@@ -27,35 +27,35 @@ public partial class Clan
 
     public int PosBr { get; set; }
 
-    public string Oznd { get; set; } = null!;
+    public string OZND { get; set; } = null!;
 
-    public virtual ICollection<Ispunjenzahtevknjiga> Ispunjenzahtevknjigas { get; set; } = new List<Ispunjenzahtevknjiga>();
+    public virtual ICollection<IspunjenZahtevKnjiga> IspunjenZahtevKnjigas { get; set; } = new List<IspunjenZahtevKnjiga>();
 
-    public virtual ICollection<Ispunjenzahtevserijskostivo> Ispunjenzahtevserijskostivos { get; set; } = new List<Ispunjenzahtevserijskostivo>();
+    public virtual ICollection<IspunjenZahtevSerijskoStivo> IspunjenZahtevSerijskoStivos { get; set; } = new List<IspunjenZahtevSerijskoStivo>();
 
-    public virtual ICollection<Istorijaclanarina> Istorijaclanarinas { get; set; } = new List<Istorijaclanarina>();
+    public virtual ICollection<IstorijaClanarina> IstorijaClanarinas { get; set; } = new List<IstorijaClanarina>();
 
-    public virtual ICollection<Izmenakreditum> Izmenakredita { get; set; } = new List<Izmenakreditum>();
+    public virtual ICollection<IzmenaKredita> IzmenaKredita { get; set; } = new List<IzmenaKredita>();
 
-    public virtual ICollection<Izmenalokacije> Izmenalokacijes { get; set; } = new List<Izmenalokacije>();
+    public virtual ICollection<IzmenaLokacije> IzmenaLokacijes { get; set; } = new List<IzmenaLokacije>();
 
-    public virtual ICollection<Izmenapodataka> Izmenapodatakas { get; set; } = new List<Izmenapodataka>();
+    public virtual ICollection<IzmenaPodataka> IzmenaPodatakas { get; set; } = new List<IzmenaPodataka>();
 
-    public virtual ICollection<Izmenasifre> Izmenasifres { get; set; } = new List<Izmenasifre>();
+    public virtual ICollection<IzmenaSifre> IzmenaSifres { get; set; } = new List<IzmenaSifre>();
 
-    public virtual ICollection<Izmenastatusa> Izmenastatusas { get; set; } = new List<Izmenastatusa>();
+    public virtual ICollection<IzmenaStatusa> IzmenaStatusas { get; set; } = new List<IzmenaStatusa>();
 
     public virtual ICollection<Kupovina> Kupovinas { get; set; } = new List<Kupovina>();
 
     public virtual Lokacija Lokacija { get; set; } = null!;
 
-    public virtual ICollection<Ocenaknjige> Ocenaknjiges { get; set; } = new List<Ocenaknjige>();
+    public virtual ICollection<OcenaKnjige> OcenaKnjiges { get; set; } = new List<OcenaKnjige>();
 
-    public virtual ICollection<Ocenasstiva> Ocenasstivas { get; set; } = new List<Ocenasstiva>();
+    public virtual ICollection<OcenaSStiva> OcenaSStivas { get; set; } = new List<OcenaSStiva>();
 
     public virtual ICollection<Rezervacija> Rezervacijas { get; set; } = new List<Rezervacija>();
 
-    public virtual ICollection<Zahtevzaknjigu> Zahtevzaknjigus { get; set; } = new List<Zahtevzaknjigu>();
+    public virtual ICollection<ZahtevZaKnjigu> ZahtevZaKnjigus { get; set; } = new List<ZahtevZaKnjigu>();
 
-    public virtual ICollection<Zahtevzaserijskostivo> Zahtevzaserijskostivos { get; set; } = new List<Zahtevzaserijskostivo>();
+    public virtual ICollection<ZahtevZaSerijskoStivo> ZahtevZaSerijskoStivos { get; set; } = new List<ZahtevZaSerijskoStivo>();
 }

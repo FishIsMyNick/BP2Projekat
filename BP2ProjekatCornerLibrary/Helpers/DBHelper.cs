@@ -32,17 +32,17 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		{
 			//using (var db = new CornerLibraryDbContext(optionBuilder.Options))
 			//{
-			int id = db.Clans.First().Id;
+			int id = db.Clans.First().IDClan;
 
 			foreach (Clan clan in db.Clans)
 			{
-				if (clan.Id > id)
-					id = clan.Id;
+				if (clan.IDClan > id)
+					id = clan.IDClan;
 			}
 			id++;
 			if (id < 0)
 			{
-				id = db.Clans.First().Id;
+				id = db.Clans.First().IDClan;
 				bool set = true;
 				do
 				{
@@ -50,7 +50,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 					set = true;
 					foreach (Clan c in db.Clans)
 					{
-						if (c.Id == id)
+						if (c.IDClan == id)
 						{
 							set = false;
 							break;
@@ -83,10 +83,10 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		{
 			message = "";
 			//List<Korisnik> lk = db.Korisniks.ToList();
-			Clan c = db.Clans.FirstOrDefault(x => x.Username == username);
+			Clan c = db.Clans.FirstOrDefault(x => x.KorisnickoIme == username);
 			if (c != null)
 			{
-				if (c.Pass == hashedPassword)
+				if (c.Sifra == hashedPassword)
 					return c;
 				else
 				{
@@ -99,29 +99,29 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			return null;
 		}
 
-		public static Bibliotekar TryLoginBibliotekar(string username, string hashedPassword, out string message)
-		{
-			message = "";
-			var optionBuilder = new DbContextOptionsBuilder<CornerLibraryDbContext>();
-			optionBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["CornerLibraryDbConnString"].ConnectionString);
-			using (var db = new CornerLibraryDbContext(optionBuilder.Options))
-			{
-				//List<Korisnik> lk = db.Korisniks.ToList();
-				Bibliotekar c = db.Bibliotekars.FirstOrDefault(x => x.Username == username);
-				if (c != null)
-				{
-					if (c.Pass == hashedPassword)
-						return c;
-					else
-					{
-						message = "Pogrešna šifra!";
-						return null;
-					}
-				}
-			}
-			message = "Nepostojeći korisnik.";
-			return null;
-		}
+		//public static Bibliotekar TryLoginBibliotekar(string username, string hashedPassword, out string message)
+		//{
+		//	message = "";
+		//	var optionBuilder = new DbContextOptionsBuilder<CornerLibraryDbContext>();
+		//	optionBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["CornerLibraryDbConnString"].ConnectionString);
+		//	using (var db = new CornerLibraryDbContext(optionBuilder.Options))
+		//	{
+		//		//List<Korisnik> lk = db.Korisniks.ToList();
+		//		Bibliotekar c = db.Bibliotekars.FirstOrDefault(x => x.Username == username);
+		//		if (c != null)
+		//		{
+		//			if (c.Pass == hashedPassword)
+		//				return c;
+		//			else
+		//			{
+		//				message = "Pogrešna šifra!";
+		//				return null;
+		//			}
+		//		}
+		//	}
+		//	message = "Nepostojeći korisnik.";
+		//	return null;
+		//}
 
 
 
@@ -176,7 +176,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//}
 			return null;
 		}
-		public static Knjigaulokalu GetBookInStore(int bookID, int lokalID)
+		public static KnjigaULokalu GetBookInStore(int bookID, int lokalID)
 		{
 			//TODO: get book in store
 			//foreach (Knjigaulokalu k in MockDB.Instance.KUL)
@@ -186,9 +186,9 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//}
 			return null;
 		}
-		public static List<Knjigaulokalu> GetBooksInStore(int lokalID)
+		public static List<KnjigaULokalu> GetBooksInStore(int lokalID)
 		{
-			List<Knjigaulokalu> ret = new List<Knjigaulokalu>();
+			List<KnjigaULokalu> ret = new List<KnjigaULokalu>();
 
 			//foreach (Knjigaulokalu k in MockDB.Instance.KUL)
 			//{
@@ -199,133 +199,149 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		}
 
 		// GET NEWS
-		public static int GetFirstFreeNewsID()
+		//public static int GetFirstFreeNewsID()
+		//{
+		//	//int id = MockDB.Instance.Novines[0].Id;
+		//	//for (int i = 1; i < MockDB.Instance.Novines.Count; i++)
+		//	//{
+		//	//	if (id < MockDB.Instance.Novines[i].Id)
+		//	//		id = MockDB.Instance.Novines[i].Id;
+		//	//}
+		//	//id++;
+		//	//if (id < 0)
+		//	//{
+		//	//	id = MockDB.Instance.Novines[0].Id;
+		//	//	bool set = true;
+		//	//	do
+		//	//	{
+		//	//		id++;
+		//	//		set = true;
+		//	//		foreach (Novine c in MockDB.Instance.Novines)
+		//	//		{
+		//	//			if (c.Id == id)
+		//	//			{
+		//	//				set = false;
+		//	//				break;
+		//	//			}
+		//	//		}
+		//	//	} while (!set && id > 0);
+		//	//}
+		//	return 1;
+		//}
+		//public static Novine GetNews(int novineID)
+		//{
+		//	//TODO: Get news
+		//	//foreach (Novine n in MockDB.Instance.Novines)
+		//	//{
+		//	//	if (n.Id == novineID)
+		//	//		return n;
+		//	//}
+		//	return null;
+		//}
+		//public static Novineulokalu GetNewsInStore(int novineID, int lokalID)
+		//{
+		//	// TODO: Get news in store
+		//	//foreach (Novineulokalu n in MockDB.Instance.NUL)
+		//	//{
+		//	//	if (n.Idn == novineID && n.Idl == lokalID)
+		//	//		return n;
+		//	//}
+		//	return null;
+		//}
+		//public static List<Novineulokalu> GetNewsInStore(int lokalID)
+		//{
+		//	List<Novineulokalu> ret = new List<Novineulokalu>();
+
+		//	//foreach (Novineulokalu k in MockDB.Instance.NUL)
+		//	//{
+		//	//	if (k.Idl == lokalID)
+		//	//	{ ret.Add(k); }
+		//	//}
+		//	return ret;
+		//}
+
+		//// GET MAGAZINE
+		//public static int GetFirstFreeMagazinID()
+		//{
+		//	//int id = MockDB.Instance.Magazines[0].Id;
+		//	//for (int i = 1; i < MockDB.Instance.Magazines.Count; i++)
+		//	//{
+		//	//	if (id < MockDB.Instance.Magazines[i].Id)
+		//	//		id = MockDB.Instance.Magazines[i].Id;
+		//	//}
+		//	//id++;
+		//	//if (id < 0)
+		//	//{
+		//	//	id = MockDB.Instance.Magazines[0].Id;
+		//	//	bool set = true;
+		//	//	do
+		//	//	{
+		//	//		id++;
+		//	//		set = true;
+		//	//		foreach (Magazin c in MockDB.Instance.Magazines)
+		//	//		{
+		//	//			if (c.Id == id)
+		//	//			{
+		//	//				set = false;
+		//	//				break;
+		//	//			}
+		//	//		}
+		//	//	} while (!set && id > 0);
+		//	//}
+		//	return 1;
+		//}
+		//public static Magazin GetMagazin(int magID)
+		//{
+		//	// TODO: Get magazin
+		//	//foreach (Magazin m in MockDB.Instance.Magazines)
+		//	//{
+		//	//	if (m.Id == magID)
+		//	//	{ return m; }
+		//	//}
+		//	return null;
+		//}
+		//public static Magazinulokalu GetMagazineInStore(int magID, int lokalID)
+		//{
+		//	// TODO: Get magazine in store
+		//	//foreach (Magazinulokalu m in MockDB.Instance.MUL)
+		//	//{
+		//	//	if (m.Idm == magID && m.Idl == lokalID)
+		//	//	{
+		//	//		return m;
+		//	//	}
+		//	//}
+		//	return null;
+		//}
+		//public static List<Magazinulokalu> GetMagazinesInStore(int lokalID)
+		//{
+		//	List<Magazinulokalu> ret = new List<Magazinulokalu>();
+
+		//	//foreach (Magazinulokalu k in MockDB.Instance.MUL)
+		//	//{
+		//	//	if (k.Idl == lokalID)
+		//	//	{ ret.Add(k); }
+		//	//}
+		//	return ret;
+		//}
+
+		public static SerijskoStivo GetSerijskoStivo(int id)
 		{
-			//int id = MockDB.Instance.Novines[0].Id;
-			//for (int i = 1; i < MockDB.Instance.Novines.Count; i++)
-			//{
-			//	if (id < MockDB.Instance.Novines[i].Id)
-			//		id = MockDB.Instance.Novines[i].Id;
-			//}
-			//id++;
-			//if (id < 0)
-			//{
-			//	id = MockDB.Instance.Novines[0].Id;
-			//	bool set = true;
-			//	do
-			//	{
-			//		id++;
-			//		set = true;
-			//		foreach (Novine c in MockDB.Instance.Novines)
-			//		{
-			//			if (c.Id == id)
-			//			{
-			//				set = false;
-			//				break;
-			//			}
-			//		}
-			//	} while (!set && id > 0);
-			//}
-			return 1;
-		}
-		public static Novine GetNews(int novineID)
-		{
-			//TODO: Get news
-			//foreach (Novine n in MockDB.Instance.Novines)
-			//{
-			//	if (n.Id == novineID)
-			//		return n;
-			//}
+			//TODO: GET FROM DB
+			List<SerijskoStivo> sstFDB = db.Serijskostivos.ToList();
+
+            foreach (SerijskoStivo l in sstFDB)
+			{
+				if (l.IDSStivo == id)
+				{
+					return l;
+				}
+			}
 			return null;
 		}
-		public static Novineulokalu GetNewsInStore(int novineID, int lokalID)
-		{
-			// TODO: Get news in store
-			//foreach (Novineulokalu n in MockDB.Instance.NUL)
-			//{
-			//	if (n.Idn == novineID && n.Idl == lokalID)
-			//		return n;
-			//}
-			return null;
-		}
-		public static List<Novineulokalu> GetNewsInStore(int lokalID)
-		{
-			List<Novineulokalu> ret = new List<Novineulokalu>();
-
-			//foreach (Novineulokalu k in MockDB.Instance.NUL)
-			//{
-			//	if (k.Idl == lokalID)
-			//	{ ret.Add(k); }
-			//}
-			return ret;
-		}
-
-		// GET MAGAZINE
-		public static int GetFirstFreeMagazinID()
-		{
-			//int id = MockDB.Instance.Magazines[0].Id;
-			//for (int i = 1; i < MockDB.Instance.Magazines.Count; i++)
-			//{
-			//	if (id < MockDB.Instance.Magazines[i].Id)
-			//		id = MockDB.Instance.Magazines[i].Id;
-			//}
-			//id++;
-			//if (id < 0)
-			//{
-			//	id = MockDB.Instance.Magazines[0].Id;
-			//	bool set = true;
-			//	do
-			//	{
-			//		id++;
-			//		set = true;
-			//		foreach (Magazin c in MockDB.Instance.Magazines)
-			//		{
-			//			if (c.Id == id)
-			//			{
-			//				set = false;
-			//				break;
-			//			}
-			//		}
-			//	} while (!set && id > 0);
-			//}
-			return 1;
-		}
-		public static Magazin GetMagazin(int magID)
-		{
-			// TODO: Get magazin
-			//foreach (Magazin m in MockDB.Instance.Magazines)
-			//{
-			//	if (m.Id == magID)
-			//	{ return m; }
-			//}
-			return null;
-		}
-		public static Magazinulokalu GetMagazineInStore(int magID, int lokalID)
-		{
-			// TODO: Get magazine in store
-			//foreach (Magazinulokalu m in MockDB.Instance.MUL)
-			//{
-			//	if (m.Idm == magID && m.Idl == lokalID)
-			//	{
-			//		return m;
-			//	}
-			//}
-			return null;
-		}
-		public static List<Magazinulokalu> GetMagazinesInStore(int lokalID)
-		{
-			List<Magazinulokalu> ret = new List<Magazinulokalu>();
-
-			//foreach (Magazinulokalu k in MockDB.Instance.MUL)
-			//{
-			//	if (k.Idl == lokalID)
-			//	{ ret.Add(k); }
-			//}
-			return ret;
-		}
-
 		// GET STORE
-		public static Cornerlibrary GetStore(int storeID)
+
+
+        public static Cornerlibrary GetStore(int storeID)
 		{
 			// TODO: Get store
 			//foreach (Cornerlibrary l in MockDB.Instance.Lokali)
@@ -503,7 +519,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		//	return iDbResult.Success;
 		//}
 		//Modify Book In Store Amount
-		public static iDbResult ModifyBookInStoreAmount(Knjigaulokalu kul)
+		public static iDbResult ModifyBookInStoreAmount(KnjigaULokalu kul)
 		{
 			//TODO: Try update entry
 			//foreach (Knjigaulokalu k in MockDB.Instance.KUL)
@@ -781,13 +797,13 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		// DELETE RESERVATION
 		public static iDbResult DeleteReservation(Rezervacija rez)
 		{
-			return DeleteReservation(rez.Idclan, rez.Idknjiga, rez.Idbk);
+			return DeleteReservation(rez.IDClan, rez.IDKnjiga, rez.IDBK);
 		}
 		public static iDbResult DeleteReservations(List<Rezervacija> rezervacije)
 		{
 			foreach (Rezervacija rez in rezervacije)
 			{
-				if (DeleteReservation(rez.Idclan, rez.Idknjiga, rez.Idbk) == iDbResult.Error)
+				if (DeleteReservation(rez.IDClan, rez.IDKnjiga, rez.IDBK) == iDbResult.Error)
 					return iDbResult.Error;
 			}
 			return iDbResult.Success;

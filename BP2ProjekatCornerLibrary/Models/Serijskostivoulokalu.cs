@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace BP2ProjekatCornerLibrary.Models;
 
-public partial class Serijskostivoulokalu
+public partial class SerijskoStivoULokalu
 {
-    public int Idsstivo { get; set; }
+    public int IDSStivo { get; set; }
 
-    public int Idbk { get; set; }
+    public int IDBK { get; set; }
 
     public int Kolicina { get; set; }
 
-    public virtual Biblikutak IdbkNavigation { get; set; } = null!;
+    public virtual Biblikutak IDBKNavigation { get; set; } = null!;
 
-    public virtual Serijskostivo IdsstivoNavigation { get; set; } = null!;
+    public virtual SerijskoStivo IDSStivoNavigation { get; set; } = null!;
 
-    public virtual ICollection<Ispunjenzahtevserijskostivo> Ispunjenzahtevserijskostivos { get; set; } = new List<Ispunjenzahtevserijskostivo>();
+    public virtual ICollection<IspunjenZahtevSerijskoStivo> IspunjenZahtevSerijskoStivos { get; set; } = new List<IspunjenZahtevSerijskoStivo>();
 
     public virtual ICollection<Kupovina> Kupovinas { get; set; } = new List<Kupovina>();
 }

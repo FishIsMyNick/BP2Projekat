@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace BP2ProjekatCornerLibrary.Models;
 
-public partial class Izmenalokacije
+public partial class IzmenaLokacije
 {
-    public int Idil { get; set; }
+    public int IDIL { get; set; }
 
-    public int Idclan { get; set; }
+    public int IDClan { get; set; }
 
     public string Ulica { get; set; } = null!;
 
@@ -15,11 +15,11 @@ public partial class Izmenalokacije
 
     public int PosBr { get; set; }
 
-    public string Oznd { get; set; } = null!;
+    public string OZND { get; set; } = null!;
 
     public DateTime DatVr { get; set; }
 
-    public virtual Clan IdclanNavigation { get; set; } = null!;
+    public virtual Clan IDClanNavigation { get; set; } = null!;
 
     public virtual Lokacija Lokacija { get; set; } = null!;
 }

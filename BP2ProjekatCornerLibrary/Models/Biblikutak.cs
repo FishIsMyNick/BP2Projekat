@@ -17,17 +17,17 @@ public partial class Biblikutak
 
     public string OZND { get; set; } = null!;
 
-    public virtual ICollection<Izmenakreditum> IzmenaKredita { get; set; } = new List<Izmenakreditum>();
+    public virtual ICollection<IzmenaKredita> IzmenaKredita { get; set; } = new List<IzmenaKredita>();
 
-    public virtual ICollection<Knjigaulokalu> KnjigaULokalus { get; set; } = new List<Knjigaulokalu>();
+    public virtual ICollection<KnjigaULokalu> KnjigaULokalus { get; set; } = new List<KnjigaULokalu>();
 
     public virtual Lokacija Lokacija { get; set; } = null!;
 
     public virtual ICollection<Radnik> Radniks { get; set; } = new List<Radnik>();
 
-    public virtual ICollection<Serijskostivoulokalu> SerijskoStivoULokalus { get; set; } = new List<Serijskostivoulokalu>();
+    public virtual ICollection<SerijskoStivoULokalu> SerijskoStivoULokalus { get; set; } = new List<SerijskoStivoULokalu>();
 
-    public virtual ICollection<Zahtevzaknjigu> ZahtevZaKnjigus { get; set; } = new List<Zahtevzaknjigu>();
+    public virtual ICollection<ZahtevZaKnjigu> ZahtevZaKnjigus { get; set; } = new List<ZahtevZaKnjigu>();
 
-    public virtual ICollection<Zahtevzaserijskostivo> ZahtevZaSerijskoStivos { get; set; } = new List<Zahtevzaserijskostivo>();
+    public virtual ICollection<ZahtevZaSerijskoStivo> ZahtevZaSerijskoStivos { get; set; } = new List<ZahtevZaSerijskoStivo>();
 }

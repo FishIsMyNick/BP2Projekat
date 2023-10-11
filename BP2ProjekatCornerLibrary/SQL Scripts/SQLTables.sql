@@ -3,14 +3,14 @@
 
 CREATE TABLE DRZAVA(
 	OZND varchar(3) NOT NULL,
-	Drzava varchar(50) NOT NULL,
+	NazivDrzave varchar(50) NOT NULL,
 
 	CONSTRAINT OZND_PK PRIMARY KEY (OZND)
 );
 
 CREATE TABLE MESTO(
 	PosBr int NOT NULL,
-	Mesto varchar(50) NOT NULL,
+	NazivMesta varchar(50) NOT NULL,
 
 	CONSTRAINT MESTO_PK PRIMARY KEY (PosBr)
 );
@@ -91,7 +91,7 @@ CREATE TABLE RADNIK(
 
 CREATE TABLE ZANR(
 	OZNZ varchar(4) NOT NULL,
-	Zanr varchar(MAX) not null,
+	NazivZanra varchar(MAX) not null,
 
 	CONSTRAINT ZANR_PK PRIMARY KEY (OZNZ)
 );
@@ -111,7 +111,7 @@ CREATE TABLE AUTOR(
 
 create table JEZIK(
 	OZNJ varchar(4) not null,
-	Jezik varchar(max) not null,
+	NazivJezika varchar(max) not null,
 
 	constraint JEZ_PK primary key (OZNJ)
 );
@@ -446,7 +446,7 @@ create table OCENASSTIVA(
 create table CLANARINA(
 	OZNC varchar(3) not null,
 	DatUvoda date not null,
-	Clanarina varchar(20) not null,
+	NazivClanarine varchar(20) not null,
 	Cena float not null,
 	Izbacena bit not null,
 

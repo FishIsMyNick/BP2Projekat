@@ -5,9 +5,9 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Zanr
 {
-    public string Oznz { get; set; } = null!;
+    public string OZNZ { get; set; } = null!;
 
-    public string Zanr1 { get; set; } = null!;
+    public string NazivZanra { get; set; } = null!;
 
-    public virtual ICollection<Knjiga> Idknjigas { get; set; } = new List<Knjiga>();
+    public virtual ICollection<Knjiga> IDKnjigas { get; set; } = new List<Knjiga>();
 }

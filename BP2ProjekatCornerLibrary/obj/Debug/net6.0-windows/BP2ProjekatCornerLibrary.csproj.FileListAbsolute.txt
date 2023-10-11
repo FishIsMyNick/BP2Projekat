@@ -79,3 +79,25 @@ E:\Fax\BP2\Projekat\Git\BP2-projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-w
 E:\Fax\BP2\Projekat\Git\BP2-projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibDodajKredit.g.cs
 E:\Fax\BP2\Projekat\Git\BP2-projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibliotekarMainView.g.cs
 E:\Fax\BP2\Projekat\Git\BP2-projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibUserReservations.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\BP2ProjekatCornerLibrary.csproj.AssemblyReference.cache
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Login.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\MainWindow.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\ConfirmBookRezervationWindow.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\ConfirmMagazineRezervationWindow.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\ConfirmNewsRezervationWindow.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\NotificationWindow.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\UserMainWindow.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibAddBookToStoreWindow.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibAddBookWindow.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibAddMagazinWindow.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibAddNewsWindow.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibAddUserWindow.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibDodajKredit.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibliotekarMainView.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibUserReservations.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\App.g.cs
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\BP2ProjekatCornerLibrary_MarkupCompile.cache
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\BP2ProjekatCornerLibrary_MarkupCompile.lref
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\BP2ProjekatCornerLibrary.dll
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\refint\BP2ProjekatCornerLibrary.dll
+C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\BP2ProjekatCornerLibrary.pdb

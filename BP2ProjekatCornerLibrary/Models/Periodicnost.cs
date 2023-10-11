@@ -7,5 +7,5 @@ public partial class Periodicnost
 {
     public string PeriodIzd { get; set; } = null!;
 
-    public virtual ICollection<Serijskostivo> Serijskostivos { get; set; } = new List<Serijskostivo>();
+    public virtual ICollection<SerijskoStivo> SerijskoStivos { get; set; } = new List<SerijskoStivo>();
 }

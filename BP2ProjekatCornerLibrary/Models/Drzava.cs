@@ -5,9 +5,9 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Drzava
 {
-    public string Oznd { get; set; } = null!;
+    public string OZND { get; set; } = null!;
 
-    public string Drzava1 { get; set; } = null!;
+    public string NazivDrzave { get; set; } = null!;
 
     public virtual ICollection<Autor> Autors { get; set; } = new List<Autor>();
 

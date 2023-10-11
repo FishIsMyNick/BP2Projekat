@@ -143,7 +143,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			Kolicina = "1";
 			Ogr = false;
 		}
-		public KnjigaULokaluView(Knjigaulokalu kul)
+		public KnjigaULokaluView(KnjigaULokalu kul)
 		{
 			ID = 1;
 			Knjiga k = DBHelper.GetBook(kul.Idk);

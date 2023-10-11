@@ -3,19 +3,19 @@ using System.Collections.Generic;
 
 namespace BP2ProjekatCornerLibrary.Models;
 
-public partial class Ispunjenzahtevserijskostivo
+public partial class IspunjenZahtevSerijskoStivo
 {
-    public int Idclan { get; set; }
+    public int IDClan { get; set; }
 
-    public int Idsstivo { get; set; }
+    public int IDSStivo { get; set; }
 
-    public int Idbk { get; set; }
+    public int IDBK { get; set; }
 
     public DateTime DatVrIsp { get; set; }
 
     public bool Procitano { get; set; }
 
-    public virtual Serijskostivoulokalu Id { get; set; } = null!;
+    public virtual SerijskoStivoULokalu IDSStivoULokaluNavigation { get; set; } = null!;
 
-    public virtual Clan IdclanNavigation { get; set; } = null!;
+    public virtual Clan IDClanNavigation { get; set; } = null!;
 }
