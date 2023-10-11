@@ -1,0 +1,24 @@
+﻿<Window x:Class="BP2ProjekatCornerLibrary.Views.Worker.BibUserReservations"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker"
+        mc:Ignorable="d"
+        Title="Rezervacije korisnika" Height="450" Width="656">
+	<Grid>
+		<ListView Name="RezervacijeList"
+							ItemsSource="{Binding RezervacijeCollection}"
+							Background="LightGray"
+							Margin="0,0,0,0">
+			<ListView.View>
+				<GridView>
+					<GridViewColumn Width="80" Header="ID knjige" DisplayMemberBinding="{Binding ID}"/>
+					<GridViewColumn Width="300" Header="Knjiga" DisplayMemberBinding="{Binding Naziv}"/>
+					<GridViewColumn Width="150" Header="Autor" DisplayMemberBinding="{Binding Autor}" />
+					<GridViewColumn Width="100" Header="Datum" DisplayMemberBinding="{Binding Datum}" />
+				</GridView>
+			</ListView.View>
+		</ListView>
+	</Grid>
+</Window>

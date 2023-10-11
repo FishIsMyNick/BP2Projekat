@@ -1,0 +1,25 @@
+﻿<Window x:Class="BP2ProjekatCornerLibrary.Views.User.NotificationWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.User"
+        mc:Ignorable="d"
+        Height="450" Width="820">
+	<Grid>
+		<StackPanel>
+			<StackPanel Orientation="Horizontal">
+				<Label FontSize="40">Notifikacije:</Label>
+				<Button x:Name="btnBack" Width="80" Height="50" Margin="450 0 0 0" Click="btnBack_Click">Nazad</Button>
+			</StackPanel>
+			<ListView x:Name="NotificationList" ItemsSource="{Binding Notifications}" MouseDoubleClick="NotificationList_MouseDoubleClick">
+				<ListView.View>
+					<GridView>
+						<GridViewColumn Width="450" DisplayMemberBinding="{Binding Text}"/>
+						<GridViewColumn Width="350" DisplayMemberBinding="{Binding Location}"/>
+					</GridView>
+				</ListView.View>
+			</ListView>
+		</StackPanel>
+	</Grid>
+</Window>
