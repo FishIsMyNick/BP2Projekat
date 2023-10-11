@@ -27,8 +27,12 @@ namespace BP2ProjekatCornerLibrary.Views.Login
 		public Login()
 		{
 			DBHelper.InitializeConnection();
+			
+
 			//Mock = new MockDB();
 			InitializeComponent();
+
+			TryLogin();
 		}
 
 
@@ -41,6 +45,10 @@ namespace BP2ProjekatCornerLibrary.Views.Login
 			string user = tbUsername.Text;
 			string hashedPassword = HashHelper.ComputeSha256Hash(pbPasswordHidden.Password);
 			string message;
+
+			//test
+			user = "Fish";
+			hashedPassword = HashHelper.ComputeSha256Hash("pass");
 
 			Clan clan = DBHelper.TryLoginUser(user, hashedPassword, out message);
 			if (clan != null)
@@ -56,22 +64,22 @@ namespace BP2ProjekatCornerLibrary.Views.Login
 			}
 			else
 			{
-				Bibliotekar bibliotekar = DBHelper.TryLoginBibliotekar(user, hashedPassword, out message);
-				if (bibliotekar != null)
-				{
-					BibliotekarMainView bibMainView = new BibliotekarMainView(bibliotekar);
-					bibMainView.Show();
-					Close();
-				}
-				else if (message == "Pogrešna šifra!")
-				{
-					MessageBox.Show(message);
-					return;
-				}
-				else
-				{
-					MessageBox.Show(message);
-				}
+				//Radnik bibliotekar = DBHelper.TryLoginBibliotekar(user, hashedPassword, out message);
+				//if (bibliotekar != null)
+				//{
+				//	BibliotekarMainView bibMainView = new BibliotekarMainView(bibliotekar);
+				//	bibMainView.Show();
+				//	Close();
+				//}
+				//else if (message == "Pogrešna šifra!")
+				//{
+				//	MessageBox.Show(message);
+				//	return;
+				//}
+				//else
+				//{
+				//	MessageBox.Show(message);
+				//}
 			}
 		}
 		private void OnKeyDownHandler(object sender, KeyEventArgs e)

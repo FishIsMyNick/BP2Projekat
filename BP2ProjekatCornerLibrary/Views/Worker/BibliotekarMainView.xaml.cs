@@ -21,7 +21,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 	public partial class BibliotekarMainView : Window
 	{
 		//private MockDB mockDB;
-		public BibliotekarMainView(Bibliotekar bibliotekar)
+		public BibliotekarMainView(Radnik bibliotekar)
 		{
 
 			//mockDB = new MockDB();

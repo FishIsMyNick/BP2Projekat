@@ -112,11 +112,11 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		}
 		public KnjigaRezView(Rezervacija rez)
 		{
-			Knjiga k = DBHelper.GetBook(rez.Knjiga);
-			ID = k.Id;
+			Knjiga k = DBHelper.GetBook(rez.IDKnjiga);
+			ID = k.IDKnjiga;
 			Naziv = k.Naziv;
-			Autor = k.Autor;
-			Datum = DateConverter.ToString(rez.Datum);
+			Autor = "Autor";
+			Datum = DateConverter.ToString((DateTime)rez.DatVrPot);
 		}
 	}
 	public class KnjigaULokaluView
@@ -146,15 +146,15 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		public KnjigaULokaluView(KnjigaULokalu kul)
 		{
 			ID = 1;
-			Knjiga k = DBHelper.GetBook(kul.Idk);
+			Knjiga k = DBHelper.GetBook(kul.IDKnjiga);
 			Naziv = k.Naziv;
-			Autor = k.Autor;
-			IzdKuca = k.IzdKuca;
-			DatIzd = DateConverter.ToString(k.DatIzd);
-			Zanr = k.Zanr;
-			Jezik = k.Jezik;
+			Autor = "Autor";
+			IzdKuca = "IzdKuca";
+			DatIzd = k.GodIzd.ToString();
+			Zanr = "Zanr";
+			Jezik = "Jezik";
 			Kolicina = kul.Kolicina.ToString();
-			Ogr = (k.Ograniceno[0] == 0 ? false : true);
+			Ogr = false;
 		}
 		public KnjigaULokaluView(string naziv, string autor, string izdKuce, string datIzd, string zanr, string jezik, bool ogr, string kol, int id = -1)
 		{
@@ -181,96 +181,96 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			Kolicina = kol.ToString();
 		}
 	}
-	//public class NovineULokaluView
-	//{
-	//	public int ID { get; set; }
-	//	public string Naziv { get; set; }
-	//	public string Period { get { if (PerInt == iPeriod.NA) return ""; return PerInt.ToString(); } }
-	//	public iPeriod PerInt;
-	//	public double Cena { get; set; }
-	//	public string CenaView { get => Cena.ToString(); }
-	//	public string Kolicina { get; set; }
-	//	public NovineULokaluView()
-	//	{
-	//		ID = 0;
-	//		Naziv = "Naziv";
-	//		PerInt = 0;
-	//		Cena = 0;
-	//		Kolicina = "1";
-	//	}
-	//	public NovineULokaluView(string naziv, iPeriod period, double cena, int kolicina, int id = -1)
-	//	{
-	//		ID = id;
-	//		Naziv = naziv;
-	//		PerInt = period;
-	//		Cena = cena;
-	//		Kolicina = kolicina.ToString();
-	//	}
-	//	public NovineULokaluView(Novineulokalu nul)
-	//	{
-	//		Novine n = DBHelper.GetNews(nul.Idn);
-	//		ID = n.Id;
-	//		Naziv = n.NazivNov;
-	//		switch (n.PeriodIzd)
-	//		{
-	//			case "Dnevni":
-	//				PerInt = iPeriod.Dnevni; break;
-	//			case "Nedeljni":
-	//				PerInt = iPeriod.Nedeljni; break;
-	//			case "Mesecni":
-	//				PerInt = iPeriod.Mesecni; break;
-	//			default:
-	//				PerInt = iPeriod.Godisnji; break;
-	//		}
-	//		Cena = n.Cena;
-	//		Kolicina = nul.Kolicina.ToString();
-	//	}
-	//}
-	//public class MagazinULokaluView
-	//{
-	//	public int ID { get; set; }
-	//	public string Naziv { get; set; }
-	//	public iPeriod PerInt { get; set; }
-	//	public string Period { get { if (PerInt == iPeriod.NA) return ""; return PerInt.ToString(); } }
-	//	public double Cena { get; set; } = 0;
-	//	public string CenaView { get => Cena.ToString(); }
-	//	public string Kolicina { get; set; }
-	//	public MagazinULokaluView()
-	//	{
-	//		ID = 0;
-	//		Naziv = "Naziv";
-	//		PerInt = 0;
-	//		Cena = 0;
-	//		Kolicina = "1";
-	//	}
-	//	public MagazinULokaluView(string naziv, iPeriod period, double cena, int kolicina, int id = -1)
-	//	{
-	//		ID = id;
-	//		Naziv = naziv;
-	//		PerInt = period;
-	//		Cena = cena;
-	//		Kolicina = kolicina.ToString();
-	//	}
-	//	public MagazinULokaluView(Magazinulokalu mul)
-	//	{
-	//		Magazin m = DBHelper.GetMagazin(mul.Idm);
-	//		ID = m.Id;
-	//		Naziv = m.NazivMag;
-	//		switch (m.PeriodIzd)
-	//		{
-	//			case "Dnevni":
-	//				PerInt = iPeriod.Dnevni; break;
-	//			case "Nedeljni":
-	//				PerInt = iPeriod.Nedeljni; break;
-	//			case "Mesecni":
-	//				PerInt = iPeriod.Mesecni; break;
-	//			default:
-	//				PerInt = iPeriod.Godisnji; break;
-	//		}
-	//		Cena = m.Cena;
-	//		Kolicina = mul.Kolicina.ToString();
-	//	}
-	//}
+	public class NovineULokaluView
+	{
+		public int ID { get; set; }
+		public string Naziv { get; set; }
+		public string Period { get { if (PerInt == iPeriod.NA) return ""; return PerInt.ToString(); } }
+		public iPeriod PerInt;
+		public double Cena { get; set; }
+		public string CenaView { get => Cena.ToString(); }
+		public string Kolicina { get; set; }
+		public NovineULokaluView()
+		{
+			ID = 0;
+			Naziv = "Naziv";
+			PerInt = 0;
+			Cena = 0;
+			Kolicina = "1";
+		}
+		public NovineULokaluView(string naziv, iPeriod period, double cena, int kolicina, int id = -1)
+		{
+			ID = id;
+			Naziv = naziv;
+			PerInt = period;
+			Cena = cena;
+			Kolicina = kolicina.ToString();
+		}
+		//public NovineULokaluView(Novineulokalu nul)
+		//{
+		//	Novine n = DBHelper.GetNews(nul.Idn);
+		//	ID = n.Id;
+		//	Naziv = n.NazivNov;
+		//	switch (n.PeriodIzd)
+		//	{
+		//		case "Dnevni":
+		//			PerInt = iPeriod.Dnevni; break;
+		//		case "Nedeljni":
+		//			PerInt = iPeriod.Nedeljni; break;
+		//		case "Mesecni":
+		//			PerInt = iPeriod.Mesecni; break;
+		//		default:
+		//			PerInt = iPeriod.Godisnji; break;
+		//	}
+		//	Cena = n.Cena;
+		//	Kolicina = nul.Kolicina.ToString();
+		//}
+	}
+	public class MagazinULokaluView
+	{
+		public int ID { get; set; }
+		public string Naziv { get; set; }
+		public iPeriod PerInt { get; set; }
+		public string Period { get { if (PerInt == iPeriod.NA) return ""; return PerInt.ToString(); } }
+		public double Cena { get; set; } = 0;
+		public string CenaView { get => Cena.ToString(); }
+		public string Kolicina { get; set; }
+		public MagazinULokaluView()
+		{
+			ID = 0;
+			Naziv = "Naziv";
+			PerInt = 0;
+			Cena = 0;
+			Kolicina = "1";
+		}
+		public MagazinULokaluView(string naziv, iPeriod period, double cena, int kolicina, int id = -1)
+		{
+			ID = id;
+			Naziv = naziv;
+			PerInt = period;
+			Cena = cena;
+			Kolicina = kolicina.ToString();
+		}
+		//public MagazinULokaluView(Magazinulokalu mul)
+		//{
+		//	Magazin m = DBHelper.GetMagazin(mul.Idm);
+		//	ID = m.Id;
+		//	Naziv = m.NazivMag;
+		//	switch (m.PeriodIzd)
+		//	{
+		//		case "Dnevni":
+		//			PerInt = iPeriod.Dnevni; break;
+		//		case "Nedeljni":
+		//			PerInt = iPeriod.Nedeljni; break;
+		//		case "Mesecni":
+		//			PerInt = iPeriod.Mesecni; break;
+		//		default:
+		//			PerInt = iPeriod.Godisnji; break;
+		//	}
+		//	Cena = m.Cena;
+		//	Kolicina = mul.Kolicina.ToString();
+		//}
+	}
 
 	public class IstorijaKnjigaView
 	{
@@ -295,13 +295,13 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			this.DatumVratio = DatumVratio;
 			ID = id;
 		}
-		public IstorijaKnjigaView(Istorijarezervacija ir)
+		public IstorijaKnjigaView(Rezervacija ir)
 		{
-			Knjiga k = DBHelper.GetBook(ir.Knjiga);
+			Knjiga k = DBHelper.GetBook(ir.IDKnjiga);
 			Naziv = k.Naziv;
-			Autor = k.Autor;
-			DatumUzeo = DateConverter.ToString(ir.DatumUzeo);
-			DatumVratio = DateConverter.ToString((DateTime)ir.DatumVratio);
+			Autor = "Autor";
+			DatumUzeo = DateConverter.ToString((DateTime)ir.DatVrPot);
+			DatumVratio = DateConverter.ToString((DateTime)ir.DatVrZak);
 		}
 	}
 	public class LokacijaView
@@ -324,12 +324,12 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			Grad = grad;
 			Drzava = drzava;
 		}
-		public LokacijaView(Cornerlibrary l)
+		public LokacijaView(Biblikutak l)
 		{
-			ID = l.Id;
-			Adresa = l.Adresa;
-			Grad = l.Grad;
-			Drzava = l.Drzava;
+			ID = l.IDBK;
+			Adresa = "Adresa";
+			Grad = "Grad";
+			Drzava = "Drzava";
 		}
 	}
 	public class KatalogNovineMagazinView

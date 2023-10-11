@@ -32,33 +32,34 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		{
 			//using (var db = new CornerLibraryDbContext(optionBuilder.Options))
 			//{
-			int id = db.Clans.First().IDClan;
+			//int id = db.Clans.First().IDClan;
 
-			foreach (Clan clan in db.Clans)
-			{
-				if (clan.IDClan > id)
-					id = clan.IDClan;
-			}
-			id++;
-			if (id < 0)
-			{
-				id = db.Clans.First().IDClan;
-				bool set = true;
-				do
-				{
-					id++;
-					set = true;
-					foreach (Clan c in db.Clans)
-					{
-						if (c.IDClan == id)
-						{
-							set = false;
-							break;
-						}
-					}
-				} while (!set && id > 0);
-			}
-			return id;
+			//foreach (Clan clan in db.Clans)
+			//{
+			//	if (clan.IDClan > id)
+			//		id = clan.IDClan;
+			//}
+			//id++;
+			//if (id < 0)
+			//{
+			//	id = db.Clans.First().IDClan;
+			//	bool set = true;
+			//	do
+			//	{
+			//		id++;
+			//		set = true;
+			//		foreach (Clan c in db.Clans)
+			//		{
+			//			if (c.IDClan == id)
+			//			{
+			//				set = false;
+			//				break;
+			//			}
+			//		}
+			//	} while (!set && id > 0);
+			//}
+			//return id;
+			return 1;
 			//}
 		}
 		public static Clan GetUser(int id)
@@ -84,6 +85,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			message = "";
 			//List<Korisnik> lk = db.Korisniks.ToList();
 			Clan c = db.Clans.FirstOrDefault(x => x.KorisnickoIme == username);
+			//Clan c = db.Clans.FirstOrDefault(x => x.KorisnickoIme == username);
 			if (c != null)
 			{
 				if (c.Sifra == hashedPassword)
@@ -327,21 +329,21 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		public static SerijskoStivo GetSerijskoStivo(int id)
 		{
 			//TODO: GET FROM DB
-			List<SerijskoStivo> sstFDB = db.Serijskostivos.ToList();
+			//List<SerijskoStivo> sstFDB = db.Serijskostivos.ToList();
 
-            foreach (SerijskoStivo l in sstFDB)
-			{
-				if (l.IDSStivo == id)
-				{
-					return l;
-				}
-			}
+   //         foreach (SerijskoStivo l in sstFDB)
+			//{
+			//	if (l.IDSStivo == id)
+			//	{
+			//		return l;
+			//	}
+			//}
 			return null;
 		}
 		// GET STORE
 
 
-        public static Cornerlibrary GetStore(int storeID)
+        public static Biblikutak GetStore(int storeID)
 		{
 			// TODO: Get store
 			//foreach (Cornerlibrary l in MockDB.Instance.Lokali)
@@ -353,7 +355,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//}
 			return null;
 		}
-		public static List<Cornerlibrary> GetAllStores()
+		public static List<Biblikutak> GetAllStores()
 		{
 			//return MockDB.Instance.Lokali;
 			return null;
@@ -382,9 +384,9 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//}
 			return null;
 		}
-		public static List<Istorijarezervacija> GetReservationHistory(int clanID)
+		public static List<Rezervacija> GetReservationHistory(int clanID)
 		{
-			List<Istorijarezervacija> ret = new List<Istorijarezervacija>();
+			List<Rezervacija> ret = new List<Rezervacija>();
 
 			//foreach (Istorijarezervacija i in MockDB.Instance.IstorijeRezervacija)
 			//{
@@ -395,19 +397,19 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		}
 
 		// GET Ispunjen zahtev za knjigu
-		public static List<Ispunjenzahtevzaknjigu> GetFulfilledBookRequests()
+		public static List<IspunjenZahtevKnjiga> GetFulfilledBookRequests()
 		{
 			// TODO: Get all fulfilled book requests
 			//return MockDB.Instance.ispunjenzahtevzaknjigus;
 			return null;
 		}
-		public static List<Ispunjenzahtevzaknjigu> GetFulfilledBookRequests(int clanID)
+		public static List<IspunjenZahtevKnjiga> GetFulfilledBookRequests(int clanID)
 		{
-			List<Ispunjenzahtevzaknjigu> ret = new List<Ispunjenzahtevzaknjigu>();
+			List<IspunjenZahtevKnjiga> ret = new List<IspunjenZahtevKnjiga>();
 
-			foreach (Ispunjenzahtevzaknjigu izk in GetFulfilledBookRequests())
+			foreach (IspunjenZahtevKnjiga izk in GetFulfilledBookRequests())
 			{
-				if (izk.Clan == clanID)
+				if (izk.IDClan == clanID)
 				{
 					ret.Add(izk);
 				}
@@ -415,19 +417,19 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			return ret;
 		}
 		// GET Ispunjen zahtev za novine
-		public static List<Ispunjenzahtevzanovine> GetFulfilledNewsRequests()
+		public static List<IspunjenZahtevSerijskoStivo> GetFulfilledNewsRequests()
 		{
 			// TODO: Get all fulfilled book requests
 			//return MockDB.Instance.ispunjenzahtevzanovines;
 			return null;
 		}
-		public static List<Ispunjenzahtevzanovine> GetFulfilledNewsRequests(int clanID)
+		public static List<IspunjenZahtevSerijskoStivo> GetFulfilledNewsRequests(int clanID)
 		{
-			List<Ispunjenzahtevzanovine> ret = new List<Ispunjenzahtevzanovine>();
+			List<IspunjenZahtevSerijskoStivo> ret = new List<IspunjenZahtevSerijskoStivo>();
 
-			foreach (Ispunjenzahtevzanovine izk in GetFulfilledNewsRequests())
+			foreach (IspunjenZahtevSerijskoStivo izk in GetFulfilledNewsRequests())
 			{
-				if (izk.Clan == clanID)
+				if (izk.IDClan == clanID)
 				{
 					ret.Add(izk);
 				}
@@ -435,19 +437,19 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			return ret;
 		}
 		// GET Ispunjen zahtev za magazin
-		public static List<Ispunjenzahtevzamagazin> GetFulfilledMagazineRequests()
+		public static List<IspunjenZahtevSerijskoStivo> GetFulfilledMagazineRequests()
 		{
 			// TODO: Get all fulfilled book requests
 			//return MockDB.Instance.ispunjenzahtevzamagazins;
 			return null;
 		}
-		public static List<Ispunjenzahtevzamagazin> GetFulfilledMagazineRequests(int clanID)
+		public static List<IspunjenZahtevSerijskoStivo> GetFulfilledMagazineRequests(int clanID)
 		{
-			List<Ispunjenzahtevzamagazin> ret = new List<Ispunjenzahtevzamagazin>();
+			List<IspunjenZahtevSerijskoStivo> ret = new List<IspunjenZahtevSerijskoStivo>();
 
-			foreach (Ispunjenzahtevzamagazin izk in GetFulfilledMagazineRequests())
+			foreach (IspunjenZahtevSerijskoStivo izk in GetFulfilledMagazineRequests())
 			{
-				if (izk.Clan == clanID)
+				if (izk.IDClan == clanID)
 				{
 					ret.Add(izk);
 				}
@@ -456,142 +458,144 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		}
 
 		#endregion
-		#region Modifiers/Setters
-		// Modify User Credit
-		public static iDbResult ModifyUserCredit(int userID, double newCredit)
-		{
-			Clan clan = GetUser(userID);
-
-			//TODO: Try modify entry
-			//MockDB.Instance.Clanovi.Remove(clan);
-			//clan.Kredit = newCredit;
-			//MockDB.Instance.Clanovi.Add(clan);
-
-			iDbResult result = iDbResult.Success;
-			return result;
-		}
-		public static iDbResult ModifyUserCredit(Clan clan)
-		{
-			//TODO: Try modify entry
-			Clan c = null;
-			//foreach (Clan clan1 in MockDB.Instance.Clanovi)
-			//{
-			//	if (clan1.Id == clan.Id)
-			//	{ c = clan1; break; }
-			//}
-			//MockDB.Instance.Clanovi.Remove(c);
-			//MockDB.Instance.Clanovi.Add(clan);
-
-			iDbResult result = iDbResult.Success;
-			return result;
-		}
-		public static iDbResult AddUserCredit(Clan clan, double amount)
-		{
-			clan.Kredit += amount;
-			return ModifyUserCredit(clan);
-		}
-		public static iDbResult SubUserCredit(Clan clan, double amount)
-		{
-			clan.Kredit -= amount;
-			return ModifyUserCredit(clan);
-		}
-
-		//public static iDbResult ExtendMembership(Clanskakartica c, int years = 1)
+		//#region Modifiers/Setters
+		//// Modify User Credit
+		//public static iDbResult ModifyUserCredit(int userID, double newCredit)
 		//{
-		//	//Clanskakartica clanskakartica = null;
-		//	//foreach (Clanskakartica ck in MockDB.Instance.ClanskeKartice)
+		//	Clan clan = GetUser(userID);
+
+		//	//TODO: Try modify entry
+		//	//MockDB.Instance.Clanovi.Remove(clan);
+		//	//clan.Kredit = newCredit;
+		//	//MockDB.Instance.Clanovi.Add(clan);
+
+		//	iDbResult result = iDbResult.Success;
+		//	return result;
+		//}
+		//public static iDbResult ModifyUserCredit(Clan clan)
+		//{
+		//	//TODO: Try modify entry
+		//	Clan c = null;
+		//	//foreach (Clan clan1 in MockDB.Instance.Clanovi)
 		//	//{
-		//	//	if (ck.Id == c.Id)
-		//	//		clanskakartica = ck;
+		//	//	if (clan1.Id == clan.Id)
+		//	//	{ c = clan1; break; }
 		//	//}
-		//	//if (clanskakartica == null)
-		//	//	return iDbResult.Error;
-		//	//int preostalo = (int)(clanskakartica.DatVal - DateTime.Now).TotalDays;
-		//	//if (preostalo > 30)
+		//	//MockDB.Instance.Clanovi.Remove(c);
+		//	//MockDB.Instance.Clanovi.Add(clan);
+
+		//	iDbResult result = iDbResult.Success;
+		//	return result;
+		//}
+		//public static iDbResult AddUserCredit(Clan clan, double amount)
+		//{
+		//	clan.Kredit += amount;
+		//	return ModifyUserCredit(clan);
+		//}
+		//public static iDbResult SubUserCredit(Clan clan, double amount)
+		//{
+		//	clan.Kredit -= amount;
+		//	return ModifyUserCredit(clan);
+		//}
+
+		////public static iDbResult ExtendMembership(Clanskakartica c, int years = 1)
+		////{
+		////	//Clanskakartica clanskakartica = null;
+		////	//foreach (Clanskakartica ck in MockDB.Instance.ClanskeKartice)
+		////	//{
+		////	//	if (ck.Id == c.Id)
+		////	//		clanskakartica = ck;
+		////	//}
+		////	//if (clanskakartica == null)
+		////	//	return iDbResult.Error;
+		////	//int preostalo = (int)(clanskakartica.DatVal - DateTime.Now).TotalDays;
+		////	//if (preostalo > 30)
+		////	//{
+		////	//	MessageBox.Show($"Trenutno nije moguće produžiti članarinu.\nPreostalo dana: {preostalo}.\nMoguće produžiti kad preostane manje od 30 dana.");
+		////	//	return iDbResult.Error;
+		////	//}
+
+		////	//MockDB.Instance.ClanskeKartice.Remove(c);
+		////	//clanskakartica.DatVal = DateTime.Now.AddYears(years);
+		////	//MockDB.Instance.ClanskeKartice.Add(clanskakartica);
+		////	return iDbResult.Success;
+		////}
+		////Modify Book In Store Amount
+		//public static iDbResult ModifyBookInStoreAmount(KnjigaULokalu kul)
+		//{
+		//	//TODO: Try update entry
+		//	//foreach (Knjigaulokalu k in MockDB.Instance.KUL)
 		//	//{
-		//	//	MessageBox.Show($"Trenutno nije moguće produžiti članarinu.\nPreostalo dana: {preostalo}.\nMoguće produžiti kad preostane manje od 30 dana.");
-		//	//	return iDbResult.Error;
+		//	//	if (k.Idk == kul.Idk && k.Idl == kul.Idl)
+		//	//	{
+		//	//		MockDB.Instance.KUL.Remove(k);
+		//	//		MockDB.Instance.KUL.Add(kul);
+		//	//		return iDbResult.Success;
+		//	//	}
 		//	//}
 
-		//	//MockDB.Instance.ClanskeKartice.Remove(c);
-		//	//clanskakartica.DatVal = DateTime.Now.AddYears(years);
-		//	//MockDB.Instance.ClanskeKartice.Add(clanskakartica);
+		//	iDbResult result = iDbResult.Success;
+
+		//	return result;
+		//}
+		//public static iDbResult ModifyBookInStoreAmount(int bookID, int lokalID, int newAmount)
+		//{
+		//	//return ModifyBookInStoreAmount(new Knjigaulokalu(bookID, lokalID, newAmount));
 		//	return iDbResult.Success;
 		//}
-		//Modify Book In Store Amount
-		public static iDbResult ModifyBookInStoreAmount(KnjigaULokalu kul)
-		{
-			//TODO: Try update entry
-			//foreach (Knjigaulokalu k in MockDB.Instance.KUL)
-			//{
-			//	if (k.Idk == kul.Idk && k.Idl == kul.Idl)
-			//	{
-			//		MockDB.Instance.KUL.Remove(k);
-			//		MockDB.Instance.KUL.Add(kul);
-			//		return iDbResult.Success;
-			//	}
-			//}
 
-			iDbResult result = iDbResult.Success;
+		////Modify News In Store Amount
+		//public static iDbResult ModifyNewsInStoreAmount(Novineulokalu nul)
+		//{
+		//	//TODO: Try update entry
+		//	//foreach (Novineulokalu k in MockDB.Instance.NUL)
+		//	//{
+		//	//	if (k.Idn == nul.Idn && k.Idl == nul.Idl)
+		//	//	{
+		//	//		MockDB.Instance.NUL.Remove(k);
+		//	//		MockDB.Instance.NUL.Add(nul);
+		//	//		return iDbResult.Success;
+		//	//	}
+		//	//}
+		//	iDbResult result = iDbResult.Success;
 
-			return result;
-		}
-		public static iDbResult ModifyBookInStoreAmount(int bookID, int lokalID, int newAmount)
-		{
-			//return ModifyBookInStoreAmount(new Knjigaulokalu(bookID, lokalID, newAmount));
-			return iDbResult.Success;
-		}
+		//	return result;
+		//}
+		//public static iDbResult ModifyNewsInStoreAmount(int newsId, int lokalID, int newAmount)
+		//{
+		//	//return ModifyNewsInStoreAmount(new Novineulokalu(newsId, lokalID, newAmount));
+		//	return iDbResult.Success;
+		//}
 
-		//Modify News In Store Amount
-		public static iDbResult ModifyNewsInStoreAmount(Novineulokalu nul)
-		{
-			//TODO: Try update entry
-			//foreach (Novineulokalu k in MockDB.Instance.NUL)
-			//{
-			//	if (k.Idn == nul.Idn && k.Idl == nul.Idl)
-			//	{
-			//		MockDB.Instance.NUL.Remove(k);
-			//		MockDB.Instance.NUL.Add(nul);
-			//		return iDbResult.Success;
-			//	}
-			//}
-			iDbResult result = iDbResult.Success;
+		////Modify Magazine In Store Amount
+		//public static iDbResult ModifyMagazineInStoreAmount(Magazinulokalu mul)
+		//{
+		//	//TODO: Try update entry
+		//	//foreach (Magazinulokalu k in MockDB.Instance.MUL)
+		//	//{
+		//	//	if (k.Idm == mul.Idm && k.Idl == mul.Idl)
+		//	//	{
+		//	//		MockDB.Instance.MUL.Remove(k);
+		//	//		MockDB.Instance.MUL.Add(mul);
+		//	//		return iDbResult.Success;
+		//	//	}
+		//	//}
+		//	iDbResult result = iDbResult.Success;
 
-			return result;
-		}
-		public static iDbResult ModifyNewsInStoreAmount(int newsId, int lokalID, int newAmount)
-		{
-			//return ModifyNewsInStoreAmount(new Novineulokalu(newsId, lokalID, newAmount));
-			return iDbResult.Success;
-		}
-
-		//Modify Magazine In Store Amount
-		public static iDbResult ModifyMagazineInStoreAmount(Magazinulokalu mul)
-		{
-			//TODO: Try update entry
-			//foreach (Magazinulokalu k in MockDB.Instance.MUL)
-			//{
-			//	if (k.Idm == mul.Idm && k.Idl == mul.Idl)
-			//	{
-			//		MockDB.Instance.MUL.Remove(k);
-			//		MockDB.Instance.MUL.Add(mul);
-			//		return iDbResult.Success;
-			//	}
-			//}
-			iDbResult result = iDbResult.Success;
-
-			return result;
-		}
-		public static iDbResult ModifyMagazineInStoreAmount(int newsId, int lokalID, int newAmount)
-		{
-			//return ModifyMagazineInStoreAmount(new Magazinulokalu(newsId, lokalID, newAmount));
-			return iDbResult.Success;
-		}
-		#endregion
-		#region Adders
-		//Add User
+		//	return result;
+		//}
+		//public static iDbResult ModifyMagazineInStoreAmount(int newsId, int lokalID, int newAmount)
+		//{
+		//	//return ModifyMagazineInStoreAmount(new Magazinulokalu(newsId, lokalID, newAmount));
+		//	return iDbResult.Success;
+		//}
+		//#endregion
+		//#region Adders
+		////Add User
 		public static iDbResult AddUser(Clan clan)
 		{
+			//db.Clans.Add(clan);
+			//db.SaveChanges();
 			//foreach (Clan c in MockDB.Instance.Clanovi)
 			//{
 			//	if (c.Id == clan.Id)
@@ -603,231 +607,231 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//MockDB.Instance.Clanovi.Add(clan);
 			return iDbResult.Success;
 		}
-		//Add Reservation
-		public static iDbResult AddReservation(Rezervacija rez)
-		{
-			return AddReservation(rez.Clan, rez.Knjiga, rez.Lokal);
-		}
-		public static iDbResult AddReservation(int userID, int bookID, int lokalID)
-		{
-			//Rezervacija rez = new Rezervacija(userID, bookID, lokalID);
+		////Add Reservation
+		//public static iDbResult AddReservation(Rezervacija rez)
+		//{
+		//	return AddReservation(rez.Clan, rez.Knjiga, rez.Lokal);
+		//}
+		//public static iDbResult AddReservation(int userID, int bookID, int lokalID)
+		//{
+		//	//Rezervacija rez = new Rezervacija(userID, bookID, lokalID);
 
-			////TODO: Try add rezervation
-			//MockDB.Instance.Rezervacije.Add(rez);
+		//	////TODO: Try add rezervation
+		//	//MockDB.Instance.Rezervacije.Add(rez);
 
-			iDbResult result = iDbResult.Success;
-
-
-			return result;
-		}
-		//Add book
-		public static iDbResult AddBook(Knjiga knjiga)
-		{
-			//foreach (Knjiga c in MockDB.Instance.Knjigas)
-			//{
-			//	if (c.Id == knjiga.Id)
-			//		return iDbResult.Duplicate;
-			//	if (c.Naziv == knjiga.Naziv && c.Autor == knjiga.Autor && c.Jezik == knjiga.Jezik)
-			//		return iDbResult.Duplicate;
-			//}
-
-			//MockDB.Instance.Knjigas.Add(knjiga);
-			return iDbResult.Success;
-		}
-
-		//Add News
-		public static iDbResult AddNews(Novine novine)
-		{
-			//foreach (Novine c in MockDB.Instance.Novines)
-			//{
-			//	if (c.Id == novine.Id)
-			//		return iDbResult.Duplicate;
-			//	if (c.NazivNov == novine.NazivNov)
-			//		return iDbResult.Duplicate;
-			//}
-
-			//MockDB.Instance.Novines.Add(novine);
-			return iDbResult.Success;
-		}
-
-		//Add Reservation History
-		public static iDbResult AddReservationHistory(Rezervacija rez)
-		{
-			//Istorijarezervacija istorijarezervacija = new Istorijarezervacija(rez, DateTime.Now);
-
-			////TODO: Try add reservation history
-			//MockDB.Instance.IstorijeRezervacija.Add(istorijarezervacija);
-
-			iDbResult result = iDbResult.Success;
-
-			return result;
-		}
+		//	iDbResult result = iDbResult.Success;
 
 
-		//Add News Purchase
-		public static iDbResult AddNewsPurchase(int clan, int novine)
-		{
-			return AddNewsPurchase(clan, novine, DateTime.Now);
-		}
-		public static iDbResult AddNewsPurchase(int clan, int novine, DateTime datum)
-		{
-			//Kupionovine kupionovine = new Kupionovine(clan, novine, datum);
+		//	return result;
+		//}
+		////Add book
+		//public static iDbResult AddBook(Knjiga knjiga)
+		//{
+		//	//foreach (Knjiga c in MockDB.Instance.Knjigas)
+		//	//{
+		//	//	if (c.Id == knjiga.Id)
+		//	//		return iDbResult.Duplicate;
+		//	//	if (c.Naziv == knjiga.Naziv && c.Autor == knjiga.Autor && c.Jezik == knjiga.Jezik)
+		//	//		return iDbResult.Duplicate;
+		//	//}
 
-			////TODO: Try add news purchase
-			//MockDB.Instance.KupovineNovina.Add(kupionovine);
+		//	//MockDB.Instance.Knjigas.Add(knjiga);
+		//	return iDbResult.Success;
+		//}
 
-			iDbResult result = iDbResult.Success;
+		////Add News
+		//public static iDbResult AddNews(Novine novine)
+		//{
+		//	//foreach (Novine c in MockDB.Instance.Novines)
+		//	//{
+		//	//	if (c.Id == novine.Id)
+		//	//		return iDbResult.Duplicate;
+		//	//	if (c.NazivNov == novine.NazivNov)
+		//	//		return iDbResult.Duplicate;
+		//	//}
 
-			return result;
-		}
+		//	//MockDB.Instance.Novines.Add(novine);
+		//	return iDbResult.Success;
+		//}
 
-		//Add Magazin
-		public static iDbResult AddMagazin(Magazin magazin)
-		{
-			//foreach (Magazin c in MockDB.Instance.Magazines)
-			//{
-			//	if (c.Id == magazin.Id)
-			//		return iDbResult.Duplicate;
-			//	if (c.NazivMag == magazin.NazivMag)
-			//		return iDbResult.Duplicate;
-			//}
+		////Add Reservation History
+		//public static iDbResult AddReservationHistory(Rezervacija rez)
+		//{
+		//	//Istorijarezervacija istorijarezervacija = new Istorijarezervacija(rez, DateTime.Now);
 
-			//MockDB.Instance.Magazines.Add(magazin);
-			return iDbResult.Success;
-		}
+		//	////TODO: Try add reservation history
+		//	//MockDB.Instance.IstorijeRezervacija.Add(istorijarezervacija);
 
+		//	iDbResult result = iDbResult.Success;
 
-		//Add Magazine Purchase
-		public static iDbResult AddMagazinePurchase(int clan, int magazin)
-		{
-			return AddMagazinePurchase(clan, magazin, DateTime.Now);
-		}
-		public static iDbResult AddMagazinePurchase(int clan, int magazin, DateTime datum)
-		{
-			//Kupiomagazin kupiomagazin = new Kupiomagazin(clan, magazin, datum);
-
-			////TODO: Try add magazine purchase
-			//MockDB.Instance.KupovineMagazina.Add(kupiomagazin);
-
-			iDbResult result = iDbResult.Success;
-
-			return result;
-		}
+		//	return result;
+		//}
 
 
+		////Add News Purchase
+		//public static iDbResult AddNewsPurchase(int clan, int novine)
+		//{
+		//	return AddNewsPurchase(clan, novine, DateTime.Now);
+		//}
+		//public static iDbResult AddNewsPurchase(int clan, int novine, DateTime datum)
+		//{
+		//	//Kupionovine kupionovine = new Kupionovine(clan, novine, datum);
 
-		#endregion
-		#region Deleters
-		// DELETE BOOK REQUEST
-		public static iDbResult DeleteFulfilledBookRequest(int clan, int bookID, int lokalID)
-		{
-			Ispunjenzahtevzaknjigu toDelete = null;
+		//	////TODO: Try add news purchase
+		//	//MockDB.Instance.KupovineNovina.Add(kupionovine);
 
-			//foreach (Ispunjenzahtevzaknjigu z in MockDB.Instance.ispunjenzahtevzaknjigus)
-			//{
-			//	if (clan == z.Clan && bookID == z.Izknjiga && lokalID == z.Izlokal)
-			//	{
-			//		toDelete = z; break;
-			//	}
-			//}
-			if (toDelete == null)
-				return iDbResult.Error;
+		//	iDbResult result = iDbResult.Success;
 
-			//MockDB.Instance.ispunjenzahtevzaknjigus.Remove(toDelete);
+		//	return result;
+		//}
 
-			iDbResult result = iDbResult.Success;
+		////Add Magazin
+		//public static iDbResult AddMagazin(Magazin magazin)
+		//{
+		//	//foreach (Magazin c in MockDB.Instance.Magazines)
+		//	//{
+		//	//	if (c.Id == magazin.Id)
+		//	//		return iDbResult.Duplicate;
+		//	//	if (c.NazivMag == magazin.NazivMag)
+		//	//		return iDbResult.Duplicate;
+		//	//}
 
-			return result;
-		}
-		public static iDbResult DeleteFulfilledBookRequest(Ispunjenzahtevzaknjigu request)
-		{
-			return DeleteFulfilledBookRequest(request.Clan, request.Izknjiga, request.Izlokal);
-			// TODO: Delete request
-		}
-		// DELETE NEWS REQUEST
-		public static iDbResult DeleteFulfilledNewsRequest(int clan, int novine, int lokal)
-		{
-			Ispunjenzahtevzanovine toDelete = null;
-			//foreach (Ispunjenzahtevzanovine z in MockDB.Instance.ispunjenzahtevzanovines)
-			//{
-			//	if (clan == z.Clan && novine == z.Iznovine && lokal == z.Izlokal)
-			//	{
-			//		toDelete = z; break;
-			//	}
-			//}
-			if (toDelete == null)
-				return iDbResult.Error;
+		//	//MockDB.Instance.Magazines.Add(magazin);
+		//	return iDbResult.Success;
+		//}
 
-			//MockDB.Instance.ispunjenzahtevzanovines.Remove(toDelete);
 
-			iDbResult result = iDbResult.Success;
+		////Add Magazine Purchase
+		//public static iDbResult AddMagazinePurchase(int clan, int magazin)
+		//{
+		//	return AddMagazinePurchase(clan, magazin, DateTime.Now);
+		//}
+		//public static iDbResult AddMagazinePurchase(int clan, int magazin, DateTime datum)
+		//{
+		//	//Kupiomagazin kupiomagazin = new Kupiomagazin(clan, magazin, datum);
 
-			return result;
-		}
-		public static iDbResult DeleteFulfilledNewsRequest(Ispunjenzahtevzanovine request)
-		{
-			return DeleteFulfilledNewsRequest(request.Clan, request.Iznovine, request.Izlokal);
-			// TODO: Delete request
-		}
-		// DELETE MAGAZINE REQUEST
-		public static iDbResult DeleteFulfilledMagazineRequest(int clan, int magazin, int lokal)
-		{
-			Ispunjenzahtevzamagazin toDelete = null;
+		//	////TODO: Try add magazine purchase
+		//	//MockDB.Instance.KupovineMagazina.Add(kupiomagazin);
 
-			//foreach (Ispunjenzahtevzamagazin z in MockDB.Instance.ispunjenzahtevzamagazins)
-			//{
-			//	if (clan == z.Clan && magazin == z.Izmagazin && lokal == z.Izlokal)
-			//	{
-			//		toDelete = z; break;
-			//	}
-			//}
-			//if (toDelete == null)
-			//	return iDbResult.Error;
+		//	iDbResult result = iDbResult.Success;
 
-			//MockDB.Instance.ispunjenzahtevzamagazins.Remove(toDelete);
-			iDbResult result = iDbResult.Success;
+		//	return result;
+		//}
 
-			return result;
-		}
-		public static iDbResult DeleteFulfilledMagazineRequest(Ispunjenzahtevzamagazin request)
-		{
-			return DeleteFulfilledMagazineRequest(request.Clan, request.Izmagazin, request.Izlokal);
-			// TODO: Delete request
-		}
-		// DELETE RESERVATION
-		public static iDbResult DeleteReservation(Rezervacija rez)
-		{
-			return DeleteReservation(rez.IDClan, rez.IDKnjiga, rez.IDBK);
-		}
-		public static iDbResult DeleteReservations(List<Rezervacija> rezervacije)
-		{
-			foreach (Rezervacija rez in rezervacije)
-			{
-				if (DeleteReservation(rez.IDClan, rez.IDKnjiga, rez.IDBK) == iDbResult.Error)
-					return iDbResult.Error;
-			}
-			return iDbResult.Success;
-		}
-		public static iDbResult DeleteReservation(int clan, int knjiga, int lokal)
-		{
-			Rezervacija toDelete = null;
-			//foreach (Rezervacija r in MockDB.Instance.Rezervacije)
-			//{
-			//	if (r.Clan == clan && r.Knjiga == knjiga && r.Lokal == lokal)
-			//	{
-			//		toDelete = r; break;
-			//	}
-			//}
-			//if (toDelete == null)
-			//	return iDbResult.Error;
 
-			//MockDB.Instance.Rezervacije.Remove(toDelete);
 
-			iDbResult result = iDbResult.Success;
+		//#endregion
+		//#region Deleters
+		//// DELETE BOOK REQUEST
+		//public static iDbResult DeleteFulfilledBookRequest(int clan, int bookID, int lokalID)
+		//{
+		//	Ispunjenzahtevzaknjigu toDelete = null;
 
-			return result;
-		}
-		#endregion
+		//	//foreach (Ispunjenzahtevzaknjigu z in MockDB.Instance.ispunjenzahtevzaknjigus)
+		//	//{
+		//	//	if (clan == z.Clan && bookID == z.Izknjiga && lokalID == z.Izlokal)
+		//	//	{
+		//	//		toDelete = z; break;
+		//	//	}
+		//	//}
+		//	if (toDelete == null)
+		//		return iDbResult.Error;
+
+		//	//MockDB.Instance.ispunjenzahtevzaknjigus.Remove(toDelete);
+
+		//	iDbResult result = iDbResult.Success;
+
+		//	return result;
+		//}
+		//public static iDbResult DeleteFulfilledBookRequest(Ispunjenzahtevzaknjigu request)
+		//{
+		//	return DeleteFulfilledBookRequest(request.Clan, request.Izknjiga, request.Izlokal);
+		//	// TODO: Delete request
+		//}
+		//// DELETE NEWS REQUEST
+		//public static iDbResult DeleteFulfilledNewsRequest(int clan, int novine, int lokal)
+		//{
+		//	Ispunjenzahtevzanovine toDelete = null;
+		//	//foreach (Ispunjenzahtevzanovine z in MockDB.Instance.ispunjenzahtevzanovines)
+		//	//{
+		//	//	if (clan == z.Clan && novine == z.Iznovine && lokal == z.Izlokal)
+		//	//	{
+		//	//		toDelete = z; break;
+		//	//	}
+		//	//}
+		//	if (toDelete == null)
+		//		return iDbResult.Error;
+
+		//	//MockDB.Instance.ispunjenzahtevzanovines.Remove(toDelete);
+
+		//	iDbResult result = iDbResult.Success;
+
+		//	return result;
+		//}
+		//public static iDbResult DeleteFulfilledNewsRequest(Ispunjenzahtevzanovine request)
+		//{
+		//	return DeleteFulfilledNewsRequest(request.Clan, request.Iznovine, request.Izlokal);
+		//	// TODO: Delete request
+		//}
+		//// DELETE MAGAZINE REQUEST
+		//public static iDbResult DeleteFulfilledMagazineRequest(int clan, int magazin, int lokal)
+		//{
+		//	Ispunjenzahtevzamagazin toDelete = null;
+
+		//	//foreach (Ispunjenzahtevzamagazin z in MockDB.Instance.ispunjenzahtevzamagazins)
+		//	//{
+		//	//	if (clan == z.Clan && magazin == z.Izmagazin && lokal == z.Izlokal)
+		//	//	{
+		//	//		toDelete = z; break;
+		//	//	}
+		//	//}
+		//	//if (toDelete == null)
+		//	//	return iDbResult.Error;
+
+		//	//MockDB.Instance.ispunjenzahtevzamagazins.Remove(toDelete);
+		//	iDbResult result = iDbResult.Success;
+
+		//	return result;
+		//}
+		//public static iDbResult DeleteFulfilledMagazineRequest(Ispunjenzahtevzamagazin request)
+		//{
+		//	return DeleteFulfilledMagazineRequest(request.Clan, request.Izmagazin, request.Izlokal);
+		//	// TODO: Delete request
+		//}
+		//// DELETE RESERVATION
+		//public static iDbResult DeleteReservation(Rezervacija rez)
+		//{
+		//	return DeleteReservation(rez.IDClan, rez.IDKnjiga, rez.IDBK);
+		//}
+		//public static iDbResult DeleteReservations(List<Rezervacija> rezervacije)
+		//{
+		//	foreach (Rezervacija rez in rezervacije)
+		//	{
+		//		if (DeleteReservation(rez.IDClan, rez.IDKnjiga, rez.IDBK) == iDbResult.Error)
+		//			return iDbResult.Error;
+		//	}
+		//	return iDbResult.Success;
+		//}
+		//public static iDbResult DeleteReservation(int clan, int knjiga, int lokal)
+		//{
+		//	Rezervacija toDelete = null;
+		//	//foreach (Rezervacija r in MockDB.Instance.Rezervacije)
+		//	//{
+		//	//	if (r.Clan == clan && r.Knjiga == knjiga && r.Lokal == lokal)
+		//	//	{
+		//	//		toDelete = r; break;
+		//	//	}
+		//	//}
+		//	//if (toDelete == null)
+		//	//	return iDbResult.Error;
+
+		//	//MockDB.Instance.Rezervacije.Remove(toDelete);
+
+		//	iDbResult result = iDbResult.Success;
+
+		//	return result;
+		//}
+		//#endregion
 	}
 
 	public enum iDbResult

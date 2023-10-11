@@ -4,16 +4,16 @@
 winexe
 C#
 .cs
-C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\
 BP2ProjekatCornerLibrary
 none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
-C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibrary\App.xaml
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\App.xaml
 151042070995
 
-56152433525
-2221113214034
+561127875713
+222-837829994
 Login.xaml;MainWindow.xaml;Views\User\ConfirmBookRezervationWindow.xaml;Views\User\ConfirmMagazineRezervationWindow.xaml;Views\User\ConfirmNewsRezervationWindow.xaml;Views\User\NotificationWindow.xaml;Views\User\UserMainWindow.xaml;Views\Worker\BibAddBookToStoreWindow.xaml;Views\Worker\BibAddBookWindow.xaml;Views\Worker\BibAddMagazinWindow.xaml;Views\Worker\BibAddNewsWindow.xaml;Views\Worker\BibAddUserWindow.xaml;Views\Worker\BibDodajKredit.xaml;Views\Worker\BibliotekarMainView.xaml;Views\Worker\BibUserReservations.xaml;
 
 False

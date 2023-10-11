@@ -67,7 +67,7 @@ namespace BP2ProjekatCornerLibrary.Views.User
 
 			#region Test Data
 			#region Main View
-			List<Rezervacija> rezervacije = (List<Rezervacija>)DBHelper.ExecuteQuery($"SELECT * FROM KNJIGA WHERE Clan = {clan.Id};");
+			List<Rezervacija> rezervacije = (List<Rezervacija>)DBHelper.ExecuteQuery($"SELECT * FROM KNJIGA WHERE Clan = {clan.IDClan};");
 
 			KnjigeCollection = new List<KnjigaRezView>();
 			foreach (Rezervacija re in rezervacije)
@@ -75,7 +75,7 @@ namespace BP2ProjekatCornerLibrary.Views.User
 				KnjigeCollection.Add(new KnjigaRezView(re));
 			}
 
-			List<Istorijarezervacija> istorijarezervacija = (List<Istorijarezervacija>)DBHelper.ExecuteQuery($"SELECT * FROM ISTORIJAREZERVACIJA WHERE Clan = {clan.Id};");
+			List<Rezervacija> istorijarezervacija = (List<Rezervacija>)DBHelper.ExecuteQuery($"SELECT * FROM REZERVACIJA WHERE Clan = {clan.IDClan};");
 			//{
 			//	new KnjigaRezView(),
 			//	new KnjigaRezView("7 Krugova Pakla", "Dante Aligieri", "1.2.2022.", 5),
