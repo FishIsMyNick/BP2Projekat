@@ -67,7 +67,10 @@ namespace BP2ProjekatCornerLibrary.Views.User
 
 			#region Test Data
 			#region Main View
-			List<Rezervacija> rezervacije = (List<Rezervacija>)DBHelper.ExecuteQuery($"SELECT * FROM KNJIGA WHERE Clan = {clan.IDClan};");
+			//List<Rezervacija> rezervacije = (List<Rezervacija>)DBHelper.ExecuteQuery($"SELECT * FROM KNJIGA WHERE Clan = {clan.IDClan};");
+			List<Rezervacija> rezervacije = new List<Rezervacija>();
+
+			rezervacije.AddRange(DBHelper.GetReservations(clan.IDClan));
 
 			KnjigeCollection = new List<KnjigaRezView>();
 			foreach (Rezervacija re in rezervacije)

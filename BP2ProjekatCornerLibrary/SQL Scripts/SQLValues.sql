@@ -1,4 +1,12 @@
-﻿DELETE FROM CLAN;
+﻿DELETE FROM REZERVACIJA;
+DELETE FROM KNJIGAULOKALU;
+DELETE FROM BIBLIKUTAK;
+DELETE FROM KNJIGA;
+DELETE FROM AUTOR;
+DELETE FROM JEZIK;
+DELETE FROM ZANR;
+
+DELETE FROM CLAN;
 DELETE FROM LOKACIJA;
 DELETE FROM MESTOUDRZAVI;
 DELETE FROM MESTO;
@@ -9,11 +17,13 @@ DELETE FROM ADRESA;
 
 insert into ADRESA (Ulica, Broj)
 values
-    ('Blagoja Parovica', '9a');
+    ('Blagoja Parovica', '9a'),
+    ('Fruskogorska', '3');
 
 insert into MESTO (PosBr, NazivMesta)
 values
-    (21000, 'Novi Sad');
+    (21000, 'Novi Sad'),
+    (11000, 'Beograd');
 
 insert into DRZAVA (OZND, NazivDrzave)
 values
@@ -21,11 +31,13 @@ values
 
 insert into MESTOUDRZAVI (PosBr, OZND)
 values
-    (21000, 'SRB');
+    (21000, 'SRB'),
+    (11000, 'SRB');
 
 insert into LOKACIJA (Ulica, Broj, PosBr, OZND)
 values
-    ('Blagoja Parovica', '9a', 21000, 'SRB');
+    ('Blagoja Parovica', '9a', 21000, 'SRB'),
+    ('Fruskogorska', '3', 21000, 'SRB');
 
 
 INSERT INTO CLAN (IDClan, KorisnickoIme, Sifra, Ime, Prezime, DatRodj, BrTel, Tip, Ulica, Broj, PosBr, OZND)
@@ -41,6 +53,35 @@ VALUES
     --(9, 'user9', HASHBYTES('SHA2_256', 'pass'), 'Jacob', 'Wilson', '1987-04-12', RAND() * 1000 + 1, FLOOR(RAND() * 3)),
     --(10, 'user10', HASHBYTES('SHA2_256', 'pass'), 'Isabella', 'Thompson', '1991-08-29', RAND() * 1000 + 1, FLOOR(RAND() * 3)),
     --(11, 'user1', HASHBYTES('SHA2_256', 'pass'), 'John', 'Doe', '1980-01-01', RAND() * 1000 + 1, FLOOR(RAND() * 3));
+
+insert into AUTOR (IDAutor, Ime, Prezime, DatRodj, Biografija, OZND)
+values
+    (1, 'Mika', 'Antic', '1968-5-3', 'Mika Antic nije pisao sci-fi.', 'SRB');
+
+insert into JEZIK (OZNJ, NazivJezika)
+values
+    ('SRB', 'Srpski');
+
+insert into ZANR (OZNZ, NazivZanra)
+values
+    ('SIFI', 'Sci-Fi');
+
+insert into KNJIGA (IDKnjiga, Naziv, GodIzd, BrIzd, Ograniceno)
+values
+    (1, 'Rat i Mir', '1999-1-1', 1, 0);
+
+insert into BIBLIKUTAK (IDBK, Naziv, Ulica, Broj, PosBr, OZND)
+values
+    (1, 'Biblka', 'Fruskogorska', '3', 21000, 'SRB');
+
+insert into KNJIGAULOKALU (IDKnjiga, IDBK, Kolicina)
+values
+    (1, 1, 5);
+
+insert into REZERVACIJA (IDRez, IDKnjiga, IDClan, IDBK, DatVr, PotvrdioRez, DatVrPot, ZakljucioRez, DatVrZak)
+values
+    (1, 1, 1, 1, '2023-10-11', NULL, NULL, NULL, NULL);
+
 
 --INSERT INTO KNJIGA (ID, Naziv, Autor, IzdKuca, DatIzd, Zanr, Jezik, Ograniceno)
 --VALUES

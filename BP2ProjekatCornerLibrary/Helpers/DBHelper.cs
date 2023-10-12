@@ -199,7 +199,18 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//}
 			return ret;
 		}
-
+		public static Autor GetAutor(int IDAutor)
+		{
+			return db.Autors.FromSql($"select * from dbo.AUTOR where IDAutor={IDAutor}").ToList()[0];
+		}
+		public static Jezik GetJezik(string OZNJ)
+		{
+			return db.Jeziks.FromSql($"select * from dbo.JEZIK where OZNJ={OZNJ}").ToList()[0];
+		}
+		public static Zanr GetZanr(string OZNZ)
+		{
+			return db.Zanrs.FromSql($"select * from dbo.ZANR where OZNZ={OZNZ}").ToList()[0];
+		}
 		// GET NEWS
 		//public static int GetFirstFreeNewsID()
 		//{
@@ -364,25 +375,12 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		// GET RESERVATIONS
 		public static List<Rezervacija> GetReservations(int clanID)
 		{
-			List<Rezervacija> ret = new List<Rezervacija>();
-
-			//foreach (Rezervacija r in MockDB.Instance.Rezervacije)
-			//{
-			//	if (r.Clan == clanID)
-			//	{
-			//		ret.Add(r);
-			//	}
-			//}
-			return ret;
+			return db.Rezervacijas.FromSql($"Select * from dbo.REZERVACIJA where IDClan={clanID}").ToList();
 		}
 		public static Rezervacija GetReservation(int clan, int book, int lokal)
 		{
-			//foreach (Rezervacija r in MockDB.Instance.Rezervacije)
-			//{
-			//	if (r.Clan == clan && r.Knjiga == book && r.Lokal == lokal)
-			//		return r;
-			//}
-			return null;
+			return db.Rezervacijas.FromSql($"select * from dbo.REZERVACIJA where IDClan={clan} and IDKnjiga={book} and IDBK={lokal}").ToList()[0];
+			
 		}
 		public static List<Rezervacija> GetReservationHistory(int clanID)
 		{
