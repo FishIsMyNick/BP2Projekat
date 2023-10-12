@@ -5,7 +5,7 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Clanarina
 {
-    public string OZNC { get; set; } = null!;
+    public string Oznc { get; set; } = null!;
 
     public DateTime DatUvoda { get; set; }
 
@@ -15,5 +15,5 @@ public partial class Clanarina
 
     public bool Izbacena { get; set; }
 
-    public virtual ICollection<IstorijaClanarina> IstorijaClanarinas { get; set; } = new List<IstorijaClanarina>();
+    public virtual ICollection<Istorijaclanarina> Istorijaclanarinas { get; set; } = new List<Istorijaclanarina>();
 }

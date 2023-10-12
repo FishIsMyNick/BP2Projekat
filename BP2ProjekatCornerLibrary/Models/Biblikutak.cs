@@ -5,7 +5,7 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Biblikutak
 {
-    public int IDBK { get; set; }
+    public int Idbk { get; set; }
 
     public string Naziv { get; set; } = null!;
 
@@ -15,19 +15,19 @@ public partial class Biblikutak
 
     public int PosBr { get; set; }
 
-    public string OZND { get; set; } = null!;
+    public string Oznd { get; set; } = null!;
 
-    public virtual ICollection<IzmenaKredita> IzmenaKredita { get; set; } = new List<IzmenaKredita>();
+    public virtual ICollection<Izmenakreditum> Izmenakredita { get; set; } = new List<Izmenakreditum>();
 
-    public virtual ICollection<KnjigaULokalu> KnjigaULokalus { get; set; } = new List<KnjigaULokalu>();
+    public virtual ICollection<Knjigaulokalu> Knjigaulokalus { get; set; } = new List<Knjigaulokalu>();
 
     public virtual Lokacija Lokacija { get; set; } = null!;
 
     public virtual ICollection<Radnik> Radniks { get; set; } = new List<Radnik>();
 
-    public virtual ICollection<SerijskoStivoULokalu> SerijskoStivoULokalus { get; set; } = new List<SerijskoStivoULokalu>();
+    public virtual ICollection<Serijskostivoulokalu> Serijskostivoulokalus { get; set; } = new List<Serijskostivoulokalu>();
 
-    public virtual ICollection<ZahtevZaKnjigu> ZahtevZaKnjigus { get; set; } = new List<ZahtevZaKnjigu>();
+    public virtual ICollection<Zahtevzaknjigu> Zahtevzaknjigus { get; set; } = new List<Zahtevzaknjigu>();
 
-    public virtual ICollection<ZahtevZaSerijskoStivo> ZahtevZaSerijskoStivos { get; set; } = new List<ZahtevZaSerijskoStivo>();
+    public virtual ICollection<Zahtevzaserijskostivo> Zahtevzaserijskostivos { get; set; } = new List<Zahtevzaserijskostivo>();
 }

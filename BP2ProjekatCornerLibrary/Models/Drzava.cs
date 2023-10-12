@@ -5,7 +5,7 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Drzava
 {
-    public string OZND { get; set; } = null!;
+    public string Oznd { get; set; } = null!;
 
     public string NazivDrzave { get; set; } = null!;
 

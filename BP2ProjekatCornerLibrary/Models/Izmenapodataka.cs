@@ -3,11 +3,11 @@ using System.Collections.Generic;
 
 namespace BP2ProjekatCornerLibrary.Models;
 
-public partial class IzmenaPodataka
+public partial class Izmenapodataka
 {
-    public int IDPodatak { get; set; }
+    public int Idpodatak { get; set; }
 
-    public int IDClan { get; set; }
+    public int Idclan { get; set; }
 
     public string? Ime { get; set; }
 
@@ -17,5 +17,5 @@ public partial class IzmenaPodataka
 
     public DateTime DatVr { get; set; }
 
-    public virtual Clan IDClanNavigation { get; set; } = null!;
+    public virtual Clan IdclanNavigation { get; set; } = null!;
 }

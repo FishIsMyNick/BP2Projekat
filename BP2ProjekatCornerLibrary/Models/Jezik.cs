@@ -5,11 +5,11 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Jezik
 {
-    public string OZNJ { get; set; } = null!;
+    public string Oznj { get; set; } = null!;
 
     public string NazivJezika { get; set; } = null!;
 
-    public virtual ICollection<Knjiga> IDKnjigas { get; set; } = new List<Knjiga>();
+    public virtual ICollection<Knjiganajeziku> Knjiganajezikus { get; set; } = new List<Knjiganajeziku>();
 
-    public virtual ICollection<SerijskoStivo> IDSStivos { get; set; } = new List<SerijskoStivo>();
+    public virtual ICollection<Serijskostivo> Idsstivos { get; set; } = new List<Serijskostivo>();
 }

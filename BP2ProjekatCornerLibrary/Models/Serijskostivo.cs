@@ -3,9 +3,9 @@ using System.Collections.Generic;
 
 namespace BP2ProjekatCornerLibrary.Models;
 
-public partial class SerijskoStivo
+public partial class Serijskostivo
 {
-    public int IDSStivo { get; set; }
+    public int Idsstivo { get; set; }
 
     public string Naziv { get; set; } = null!;
 
@@ -19,13 +19,13 @@ public partial class SerijskoStivo
 
     public string? PeriodIzd { get; set; }
 
-    public virtual ICollection<OcenaSStiva> OcenaSStivas { get; set; } = new List<OcenaSStiva>();
+    public virtual ICollection<Ocenasstiva> Ocenasstivas { get; set; } = new List<Ocenasstiva>();
 
     public virtual Periodicnost? PeriodIzdNavigation { get; set; }
 
-    public virtual ICollection<SerijskoStivoULokalu> SerijskoStivoULokalus { get; set; } = new List<SerijskoStivoULokalu>();
+    public virtual ICollection<Serijskostivoulokalu> Serijskostivoulokalus { get; set; } = new List<Serijskostivoulokalu>();
 
-    public virtual ICollection<IzdKuca> IDIKs { get; set; } = new List<IzdKuca>();
+    public virtual ICollection<Izdkuca> Idiks { get; set; } = new List<Izdkuca>();
 
-    public virtual ICollection<Jezik> OZNJs { get; set; } = new List<Jezik>();
+    public virtual ICollection<Jezik> Oznjs { get; set; } = new List<Jezik>();
 }

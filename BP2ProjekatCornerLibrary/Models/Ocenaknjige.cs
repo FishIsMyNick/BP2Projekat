@@ -3,13 +3,13 @@ using System.Collections.Generic;
 
 namespace BP2ProjekatCornerLibrary.Models;
 
-public partial class OcenaKnjige
+public partial class Ocenaknjige
 {
-    public int IDOcenaK { get; set; }
+    public int IdocenaK { get; set; }
 
-    public int IDClan { get; set; }
+    public int Idclan { get; set; }
 
-    public int IDKnjiga { get; set; }
+    public int Idknjiga { get; set; }
 
     public DateTime DatVr { get; set; }
 
@@ -17,7 +17,5 @@ public partial class OcenaKnjige
 
     public string? Komentar { get; set; }
 
-    public virtual Clan IDClanNavigation { get; set; } = null!;
-
-    public virtual Knjiga IDKnjigaNavigation { get; set; } = null!;
+    public virtual Clan IdclanNavigation { get; set; } = null!;
 }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace BP2ProjekatCornerLibrary.Models;
 
-public partial class ZahtevZaKnjigu
+public partial class Zahtevzaknjigu
 {
     public string Knjiga { get; set; } = null!;
 
@@ -11,15 +11,15 @@ public partial class ZahtevZaKnjigu
 
     public string Jezik { get; set; } = null!;
 
-    public int IDClan { get; set; }
+    public int Idclan { get; set; }
 
-    public int IDBK { get; set; }
+    public int Idbk { get; set; }
 
     public DateTime DatVr { get; set; }
 
     public bool Ispunjen { get; set; }
 
-    public virtual Biblikutak IDBKNavigation { get; set; } = null!;
+    public virtual Biblikutak IdbkNavigation { get; set; } = null!;
 
-    public virtual Clan IDClanNavigation { get; set; } = null!;
+    public virtual Clan IdclanNavigation { get; set; } = null!;
 }

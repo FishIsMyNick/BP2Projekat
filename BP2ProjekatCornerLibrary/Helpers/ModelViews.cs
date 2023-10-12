@@ -103,7 +103,12 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			Autor = "Autor knjige";
 			Datum = "1.1.2023.";
 		}
-		public KnjigaRezView(string Naziv, string Autor, string Datum, int? id = -1)
+        public KnjigaRezView(int IDKnjiga)
+        {
+			Knjiga k = DBHelper.GetBook(IDKnjiga);
+			//Autor a = DBHelper.GetAutor()
+        }
+        public KnjigaRezView(string Naziv, string Autor, string Datum, int? id = -1)
 		{
 			ID = id;
 			this.Naziv = Naziv;
@@ -112,7 +117,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		}
 		public KnjigaRezView(Rezervacija rez)
 		{
-			Knjiga k = DBHelper.GetBook(rez.IDKnjiga);
+			Knjiga k = DBHelper.GetBook(rez.Idknjiga);
 			ID = k.IDKnjiga;
 			Naziv = k.Naziv;
 			Autor = "Autor";
@@ -143,10 +148,10 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			Kolicina = "1";
 			Ogr = false;
 		}
-		public KnjigaULokaluView(KnjigaULokalu kul)
+		public KnjigaULokaluView(Knjigaulokalu kul)
 		{
 			ID = 1;
-			Knjiga k = DBHelper.GetBook(kul.IDKnjiga);
+			Knjiga k = DBHelper.GetBook(kul.Idknjiga);
 			Naziv = k.Naziv;
 			Autor = "Autor";
 			IzdKuca = "IzdKuca";
@@ -297,7 +302,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		}
 		public IstorijaKnjigaView(Rezervacija ir)
 		{
-			Knjiga k = DBHelper.GetBook(ir.IDKnjiga);
+			Knjiga k = DBHelper.GetBook(ir.Idknjiga);
 			Naziv = k.Naziv;
 			Autor = "Autor";
 			DatumUzeo = DateConverter.ToString((DateTime)ir.DatVrPot);
@@ -326,7 +331,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		}
 		public LokacijaView(Biblikutak l)
 		{
-			ID = l.IDBK;
+			ID = l.Idbk;
 			Adresa = "Adresa";
 			Grad = "Grad";
 			Drzava = "Drzava";

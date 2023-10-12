@@ -5,13 +5,13 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Kupovina
 {
-    public int IDKup { get; set; }
+    public int Idkup { get; set; }
 
-    public int IDSStivo { get; set; }
+    public int Idsstivo { get; set; }
 
-    public int IDClan { get; set; }
+    public int Idclan { get; set; }
 
-    public int IDBK { get; set; }
+    public int Idbk { get; set; }
 
     public DateTime DatVr { get; set; }
 
@@ -19,9 +19,9 @@ public partial class Kupovina
 
     public DateTime? DatVrPot { get; set; }
 
-    public virtual SerijskoStivoULokalu ISStivoULokaluNavigation { get; set; } = null!;
+    public virtual Serijskostivoulokalu Id { get; set; } = null!;
 
-    public virtual Clan IDClanNavigation { get; set; } = null!;
+    public virtual Clan IdclanNavigation { get; set; } = null!;
 
     public virtual Radnik? PotvrdioKupNavigation { get; set; }
 }

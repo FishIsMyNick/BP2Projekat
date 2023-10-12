@@ -5,13 +5,13 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Rezervacija
 {
-    public int IDRez { get; set; }
+    public int Idrez { get; set; }
 
-    public int IDKnjiga { get; set; }
+    public int Idknjiga { get; set; }
 
-    public int IDClan { get; set; }
+    public int Idclan { get; set; }
 
-    public int IDBK { get; set; }
+    public int Idbk { get; set; }
 
     public DateTime DatVr { get; set; }
 
@@ -23,9 +23,9 @@ public partial class Rezervacija
 
     public DateTime? DatVrZak { get; set; }
 
-    public virtual KnjigaULokalu IDKULNavigation { get; set; } = null!;
+    public virtual Knjigaulokalu Id { get; set; } = null!;
 
-    public virtual Clan IDClanNavigation { get; set; } = null!;
+    public virtual Clan IdclanNavigation { get; set; } = null!;
 
     public virtual Radnik? PotvrdioRezNavigation { get; set; }
 

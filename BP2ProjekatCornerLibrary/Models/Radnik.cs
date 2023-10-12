@@ -5,7 +5,7 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Radnik
 {
-    public int IDRadnik { get; set; }
+    public int Idradnik { get; set; }
 
     public string KorisnickoIme { get; set; } = null!;
 
@@ -21,9 +21,9 @@ public partial class Radnik
 
     public int Tip { get; set; }
 
-    public int? IDBK { get; set; }
+    public int? Idbk { get; set; }
 
-    public virtual Biblikutak? IDBKNavigation { get; set; }
+    public virtual Biblikutak? IdbkNavigation { get; set; }
 
     public virtual ICollection<Kupovina> Kupovinas { get; set; } = new List<Kupovina>();
 

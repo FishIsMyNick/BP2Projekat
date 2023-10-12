@@ -84,7 +84,8 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		{
 			message = "";
 			//List<Korisnik> lk = db.Korisniks.ToList();
-			Clan c = db.Clans.FirstOrDefault(x => x.KorisnickoIme == username);
+			//Clan c = db.Clans.FirstOrDefault(x => x.KorisnickoIme == username);
+			Clan c = db.Clans.FromSql($"select * from CLAN where KorisnickoIme={username}").ToList()[0];
 			//Clan c = db.Clans.FirstOrDefault(x => x.KorisnickoIme == username);
 			if (c != null)
 			{
@@ -178,7 +179,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//}
 			return null;
 		}
-		public static KnjigaULokalu GetBookInStore(int bookID, int lokalID)
+		public static Knjigaulokalu GetBookInStore(int bookID, int lokalID)
 		{
 			//TODO: get book in store
 			//foreach (Knjigaulokalu k in MockDB.Instance.KUL)
@@ -188,9 +189,9 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//}
 			return null;
 		}
-		public static List<KnjigaULokalu> GetBooksInStore(int lokalID)
+		public static List<Knjigaulokalu> GetBooksInStore(int lokalID)
 		{
-			List<KnjigaULokalu> ret = new List<KnjigaULokalu>();
+			List<Knjigaulokalu> ret = new List<Knjigaulokalu>();
 
 			//foreach (Knjigaulokalu k in MockDB.Instance.KUL)
 			//{
@@ -203,6 +204,10 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		{
 			return db.Autors.FromSql($"select * from dbo.AUTOR where IDAutor={IDAutor}").ToList()[0];
 		}
+		//public static List<Autor> GetBookAuthors(int IDKnjiga)
+		//{
+		//	List<Pise> pises = db.Pise
+		//}
 		public static Jezik GetJezik(string OZNJ)
 		{
 			return db.Jeziks.FromSql($"select * from dbo.JEZIK where OZNJ={OZNJ}").ToList()[0];
@@ -337,7 +342,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		//	return ret;
 		//}
 
-		public static SerijskoStivo GetSerijskoStivo(int id)
+		public static Serijskostivo GetSerijskoStivo(int id)
 		{
 			//TODO: GET FROM DB
 			//List<SerijskoStivo> sstFDB = db.Serijskostivos.ToList();
@@ -395,19 +400,19 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		}
 
 		// GET Ispunjen zahtev za knjigu
-		public static List<IspunjenZahtevKnjiga> GetFulfilledBookRequests()
+		public static List<Ispunjenzahtevknjiga> GetFulfilledBookRequests()
 		{
 			// TODO: Get all fulfilled book requests
 			//return MockDB.Instance.ispunjenzahtevzaknjigus;
 			return null;
 		}
-		public static List<IspunjenZahtevKnjiga> GetFulfilledBookRequests(int clanID)
+		public static List<Ispunjenzahtevknjiga> GetFulfilledBookRequests(int clanID)
 		{
-			List<IspunjenZahtevKnjiga> ret = new List<IspunjenZahtevKnjiga>();
+			List<Ispunjenzahtevknjiga> ret = new List<Ispunjenzahtevknjiga>();
 
-			foreach (IspunjenZahtevKnjiga izk in GetFulfilledBookRequests())
+			foreach (Ispunjenzahtevknjiga izk in GetFulfilledBookRequests())
 			{
-				if (izk.IDClan == clanID)
+				if (izk.Idclan == clanID)
 				{
 					ret.Add(izk);
 				}
@@ -415,19 +420,19 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			return ret;
 		}
 		// GET Ispunjen zahtev za novine
-		public static List<IspunjenZahtevSerijskoStivo> GetFulfilledNewsRequests()
+		public static List<Ispunjenzahtevserijskostivo> GetFulfilledNewsRequests()
 		{
 			// TODO: Get all fulfilled book requests
 			//return MockDB.Instance.ispunjenzahtevzanovines;
 			return null;
 		}
-		public static List<IspunjenZahtevSerijskoStivo> GetFulfilledNewsRequests(int clanID)
+		public static List<Ispunjenzahtevserijskostivo> GetFulfilledNewsRequests(int clanID)
 		{
-			List<IspunjenZahtevSerijskoStivo> ret = new List<IspunjenZahtevSerijskoStivo>();
+			List<Ispunjenzahtevserijskostivo> ret = new List<Ispunjenzahtevserijskostivo>();
 
-			foreach (IspunjenZahtevSerijskoStivo izk in GetFulfilledNewsRequests())
+			foreach (Ispunjenzahtevserijskostivo izk in GetFulfilledNewsRequests())
 			{
-				if (izk.IDClan == clanID)
+				if (izk.Idclan == clanID)
 				{
 					ret.Add(izk);
 				}
@@ -435,19 +440,19 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			return ret;
 		}
 		// GET Ispunjen zahtev za magazin
-		public static List<IspunjenZahtevSerijskoStivo> GetFulfilledMagazineRequests()
+		public static List<Ispunjenzahtevserijskostivo> GetFulfilledMagazineRequests()
 		{
 			// TODO: Get all fulfilled book requests
 			//return MockDB.Instance.ispunjenzahtevzamagazins;
 			return null;
 		}
-		public static List<IspunjenZahtevSerijskoStivo> GetFulfilledMagazineRequests(int clanID)
+		public static List<Ispunjenzahtevserijskostivo> GetFulfilledMagazineRequests(int clanID)
 		{
-			List<IspunjenZahtevSerijskoStivo> ret = new List<IspunjenZahtevSerijskoStivo>();
+			List<Ispunjenzahtevserijskostivo> ret = new List<Ispunjenzahtevserijskostivo>();
 
-			foreach (IspunjenZahtevSerijskoStivo izk in GetFulfilledMagazineRequests())
+			foreach (Ispunjenzahtevserijskostivo izk in GetFulfilledMagazineRequests())
 			{
-				if (izk.IDClan == clanID)
+				if (izk.Idclan == clanID)
 				{
 					ret.Add(izk);
 				}

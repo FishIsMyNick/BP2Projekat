@@ -11,7 +11,7 @@ public partial class Lokacija
 
     public int PosBr { get; set; }
 
-    public string OZND { get; set; } = null!;
+    public string Oznd { get; set; } = null!;
 
     public virtual Adresa Adresa { get; set; } = null!;
 
@@ -19,11 +19,11 @@ public partial class Lokacija
 
     public virtual ICollection<Clan> Clans { get; set; } = new List<Clan>();
 
-    public virtual ICollection<IzdKuca> IzdKucas { get; set; } = new List<IzdKuca>();
+    public virtual ICollection<Izdkuca> Izdkucas { get; set; } = new List<Izdkuca>();
 
-    public virtual ICollection<IzmenaLokacije> IzmenaLokacijes { get; set; } = new List<IzmenaLokacije>();
+    public virtual ICollection<Izmenalokacije> Izmenalokacijes { get; set; } = new List<Izmenalokacije>();
 
-    public virtual Drzava OZNDNavigation { get; set; } = null!;
+    public virtual Drzava OzndNavigation { get; set; } = null!;
 
     public virtual Mesto PosBrNavigation { get; set; } = null!;
 }

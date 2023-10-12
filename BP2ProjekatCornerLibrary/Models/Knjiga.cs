@@ -15,13 +15,13 @@ public partial class Knjiga
 
     public bool? Ograniceno { get; set; }
 
-    public virtual ICollection<KnjigaULokalu> KnjigaULokalus { get; set; } = new List<KnjigaULokalu>();
+    public virtual ICollection<Knjigaulokalu> KnjigaULokalus { get; set; } = new List<Knjigaulokalu>();
 
-    public virtual ICollection<OcenaKnjige> OcenaKnjiges { get; set; } = new List<OcenaKnjige>();
+    public virtual ICollection<Ocenaknjige> OcenaKnjiges { get; set; } = new List<Ocenaknjige>();
 
     public virtual ICollection<Autor> IDAutors { get; set; } = new List<Autor>();
 
-    public virtual ICollection<IzdKuca> IDIKs { get; set; } = new List<IzdKuca>();
+    public virtual ICollection<Izdkuca> IDIKs { get; set; } = new List<Izdkuca>();
 
     public virtual ICollection<Jezik> OZNJs { get; set; } = new List<Jezik>();
 
