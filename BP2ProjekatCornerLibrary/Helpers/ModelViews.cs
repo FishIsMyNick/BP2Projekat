@@ -44,6 +44,48 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		Staro,
 		Ograniceno
 	}
+
+	#region NEW SHIT
+	public class ClanMainViewRezervacija
+	{
+		public int IDRez { get; set; }
+		public string NazivKnjige { get; set; }
+		public string Autori { get; set; }
+		public string DatumStarta { get; set; }
+
+        public ClanMainViewRezervacija(Rezervacija r)
+        {
+			Knjiga k = DBHelper.GetBook(r.Idknjiga);
+			List<Autor> autors = DBHelper.GetBookAuthors(r.Idknjiga);
+			//List<Autor> a = DBHelper.get
+			IDRez = r.Idrez;
+
+			NazivKnjige = k.Naziv;
+			
+			Autori = "";
+			if(autors == null || autors.Count == 0)
+			{
+				Autori = "Nepoznat";
+			}
+			for (int i = 0; i < autors.Count; i++)
+			{
+				Autori += autors[i].Ime;
+				if (autors[i].Prezime != null && autors[i].Prezime != "")
+					Autori += " " + autors[i].Prezime;
+				if (i < autors.Count - 1)
+					Autori += ", ";
+			}
+
+			DatumStarta = DateConverter.ToString((DateTime)r.DatVrPot);
+        }
+    }
+	#endregion
+
+
+
+
+
+
 	public class ClanView
 	{
 		public int ID { get; set; }
@@ -118,7 +160,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		public KnjigaRezView(Rezervacija rez)
 		{
 			Knjiga k = DBHelper.GetBook(rez.Idknjiga);
-			ID = k.IDKnjiga;
+			ID = k.Idknjiga;
 			Naziv = k.Naziv;
 			Autor = "Autor";
 			Datum = DateConverter.ToString((DateTime)rez.DatVrPot);

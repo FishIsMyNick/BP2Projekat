@@ -9,7 +9,7 @@ public partial class Jezik
 
     public string NazivJezika { get; set; } = null!;
 
-    public virtual ICollection<Knjiganajeziku> Knjiganajezikus { get; set; } = new List<Knjiganajeziku>();
+    public virtual ICollection<Knjiga> Idknjigas { get; set; } = new List<Knjiga>();
 
     public virtual ICollection<Serijskostivo> Idsstivos { get; set; } = new List<Serijskostivo>();
 }

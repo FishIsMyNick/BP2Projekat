@@ -19,5 +19,5 @@ public partial class Autor
 
     public virtual Drzava? OzndNavigation { get; set; }
 
-    public virtual ICollection<Pise> Pises { get; set; } = new List<Pise>();
+    public virtual ICollection<Knjiga> Idknjigas { get; set; } = new List<Knjiga>();
 }

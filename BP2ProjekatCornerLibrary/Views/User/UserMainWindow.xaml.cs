@@ -72,13 +72,18 @@ namespace BP2ProjekatCornerLibrary.Views.User
 
 			rezervacije.AddRange(DBHelper.GetReservations(clan.Idclan));
 
+			foreach(Rezervacija rez in rezervacije)
+			{
+				List<Autor> k = DBHelper.GetBookAuthors(rez.Idknjiga);
+			}
+
 			KnjigeCollection = new List<KnjigaRezView>();
 			foreach (Rezervacija re in rezervacije)
 			{
 				//KnjigeCollection.Add(new KnjigaRezView(DBHelper.GetBook(re.IDKnjiga)));
 			}
 
-			List<Rezervacija> istorijarezervacija = (List<Rezervacija>)DBHelper.ExecuteQuery($"SELECT * FROM REZERVACIJA WHERE Clan = {clan.Idclan};");
+			//List<Rezervacija> istorijarezervacija = (List<Rezervacija>)DBHelper.ExecuteQuery($"SELECT * FROM REZERVACIJA WHERE Clan = {clan.Idclan};");
 			//{
 			//	new KnjigaRezView(),
 			//	new KnjigaRezView("7 Krugova Pakla", "Dante Aligieri", "1.2.2022.", 5),

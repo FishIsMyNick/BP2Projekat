@@ -18,4 +18,6 @@ public partial class Ocenaknjige
     public string? Komentar { get; set; }
 
     public virtual Clan IdclanNavigation { get; set; } = null!;
+
+    public virtual Knjiga IdknjigaNavigation { get; set; } = null!;
 }

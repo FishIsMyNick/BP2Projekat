@@ -13,6 +13,8 @@ public partial class Knjigaulokalu
 
     public virtual Biblikutak IdbkNavigation { get; set; } = null!;
 
+    public virtual Knjiga IdknjigaNavigation { get; set; } = null!;
+
     public virtual ICollection<Ispunjenzahtevknjiga> Ispunjenzahtevknjigas { get; set; } = new List<Ispunjenzahtevknjiga>();
 
     public virtual ICollection<Rezervacija> Rezervacijas { get; set; } = new List<Rezervacija>();

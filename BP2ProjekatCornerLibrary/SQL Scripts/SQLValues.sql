@@ -39,6 +39,10 @@ values
     ('Blagoja Parovica', '9a', 21000, 'SRB'),
     ('Fruskogorska', '3', 21000, 'SRB');
 
+insert into IZDKUCA (IDIK, Naziv, Ulica, Broj, PosBr, OZND)
+values
+    (1, 'Pingvin', 'Fruskogorska', '3', 21000, 'SRB');
+
 
 INSERT INTO CLAN (IDClan, KorisnickoIme, Sifra, Ime, Prezime, DatRodj, BrTel, Tip, Ulica, Broj, PosBr, OZND)
 VALUES
@@ -69,6 +73,18 @@ values
 insert into KNJIGA (IDKnjiga, Naziv, GodIzd, BrIzd, Ograniceno)
 values
     (1, 'Rat i Mir', '1999-1-1', 1, 0);
+
+insert into PISE (IDKnjiga, IDAutor)
+values
+    (1, 1);
+
+insert into KNJIGANAJEZIKU(IDKnjiga, OZNJ)
+values
+    (1, 'SRB');
+
+insert into IZDAJEKNJIGU(IDKnjiga, IDIK)
+values
+    (1, 1);
 
 insert into BIBLIKUTAK (IDBK, Naziv, Ulica, Broj, PosBr, OZND)
 values

@@ -27,6 +27,41 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		{
 			return query;
 		}
+
+		#region NEW SHIT
+
+		#region GETTERS
+		public static Knjiga GetBook(int bookID)
+		{
+			return db.Knjigas.FromSql($"select * from KNJIGA where IDKnjiga={bookID}").ToList()[0];
+		}
+		public static Autor GetAutor(int autorID)
+		{
+			return db.Autors.FromSql($"select * from AUTOR where IDAutor={autorID}").ToList()[0]; 
+		}
+		public static List<Autor> GetBookAuthors(int bookID)
+		{
+			Knjiga k = db.Knjigas.FromSql($"select * from KNJIGA where IDKnjiga={bookID}").ToList()[0];
+
+			List<Pise> pisu = db.Pises.FromSql($"select IDAutor from PISE where IDKnjiga={bookID}").ToList();
+
+			//HashSet<int> authors = new HashSet<int>();
+			//foreach(Pise p in pisu)
+			//{
+			//	authors.Add(p.Idautor);
+			//}
+
+			List<Autor> ret = new List<Autor>();
+			//foreach (int a in authors)
+			//	ret.Add(GetAutor(a));
+			
+			return ret;
+		}
+		#endregion
+
+		#endregion
+
+
 		#region Getters
 		public static int GetFirstFreeUserID()
 		{
@@ -169,16 +204,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//}
 			return 1;
 		}
-		public static Knjiga GetBook(int bookID)
-		{
-			//TODO: Get book
-			//foreach (Knjiga k in MockDB.Instance.Knjigas)
-			//{
-			//	if (k.Id == bookID)
-			//		return k;
-			//}
-			return null;
-		}
+		
 		public static Knjigaulokalu GetBookInStore(int bookID, int lokalID)
 		{
 			//TODO: get book in store
@@ -199,10 +225,6 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//	{ ret.Add(k); }
 			//}
 			return ret;
-		}
-		public static Autor GetAutor(int IDAutor)
-		{
-			return db.Autors.FromSql($"select * from dbo.AUTOR where IDAutor={IDAutor}").ToList()[0];
 		}
 		//public static List<Autor> GetBookAuthors(int IDKnjiga)
 		//{

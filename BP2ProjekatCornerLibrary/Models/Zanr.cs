@@ -9,5 +9,5 @@ public partial class Zanr
 
     public string NazivZanra { get; set; } = null!;
 
-    public virtual ICollection<Pripadazanru> Pripadazanrus { get; set; } = new List<Pripadazanru>();
+    public virtual ICollection<Knjiga> Idknjigas { get; set; } = new List<Knjiga>();
 }

@@ -5,7 +5,7 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Knjiga
 {
-    public int IDKnjiga { get; set; }
+    public int Idknjiga { get; set; }
 
     public string Naziv { get; set; } = null!;
 
@@ -15,15 +15,15 @@ public partial class Knjiga
 
     public bool? Ograniceno { get; set; }
 
-    public virtual ICollection<Knjigaulokalu> KnjigaULokalus { get; set; } = new List<Knjigaulokalu>();
+    public virtual ICollection<Knjigaulokalu> Knjigaulokalus { get; set; } = new List<Knjigaulokalu>();
 
-    public virtual ICollection<Ocenaknjige> OcenaKnjiges { get; set; } = new List<Ocenaknjige>();
+    public virtual ICollection<Ocenaknjige> Ocenaknjiges { get; set; } = new List<Ocenaknjige>();
 
-    public virtual ICollection<Autor> IDAutors { get; set; } = new List<Autor>();
+    public virtual ICollection<Autor> Idautors { get; set; } = new List<Autor>();
 
-    public virtual ICollection<Izdkuca> IDIKs { get; set; } = new List<Izdkuca>();
+    public virtual ICollection<Izdkuca> Idiks { get; set; } = new List<Izdkuca>();
 
-    public virtual ICollection<Jezik> OZNJs { get; set; } = new List<Jezik>();
+    public virtual ICollection<Jezik> Oznjs { get; set; } = new List<Jezik>();
 
-    public virtual ICollection<Zanr> OZNZs { get; set; } = new List<Zanr>();
+    public virtual ICollection<Zanr> Oznzs { get; set; } = new List<Zanr>();
 }
