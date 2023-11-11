@@ -71,10 +71,10 @@ namespace BP2ProjekatCornerLibrary.Views.User
 			List<Rezervacija> rezervacije = new List<Rezervacija>();
 
 			rezervacije.AddRange(DBHelper.GetReservations(clan.Idclan));
-
+			List<Autor> autori = new List<Autor>();
 			foreach(Rezervacija rez in rezervacije)
 			{
-				List<Autor> k = DBHelper.GetBookAuthors(rez.Idknjiga);
+				autori.AddRange(DBHelper.GetBookAuthors(rez.Idknjiga));
 			}
 
 			KnjigeCollection = new List<KnjigaRezView>();

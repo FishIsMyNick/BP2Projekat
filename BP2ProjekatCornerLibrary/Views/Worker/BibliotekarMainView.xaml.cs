@@ -21,6 +21,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 	public partial class BibliotekarMainView : Window
 	{
 		//private MockDB mockDB;
+		private int currentUser;
 		public BibliotekarMainView(Radnik bibliotekar)
 		{
 
@@ -29,7 +30,9 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 			InitializeComponent();
 
 			//lbUsername.Content = bibliotekar.Username;
-			lbUsername.Content = "Username";
+
+			lbUsername.Content = bibliotekar.KorisnickoIme;
+			currentUser = bibliotekar.Idradnik;
 		}
 		//public BibliotekarMainView(Bibliotekar bibliotekar)
 		//{
@@ -131,7 +134,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
 		private void btnAddBook_Click(object sender, RoutedEventArgs e)
 		{
-			BibAddBookWindow bibAddBookWindow = new BibAddBookWindow();
+			BibAddBookWindow bibAddBookWindow = new BibAddBookWindow(currentUser);
 			bibAddBookWindow.ShowDialog();
 		}
 

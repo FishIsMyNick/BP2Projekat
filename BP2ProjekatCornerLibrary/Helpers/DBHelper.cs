@@ -1,6 +1,7 @@
 ﻿using BP2ProjekatCornerLibrary.Models;
 using Microsoft.EntityFrameworkCore;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Configuration;
 using System.Linq;
@@ -31,36 +32,180 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		#region NEW SHIT
 
 		#region GETTERS
+		// KNJIGA
 		public static Knjiga GetBook(int bookID)
 		{
 			return db.Knjigas.FromSql($"select * from KNJIGA where IDKnjiga={bookID}").ToList()[0];
 		}
+		public static Knjiga GetExactBook(string naziv, int autorID, int IDIK, string godIzd, int brIzd, string oznz, string oznj, bool ogr)
+		{
+			List<Knjiga> knjige = db.Knjigas.FromSql($"select * from KNJIGA where Naziv={naziv} and GodIzd={godIzd} and BrIzd={brIzd} and Ograniceno={Convert.ToInt16(ogr)}").ToList();
+			if (knjige.Count == 0) return null;
+
+			Autor autor = db.Autors.FromSql($"select * from AUTOR where IDAutor={autorID}").ToList()[0];
+			if (autor == null) return null;
+
+			Izdkuca izdkuca = db.Izdkucas.FromSql($"select * from IZDKUCA where IDIK={IDIK}").ToList()[0];
+			if (izdkuca == null) return null;
+
+
+			bool allSame = true;
+
+			foreach (Knjiga k in knjige)
+			{
+				List<Pise> pise = db.Pises.FromSql($"select * from PISE where IDKnjiga={k.Idknjiga} and IDAutor={autorID}").ToList();
+				if (pise.Count == 0) allSame = false;
+
+				List<Izdajeknjigu> ik = db.Izdajeknjigus.FromSql($"select * from IZDAJEKNJIGU where IDIK={IDIK} and IDKnjiga={k.Idknjiga}").ToList();
+				if (ik.Count == 0) allSame = false;
+
+				List<Knjiganajeziku> knj = db.Knjiganajezikus.FromSql($"select * from KNJIGANAJEZIKU where IDKnjiga={k.Idknjiga} and OZNJ={oznj}").ToList();
+				if (knj.Count == 0) allSame = false;
+
+				List<Pripadazanru> pz = db.Pripadazanrus.FromSql($"select * from PRIPADAZANRU where IDKnjiga={k.Idknjiga} and OZNZ={oznz}").ToList();
+				if (pz.Count == 0) allSame = false;
+
+				if (allSame)
+					return k;
+				else
+					allSame = true;
+			}
+			return null;
+		}
+		public static List<Knjiga> GetAllKnjigas()
+		{
+			return db.Knjigas.ToList();
+		}
+
+		// AUTOR
 		public static Autor GetAutor(int autorID)
 		{
-			return db.Autors.FromSql($"select * from AUTOR where IDAutor={autorID}").ToList()[0]; 
+			return db.Autors.FromSql($"select * from AUTOR where IDAutor={autorID}").ToList()[0];
+		}
+		public static List<Autor> GetAutorsByName(string name, string lastName)
+		{
+			return db.Autors.FromSql($"select * from AUTOR where Ime={name} and Prezime={lastName}").ToList();
 		}
 		public static List<Autor> GetBookAuthors(int bookID)
 		{
 			Knjiga k = db.Knjigas.FromSql($"select * from KNJIGA where IDKnjiga={bookID}").ToList()[0];
 
-			List<Pise> pisu = db.Pises.FromSql($"select IDAutor from PISE where IDKnjiga={bookID}").ToList();
+			List<Pise> pisu = db.Pises.FromSql($"select * from PISE where IDKnjiga={bookID}").ToList();
+			//List<Pise> pisu = db.Pises.FromSql($"select * from PISE").ToList();
 
-			//HashSet<int> authors = new HashSet<int>();
-			//foreach(Pise p in pisu)
-			//{
-			//	authors.Add(p.Idautor);
-			//}
+			HashSet<int> authors = new HashSet<int>();
+			foreach (Pise p in pisu)
+			{
+				authors.Add(p.Idautor);
+			}
 
 			List<Autor> ret = new List<Autor>();
-			//foreach (int a in authors)
-			//	ret.Add(GetAutor(a));
-			
+			foreach (int a in authors)
+				ret.Add(GetAutor(a));
+
 			return ret;
+		}
+		public static List<Autor> GetAllAutors()
+		{
+			return db.Autors.ToList();
+		}
+
+		// JEZIK
+		public static Jezik GetJezik(string oznj)
+		{
+			return db.Jeziks.FromSql($"select * from JEZIK where OZNJ={oznj}").ToList()[0];
+		}
+		public static Jezik GetJezikByName(string jezik)
+		{
+			return db.Jeziks.FromSql($"select * from JEZIK where NAZIVJEZIKA={jezik}").ToList()[0];
+		}
+		public static List<Jezik> GetAllJeziks()
+		{
+			//return db.Jeziks.FromSql($"select * from Jezik").ToList();
+			return db.Jeziks.ToList();
+		}
+
+		// ZANR
+		public static Zanr GetZanr(string oznz)
+		{
+			return db.Zanrs.FromSql($"select * from ZANR where OZNZ={oznz}").ToList()[0];
+		}
+		public static Zanr GetZanrByName(string zanr)
+		{
+			return db.Zanrs.FromSql($"select * from ZANR where NAZIVZANRA={zanr}").ToList()[0];
+		}
+		public static List<Zanr> GetAllZanrs()
+		{
+			//return db.Zanrs.FromSql($"select * from ZANR").ToList();
+			return db.Zanrs.ToList();
+		}
+
+		// IZDAVACKA KUCA
+		public static Izdkuca GetIzdKuca(int idik)
+		{
+			return db.Izdkucas.FromSql($"select * from IZDKUCA where IDIK={idik}").ToList()[0];
+		}
+		public static List<Izdkuca> GetAllIzdKucas()
+		{
+			return db.Izdkucas.ToList();
+		}
+
+		// RADNIK
+		public static Radnik GetRadnik(int id)
+		{
+			return db.Radniks.FromSql($"select * from RADNIK where IDRadnik={id}").ToList()[0];
 		}
 		#endregion
 
+		#region Adders
+		// KNJIGA
+		public static iDbResult AddBook(int bookID, string naziv, string godIzd, int brIzd, bool ogr, int autorID, string jezik, int izdKuca, string zanr)
+		{
+			Knjiga knjiga = new Knjiga(bookID, naziv, godIzd, brIzd, ogr);
+			Pise pise = new Pise(bookID, autorID);
+			Knjiganajeziku knjiganajeziku = new Knjiganajeziku(bookID, jezik);
+			Pripadazanru pripadazanru = new Pripadazanru(bookID, zanr);
+			Izdajeknjigu izdajeknjigu = new Izdajeknjigu(bookID, izdKuca);
+
+			try
+			{
+				db.Knjigas.Add(knjiga);
+				db.SaveChanges();
+				db.Pises.Add(pise);
+				db.Knjiganajezikus.Add(knjiganajeziku);
+				db.Pripadazanrus.Add(pripadazanru);
+				db.Izdajeknjigus.Add(izdajeknjigu);
+			}
+			catch (Exception ex)
+			{
+				return iDbResult.Error;
+			}
+
+			db.SaveChanges();
+
+			return iDbResult.Success;
+		}
+		
+		// KNJIGA U LOKALU
+		public static iDbResult AddKnjigaULokalu(int knjigaID, int lokalID, int kolicina)
+		{
+			try
+			{
+				db.Knjigaulokalus.Add(new Knjigaulokalu(knjigaID, lokalID, kolicina));
+			}
+			catch (Exception ex)
+			{
+				return iDbResult.Error;
+			}
+
+			db.SaveChanges();
+
+			return iDbResult.Success;
+		}
+
 		#endregion
 
+		#endregion
 
 		#region Getters
 		public static int GetFirstFreeUserID()
@@ -120,8 +265,12 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			message = "";
 			//List<Korisnik> lk = db.Korisniks.ToList();
 			//Clan c = db.Clans.FirstOrDefault(x => x.KorisnickoIme == username);
-			Clan c = db.Clans.FromSql($"select * from CLAN where KorisnickoIme={username}").ToList()[0];
+			List<Clan> cs = db.Clans.FromSql($"select * from CLAN where KorisnickoIme={username}").ToList();
 			//Clan c = db.Clans.FirstOrDefault(x => x.KorisnickoIme == username);
+			Clan c = null;
+			if (cs.Count > 0)
+				c = cs[0];
+
 			if (c != null)
 			{
 				if (c.Sifra == hashedPassword)
@@ -137,29 +286,33 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			return null;
 		}
 
-		//public static Bibliotekar TryLoginBibliotekar(string username, string hashedPassword, out string message)
-		//{
-		//	message = "";
-		//	var optionBuilder = new DbContextOptionsBuilder<CornerLibraryDbContext>();
-		//	optionBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["CornerLibraryDbConnString"].ConnectionString);
-		//	using (var db = new CornerLibraryDbContext(optionBuilder.Options))
-		//	{
-		//		//List<Korisnik> lk = db.Korisniks.ToList();
-		//		Bibliotekar c = db.Bibliotekars.FirstOrDefault(x => x.Username == username);
-		//		if (c != null)
-		//		{
-		//			if (c.Pass == hashedPassword)
-		//				return c;
-		//			else
-		//			{
-		//				message = "Pogrešna šifra!";
-		//				return null;
-		//			}
-		//		}
-		//	}
-		//	message = "Nepostojeći korisnik.";
-		//	return null;
-		//}
+		public static Radnik TryLoginBibliotekar(string username, string hashedPassword, out string message)
+		{
+			message = "";
+			var optionBuilder = new DbContextOptionsBuilder<CornerLibraryDbContext>();
+			optionBuilder.UseSqlServer(ConfigurationManager.ConnectionStrings["CornerLibraryDbConnString"].ConnectionString);
+			using (var db = new CornerLibraryDbContext(optionBuilder.Options))
+			{
+				//List<Korisnik> lk = db.Korisniks.ToList();
+				List<Radnik> cs = db.Radniks.FromSql($"select * from RADNIK where KorisnickoIme={username}").ToList();
+				Radnik c = null;
+				if (cs.Count > 0)
+					c = cs[0];
+
+				if (c != null)
+				{
+					if (c.Sifra == hashedPassword)
+						return c;
+					else
+					{
+						message = "Pogrešna šifra!";
+						return null;
+					}
+				}
+			}
+			message = "Nepostojeći korisnik.";
+			return null;
+		}
 
 
 
@@ -204,7 +357,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//}
 			return 1;
 		}
-		
+
 		public static Knjigaulokalu GetBookInStore(int bookID, int lokalID)
 		{
 			//TODO: get book in store
@@ -230,14 +383,14 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		//{
 		//	List<Pise> pises = db.Pise
 		//}
-		public static Jezik GetJezik(string OZNJ)
-		{
-			return db.Jeziks.FromSql($"select * from dbo.JEZIK where OZNJ={OZNJ}").ToList()[0];
-		}
-		public static Zanr GetZanr(string OZNZ)
-		{
-			return db.Zanrs.FromSql($"select * from dbo.ZANR where OZNZ={OZNZ}").ToList()[0];
-		}
+		//public static Jezik GetJezik(string OZNJ)
+		//{
+		//	return db.Jeziks.FromSql($"select * from dbo.JEZIK where OZNJ={OZNJ}").ToList()[0];
+		//}
+		//public static Zanr GetZanr(string OZNZ)
+		//{
+		//	return db.Zanrs.FromSql($"select * from dbo.ZANR where OZNZ={OZNZ}").ToList()[0];
+		//}
 		// GET NEWS
 		//public static int GetFirstFreeNewsID()
 		//{
@@ -369,7 +522,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			//TODO: GET FROM DB
 			//List<SerijskoStivo> sstFDB = db.Serijskostivos.ToList();
 
-   //         foreach (SerijskoStivo l in sstFDB)
+			//         foreach (SerijskoStivo l in sstFDB)
 			//{
 			//	if (l.IDSStivo == id)
 			//	{
@@ -381,7 +534,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		// GET STORE
 
 
-        public static Biblikutak GetStore(int storeID)
+		public static Biblikutak GetStore(int storeID)
 		{
 			// TODO: Get store
 			//foreach (Cornerlibrary l in MockDB.Instance.Lokali)
@@ -407,7 +560,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		public static Rezervacija GetReservation(int clan, int book, int lokal)
 		{
 			return db.Rezervacijas.FromSql($"select * from dbo.REZERVACIJA where IDClan={clan} and IDKnjiga={book} and IDBK={lokal}").ToList()[0];
-			
+
 		}
 		public static List<Rezervacija> GetReservationHistory(int clanID)
 		{

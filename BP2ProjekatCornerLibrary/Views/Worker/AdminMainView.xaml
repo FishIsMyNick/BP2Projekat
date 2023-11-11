@@ -1,0 +1,264 @@
+﻿<Window x:Class="BP2ProjekatCornerLibrary.Views.Worker.AdminMainView"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker"
+        mc:Ignorable="d"
+        Title="AdminMainView" Height="1080" Width="1920"
+		WindowState="Maximized" WindowStyle="SingleBorderWindow">
+	<Grid>
+		<!-- MAIN VIEW -->
+		<Grid Name="viewHomePage" Visibility="Visible">
+
+			<StackPanel Orientation="Horizontal">
+				<!-- Left panel -->
+				<StackPanel Orientation="Vertical" Width="1200">
+					<Label FontSize="30" Content="Administrator" Margin="20 0 0 0 "/>
+					<!-- LISTE RADNIKA I FILIJALA -->
+					<Grid Height="1000">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="1*"/>
+							<ColumnDefinition Width="1*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="1*"/>
+							<RowDefinition Height="1*"/>
+						</Grid.RowDefinitions>
+
+						<!--ZAPOSLENI RADNICI-->
+						<DockPanel Margin="5">
+							<Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">
+								<StackPanel Grid.Row="0" Grid.Column="0">
+									<!--LABEL-->
+									<Label FontSize="20" FontWeight="Bold" Margin="15 10 0 0">Zaposeni radnici:</Label>
+									
+									<!--SORT BUTTONS-->
+									<StackPanel Orientation="Horizontal" Width="600" Height="25" Panel.ZIndex="1" Margin="3 0 0 0">
+										<!--IME-->
+										<Button x:Name="btnZapRadnikIme"
+											Content="Ime"
+											Width="110" 
+											Click="btn_ZapRadnik_Ime_Click"/>
+										<Image x:Name="img_ZapRad_Ime_Sort" 
+											Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+											Margin="-30 0 0 0"
+											Panel.ZIndex="2"/>
+										<!--PREZIME-->
+										<Button x:Name="btnZapRadnikPrezime"
+											Content="Prezime"
+											Width="130" 
+											Click="btn_ZapRadnik_Prezime_Click"/>
+										<Image x:Name="img_ZapRad_Prezime_Sort" 
+										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Margin="-30 0 0 0"
+										   Panel.ZIndex="2"/>
+										<!--USERNAME-->
+										<Button x:Name="btnZapRadnikUsername"
+											Content="Korisničko ime"
+											Width="120" 
+											Click="btn_ZapRadnik_Username_Click"/>
+										<Image x:Name="img_ZapRad_Username_Sort" 
+										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Margin="-30 0 0 0"
+										   Panel.ZIndex="2"/>
+										<!--TIP-->
+										<Button x:Name="btnZapRadnikTip"
+											Content="Tip radnika"
+											Width="120" 
+											Click="btn_ZapRadnik_Tip_Click"/>
+										<Image x:Name="img_ZapRad_Tip_Sort" 
+										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Margin="-30 0 0 0"
+										   Panel.ZIndex="2"/>
+										<!--DAT ZAP-->
+										<Button x:Name="btnZapRadnikDatZap"
+											Content="Datum zap."
+											Width="100 " 
+											Click="btn_ZapRadnik_DatZap_Click"/>
+										<Image x:Name="img_ZapRad_DatZap_Sort" 
+										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Margin="-30 0 0 0"
+										   Panel.ZIndex="2"/>
+									</StackPanel>
+									
+									<!--LIST OF EMPLOYED WORKERS-->
+									<ListView Name="ZaposleniRadnici"
+											ItemsSource="{Binding ListaZaposlenihRadnika}"
+											Width="580"
+											Height="437"
+											Margin="0 -25 0 0"
+											Background="White"
+							ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+											  MouseDoubleClick="ZapRadnici_List_MouseDoubleClick">
+										<ListView.View>
+											<GridView>
+												<GridViewColumn Width="110" DisplayMemberBinding="{Binding Zap_Ime}"/>
+												<GridViewColumn Width="130" DisplayMemberBinding="{Binding Zap_Prezime}" />
+												<GridViewColumn Width="120" DisplayMemberBinding="{Binding Zap_Username}" />
+												<GridViewColumn Width="120" DisplayMemberBinding="{Binding Zap_Tip}" />
+												<GridViewColumn Width="105" DisplayMemberBinding="{Binding Zap_DatZap}" />
+											</GridView>
+										</ListView.View>
+									</ListView>
+								</StackPanel>
+							</Border>
+						</DockPanel>
+						
+
+						
+					</Grid>
+
+					<!-- ISTORIJA REZERVACIJA -->
+					<!--<StackPanel Orientation="Vertical">
+						<Label FontSize="20">Istorija rezervacija:</Label>
+						<StackPanel Orientation="Horizontal" Width="600" Height="25" Panel.ZIndex="1">
+							<Button x:Name="btnIstorijaKnjiga"
+							Content="Knjiga"
+							Width="250" 
+							Click="btnIstorijaKnjiga_Click"/>
+							<Image x:Name="imgIstorijaKnjigaSort" 
+						   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+						   Margin="-30 0 0 0"
+						   Panel.ZIndex="2"/>
+
+							<Button x:Name="btnIstorijaAutor"
+							Content="Autor"
+							Width="150"
+							Click="btnIstorijaAutor_Click"/>
+							<Image x:Name="imgIstorijaAutorSort" 
+						   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+						   Panel.ZIndex="2"
+						   Margin="-30 0 0 0"/>
+
+							<Button x:Name="btnIstorijaDatumUzeo"
+							Content="Datum uzeo"
+							HorizontalContentAlignment="Left"
+							Width="100"
+							Click="btnIstorijaDatumUzeo_Click"/>
+							<Image Name="imgIstorijaDatumUzeoSort" 
+						   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+						   Margin="-25 0 0 0"/>
+
+							<Button x:Name="btnIstorijaDatumVratio"
+							Content="Datum vratio"
+							HorizontalContentAlignment="Left"
+							Width="100"
+							Click="btnIstorijaDatumVratio_Click"/>
+							<Image Name="imgIstorijaDatumVratioSort" 
+						   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+						   Margin="-25 0 0 0"/>
+						</StackPanel>
+						<ListView Name="IstorijaRezervacijaList"
+							ItemsSource="{Binding IstorijaKnjigeCollection}"
+							Width="600"
+							Height="290"
+							Margin="0 -25 0 0"
+							Background="LightGray"
+							MouseDoubleClick="IstorijaRezervacijaList_MouseDoubleClick">
+							<ListView.View>
+								<GridView>
+									<GridViewColumn Width="250" DisplayMemberBinding="{Binding Naziv}"/>
+									<GridViewColumn Width="150" DisplayMemberBinding="{Binding Autor}" />
+									<GridViewColumn Width="100" DisplayMemberBinding="{Binding DatumUzeo}" />
+									<GridViewColumn Width="90" DisplayMemberBinding="{Binding DatumVratio}" />
+								</GridView>
+							</ListView.View>
+						</ListView>
+					</StackPanel>
+
+				</StackPanel>
+					-->
+
+					<!-- Right panel-->
+					<!--
+					<StackPanel Orientation="Vertical" Width="700" Margin="10 10 0 0">
+						<StackPanel Orientation="Horizontal">
+							<Label FontSize="20" Margin="0 5 0 0">Kredit:</Label>
+							<Label Name="lbKredit" FontSize="25" Margin="5 0 0 0">5000</Label>
+							<Button x:Name="btnCallCourier" Width="132 " Height="50" FontSize="20" Margin="71 0 0 0" Content="Pozovi kurira" Click="btnCallCourier_Click"/>
+							<Button x:Name="btnNotifications" Width="50" Height="50" Margin="20 0 0 0" Click="btnNotifications_Click">
+								<Image Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\zvonce.png"
+								   Panel.ZIndex ="2"></Image>
+							</Button>
+						</StackPanel>
+					-->
+					<!-- DUGMICI -->
+					<!--
+						<Grid Width="410" Height="255" Margin="0 32 0 0">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="1*" />
+								<ColumnDefinition Width="1*" />
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="1*" />
+								<RowDefinition Height="1*" />
+								<RowDefinition Height="1*" />
+							</Grid.RowDefinitions>
+							<Button x:Name="mvBtnKatalogKnjiga" Margin="2" FontSize="25" FontWeight="Bold" HorizontalContentAlignment="Center" Content="Katalog&#10;knjiga" Click="mvBtnKatalogKnjiga_Click"/>
+							<Button x:Name="mvBtnZatraziKnjigu" Margin="2" FontSize="25" FontWeight="Bold" HorizontalContentAlignment="Center" Grid.Column="1" Content="Zatrazi&#10;knjigu" Click="mvBtnZatraziKnjigu_Click"/>
+							<Button x:Name="mvBtnKatalogNovina" Margin="2" FontSize="25" FontWeight="Bold" HorizontalContentAlignment="Center" Grid.Row="1" Content="Katalog&#10;novina" Click="mvBtnKatalogNovina_Click"/>
+							<Button x:Name="mvBtnZatraziNovine" Margin="2" FontSize="25" FontWeight="Bold" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="1" Content="Zatrazi&#10;novine" Click="mvBtnZatraziNovine_Click"/>
+							<Button x:Name="mvBtnKatalogMagazina" Margin="2" FontSize="25" FontWeight="Bold" HorizontalContentAlignment="Center" Grid.Row="2" Content="Katalog&#10;magazina" Click="mvBtnKatalogMagazina_Click"/>
+							<Button	x:Name="mvBtnZatraziMagazin" Margin="2" FontSize="25" FontWeight="Bold" HorizontalContentAlignment="Center" Grid.Column="1" Grid.Row="2" Content="Zatrazi&#10;magazin" Click="mvBtnZatraziMagazin_Click"/>
+						</Grid>
+					-->
+
+
+					<!-- LOKALI -->
+					<!--
+						<Label FontSize="20" Margin="0 0 0 0" Height="34">Corner Library lokacije:</Label>
+
+
+						<StackPanel Orientation="Horizontal" 
+							Width="410" Height="25" 
+							Panel.ZIndex="1"
+							Margin="0 0 0 0">
+							<Button x:Name="btnAdresa"
+							Content="Adresa"
+							Width="200" 
+							Click="btnAdresa_Click"/>
+							<Image x:Name="imgAdresaSort" 
+						   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+						   Margin="-30 0 0 0"
+						   Panel.ZIndex="2"
+						   />
+							<Button x:Name="btnGrad"
+							Content="Grad"
+							Width="105"
+							Click="btnGrad_Click"/>
+							<Image x:Name="imgGradSort" 
+						   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+						   Panel.ZIndex="2"
+						   Margin="-30 0 0 0"
+						   />
+							<Button x:Name="btnDrzava"
+							Content="Drzava"
+							Width="105"
+							Click="btnDrzava_Click"/>
+							<Image Name="imgDrzavaSort" 
+						   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+						   Margin="-25 0 0 0"/>
+						</StackPanel>
+						<ListView Name="Lokacije"
+						  ItemsSource="{Binding LokacijaCollection}"
+						  Width="410"
+						  Height="290"
+						  Margin="0 -25 0 0"
+						  Background="LightGray"
+						  MouseDoubleClick="Lokacije_MouseDoubleClick">
+							<ListView.View>
+								<GridView>
+									<GridViewColumn Header="Adresa" Width="190" DisplayMemberBinding="{Binding Adresa}"/>
+									<GridViewColumn Header="Grad" Width="105" DisplayMemberBinding="{Binding Grad}" />
+									<GridViewColumn Header="Drzava" Width="85" DisplayMemberBinding="{Binding Drzava}" />
+								</GridView>
+							</ListView.View>
+						</ListView>
+					</StackPanel>
+-->
+				</StackPanel>
+			</StackPanel>
+		</Grid>
+	</Grid>
+</Window>

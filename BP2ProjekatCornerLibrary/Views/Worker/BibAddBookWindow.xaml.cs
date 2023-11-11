@@ -1,4 +1,5 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,38 +22,40 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 	public partial class BibAddBookWindow : Window
 	{
 		iDbResult result;
-		public BibAddBookWindow()
+		private int currentUser;
+		public BibAddBookWindow(int currentUser)
 		{
+			this.currentUser = currentUser;
 			InitializeComponent();
 
-			List<string> zanrovi = Enum.GetValues(typeof(iZanr)).Cast<iZanr>().ToList<iZanr>().ConvertAll(f => f.ToString());
+			InitZanrCB();
+			InitJezikCB();
+			InitIzdKuca();
+		}
 
-			foreach (string zanr in zanrovi)
-			{
-				if (zanr == "CookBook")
-				{
-					cbZanr.Items.Add("Cook Book");
-				}
-				else if (zanr == "SciFi")
-				{
-					cbZanr.Items.Add("Sci Fi");
-				}
-				else if (zanr == "SelfHelp")
-				{
-					cbZanr.Items.Add("Self Help");
-				}
-				else
-				{
-					cbZanr.Items.Add((string)zanr);
-				}
-			}
+		private void InitZanrCB()
+		{
+			List<Zanr> zanrovi = DBHelper.GetAllZanrs();
+			zanrovi.Add(new Zanr("000", "Dodaj nov žanr"));
+
+			cbZanr.ItemsSource = zanrovi;
 			cbZanr.SelectedIndex = 0;
+		}
+		private void InitJezikCB()
+		{
+			List<Jezik> jeziks = DBHelper.GetAllJeziks();
+			jeziks.Add(new Jezik("000", "Dodaj nov jezik"));
 
-			for (int i = 1900; i <= 2023; i++)
-			{
-				cbGodina.Items.Add(i.ToString());
-			}
-			cbGodina.SelectedIndex = 0;
+			cbJezik.ItemsSource = jeziks;
+			cbJezik.SelectedIndex = 0;
+		}
+		private void InitIzdKuca()
+		{
+			List<Izdkuca> izdkucas = DBHelper.GetAllIzdKucas();
+			izdkucas.Add(new Izdkuca(-1, "Dodaj novu izdavačku kuću")); 
+
+			cbIK.ItemsSource = izdkucas;
+			cbIK.SelectedIndex = 0;
 		}
 
 		private void btnGenerisi_Click(object sender, RoutedEventArgs e)
@@ -62,16 +65,20 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
 		private void btnDodaj_Click(object sender, RoutedEventArgs e)
 		{
-			if (tbID.Text != "" &&
-				tbNaziv.Text != "" &&
-				tbAutor.Text != "" &&
-				tbIzdKuca.Text != "" &&
-				tbJezik.Text != "" &&
-				cbDan.SelectedItem != null &&
-				cbMesec.SelectedItem != null &&
-				cbGodina.SelectedItem != null)
+			if (tbID.Text == "" ||
+				tbNaziv.Text == "" ||
+				tbAutor.Text == "" ||
+				//tbIzdKuca.Text != "" &&
+				tbGodIzd.Text == "")
 			{
-
+				MessageBox.Show("Sva polja moraju biti popunjena!");
+			}
+			//cbDan.SelectedItem != null &&
+			//cbMesec.SelectedItem != null &&
+			//cbGodina.SelectedItem != null)
+			else
+			{
+				// TODO: Izbaci sve sa id, prebaci na autogenerisan
 				int id;
 				if (!int.TryParse(tbID.Text, out id))
 				{
@@ -83,29 +90,85 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 					MessageBox.Show("Uneta vrednost za ID knjige nije validna!");
 					return;
 				}
+
+				// Get values
 				string naziv = tbNaziv.Text;
 				string autor = tbAutor.Text;
-				string jezik = tbJezik.Text;
-				string izdKuca = tbIzdKuca.Text;
+				string jezik = cbJezik.SelectedValue.ToString();
+				int izdKuca = int.Parse(cbIK.SelectedValue.ToString());
+				string godIzd = tbGodIzd.Text;
 				string zanr = cbZanr.SelectedValue.ToString();
 				bool ogr = (bool)chbOgraniceno.IsChecked;
-				DateTime datIzd;
+				bool dodajOvde = (bool)chbDodajOvde.IsChecked;
 
-				try
+				// Check BrIzd
+				int brIzd;
+
+				if(!int.TryParse(tbBrIzd.Text, out brIzd) || brIzd < 1)
 				{
-					datIzd = new DateTime(1900 + cbGodina.SelectedIndex, 1 + cbMesec.SelectedIndex, 1 + cbDan.SelectedIndex);
-				}
-				catch (Exception ex)
-				{
-					MessageBox.Show("Uneti datum nije validan!");
+					MessageBox.Show("Uneta vrednost za broj izdanja knjige nije validna!");
 					return;
 				}
 
+				// Get possible authors
+				string[] aImena = autor.Split(' ');
+				string aIme = aImena[0];
+				string aPrezime = "";
+				for (int i = 1; i < aImena.Length; i++)
+				{
+					aPrezime += aImena[i];
+					if (i < aImena.Length - 1)
+						aPrezime += " ";
+				}
+				List<Autor> autors = DBHelper.GetAutorsByName(aIme, aPrezime);
 
-				//iDbResult result = DBHelper.AddBook(new Knjiga(id, naziv, autor, izdKuca, datIzd, zanr, jezik, ogr));
+				int autorID = autors[0].Idautor;
+				if (autors.Count > 1)
+				{
+					// TODO: open autor selection
+
+				}
+
+				// Check if book exists
+				Knjiga checkDup = DBHelper.GetExactBook(naziv, autorID, izdKuca, godIzd, brIzd, zanr, jezik, ogr);
+				if(checkDup != null)
+				{
+					MessageBox.Show("Knjiga sa ovim podacima već postoji!");
+					return;
+				}
+
+				//Check dodaj ovde
+				int kol = 0;
+				if (dodajOvde)
+				{
+					if(!int.TryParse(tbKolicina.Text.ToString(), out kol) || kol < 1)
+					{
+						MessageBox.Show("Količina nije uneta u ispravnom formatu!");
+						return;
+					}
+				}
+
+				// Try add book
+				iDbResult result = DBHelper.AddBook(id, naziv, godIzd, brIzd, ogr, autorID, jezik, izdKuca, zanr);
+
 				if (result == iDbResult.Success)
 				{
 					MessageBox.Show("Uspešno dodata knjiga!");
+
+					if (dodajOvde)
+					{
+						result = DBHelper.AddKnjigaULokalu(id, (int)DBHelper.GetRadnik(currentUser).Idbk, kol);
+
+						if(result == iDbResult.Success)
+						{
+							MessageBox.Show("Uspešno dodata knjiga u ovoj filijali!");
+						}
+						else
+						{
+							MessageBox.Show("Greška pri dodavanju knjige u ovoj filijali! Knjiga je već dodata u sistem. Ako želite da je dodate u ovu filijalu, možete to uraditi iz glavnog menija.");
+						}
+					}
+					
 					Close();
 				}
 				else if (result == iDbResult.Duplicate)
@@ -116,10 +179,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 				{
 					MessageBox.Show("Došlo je do neočekivane greške");
 				}
-			}
-			else
-			{
-				MessageBox.Show("Sva polja moraju biti popunjena!");
 			}
 		}
 	}

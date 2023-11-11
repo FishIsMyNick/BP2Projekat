@@ -5,6 +5,15 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Jezik
 {
+    public Jezik()
+    {
+        
+    }
+    public Jezik(string oznj, string jezik)
+    {
+        Oznj = oznj;
+        NazivJezika = jezik;
+    }
     public string Oznj { get; set; } = null!;
 
     public string NazivJezika { get; set; } = null!;

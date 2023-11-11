@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\App.xaml
-151042070995
+16-1585306145
 
-62773641110
-222-837829994
-Login.xaml;MainWindow.xaml;Views\User\ConfirmBookRezervationWindow.xaml;Views\User\ConfirmMagazineRezervationWindow.xaml;Views\User\ConfirmNewsRezervationWindow.xaml;Views\User\NotificationWindow.xaml;Views\User\UserMainWindow.xaml;Views\Worker\BibAddBookToStoreWindow.xaml;Views\Worker\BibAddBookWindow.xaml;Views\Worker\BibAddMagazinWindow.xaml;Views\Worker\BibAddNewsWindow.xaml;Views\Worker\BibAddUserWindow.xaml;Views\Worker\BibDodajKredit.xaml;Views\Worker\BibliotekarMainView.xaml;Views\Worker\BibUserReservations.xaml;
+63-59273613
+2221429377423
+Login.xaml;MainWindow.xaml;Views\User\ConfirmBookRezervationWindow.xaml;Views\User\ConfirmMagazineRezervationWindow.xaml;Views\User\ConfirmNewsRezervationWindow.xaml;Views\User\NotificationWindow.xaml;Views\User\UserMainWindow.xaml;Views\Worker\AdminMainView.xaml;Views\Worker\BibAddBookToStoreWindow.xaml;Views\Worker\BibAddBookWindow.xaml;Views\Worker\BibAddMagazinWindow.xaml;Views\Worker\BibAddNewsWindow.xaml;Views\Worker\BibAddUserWindow.xaml;Views\Worker\BibDodajKredit.xaml;Views\Worker\BibliotekarMainView.xaml;Views\Worker\BibUserReservations.xaml;
 
 False
 

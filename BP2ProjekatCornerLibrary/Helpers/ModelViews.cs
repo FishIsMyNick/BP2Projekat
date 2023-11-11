@@ -131,6 +131,39 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		//	BrTel = (string)clan.BrTel;
 		//}
 	}
+	public class KnjigaView
+	{
+		public Knjiga knjiga;
+		public Autor autor;
+		public Jezik jezik;
+		public Zanr zanr;
+		public Izdkuca izdKuca;
+
+		public KnjigaView()
+		{
+			knjiga = new Knjiga();
+			autor = new Autor();
+			jezik = new Jezik();
+			zanr = new Zanr();
+			izdKuca = new Izdkuca();
+		}
+		public KnjigaView(int bookID, string naziv, string godIzd, int brIzd, bool ogr, int autorID, string ime, string prezime, DateTime datRodj, string biografija, string oznj, string jezik, string oznz, string zanr, int idik, string nazivIK)
+		{
+			knjiga = new Knjiga(bookID, naziv, godIzd, brIzd, ogr);
+			autor = new Autor(autorID, ime, prezime, datRodj, biografija);
+			this.jezik = new Jezik(oznj, jezik);
+			this.zanr = new Zanr(oznz, zanr);
+			izdKuca = new Izdkuca(idik, nazivIK);
+		}
+        public KnjigaView(int bookID, int autorID, string oznj, string oznz, int idik)
+        {
+            knjiga = DBHelper.GetBook(bookID);
+			autor = DBHelper.GetAutor(autorID);
+			jezik = DBHelper.GetJezik(oznj);
+			zanr = DBHelper.GetZanr(oznz);
+			izdKuca = DBHelper.GetIzdKuca(idik);
+        }
+    }
 	public class KnjigaRezView
 	{
 		public int? ID { get; set; }

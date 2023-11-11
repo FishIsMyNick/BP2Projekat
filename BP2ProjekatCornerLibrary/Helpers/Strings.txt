@@ -9,3 +9,5 @@ Scaffold-DbContext "Server=.\CORNERLIBRARYDB;Database=CornerLibraryDB;User Id=sa
 
 
 Scaffold-DbContext "Server=.\CORNERLIBRARYDB;Database=CornerLibraryDB;User Id=sa;Password=bp2sifra;Trusted_Connection=True;Encrypt=False;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir Models -Tables IZDAJEKNJIGU,IZDAJESSTIVO,KNJIGANAJEZIKU,MESTOUDRZAVI,PISE,PRIPADAZANRU,SSTIVONAJEZIKU -Force
+
+Scaffold-DbContext "Server=.\BP2SQLSERVER;Database=BP2CLDB;User Id=sa;Password=sifra;Trusted_Connection=True;Encrypt=False;" Microsoft.EntityFrameworkCore.SqlServer -OutputDir CodeFirstModels

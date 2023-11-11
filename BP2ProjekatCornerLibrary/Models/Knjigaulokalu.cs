@@ -5,6 +5,16 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Knjigaulokalu
 {
+    public Knjigaulokalu()
+    {
+    
+    }
+    public Knjigaulokalu(int IDKnjiga, int IDBK, int kolicina)
+    {
+        Idknjiga = IDKnjiga;
+        Idbk = IDBK;
+        Kolicina = kolicina;
+    }
     public int Idknjiga { get; set; }
 
     public int Idbk { get; set; }

@@ -125,7 +125,7 @@ create table PERIODICNOST(
 create table KNJIGA(
 	IDKnjiga int not null,
 	Naziv varchar(max) not null,
-	GodIzd date,
+	GodIzd varchar(50),
 	BrIzd int,
 	Ograniceno bit,
 

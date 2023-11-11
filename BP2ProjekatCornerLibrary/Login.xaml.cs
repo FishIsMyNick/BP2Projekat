@@ -26,13 +26,16 @@ namespace BP2ProjekatCornerLibrary.Views.Login
 		//private MockDB Mock;
 		public Login()
 		{
-			DBHelper.InitializeConnection();
+			//DBHelper.InitializeConnection();
 			
 
 			//Mock = new MockDB();
 			InitializeComponent();
 
-			TryLogin();
+			//TryLogin();
+			Window window = new AdminMainView();
+			window.Show();
+			Close();
 		}
 
 
@@ -47,7 +50,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
 			string message;
 
 			//test
-			user = "Fish";
+			user = "bib";
 			hashedPassword = HashHelper.ComputeSha256Hash("pass");
 
 			Clan clan = DBHelper.TryLoginUser(user, hashedPassword, out message);
@@ -64,22 +67,22 @@ namespace BP2ProjekatCornerLibrary.Views.Login
 			}
 			else
 			{
-				//Radnik bibliotekar = DBHelper.TryLoginBibliotekar(user, hashedPassword, out message);
-				//if (bibliotekar != null)
-				//{
-				//	BibliotekarMainView bibMainView = new BibliotekarMainView(bibliotekar);
-				//	bibMainView.Show();
-				//	Close();
-				//}
-				//else if (message == "Pogrešna šifra!")
-				//{
-				//	MessageBox.Show(message);
-				//	return;
-				//}
-				//else
-				//{
-				//	MessageBox.Show(message);
-				//}
+				Radnik bibliotekar = DBHelper.TryLoginBibliotekar(user, hashedPassword, out message);
+				if (bibliotekar != null)
+				{
+					BibliotekarMainView bibMainView = new BibliotekarMainView(bibliotekar);
+					bibMainView.Show();
+					Close();
+				}
+				else if (message == "Pogrešna šifra!")
+				{
+					MessageBox.Show(message);
+					return;
+				}
+				else
+				{
+					MessageBox.Show(message);
+				}
 			}
 		}
 		private void OnKeyDownHandler(object sender, KeyEventArgs e)

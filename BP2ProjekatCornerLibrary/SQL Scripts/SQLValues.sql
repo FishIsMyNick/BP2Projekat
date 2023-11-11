@@ -1,12 +1,17 @@
-﻿DELETE FROM REZERVACIJA;
+﻿DELETE FROM RADNIK;
+DELETE FROM REZERVACIJA;
 DELETE FROM KNJIGAULOKALU;
 DELETE FROM BIBLIKUTAK;
+DELETE FROM IZDAJEKNJIGU;
+DELETE FROM KNJIGANAJEZIKU;
+DELETE FROM PISE;
 DELETE FROM KNJIGA;
 DELETE FROM AUTOR;
 DELETE FROM JEZIK;
 DELETE FROM ZANR;
 
 DELETE FROM CLAN;
+DELETE FROM IZDKUCA;
 DELETE FROM LOKACIJA;
 DELETE FROM MESTOUDRZAVI;
 DELETE FROM MESTO;
@@ -72,7 +77,7 @@ values
 
 insert into KNJIGA (IDKnjiga, Naziv, GodIzd, BrIzd, Ograniceno)
 values
-    (1, 'Rat i Mir', '1999-1-1', 1, 0);
+    (1, 'Rat i Mir', '1999', 1, 0);
 
 insert into PISE (IDKnjiga, IDAutor)
 values
@@ -98,6 +103,9 @@ insert into REZERVACIJA (IDRez, IDKnjiga, IDClan, IDBK, DatVr, PotvrdioRez, DatV
 values
     (1, 1, 1, 1, '2023-10-11', NULL, NULL, NULL, NULL);
 
+insert into RADNIK (IDRadnik, KorisnickoIme, Sifra, Ime, Prezime, DatRodj, DatZap, Tip, IDBK)
+values
+    (1, 'bib', 'd74ff0ee8da3b9806b18c877dbf29bbde50b5bd8e4dad7a3a725000feb82e8f1', 'zarko', 'zarkovic', '2000-1-1', '2023-1-1', 2, 1);
 
 --INSERT INTO KNJIGA (ID, Naziv, Autor, IzdKuca, DatIzd, Zanr, Jezik, Ograniceno)
 --VALUES

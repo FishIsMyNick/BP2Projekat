@@ -5,6 +5,15 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Izdkuca
 {
+    public Izdkuca()
+    {
+        
+    }
+    public Izdkuca(int idik, string naziv)
+    {
+        Idik = idik;
+        Naziv = naziv;
+    }
     public int Idik { get; set; }
 
     public string Naziv { get; set; } = null!;

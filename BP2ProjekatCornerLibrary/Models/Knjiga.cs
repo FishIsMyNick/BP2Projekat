@@ -5,11 +5,23 @@ namespace BP2ProjekatCornerLibrary.Models;
 
 public partial class Knjiga
 {
+    public Knjiga()
+    {
+        
+    }
+    public Knjiga(int id, string naziv, string godIzd, int brIzd, bool ograniceno)
+    {
+        Idknjiga = id;
+        Naziv = naziv;
+        GodIzd = godIzd;
+        BrIzd = brIzd;
+        Ograniceno = ograniceno;
+    }
     public int Idknjiga { get; set; }
 
     public string Naziv { get; set; } = null!;
 
-    public DateTime? GodIzd { get; set; }
+    public string? GodIzd { get; set; }
 
     public int? BrIzd { get; set; }
 
