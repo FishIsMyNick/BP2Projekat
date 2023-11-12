@@ -78,7 +78,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		{
 			ListaOtvorenihFilijala = new List<OtvFilView>();
 
-			OtvFilView oft = new OtvFilView("Naziv filijale", "Ulice Ulicićevića 123", "Velegrad", "Državetina", new DateTime(1997, 1, 1));
+			OtvFilView oft = new OtvFilView("1", "Naziv filijale", "Domagoja Stankovica", "133", "Velegrad", "Državetina", new DateTime(1997, 1, 1));
 
 			ListaOtvorenihFilijala.Add(oft);
 
@@ -91,7 +91,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		{
 			ListaZatvorenihFilijala = new List<ZatFilView>();
 
-			ZatFilView zft = new ZatFilView("Naziv filijale", "Ulice Ulicićevića 123", "Velegrad", "Državetina", new DateTime(1997, 1, 1), new DateTime(2000, 1, 1));
+			ZatFilView zft = new ZatFilView("1", "Naziv filijale", "Ulice Ulicićevića", "123", "Velegrad", "Državetina", new DateTime(1997, 1, 1), new DateTime(2000, 1, 1));
 
 			ListaZatvorenihFilijala.Add(zft);
 
@@ -217,22 +217,26 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		#region Buttons
 		private void btn_AddWorker_Click(object sender, RoutedEventArgs e)
 		{
-
+			Window addWorkerWindow = new AdminAddWorkerWindow();
+			addWorkerWindow.ShowDialog();
 		}
 
 		private void btn_EditWorker_Click(object sender, RoutedEventArgs e)
 		{
-
+			Window editWorkerWindow = new AdminEditWorkerWindow();
+			editWorkerWindow.ShowDialog();
 		}
 
 		private void btn_AddStore_Click(object sender, RoutedEventArgs e)
 		{
-
+			Window addStoreWindow = new AdminAddStoreWindow();
+			addStoreWindow.ShowDialog();
 		}
 
 		private void btn_EditStore_Click(object sender, RoutedEventArgs e)
 		{
-
+			Window editStoreWindow = new AdminEditStoreWindow();
+			editStoreWindow.ShowDialog();
 		}
 
 		private void btn_EditLanguage_Click(object sender, RoutedEventArgs e)
@@ -259,74 +263,3 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 }
 
 
-
-public class ZapRadView
-{
-	public string? Zap_Ime { get; set; }
-	public string? Zap_Prezime { get; set; }
-	public string? Zap_Username { get; set; }
-	public string? Zap_Tip { get; set; }
-	public string? Zap_DatZap { get; set; }
-
-	public ZapRadView(string ime, string prezime, string username, TipRadnika tip, DateTime datZap)
-	{
-		Zap_Ime = ime;
-		Zap_Prezime = prezime;
-		Zap_Username = username;
-		Zap_Tip = EnumsHelper.GetTipRadnika(tip);
-		Zap_DatZap = DateConverter.ToString(datZap);
-	}
-}
-public class OtpRadView
-{
-	public string? Zap_Ime { get; set; }
-	public string? Zap_Prezime { get; set; }
-	public string? Zap_Username { get; set; }
-	public string? Zap_Tip { get; set; }
-	public string? Zap_PerZap { get; set; }
-
-    public OtpRadView(string ime, string prezime, string username, TipRadnika tip, DateTime datZap, DateTime datOtp)
-    {
-		Zap_Ime = ime;
-		Zap_Prezime = prezime;
-		Zap_Username = username;
-		Zap_Tip = EnumsHelper.GetTipRadnika(tip);
-		Zap_PerZap = DateConverter.ToString(datZap) + "-" + DateConverter.ToString(datOtp);
-    }
-}
-
-public class OtvFilView
-{
-	public string OF_Naziv { get; set; }
-	public string OF_Adresa { get; set; }
-	public string OF_Grad { get; set; }
-	public string OF_Drzava { get; set; }
-	public string OF_DatOtv { get; set; }
-
-	public OtvFilView(string naziv, string adresa, string grad, string drzava, DateTime datOtv)
-	{
-		OF_Naziv = naziv;
-		OF_Adresa = adresa;
-		OF_Grad = grad;
-		OF_Drzava = drzava;
-		OF_DatOtv = DateConverter.ToString(datOtv);
-	}
-
-}
-public class ZatFilView
-{
-	public string ZF_Naziv { get; set; }
-	public string ZF_Adresa { get; set; }
-	public string ZF_Grad { get; set; }
-	public string ZF_Drzava { get; set; }
-	public string ZF_PerOtv { get; set; }
-
-	public ZatFilView(string naziv, string adresa, string grad, string drzava, DateTime datOtv, DateTime datZat)
-	{
-		ZF_Naziv = naziv;
-		ZF_Adresa = adresa;
-		ZF_Grad = grad;
-		ZF_Drzava = drzava;
-		ZF_PerOtv = DateConverter.ToString(datOtv) + "-" + DateConverter.ToString(datZat);
-	}
-}

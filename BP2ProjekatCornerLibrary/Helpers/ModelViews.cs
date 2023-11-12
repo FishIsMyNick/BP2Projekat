@@ -46,6 +46,122 @@ namespace BP2ProjekatCornerLibrary.Helpers
 	}
 
 	#region NEW SHIT
+	public class ZapRadView
+	{
+		public string? Zap_Ime { get; set; }
+		public string? Zap_Prezime { get; set; }
+		public string? Zap_Username { get; set; }
+		public string? Zap_Tip { get; set; }
+		public string? Zap_DatZap { get; set; }
+
+		public ZapRadView(string ime, string prezime, string username, TipRadnika tip, DateTime datZap)
+		{
+			Zap_Ime = ime;
+			Zap_Prezime = prezime;
+			Zap_Username = username;
+			Zap_Tip = EnumsHelper.GetTipRadnika(tip);
+			Zap_DatZap = DateConverter.ToString(datZap);
+		}
+	}
+	public class OtpRadView
+	{
+		public string? Zap_Ime { get; set; }
+		public string? Zap_Prezime { get; set; }
+		public string? Zap_Username { get; set; }
+		public string? Zap_Tip { get; set; }
+		public string? Zap_PerZap { get; set; }
+
+		public OtpRadView(string ime, string prezime, string username, TipRadnika tip, DateTime datZap, DateTime datOtp)
+		{
+			Zap_Ime = ime;
+			Zap_Prezime = prezime;
+			Zap_Username = username;
+			Zap_Tip = EnumsHelper.GetTipRadnika(tip);
+			Zap_PerZap = DateConverter.ToString(datZap) + "-" + DateConverter.ToString(datOtp);
+		}
+	}
+
+	public class OtvFilView
+	{
+		public string IDBK { get; set; }
+		public string OF_Naziv { get; set; }
+		public string OF_Ulica { get; set; }
+		public string OF_Broj { get; set; }
+		public string OF_Adresa { get { return OF_Ulica + " " + OF_Broj; } }
+		public string OF_Grad { get; set; }
+		public string OF_Drzava { get; set; }
+		public string OF_DatOtv { get; set; }
+
+		public OtvFilView(string idbk, string naziv, string ulica, string broj, string grad, string drzava, DateTime datOtv)
+		{
+			IDBK = idbk;
+			OF_Naziv = naziv;
+			OF_Ulica = ulica;
+			OF_Broj = broj;
+			OF_Grad = grad;
+			OF_Drzava = drzava;
+			OF_DatOtv = DateConverter.ToString(datOtv);
+		}
+
+	}
+	public class ZatFilView
+	{
+		public string IDBK { get; set; }
+		public string ZF_Naziv { get; set; }
+		public string ZF_Ulica { get; set; }
+		public string ZF_Broj { get; set; }
+		public string ZF_Adresa { get { return ZF_Ulica + " " + ZF_Broj; } }
+		public string ZF_Grad { get; set; }
+		public string ZF_Drzava { get; set; }
+		public string ZF_PerOtv { get; set; }
+
+		public ZatFilView(string idbk, string naziv, string ulica, string broj, string grad, string drzava, DateTime datOtv, DateTime datZat)
+		{
+			IDBK = idbk;
+			ZF_Naziv = naziv;
+			ZF_Ulica = ulica;
+			ZF_Broj = broj;
+			ZF_Grad = grad;
+			ZF_Drzava = drzava;
+			ZF_PerOtv = DateConverter.ToString(datOtv) + "-" + DateConverter.ToString(datZat);
+		}
+	}
+	public class AddressView
+	{
+		public string Ulica { get; set; }
+		public string Broj { get; set; }
+		public string Mesto { get; set; }
+		public string Drzava { get; set; }
+        public AddressView(string ulica, string broj , string mesto, string drzava)
+        {
+            Ulica = ulica;
+			Broj = broj;
+			Mesto = mesto;
+			Drzava = drzava;
+        }
+    }
+
+	public class RadnikView
+	{
+		public string Ime { get; set; }
+		public string Prezime { get; set; }
+		public string Username { get; set; }
+		public string DatRodj { get; set; }
+		public string DatZap { get; set; }
+		public string Tip { get; set; }
+		public AddressView Adresa { get; set; }
+
+        public RadnikView(string ime, string prezime, string username, string datRodj, string datZap, string tip, string ulica, string broj , string mesto, string drzava)
+        {
+			Ime = ime; 
+			Prezime = prezime;
+			Username = username;
+			DatRodj = datRodj;
+			DatZap = datZap;
+			Tip = tip;
+			Adresa = new AddressView(ulica, broj, mesto, drzava);
+        }
+    }
 	public class ClanMainViewRezervacija
 	{
 		public int IDRez { get; set; }

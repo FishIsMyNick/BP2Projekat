@@ -198,3 +198,11 @@ E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-wi
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\ref\BP2ProjekatCornerLibrary.dll
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminMainView.g.cs
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminMainView.baml
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminAddStoreWindow.g.cs
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminAddStoreWindow.baml
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditStoreWindow.g.cs
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditStoreWindow.baml
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminAddWorkerWindow.g.cs
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminAddWorkerWindow.baml
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditWorkerWindow.g.cs
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditWorkerWindow.baml

@@ -7,12 +7,36 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
+    <Compile Update="Views\Worker\AdminAddStoreWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\AdminAddWorkerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\AdminEditStoreWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\AdminEditWorkerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Worker\AdminMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\AdminAddStoreWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\AdminAddWorkerWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\AdminEditStoreWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\AdminEditWorkerWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Worker\AdminMainView.xaml">
