@@ -241,7 +241,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
 		private void btn_EditLanguage_Click(object sender, RoutedEventArgs e)
 		{
-
+			Window editLanguageWindow = new AdminEditLanguageWindow();
+			editLanguageWindow.ShowDialog();
 		}
 
 		private void btn_EditZanr_Click(object sender, RoutedEventArgs e)

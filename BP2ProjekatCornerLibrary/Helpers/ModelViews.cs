@@ -46,6 +46,34 @@ namespace BP2ProjekatCornerLibrary.Helpers
 	}
 
 	#region NEW SHIT
+	public class JezikView
+	{
+		public string OZNJ { get; set; }
+		public string Naziv { get; set; }
+        public JezikView(string oznj, string naziv)
+        {
+            OZNJ = oznj;
+			Naziv = naziv;
+        }
+	}
+	public class ZanrView
+	{
+		public string OZNZ { get; set; }
+		public string Naziv { get; set; }
+		public ZanrView(string oznz, string naziv)
+		{
+			OZNZ = oznz;
+			Naziv = naziv;
+		}
+	}
+	public class FormatView
+	{
+		public string Naziv { get; set; }
+		public FormatView(string naziv)
+		{
+			Naziv = naziv;
+		}
+	}
 	public class ZapRadView
 	{
 		public string? Zap_Ime { get; set; }

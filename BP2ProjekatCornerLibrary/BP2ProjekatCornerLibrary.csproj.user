@@ -13,6 +13,9 @@
     <Compile Update="Views\Worker\AdminAddWorkerWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Worker\AdminEditLanguageWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Worker\AdminEditStoreWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
@@ -31,6 +34,9 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Worker\AdminAddWorkerWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\AdminEditLanguageWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Worker\AdminEditStoreWindow.xaml">

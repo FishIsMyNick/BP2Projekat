@@ -18,6 +18,10 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		#endregion
 		public static DbContextOptionsBuilder<CornerLibraryDbContext> optionBuilder;
 		public static CornerLibraryDbContext db;
+
+		#region Constraints
+		public static int MAX_OZNJ_LENGTH = 3;
+		#endregion
 		public static void InitializeConnection()
 		{
 			optionBuilder = new DbContextOptionsBuilder<CornerLibraryDbContext>();

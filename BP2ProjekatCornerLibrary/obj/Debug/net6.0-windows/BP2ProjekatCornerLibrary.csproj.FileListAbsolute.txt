@@ -206,3 +206,5 @@ E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-wi
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminAddWorkerWindow.baml
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditWorkerWindow.g.cs
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditWorkerWindow.baml
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditLanguageWindow.g.cs
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditLanguageWindow.baml
