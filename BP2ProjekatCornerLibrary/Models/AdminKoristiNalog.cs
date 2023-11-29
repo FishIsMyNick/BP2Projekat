@@ -1,4 +1,5 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -19,6 +20,12 @@ namespace BP2ProjekatCornerLibrary.Models
         {
             this.ID = ID;
             this.KorisnickoIme = KorisnickoIme;
+        }
+        public AdminKoristiNalog(params object[] args)
+        {
+            ID = (int)args[0];
+            if (DBHelper.CheckDbNull(args[1]))
+                KorisnickoIme = (string)args[1];
         }
     }
 }

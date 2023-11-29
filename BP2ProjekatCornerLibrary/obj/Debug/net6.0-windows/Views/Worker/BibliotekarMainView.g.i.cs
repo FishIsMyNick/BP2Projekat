@@ -309,8 +309,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;V1.0.0.0;component/views/worker/bibliotekarmainview.xam" +
-                    "l", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;component/views/worker/bibliotekarmainview.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\Worker\BibliotekarMainView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
