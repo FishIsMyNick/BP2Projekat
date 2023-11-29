@@ -1,17 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BP2ProjekatCornerLibrary.Models;
-
-public partial class Drzava
+namespace BP2ProjekatCornerLibrary.Models
 {
-    public string Oznd { get; set; } = null!;
-
-    public string NazivDrzave { get; set; } = null!;
-
-    public virtual ICollection<Autor> Autors { get; set; } = new List<Autor>();
-
-    public virtual ICollection<Lokacija> Lokacijas { get; set; } = new List<Lokacija>();
-
-    public virtual ICollection<Mesto> PosBrs { get; set; } = new List<Mesto>();
+    public class Drzava
+    {
+        [Key]
+        public string OZND { get; set; }
+        [Required]
+        public string NazivDrzave { get; set; }
+    }
 }

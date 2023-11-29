@@ -104,11 +104,6 @@ C:\Users\Urška\Desktop\Luka\BP2\Projekat GIT\BP2Projekat\BP2ProjekatCornerLibra
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\BP2ProjekatCornerLibrary.csproj.AssemblyReference.cache
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Login.g.cs
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\MainWindow.g.cs
-E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\ConfirmBookRezervationWindow.g.cs
-E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\ConfirmMagazineRezervationWindow.g.cs
-E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\ConfirmNewsRezervationWindow.g.cs
-E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\NotificationWindow.g.cs
-E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\UserMainWindow.g.cs
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibAddBookToStoreWindow.g.cs
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibAddBookWindow.g.cs
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibAddMagazinWindow.g.cs
@@ -172,11 +167,6 @@ E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\bin\Debug\net6.0-wi
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\bin\Debug\net6.0-windows\runtimes\browser\lib\net6.0\System.Text.Encodings.Web.dll
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Login.baml
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\MainWindow.baml
-E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\ConfirmBookRezervationWindow.baml
-E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\ConfirmMagazineRezervationWindow.baml
-E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\ConfirmNewsRezervationWindow.baml
-E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\NotificationWindow.baml
-E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\User\UserMainWindow.baml
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibAddBookToStoreWindow.baml
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibAddBookWindow.baml
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\BibAddMagazinWindow.baml
@@ -208,3 +198,4 @@ E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-wi
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditWorkerWindow.baml
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditLanguageWindow.g.cs
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditLanguageWindow.baml
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\BP2ProjekatCornerLibrary.sourcelink.json

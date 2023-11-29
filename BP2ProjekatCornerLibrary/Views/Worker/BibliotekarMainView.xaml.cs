@@ -22,7 +22,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 	{
 		//private MockDB mockDB;
 		private int currentUser;
-		public BibliotekarMainView(Radnik bibliotekar)
+		public BibliotekarMainView(Bibliotekar bibliotekar)
 		{
 
 			//mockDB = new MockDB();
@@ -31,8 +31,9 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
 			//lbUsername.Content = bibliotekar.Username;
 
-			lbUsername.Content = bibliotekar.KorisnickoIme;
-			currentUser = bibliotekar.Idradnik;
+			//lbUsername.Content = bibliotekar.KorisnickoIme;
+            lbUsername.Content = "placeholder";
+			currentUser = bibliotekar.IDRadnik;
 		}
 		//public BibliotekarMainView(Bibliotekar bibliotekar)
 		//{

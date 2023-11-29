@@ -1,20 +1,28 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
-
-namespace BP2ProjekatCornerLibrary.Models;
-
-public partial class Pripadazanru
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace BP2ProjekatCornerLibrary.Models
 {
-    public Pripadazanru()
+    [PrimaryKey("IDKnjiga", "OZNZ")]
+    public class PripadaZanru
     {
-        
-    }
-    public Pripadazanru(int knjiga, string zanr)
-    {
-        Idknjiga = knjiga;
-        Oznz = zanr;
-    }
-    public int Idknjiga { get; set; }
+        public int IDKnjiga
+        {
+            get; set;
+        }
+        public string OZNZ
+        {
+            get; set;
+        }
 
-    public string Oznz { get; set; } = null!;
+        public PripadaZanru(int IDKnjiga, string OZNZ)
+        {
+            this.IDKnjiga = IDKnjiga;
+            this.OZNZ = OZNZ;
+        }
+    }
 }

@@ -1,34 +1,39 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BP2ProjekatCornerLibrary.Models;
-
-public partial class Izdkuca
+namespace BP2ProjekatCornerLibrary.Models
 {
-    public Izdkuca()
+    public class IzdKuca
     {
-        
+        [Key]
+        public int IDBK { get; set; }
+        [Required]
+        public string Naziv { get; set; }
+        [Required]
+        public string Ulica { get; set; }
+        [Required]
+        public string Broj { get; set; }
+        [Required]
+        public int PosBr { get; set; }
+        [Required]
+        public string OZND { get; set; }
+
+        public IzdKuca() { }
+        public IzdKuca(string naziv)
+        {
+            Naziv = naziv;
+        }
+        public IzdKuca(string naziv, string ulica, string broj, int posBr, string oznd)
+        {
+            Naziv = naziv;
+            Ulica = ulica;
+            Broj = broj;
+            PosBr = posBr;
+            OZND = oznd;
+        }
     }
-    public Izdkuca(int idik, string naziv)
-    {
-        Idik = idik;
-        Naziv = naziv;
-    }
-    public int Idik { get; set; }
-
-    public string Naziv { get; set; } = null!;
-
-    public string Ulica { get; set; } = null!;
-
-    public string Broj { get; set; } = null!;
-
-    public int PosBr { get; set; }
-
-    public string Oznd { get; set; } = null!;
-
-    public virtual Lokacija Lokacija { get; set; } = null!;
-
-    public virtual ICollection<Knjiga> Idknjigas { get; set; } = new List<Knjiga>();
-
-    public virtual ICollection<Serijskostivo> Idsstivos { get; set; } = new List<Serijskostivo>();
 }

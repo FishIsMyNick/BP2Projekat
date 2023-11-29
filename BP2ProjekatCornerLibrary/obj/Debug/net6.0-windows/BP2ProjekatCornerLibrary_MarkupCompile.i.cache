@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\App.xaml
-212074698669
+16-1466949292
 
-71350415417
-2221429377423
-Login.xaml;MainWindow.xaml;Views\User\ConfirmBookRezervationWindow.xaml;Views\User\ConfirmMagazineRezervationWindow.xaml;Views\User\ConfirmNewsRezervationWindow.xaml;Views\User\NotificationWindow.xaml;Views\User\UserMainWindow.xaml;Views\Worker\AdminAddStoreWindow.xaml;Views\Worker\AdminAddWorkerWindow.xaml;Views\Worker\AdminEditLanguageWindow.xaml;Views\Worker\AdminEditStoreWindow.xaml;Views\Worker\AdminEditWorkerWindow.xaml;Views\Worker\AdminMainView.xaml;Views\Worker\BibAddBookToStoreWindow.xaml;Views\Worker\BibAddBookWindow.xaml;Views\Worker\BibAddMagazinWindow.xaml;Views\Worker\BibAddNewsWindow.xaml;Views\Worker\BibAddUserWindow.xaml;Views\Worker\BibDodajKredit.xaml;Views\Worker\BibliotekarMainView.xaml;Views\Worker\BibUserReservations.xaml;
+71-913842736
+2221671468347
+Login.xaml;MainWindow.xaml;Views\Worker\AdminAddStoreWindow.xaml;Views\Worker\AdminAddWorkerWindow.xaml;Views\Worker\AdminEditLanguageWindow.xaml;Views\Worker\AdminEditStoreWindow.xaml;Views\Worker\AdminEditWorkerWindow.xaml;Views\Worker\AdminMainView.xaml;Views\Worker\BibAddBookToStoreWindow.xaml;Views\Worker\BibAddBookWindow.xaml;Views\Worker\BibAddMagazinWindow.xaml;Views\Worker\BibAddNewsWindow.xaml;Views\Worker\BibAddUserWindow.xaml;Views\Worker\BibDodajKredit.xaml;Views\Worker\BibliotekarMainView.xaml;Views\Worker\BibUserReservations.xaml;
 
-True
+False
 

@@ -1,41 +1,42 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BP2ProjekatCornerLibrary.Models;
-
-public partial class Knjiga
+namespace BP2ProjekatCornerLibrary.Models
 {
-    public Knjiga()
+    public class Knjiga
     {
-        
+        [Key]
+        public int IDKnjiga { get; set; }
+        [Required]
+        public string Naziv { get; set; }
+        [Required]
+        public int BrIzd { get; set; }
+        public int GodIzd { get; set; }
+        public string  VrIzd { get; set; }
+        public int BrStrana { get; set; }
+        public int VelicinaFonta { get; set; }
+        public int Korice { get; set; }
+        public int Ograniceno { get; set; }
+        [Required]
+        public string Format { get; set; }
+
+        public Knjiga() { }
+
+        public Knjiga(string naziv, int brIzd, int godIzd, string vrIzd, int brStrana, int velicinaFonta, int korice, int ograniceno, string format)
+        {
+            Naziv = naziv;
+            BrIzd = brIzd;
+            GodIzd = godIzd;
+            VrIzd = vrIzd;
+            BrStrana = brStrana;
+            VelicinaFonta = velicinaFonta;
+            Korice = korice;
+            Ograniceno = ograniceno;
+            Format = format;
+        }
     }
-    public Knjiga(int id, string naziv, string godIzd, int brIzd, bool ograniceno)
-    {
-        Idknjiga = id;
-        Naziv = naziv;
-        GodIzd = godIzd;
-        BrIzd = brIzd;
-        Ograniceno = ograniceno;
-    }
-    public int Idknjiga { get; set; }
-
-    public string Naziv { get; set; } = null!;
-
-    public string? GodIzd { get; set; }
-
-    public int? BrIzd { get; set; }
-
-    public bool? Ograniceno { get; set; }
-
-    public virtual ICollection<Knjigaulokalu> Knjigaulokalus { get; set; } = new List<Knjigaulokalu>();
-
-    public virtual ICollection<Ocenaknjige> Ocenaknjiges { get; set; } = new List<Ocenaknjige>();
-
-    public virtual ICollection<Autor> Idautors { get; set; } = new List<Autor>();
-
-    public virtual ICollection<Izdkuca> Idiks { get; set; } = new List<Izdkuca>();
-
-    public virtual ICollection<Jezik> Oznjs { get; set; } = new List<Jezik>();
-
-    public virtual ICollection<Zanr> Oznzs { get; set; } = new List<Zanr>();
 }

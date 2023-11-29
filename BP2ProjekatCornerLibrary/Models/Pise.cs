@@ -1,20 +1,23 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BP2ProjekatCornerLibrary.Models;
-
-public partial class Pise
+namespace BP2ProjekatCornerLibrary.Models
 {
-    public Pise()
+    [PrimaryKey("IDKnjiga", "IDAutor")]
+    public class Pise
     {
-    
-    }
-    public Pise(int knjiga, int autor)
-    {
-        Idknjiga = knjiga;
-        Idautor = autor;
-    }
-    public int Idknjiga { get; set; }
+        public int IDKnjiga { get; set; }
+        public int IDAutor { get; set; }
 
-    public int Idautor { get; set; }
+        public Pise(int IDKnjiga, int IDAutor)
+        {
+            this.IDKnjiga = IDKnjiga;
+            this.IDAutor = IDAutor;
+        }
+    }
 }

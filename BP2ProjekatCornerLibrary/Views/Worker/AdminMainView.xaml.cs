@@ -1,4 +1,5 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,7 +34,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		public List<ZatFilView> ListaZatvorenihFilijala { get; set; }
 
 		public int RadnikTableImeWidth = 300;
-        public AdminMainView()
+        public AdminMainView(Admin admin)
 		{
 			InitializeComponent();
 
@@ -47,6 +48,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 			FillOtpRadniciList();
 			FillOtvFilList();
 			FillZatvFilList();
+			Knjiga k = DBHelper.GetBook(1);
 		}
         private void FillZapRadniciList()
 		{

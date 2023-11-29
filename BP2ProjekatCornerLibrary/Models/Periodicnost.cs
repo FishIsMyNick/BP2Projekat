@@ -1,11 +1,16 @@
 ﻿using System;
 using System.Collections.Generic;
-
-namespace BP2ProjekatCornerLibrary.Models;
-
-public partial class Periodicnost
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+namespace BP2ProjekatCornerLibrary.Models
 {
-    public string PeriodIzd { get; set; } = null!;
-
-    public virtual ICollection<Serijskostivo> Serijskostivos { get; set; } = new List<Serijskostivo>();
+    public class Periodicnost
+    {
+        [Key]
+        public string PeriodIzd { get; set; }
+        [Required]
+        public int Ucestalost { get; set; }
+    }
 }

@@ -1,11 +1,17 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BP2ProjekatCornerLibrary.Models;
-
-public partial class Mestoudrzavi
+namespace BP2ProjekatCornerLibrary.Models
 {
-    public int PosBr { get; set; }
-
-    public string Oznd { get; set; } = null!;
+    [PrimaryKey("PosBr", "OZND")]
+    public class MestoUDrzavi
+    {
+        public int PosBr { get; set; }
+        public string OZND { get; set; }
+    }
 }

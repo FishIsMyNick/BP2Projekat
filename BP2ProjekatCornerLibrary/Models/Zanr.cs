@@ -1,22 +1,24 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BP2ProjekatCornerLibrary.Models;
-
-public partial class Zanr
+namespace BP2ProjekatCornerLibrary.Models
 {
-    public Zanr()
+    public class Zanr
     {
-        
-    }
-    public Zanr(string oznz, string zanr)
-    {
-        Oznz = oznz;
-        NazivZanra = zanr; 
-    }
-    public string Oznz { get; set; } = null!;
+        [Key]
+        public string OZNZ { get; set; }
+        [Required]
+        public string NazivZanra { get; set; }
 
-    public string NazivZanra { get; set; } = null!;
-
-    public virtual ICollection<Knjiga> Idknjigas { get; set; } = new List<Knjiga>();
+        public Zanr() { }
+        public Zanr(string oznz, string naziv)
+        {
+            OZNZ = oznz;
+            NazivZanra = naziv;
+        }
+    }
 }

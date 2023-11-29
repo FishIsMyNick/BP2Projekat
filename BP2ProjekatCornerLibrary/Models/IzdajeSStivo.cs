@@ -1,11 +1,17 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
 
-namespace BP2ProjekatCornerLibrary.Models;
-
-public partial class Izdajesstivo
+namespace BP2ProjekatCornerLibrary.Models
 {
-    public int Idsstivo { get; set; }
-
-    public int Idik { get; set; }
+    [PrimaryKey("IDSStivo", "IDIK")]
+    public class IzdajeSStivo
+    {
+        public int IDSStivo { get; set; }
+        public int IDIK { get; set; }
+    }
 }

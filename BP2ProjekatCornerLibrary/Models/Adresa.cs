@@ -1,13 +1,13 @@
-﻿using System;
+﻿using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 
 namespace BP2ProjekatCornerLibrary.Models;
 
-public partial class Adresa
+[PrimaryKey("Ulica", "Broj")]
+public class Adresa
 {
     public string Ulica { get; set; } = null!;
-
     public string Broj { get; set; } = null!;
-
-    public virtual ICollection<Lokacija> Lokacijas { get; set; } = new List<Lokacija>();
 }

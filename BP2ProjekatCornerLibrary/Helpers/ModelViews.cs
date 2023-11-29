@@ -190,39 +190,39 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			Adresa = new AddressView(ulica, broj, mesto, drzava);
         }
     }
-	public class ClanMainViewRezervacija
-	{
-		public int IDRez { get; set; }
-		public string NazivKnjige { get; set; }
-		public string Autori { get; set; }
-		public string DatumStarta { get; set; }
+	//public class ClanMainViewRezervacija
+	//{
+	//	public int IDRez { get; set; }
+	//	public string NazivKnjige { get; set; }
+	//	public string Autori { get; set; }
+	//	public string DatumStarta { get; set; }
 
-        public ClanMainViewRezervacija(Rezervacija r)
-        {
-			Knjiga k = DBHelper.GetBook(r.Idknjiga);
-			List<Autor> autors = DBHelper.GetBookAuthors(r.Idknjiga);
-			//List<Autor> a = DBHelper.get
-			IDRez = r.Idrez;
+	//       public ClanMainViewRezervacija(Rezervacija r)
+	//       {
+	//		Knjiga k = DBHelper.GetBook(r.Idknjiga);
+	//		List<Autor> autors = DBHelper.GetBookAuthors(r.Idknjiga);
+	//		//List<Autor> a = DBHelper.get
+	//		IDRez = r.Idrez;
 
-			NazivKnjige = k.Naziv;
-			
-			Autori = "";
-			if(autors == null || autors.Count == 0)
-			{
-				Autori = "Nepoznat";
-			}
-			for (int i = 0; i < autors.Count; i++)
-			{
-				Autori += autors[i].Ime;
-				if (autors[i].Prezime != null && autors[i].Prezime != "")
-					Autori += " " + autors[i].Prezime;
-				if (i < autors.Count - 1)
-					Autori += ", ";
-			}
+	//		NazivKnjige = k.Naziv;
 
-			DatumStarta = DateConverter.ToString((DateTime)r.DatVrPot);
-        }
-    }
+	//		Autori = "";
+	//		if(autors == null || autors.Count == 0)
+	//		{
+	//			Autori = "Nepoznat";
+	//		}
+	//		for (int i = 0; i < autors.Count; i++)
+	//		{
+	//			Autori += autors[i].Ime;
+	//			if (autors[i].Prezime != null && autors[i].Prezime != "")
+	//				Autori += " " + autors[i].Prezime;
+	//			if (i < autors.Count - 1)
+	//				Autori += ", ";
+	//		}
+
+	//		DatumStarta = DateConverter.ToString((DateTime)r.DatVrPot);
+	//       }
+	//   }
 	#endregion
 
 
@@ -230,58 +230,58 @@ namespace BP2ProjekatCornerLibrary.Helpers
 
 
 
-	public class ClanView
-	{
-		public int ID { get; set; }
-		public string Username { get; set; }
-		public string Ime { get; set; }
-		public string Prezime { get; set; }
-		public double Kredit { get; set; }
-		public DateTime DatRodj { get; set; }
-		public string BrTel { get; set; }
-		public int Tip { get; set; }
-		public float Prosek { get; set; }
-		public bool Budzet { get; set; }
-		public bool Zaposlen { get; set; }
-		public string Ulica { get; set; }
-		public string Broj { get; set; }
-		public string Mesto { get; set; }
-		public string Drzava { get; set; }
-		public ClanView(int id, string username, string ime, string prezime, double kredit, DateTime datRodj, string brTel, int tip, float prosek, bool budzet, bool zaposlen, string ulica, string broj, string mesto)
-		{
-			ID = id;
-			Username = username;
-			Ime = ime;
-			Prezime = prezime;
-			Kredit = kredit;
-			DatRodj = datRodj;
-			BrTel = brTel;
-			Tip = tip;
-			Prosek = prosek;
-			Budzet = budzet;
-			Zaposlen = zaposlen;
-			Ulica = ulica;
-			Broj = broj;
-			Mesto = mesto;
-		}
-		//public ClanView(Clan clan)
-		//{
-		//	ID = clan.Id;
-		//	Username = clan.Username;
-		//	Ime = clan.Ime;
-		//	Prezime = clan.Prezime;
-		//	Kredit = clan.Kredit;
-		//	DatRodj = (DateTime)clan.DatRodj;
-		//	BrTel = (string)clan.BrTel;
-		//}
-	}
+	//public class ClanView
+	//{
+	//	public int ID { get; set; }
+	//	public string Username { get; set; }
+	//	public string Ime { get; set; }
+	//	public string Prezime { get; set; }
+	//	public double Kredit { get; set; }
+	//	public DateTime DatRodj { get; set; }
+	//	public string BrTel { get; set; }
+	//	public int Tip { get; set; }
+	//	public float Prosek { get; set; }
+	//	public bool Budzet { get; set; }
+	//	public bool Zaposlen { get; set; }
+	//	public string Ulica { get; set; }
+	//	public string Broj { get; set; }
+	//	public string Mesto { get; set; }
+	//	public string Drzava { get; set; }
+	//	public ClanView(int id, string username, string ime, string prezime, double kredit, DateTime datRodj, string brTel, int tip, float prosek, bool budzet, bool zaposlen, string ulica, string broj, string mesto)
+	//	{
+	//		ID = id;
+	//		Username = username;
+	//		Ime = ime;
+	//		Prezime = prezime;
+	//		Kredit = kredit;
+	//		DatRodj = datRodj;
+	//		BrTel = brTel;
+	//		Tip = tip;
+	//		Prosek = prosek;
+	//		Budzet = budzet;
+	//		Zaposlen = zaposlen;
+	//		Ulica = ulica;
+	//		Broj = broj;
+	//		Mesto = mesto;
+	//	}
+	//	//public ClanView(Clan clan)
+	//	//{
+	//	//	ID = clan.Id;
+	//	//	Username = clan.Username;
+	//	//	Ime = clan.Ime;
+	//	//	Prezime = clan.Prezime;
+	//	//	Kredit = clan.Kredit;
+	//	//	DatRodj = (DateTime)clan.DatRodj;
+	//	//	BrTel = (string)clan.BrTel;
+	//	//}
+	//}
 	public class KnjigaView
 	{
 		public Knjiga knjiga;
 		public Autor autor;
 		public Jezik jezik;
 		public Zanr zanr;
-		public Izdkuca izdKuca;
+		public IzdKuca izdKuca;
 
 		public KnjigaView()
 		{
@@ -289,15 +289,21 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			autor = new Autor();
 			jezik = new Jezik();
 			zanr = new Zanr();
-			izdKuca = new Izdkuca();
+			izdKuca = new IzdKuca();
 		}
-		public KnjigaView(int bookID, string naziv, string godIzd, int brIzd, bool ogr, int autorID, string ime, string prezime, DateTime datRodj, string biografija, string oznj, string jezik, string oznz, string zanr, int idik, string nazivIK)
+		public KnjigaView(int bookID, string naziv, int brIzd, int godIzd, string vrIzd, int brStrana, int velicinaFonta, int korice, int ograniceno, string format, int autorID, string ime, string prezime, DateTime datRodj, string biografija, string drzavaAutora, string oznj, string jezik, string oznz, string zanr, int idik, string nazivIK)
 		{
-			knjiga = new Knjiga(bookID, naziv, godIzd, brIzd, ogr);
-			autor = new Autor(autorID, ime, prezime, datRodj, biografija);
+			knjiga = new Knjiga(naziv, brIzd, godIzd, vrIzd, brStrana, velicinaFonta, korice, ograniceno, format);
+			knjiga.IDKnjiga = bookID;
+
+			autor = new Autor(ime, prezime, datRodj, biografija, drzavaAutora);
+			autor.IDAutor = autorID;
+
 			this.jezik = new Jezik(oznj, jezik);
 			this.zanr = new Zanr(oznz, zanr);
-			izdKuca = new Izdkuca(idik, nazivIK);
+
+			izdKuca = new IzdKuca(nazivIK);
+			izdKuca.IDBK = idik;
 		}
         public KnjigaView(int bookID, int autorID, string oznj, string oznz, int idik)
         {
@@ -308,41 +314,41 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			izdKuca = DBHelper.GetIzdKuca(idik);
         }
     }
-	public class KnjigaRezView
-	{
-		public int? ID { get; set; }
-		public string Naziv { get; set; }
-		public string Autor { get; set; }
-		public string Datum { get; set; }
+	//public class KnjigaRezView
+	//{
+	//	public int? ID { get; set; }
+	//	public string Naziv { get; set; }
+	//	public string Autor { get; set; }
+	//	public string Datum { get; set; }
 
-		public KnjigaRezView()
-		{
-			ID = -1;
-			Naziv = "Naslov knjige";
-			Autor = "Autor knjige";
-			Datum = "1.1.2023.";
-		}
-        public KnjigaRezView(int IDKnjiga)
-        {
-			Knjiga k = DBHelper.GetBook(IDKnjiga);
-			//Autor a = DBHelper.GetAutor()
-        }
-        public KnjigaRezView(string Naziv, string Autor, string Datum, int? id = -1)
-		{
-			ID = id;
-			this.Naziv = Naziv;
-			this.Autor = Autor;
-			this.Datum = Datum;
-		}
-		public KnjigaRezView(Rezervacija rez)
-		{
-			Knjiga k = DBHelper.GetBook(rez.Idknjiga);
-			ID = k.Idknjiga;
-			Naziv = k.Naziv;
-			Autor = "Autor";
-			Datum = DateConverter.ToString((DateTime)rez.DatVrPot);
-		}
-	}
+	//	public KnjigaRezView()
+	//	{
+	//		ID = -1;
+	//		Naziv = "Naslov knjige";
+	//		Autor = "Autor knjige";
+	//		Datum = "1.1.2023.";
+	//	}
+ //       public KnjigaRezView(int IDKnjiga)
+ //       {
+	//		Knjiga k = DBHelper.GetBook(IDKnjiga);
+	//		//Autor a = DBHelper.GetAutor()
+ //       }
+ //       public KnjigaRezView(string Naziv, string Autor, string Datum, int? id = -1)
+	//	{
+	//		ID = id;
+	//		this.Naziv = Naziv;
+	//		this.Autor = Autor;
+	//		this.Datum = Datum;
+	//	}
+	//	public KnjigaRezView(Rezervacija rez)
+	//	{
+	//		Knjiga k = DBHelper.GetBook(rez.Idknjiga);
+	//		ID = k.Idknjiga;
+	//		Naziv = k.Naziv;
+	//		Autor = "Autor";
+	//		Datum = DateConverter.ToString((DateTime)rez.DatVrPot);
+	//	}
+	//}
 	public class KnjigaULokaluView
 	{
 		public int ID { get; set; }
@@ -367,10 +373,10 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			Kolicina = "1";
 			Ogr = false;
 		}
-		public KnjigaULokaluView(Knjigaulokalu kul)
+		public KnjigaULokaluView(KnjigaULokalu kul)
 		{
 			ID = 1;
-			Knjiga k = DBHelper.GetBook(kul.Idknjiga);
+			Knjiga k = DBHelper.GetBook(kul.IDKnjiga);
 			Naziv = k.Naziv;
 			Autor = "Autor";
 			IzdKuca = "IzdKuca";
@@ -496,38 +502,38 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		//}
 	}
 
-	public class IstorijaKnjigaView
-	{
-		public int ID { get; set; } = -1;
-		public string Naziv { get; set; }
-		public string Autor { get; set; }
-		public string DatumUzeo { get; set; }
-		public string DatumVratio { get; set; }
+	//public class IstorijaKnjigaView
+	//{
+	//	public int ID { get; set; } = -1;
+	//	public string Naziv { get; set; }
+	//	public string Autor { get; set; }
+	//	public string DatumUzeo { get; set; }
+	//	public string DatumVratio { get; set; }
 
-		public IstorijaKnjigaView()
-		{
-			Naziv = "Naslov knjige";
-			Autor = "Autor knjige";
-			DatumUzeo = "1.1.2023.";
-			DatumVratio = "1.2.2023.";
-		}
-		public IstorijaKnjigaView(string Naziv, string Autor, string DatumUzeo, string DatumVratio, int id = -1)
-		{
-			this.Naziv = Naziv;
-			this.Autor = Autor;
-			this.DatumUzeo = DatumUzeo;
-			this.DatumVratio = DatumVratio;
-			ID = id;
-		}
-		public IstorijaKnjigaView(Rezervacija ir)
-		{
-			Knjiga k = DBHelper.GetBook(ir.Idknjiga);
-			Naziv = k.Naziv;
-			Autor = "Autor";
-			DatumUzeo = DateConverter.ToString((DateTime)ir.DatVrPot);
-			DatumVratio = DateConverter.ToString((DateTime)ir.DatVrZak);
-		}
-	}
+	//	public IstorijaKnjigaView()
+	//	{
+	//		Naziv = "Naslov knjige";
+	//		Autor = "Autor knjige";
+	//		DatumUzeo = "1.1.2023.";
+	//		DatumVratio = "1.2.2023.";
+	//	}
+	//	public IstorijaKnjigaView(string Naziv, string Autor, string DatumUzeo, string DatumVratio, int id = -1)
+	//	{
+	//		this.Naziv = Naziv;
+	//		this.Autor = Autor;
+	//		this.DatumUzeo = DatumUzeo;
+	//		this.DatumVratio = DatumVratio;
+	//		ID = id;
+	//	}
+	//	public IstorijaKnjigaView(Rezervacija ir)
+	//	{
+	//		Knjiga k = DBHelper.GetBook(ir.Idknjiga);
+	//		Naziv = k.Naziv;
+	//		Autor = "Autor";
+	//		DatumUzeo = DateConverter.ToString((DateTime)ir.DatVrPot);
+	//		DatumVratio = DateConverter.ToString((DateTime)ir.DatVrZak);
+	//	}
+	//}
 	public class LokacijaView
 	{
 		public int ID { get; set; }
@@ -550,7 +556,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		}
 		public LokacijaView(Biblikutak l)
 		{
-			ID = l.Idbk;
+			ID = l.IDBK;
 			Adresa = "Adresa";
 			Grad = "Grad";
 			Drzava = "Drzava";

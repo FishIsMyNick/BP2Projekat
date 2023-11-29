@@ -2,11 +2,11 @@
 
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Login.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\MainWindow.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\User\ConfirmBookRezervationWindow.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\User\ConfirmMagazineRezervationWindow.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\User\ConfirmNewsRezervationWindow.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\User\NotificationWindow.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\User\UserMainWindow.xaml;;
+FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\AdminAddStoreWindow.xaml;;
+FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\AdminAddWorkerWindow.xaml;;
+FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\AdminEditLanguageWindow.xaml;;
+FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\AdminEditStoreWindow.xaml;;
+FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\AdminEditWorkerWindow.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\AdminMainView.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\BibAddBookToStoreWindow.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\BibAddBookWindow.xaml;;
@@ -16,9 +16,4 @@ FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\BibAd
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\BibDodajKredit.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\BibliotekarMainView.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\BibUserReservations.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\AdminAddStoreWindow.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\AdminEditStoreWindow.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\AdminAddWorkerWindow.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\AdminEditWorkerWindow.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\AdminEditLanguageWindow.xaml;;
 
