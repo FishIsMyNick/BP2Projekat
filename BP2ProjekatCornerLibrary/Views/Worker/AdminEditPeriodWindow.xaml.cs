@@ -28,5 +28,55 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         {
 
         }
+
+        private void Zanrovi_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+
+        }
+
+        private void tb_Edit_Naziv_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void btn_Edit_Confirm_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Edit_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void tb_Add_OZNZ_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void tb_Add_Naziv_TextChanged(object sender, TextChangedEventArgs e)
+        {
+
+        }
+
+        private void btn_Add_Confirm_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Add_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Add_Cancel_Click_1(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
