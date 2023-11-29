@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 C:\Users\urska\OneDrive\Namizje\Luka\BP2\Projekat\BP2Projekat\BP2ProjekatCornerLibrary\App.xaml
 18-1406885294
 
-712130713057
+72698143897
 222-1404995216
 Login.xaml;MainWindow.xaml;Views\Worker\AdminAddStoreWindow.xaml;Views\Worker\AdminAddWorkerWindow.xaml;Views\Worker\AdminEditLanguageWindow.xaml;Views\Worker\AdminEditPeriodWindow.xaml;Views\Worker\AdminEditStoreWindow.xaml;Views\Worker\AdminEditWorkerWindow.xaml;Views\Worker\AdminEditZanrWindow.xaml;Views\Worker\AdminMainView.xaml;Views\Worker\BibAddBookToStoreWindow.xaml;Views\Worker\BibAddBookWindow.xaml;Views\Worker\BibAddMagazinWindow.xaml;Views\Worker\BibAddNewsWindow.xaml;Views\Worker\BibAddUserWindow.xaml;Views\Worker\BibDodajKredit.xaml;Views\Worker\BibliotekarMainView.xaml;Views\Worker\BibUserReservations.xaml;
 
-True
+False
 
