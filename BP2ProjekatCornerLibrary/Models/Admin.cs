@@ -31,6 +31,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public Admin() { }
         public Admin(params object[] args)
         {
+            var props = GetType().GetProperties();
             IDRadnik = (int)args[0];
             Ime = (string)args[1];
             Prezime = (string)args[2];

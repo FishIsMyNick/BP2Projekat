@@ -33,7 +33,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             //Mock = new MockDB();
             InitializeComponent();
 
-            //TryLogin();
+            TryLogin();
             //Window window = new AdminMainView();
             //window.Show();
             //Close();
@@ -46,6 +46,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
         }
         private void TryLogin()
         {
+            if(false)
             if(tbUsername.Text == "" || pbPasswordHidden.Password == "")
             {
                 MessageBox.Show("Sva polja moraju biti popunjena!");
@@ -58,8 +59,8 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             string message;
 
             //test
-            //user = "bisb";
-            //hashedPassword = HashHelper.ComputeSha256Hash("pass");
+            user = "bisb";
+            hashedPassword = HashHelper.ComputeSha256Hash("pass");
 
             Radnik r = DBHelper.TryLoginUser(user, hashedPassword);
 
