@@ -7,11 +7,13 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Mesto
+    public class Mesto : _DbClass
     {
         [Key]
         public int PosBr { get; set; }
         [Required]
         public string NazivMesta  { get; set; }
+
+        public Mesto() : base() { }
     }
 }

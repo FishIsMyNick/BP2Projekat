@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDKnjiga", "IDBib", "DatVr")]
-    public class IzmenaKnjige
+    public class IzmenaKnjige : _DbClass
     {
         public int IDKnjiga { get; set; }
         public int IDBib { get; set; }
@@ -23,5 +23,6 @@ namespace BP2ProjekatCornerLibrary.Models
         public int Korice { get; set; }
         public int Ograniceno { get; set; }
         public string Format { get; set; }
+        public IzmenaKnjige() : base() { }
     }
 }

@@ -6,11 +6,13 @@ using System.Text;
 using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Periodicnost
+    public class Periodicnost : _DbClass
     {
         [Key]
         public string PeriodIzd { get; set; }
         [Required]
         public int Ucestalost { get; set; }
+
+        public Periodicnost() : base() { }
     }
 }

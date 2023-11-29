@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class IzdKuca
+    public class IzdKuca : _DbClass
     {
         [Key]
         public int IDBK { get; set; }
@@ -22,7 +22,7 @@ namespace BP2ProjekatCornerLibrary.Models
         [Required]
         public string OZND { get; set; }
 
-        public IzdKuca() { }
+        public IzdKuca() : base() { }
         public IzdKuca(string naziv)
         {
             Naziv = naziv;

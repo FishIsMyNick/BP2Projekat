@@ -7,11 +7,12 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Drzava
+    public class Drzava : _DbClass
     {
         [Key]
         public string OZND { get; set; }
         [Required]
         public string NazivDrzave { get; set; }
+        public Drzava() : base() { }
     }
 }

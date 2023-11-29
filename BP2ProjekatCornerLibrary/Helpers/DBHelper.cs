@@ -40,15 +40,25 @@ namespace BP2ProjekatCornerLibrary.Helpers
 
         #region NEW SHIT
         #region PUBLIC
-        public static bool CheckDbNull(object obj)
+        public static bool CheckDbNotNull(object obj)
         {
             return obj.GetType() != typeof(DBNull);
         }
         #endregion
         #region SQL DIRECT EXECUTION
-        public static T CreateInstance<T>(params object[] args)
+        public static T CreateInstance<T>(params ClassPropertyValue[] args)
         {
-            return (T)Activator.CreateInstance(typeof(T), args);
+            T instance = (T)Activator.CreateInstance(typeof(T));
+            Type iType = typeof(T);
+
+            foreach (ClassPropertyValue arg in args)
+            {
+                if (CheckDbNotNull(arg.Value))
+                    iType.GetProperty(arg.Name).SetValue(instance, arg.Value);
+            }
+
+            return instance;
+            //return (T)Activator.CreateInstance(typeof(T), args);
         }
         public static List<T> ExecuteGetListFromCommand<T>(string sqlParameters = null) where T : new()
         {
@@ -72,10 +82,10 @@ namespace BP2ProjekatCornerLibrary.Helpers
                             columns.Add(reader.GetName(i));
                         }
 
-                        object[] values = new object[reader.FieldCount];
+                        ClassPropertyValue[] values = new ClassPropertyValue[reader.FieldCount];
                         for (int i = 0; i < values.Length; i++)
                         {
-                            values[i] = reader[columns[i]];
+                            values[i] = new ClassPropertyValue(columns[i], reader[columns[i]]);
                         }
 
                         ret.Add(CreateInstance<T>(values));
@@ -110,10 +120,10 @@ namespace BP2ProjekatCornerLibrary.Helpers
                             columns.Add(reader.GetName(i));
                         }
 
-                        object[] values = new object[reader.FieldCount];
+                        ClassPropertyValue[] values = new ClassPropertyValue[reader.FieldCount];
                         for (int i = 0; i < values.Length; i++)
                         {
-                            values[i] = reader[columns[i]];
+                            values[i] = new ClassPropertyValue(columns[i], reader[columns[i]]);
                         }
 
                         ret = CreateInstance<T>(values);

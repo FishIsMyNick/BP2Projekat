@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDKnjiga", "OZNZ")]
-    public class PripadaZanru
+    public class PripadaZanru : _DbClass
     {
         public int IDKnjiga
         {
@@ -19,6 +19,7 @@ namespace BP2ProjekatCornerLibrary.Models
             get; set;
         }
 
+        public PripadaZanru() : base() { }
         public PripadaZanru(int IDKnjiga, string OZNZ)
         {
             this.IDKnjiga = IDKnjiga;

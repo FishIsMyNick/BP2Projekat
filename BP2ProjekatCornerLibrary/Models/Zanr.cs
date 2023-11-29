@@ -7,14 +7,14 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Zanr
+    public class Zanr : _DbClass
     {
         [Key]
         public string OZNZ { get; set; }
         [Required]
         public string NazivZanra { get; set; }
 
-        public Zanr() { }
+        public Zanr() : base() { }
         public Zanr(string oznz, string naziv)
         {
             OZNZ = oznz;

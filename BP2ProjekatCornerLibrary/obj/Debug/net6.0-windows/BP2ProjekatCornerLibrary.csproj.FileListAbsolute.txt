@@ -301,3 +301,7 @@ C:\Users\urska\OneDrive\Namizje\Luka\BP2\Projekat\BP2Projekat\BP2ProjekatCornerL
 C:\Users\urska\OneDrive\Namizje\Luka\BP2\Projekat\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\BP2ProjekatCornerLibrary.csproj.CopyComplete
 C:\Users\urska\OneDrive\Namizje\Luka\BP2\Projekat\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\BP2ProjekatCornerLibrary.genruntimeconfig.cache
 C:\Users\urska\OneDrive\Namizje\Luka\BP2\Projekat\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\ref\BP2ProjekatCornerLibrary.dll
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditPeriodWindow.g.cs
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditZanrWindow.g.cs
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditPeriodWindow.baml
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\AdminEditZanrWindow.baml

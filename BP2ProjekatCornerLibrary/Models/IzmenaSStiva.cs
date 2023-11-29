@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDSStivo", "IDBib", "DatVr")]
-    public class IzmenaSStiva
+    public class IzmenaSStiva : _DbClass
     {
         public int IDSStivo { get; set; }
         public int IDBib { get; set; }
@@ -18,5 +18,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public int TipStiva { get; set; }
         public string Format { get; set; }
         public string Period { get; set; }
+
+        public IzmenaSStiva() : base() { }
     }
 }

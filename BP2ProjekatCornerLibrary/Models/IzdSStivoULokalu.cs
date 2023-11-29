@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDSStivo", "BrIzd", "IDBK")]
-    public class IzdSStivoULokalu
+    public class IzdSStivoULokalu : _DbClass
     {
         public int IDSStivo { get; set; }
         public int BrIzd { get; set; }
@@ -18,5 +18,6 @@ namespace BP2ProjekatCornerLibrary.Models
         public DateTime DatVrIzmene { get; set; }
         [Required]
         public int Kolicina { get; set; }
+        public IzdSStivoULokalu() : base() { }
     }
 }

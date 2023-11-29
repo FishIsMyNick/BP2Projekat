@@ -9,9 +9,11 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDSStivo", "IDIK")]
-    public class IzdajeSStivo
+    public class IzdajeSStivo : _DbClass
     {
         public int IDSStivo { get; set; }
         public int IDIK { get; set; }
+
+        public IzdajeSStivo() : base() { }
     }
 }

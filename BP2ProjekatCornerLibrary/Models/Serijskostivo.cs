@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class SerijskoStivo
+    public class SerijskoStivo : _DbClass
     {
         [Key] 
         public int IDSStivo { get; set; }
@@ -19,5 +19,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public string Format { get; set; }
         [Required]
         public string Period { get; set; }
+
+        public SerijskoStivo() : base() { }
     }
 }

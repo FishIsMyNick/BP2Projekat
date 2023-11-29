@@ -10,22 +10,16 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("ID", "KorisnickoIme")]
-    public class AdminKoristiNalog
+    public class AdminKoristiNalog : _DbClass
     {
         public int ID { get; set; }
         public string KorisnickoIme { get; set; }
 
-        public AdminKoristiNalog() { }
+        public AdminKoristiNalog() : base() { }
         public AdminKoristiNalog(int ID, string KorisnickoIme)
         {
             this.ID = ID;
             this.KorisnickoIme = KorisnickoIme;
-        }
-        public AdminKoristiNalog(params object[] args)
-        {
-            ID = (int)args[0];
-            if (DBHelper.CheckDbNull(args[1]))
-                KorisnickoIme = (string)args[1];
         }
     }
 }

@@ -33,5 +33,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public int PosBr { get; set; }
         [Required]
         public string OZND { get; set; }
+
+        public Kurir() : base() { }
     }
 }

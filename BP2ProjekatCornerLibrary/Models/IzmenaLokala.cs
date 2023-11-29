@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDLokal", "IDAdmin", "DatVrIL")]
-    public class IzmenaLokala
+    public class IzmenaLokala : _DbClass
     {
         public int IDLokal { get; set; }
         public int IDAdmin { get; set; }
@@ -18,5 +18,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public string Naziv { get; set; }
         public DateTime DatOtv { get; set; }
         public DateTime DatZat { get; set; }
+
+        public IzmenaLokala() : base() { }
     }
 }

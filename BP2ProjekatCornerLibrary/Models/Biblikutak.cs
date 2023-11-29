@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Biblikutak
+    public class Biblikutak : _DbClass
     {
         [Key]
         public int IDBK { get; set; }
@@ -27,22 +27,6 @@ namespace BP2ProjekatCornerLibrary.Models
         [Required]
         public string OZND { get; set; }
 
-        public Biblikutak(params object[] args)
-        {
-            IDBK = (int)args[0];
-            if (DBHelper.CheckDbNull(args[1]))
-                Naziv = (string)args[1];
-            if (DBHelper.CheckDbNull(args[2]))
-                DatOtv = (DateTime)args[2];
-            if (DBHelper.CheckDbNull(args[3]))
-                DatZat = (DateTime)args[3];
-            if (DBHelper.CheckDbNull(args[4]))
-                Ulica = (string)args[4];
-            if (DBHelper.CheckDbNull(args[5]))
-                Broj = (string)args[5];
-            PosBr = (int)args[6];
-            if (DBHelper.CheckDbNull(args[7]))
-                OZND = (string)args[7];
-        }
+        public Biblikutak() : base() { }
     }
 }

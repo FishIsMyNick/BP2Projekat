@@ -59,7 +59,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             string message;
 
             //test
-            user = "bisb";
+            user = "admin";
             hashedPassword = HashHelper.ComputeSha256Hash("pass");
 
             Radnik r = DBHelper.TryLoginUser(user, hashedPassword);

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class KorisnickiNalog
+    public class KorisnickiNalog : _DbClass
     {
         [Key]
         public string KorisnickoIme { get; set; }
@@ -19,15 +20,9 @@ namespace BP2ProjekatCornerLibrary.Models
         [Required]
         public int TipNaloga { get; set; }
 
-        public KorisnickiNalog() { }
-        public KorisnickiNalog(params object[] args)
-        {
-            KorisnickoIme = (string)args[0];
-            Sifra = (string)args[1];
-            DatKreiranja = (DateTime)args[2];
-            if (args[3].GetType() != typeof(DBNull))
-                DatZatvaranja = (DateTime)args[3];
-            TipNaloga = (int)args[4];
-        }
+        public KorisnickiNalog() : base() { }
+        //public KorisnickiNalog(params ClassPropertyValue[] args) : base(args)
+        //{
+        //}
     }
 }

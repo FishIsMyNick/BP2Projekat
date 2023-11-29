@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Knjiga
+    public class Knjiga : _DbClass
     {
         [Key]
         public int IDKnjiga { get; set; }
@@ -24,7 +24,7 @@ namespace BP2ProjekatCornerLibrary.Models
         [Required]
         public string Format { get; set; }
 
-        public Knjiga() { }
+        public Knjiga() : base() { }
 
         public Knjiga(string naziv, int brIzd, int godIzd, string vrIzd, int brStrana, int velicinaFonta, int korice, int ograniceno, string format)
         {

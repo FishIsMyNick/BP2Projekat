@@ -9,11 +9,13 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDKnjiga", "IDAutor")]
-    public class Pise
+    public class Pise : _DbClass
     {
         public int IDKnjiga { get; set; }
         public int IDAutor { get; set; }
 
+
+        public Pise() : base() { }
         public Pise(int IDKnjiga, int IDAutor)
         {
             this.IDKnjiga = IDKnjiga;

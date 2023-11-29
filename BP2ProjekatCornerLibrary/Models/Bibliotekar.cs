@@ -42,15 +42,15 @@ namespace BP2ProjekatCornerLibrary.Models
             Prezime = (string)args[2];
             DatRodj = (DateTime)args[3];
             DatZap = (DateTime)args[4];
-            if (DBHelper.CheckDbNull(args[5]))
+            if (DBHelper.CheckDbNotNull(args[5]))
                 DatOtp = (DateTime)args[5];
-            if (DBHelper.CheckDbNull(args[6]))
+            if (DBHelper.CheckDbNotNull(args[6]))
                 Ulica = (string)args[6];
-            if (DBHelper.CheckDbNull(args[7]))
+            if (DBHelper.CheckDbNotNull(args[7]))
                 Broj = (string)args[7];
-            if (DBHelper.CheckDbNull(args[8]))
+            if (DBHelper.CheckDbNotNull(args[8]))
                 PosBr = (int)args[8];
-            if (DBHelper.CheckDbNull(args[9]))
+            if (DBHelper.CheckDbNotNull(args[9]))
                 OZND = (string)args[9];
 
         }

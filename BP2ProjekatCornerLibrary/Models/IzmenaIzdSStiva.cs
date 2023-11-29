@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDSStivo", "BrIzd", "IDBib", "DatVr")]
-    public class IzmenaIzdSStiva
+    public class IzmenaIzdSStiva : _DbClass
     {
         public int IDSStivo { get; set; }
         public int BrIzd { get; set; }
@@ -17,5 +17,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public DateTime DatVr { get; set; }
         public DataType DatIzd { get; set; }
         public decimal Cena { get; set; }
+
+        public IzmenaIzdSStiva() : base() { }
     }
 }

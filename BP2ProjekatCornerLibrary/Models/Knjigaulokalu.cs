@@ -9,13 +9,14 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDKnjiga", "IDBK", "DatVrIzmene")]
-    public class KnjigaULokalu
+    public class KnjigaULokalu : _DbClass
     {
         public int IDKnjiga { get; set; }
         public int IDBK { get; set; }
         public DateTime DatVrIzmene { get; set; }
         public int Kolicina { get; set; }
 
+        public KnjigaULokalu() : base() { }
         public KnjigaULokalu(int IDKnjiga, int IDBK, int Kolicina)
         {
             this.IDKnjiga = IDKnjiga;

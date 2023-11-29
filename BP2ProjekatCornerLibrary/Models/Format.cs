@@ -7,9 +7,10 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Format
+    public class Format : _DbClass
     {
         [Key]
         public string NazivFormata { get; set; }
+        public Format() : base() { }
     }
 }
