@@ -10,19 +10,8 @@ using System.Windows;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Admin : Radnik
+    public class Admin : Zaposleni
     {
-        [Key]
-        public int IDRadnik { get; set; }
-        [Required]
-        public string Ime { get; set; }
-        [Required]
-        public string Prezime { get; set; }
-        [Required]
-        public DateTime DatRodj { get; set; }
-        [Required]
-        public DateTime DatZap { get; set; }
-        public DateTime DatOtp { get; set; }
         public string Ulica { get; set; }
         public string Broj { get; set; }
         public int PosBr { get; set; }

@@ -8,8 +8,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 {
     public static class EnumsHelper
     {
-
-        public static  string GetTipRadnika(TipRadnika tipRadnika)
+        public static string GetTipRadnika(TipRadnika tipRadnika)
         {
             switch (tipRadnika)
             {
@@ -19,6 +18,18 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 default: return null;
             }
         }
+        public static string GetTipRadnika(int tipRadnika)
+        {
+            switch (tipRadnika)
+            {
+                case 1: return "Administrator";
+                case 2: return "Bibliotekar";
+                case 3: return "Kurir";
+                default: return null;
+            }
+        }
+
+
     }
 
     public enum TipRadnika

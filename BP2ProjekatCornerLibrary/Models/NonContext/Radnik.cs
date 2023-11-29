@@ -8,8 +8,19 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models.NonContext
 {
-    public class Radnik : _DbClass
+    public class Radnik : Zaposleni
     {
-        public Radnik() : base() { }
+        [Required]
+        public int IDAdmin { get; set; }
+        [Required]
+        public DateTime DatVr { get; set; }
+        [Required]
+        public string Ulica { get; set; }
+        [Required]
+        public string Broj { get; set; }
+        [Required]
+        public int PosBr { get; set; }
+        [Required]
+        public string OZND { get; set; }
     }
 }

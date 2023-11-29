@@ -90,7 +90,23 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			Zap_Tip = EnumsHelper.GetTipRadnika(tip);
 			Zap_DatZap = DateConverter.ToString(datZap);
 		}
-	}
+        public ZapRadView(string ime, string prezime, string username, string tip, DateTime datZap)
+        {
+            Zap_Ime = ime;
+            Zap_Prezime = prezime;
+            Zap_Username = username;
+            Zap_Tip = tip;
+            Zap_DatZap = DateConverter.ToString(datZap);
+        }
+        public ZapRadView(string ime, string prezime, string username, string tip, string date)
+        {
+            Zap_Ime= ime;
+			Zap_Prezime = prezime;
+			Zap_Username= username;
+			Zap_Tip = tip;
+			Zap_DatZap = date;
+        }
+    }
 	public class OtpRadView
 	{
 		public string? Zap_Ime { get; set; }
@@ -107,11 +123,27 @@ namespace BP2ProjekatCornerLibrary.Helpers
 			Zap_Tip = EnumsHelper.GetTipRadnika(tip);
 			Zap_PerZap = DateConverter.ToString(datZap) + "-" + DateConverter.ToString(datOtp);
 		}
-	}
+        public OtpRadView(string ime, string prezime, string username, string tip, DateTime datZap, DateTime datOtp)
+        {
+            Zap_Ime = ime;
+            Zap_Prezime = prezime;
+            Zap_Username = username;
+            Zap_Tip = tip;
+            Zap_PerZap = DateConverter.ToString(datZap) + "-" + DateConverter.ToString(datOtp);
+        }
+        public OtpRadView(string ime, string prezime, string username, string tip, string datZap, string datOtp)
+        {
+            Zap_Ime = ime;
+            Zap_Prezime = prezime;
+            Zap_Username = username;
+            Zap_Tip = tip;
+            Zap_PerZap = datZap + "-" + datOtp;
+        }
+    }
 
 	public class OtvFilView
 	{
-		public string IDBK { get; set; }
+		public int IDBK { get; set; }
 		public string OF_Naziv { get; set; }
 		public string OF_Ulica { get; set; }
 		public string OF_Broj { get; set; }
@@ -120,7 +152,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		public string OF_Drzava { get; set; }
 		public string OF_DatOtv { get; set; }
 
-		public OtvFilView(string idbk, string naziv, string ulica, string broj, string grad, string drzava, DateTime datOtv)
+		public OtvFilView(int idbk, string naziv, string ulica, string broj, string grad, string drzava, DateTime datOtv)
 		{
 			IDBK = idbk;
 			OF_Naziv = naziv;
@@ -134,7 +166,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 	}
 	public class ZatFilView
 	{
-		public string IDBK { get; set; }
+		public int IDBK { get; set; }
 		public string ZF_Naziv { get; set; }
 		public string ZF_Ulica { get; set; }
 		public string ZF_Broj { get; set; }
@@ -143,7 +175,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		public string ZF_Drzava { get; set; }
 		public string ZF_PerOtv { get; set; }
 
-		public ZatFilView(string idbk, string naziv, string ulica, string broj, string grad, string drzava, DateTime datOtv, DateTime datZat)
+		public ZatFilView(int idbk, string naziv, string ulica, string broj, string grad, string drzava, DateTime datOtv, DateTime datZat)
 		{
 			IDBK = idbk;
 			ZF_Naziv = naziv;

@@ -49,6 +49,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
         public static T CreateInstance<T>(params ClassPropertyValue[] args)
         {
             T instance = (T)Activator.CreateInstance(typeof(T));
+
             Type iType = typeof(T);
 
             foreach (ClassPropertyValue arg in args)
@@ -60,7 +61,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
             return instance;
             //return (T)Activator.CreateInstance(typeof(T), args);
         }
-        public static List<T> ExecuteGetListFromCommand<T>(string sqlParameters = null) where T : new()
+        public static List<T> GetListFromSQL<T>(string sqlParameters = null) where T : new()
         {
             List<string> columns = new List<string>();
             List<T> ret = new List<T>();
@@ -99,12 +100,12 @@ namespace BP2ProjekatCornerLibrary.Helpers
             }
             return ret;
         }
-        public static T ExecuteGetFirstFromCommand<T>(string sqlParameters = null) where T : new()
+        public static T GetFirstFromSQL<T>(string sqlParameters = null) where T : new()
         {
             List<string> columns = new List<string>();
             T ret = new T();
             string sqlCommand = $"select * from {typeof(T).Name}";
-            if(sqlParameters != null) sqlCommand += " where " + sqlParameters;
+            if (sqlParameters != null) sqlCommand += " where " + sqlParameters;
 
             using (SqlConnection connection = new SqlConnection(connString))
             {
@@ -140,23 +141,23 @@ namespace BP2ProjekatCornerLibrary.Helpers
         #endregion
 
         #region LOGIN
-        public static Radnik TryLoginUser(string username, string password)
+        public static Zaposleni TryLoginUser(string username, string password)
         {
-            KorisnickiNalog nalog = ExecuteGetFirstFromCommand<KorisnickiNalog>($"KorisnickoIme='{username}' and Sifra='{password}'");
+            KorisnickiNalog nalog = GetFirstFromSQL<KorisnickiNalog>($"KorisnickoIme='{username}' and Sifra='{password}'");
 
             if (nalog.KorisnickoIme != null)
             {
                 switch (nalog.TipNaloga)
                 {
                     case (1):
-                        AdminKoristiNalog akn = ExecuteGetFirstFromCommand<AdminKoristiNalog>($"KorisnickoIme='{username}'");
-                        return ExecuteGetFirstFromCommand<Admin>($"IDRadnik='{akn.ID}'");
+                        AdminKoristiNalog akn = GetFirstFromSQL<AdminKoristiNalog>($"KorisnickoIme='{username}'");
+                        return GetFirstFromSQL<Admin>($"IDRadnik='{akn.ID}'");
                     case (2):
-                        BibliotekarKoristiNalog bkn = ExecuteGetFirstFromCommand<BibliotekarKoristiNalog>($"KorisnickoIme='{username}'");
-                        return ExecuteGetFirstFromCommand<Bibliotekar>($"IDRadnik='{bkn.ID}'");
+                        BibliotekarKoristiNalog bkn = GetFirstFromSQL<BibliotekarKoristiNalog>($"KorisnickoIme='{username}'");
+                        return GetFirstFromSQL<Bibliotekar>($"IDRadnik='{bkn.ID}'");
                     case (3):
-                        KurirKoristiNalog kkn = ExecuteGetFirstFromCommand<KurirKoristiNalog>($"KorisnickoIme='{username}'");
-                        return ExecuteGetFirstFromCommand<Kurir>($"IDRadnik='{kkn.ID}'");
+                        KurirKoristiNalog kkn = GetFirstFromSQL<KurirKoristiNalog>($"KorisnickoIme='{username}'");
+                        return GetFirstFromSQL<Kurir>($"IDRadnik='{kkn.ID}'");
                     default: return null;
                 }
             }
@@ -168,10 +169,213 @@ namespace BP2ProjekatCornerLibrary.Helpers
         #endregion
 
         #region GETTERS
+
+        #region WORKERS
+        // EMPLOYEES
+        public static List<Zaposleni> GetAllEmployees(string args = null)
+        {
+            List<Zaposleni> zaposleni = new List<Zaposleni>();
+            zaposleni.AddRange(GetListFromSQL<Admin>(args));
+            zaposleni.AddRange(GetListFromSQL<Bibliotekar>(args));
+            zaposleni.AddRange(GetListFromSQL<Kurir>(args));
+
+            return zaposleni;
+        }
+        public static List<Zaposleni> GetAllEmployedEmployees()
+        {
+            return GetAllEmployees("DatOtp IS NULL");
+        }
+        public static List<Zaposleni> GetAllUnemployedEmployees()
+        {
+            return GetAllEmployees("DatOtp IS NOT NULL");
+        }
+        public static Zaposleni GetEmployee(int workerId)
+        {
+            List<Zaposleni> workerList = new List<Zaposleni>();
+            workerList.AddRange(GetListFromSQL<Admin>($"IDRadnik={workerId}"));
+            if (workerList.Count == 0)
+            {
+                workerList.Add(GetWorker(workerId));
+                if (workerList.Count == 0)
+                {
+                    return null;
+                }
+            }
+            return workerList[0];
+        }
+        //WORKERS
+        public static List<Radnik> GetAllWorkers(string args = null)
+        {
+            List<Radnik> radniks = new List<Radnik>();
+            radniks.AddRange(GetListFromSQL<Bibliotekar>(args));
+            radniks.AddRange(GetListFromSQL<Kurir>(args));
+
+            return radniks;
+        }
+        public static List<Radnik> GetAllEmployedWorkers()
+        {
+            return GetAllWorkers("DatOtp IS NULL");
+        }
+        public static List<Radnik> GetAllUnemployedWorkers()
+        {
+            return GetAllWorkers("DatOtp IS NOT NULL");
+        }
+        public static Radnik GetWorker(int workerId)
+        {
+            List<Radnik> workerList = new List<Radnik>();
+            workerList.AddRange(GetListFromSQL<Bibliotekar>($"IDRadnik={workerId}"));
+            if (workerList.Count == 0)
+            {
+                workerList.AddRange(GetListFromSQL<Kurir>($"IDRadnik={workerId}"));
+                if (workerList.Count == 0)
+                {
+                    return null;
+                }
+            }
+            return workerList[0];
+        }
+        // BIBLIOTEKAR
+        public static List<Bibliotekar> GetAllBibliotekar(string args = null)
+        {
+            return GetListFromSQL<Bibliotekar>(args);
+        }
+        public static List<Bibliotekar> GetAllEmployedBibliotekars()
+        {
+            return GetAllBibliotekar("DatOtp IS NULL");
+        }
+        public static List<Bibliotekar> GetAllUnemployedBibliotekars()
+        {
+            return GetAllBibliotekar("DatOtp IS NOT NULL");
+        }
+        public static Bibliotekar GetBibliotekar(int id)
+        {
+            return GetFirstFromSQL<Bibliotekar>($"IDRadnik={id}");
+        }
+        //KURIR
+        public static List<Kurir> GetAllKurirs(string args = null)
+        {
+            return GetListFromSQL<Kurir>(args);
+        }
+        public static List<Kurir> GetAllEmployedKurirs()
+        {
+            return GetAllKurirs("DatOtp IS NULL");
+        }
+        public static List<Kurir> GetAllUnemployedKurirs()
+        {
+            return GetAllKurirs("DatOtp IS NOT NULL");
+        }
+        public static Kurir GetKurir(int id)
+        {
+            return GetFirstFromSQL<Kurir>($"IDRadnik={id}");
+        }
+        #endregion
+
+        #region ACCOUNTS
+        public static List<KorisnickiNalog> GetAllKorisnickiNalogs(string args = null)
+        {
+            return GetListFromSQL<KorisnickiNalog>(args);
+        }
+        /// <summary>
+        /// Get account by the username
+        /// </summary>
+        /// <param name="username">KorisnickoIme</param>
+        /// <returns></returns>
+        public static KorisnickiNalog GetKorisnickiNalog(string username)
+        {
+            return GetFirstFromSQL<KorisnickiNalog>($"KorisnickoIme='{username}'");
+        }
+        /// <summary>
+        /// Get bibliotekar account based on ID
+        /// </summary>
+        /// <param name="id">IDRadnik</param>
+        /// <returns></returns>
+        public static KorisnickiNalog GetBibNalog(int id)
+        {
+            return GetKorisnickiNalog(GetFirstFromSQL<BibliotekarKoristiNalog>($"ID='{id}'").KorisnickoIme);
+        }
+        /// <summary>
+        /// Get kurir account based on ID
+        /// </summary>
+        /// <param name="id">IDRadnik</param>
+        /// <returns></returns>
+        public static KorisnickiNalog GetKurirNalog(int id)
+        {
+            return GetKorisnickiNalog(GetFirstFromSQL<KurirKoristiNalog>($"ID='{id}'").KorisnickoIme);
+        }
+        /// <summary>
+        /// Get admin account based on ID
+        /// </summary>
+        /// <param name="id">IDRadnik</param>
+        /// <returns></returns>
+        public static KorisnickiNalog GetAdminNalog(int id)
+        {
+            return GetKorisnickiNalog(GetFirstFromSQL<AdminKoristiNalog>($"ID='{id}'").KorisnickoIme);
+        }
+        #endregion
+
+        #region LOKALI
+        public static List<Biblikutak> GetAllLokals(string args)
+        {
+            return GetListFromSQL<Biblikutak>(args);
+        }
+        public static List<Biblikutak> GetOpenLokals()
+        {
+            return GetAllLokals($"DatZat IS NULL");
+        }
+        public static List<Biblikutak> GetClosedLokals()
+        {
+            return GetAllLokals($"DatZat IS NOT NULL");
+        }
+        public static Biblikutak GetLokal(int id)
+        {
+            return GetFirstFromSQL<Biblikutak>($"IDBK='{id}'");
+        }
+        #endregion
+
+        #region LOKACIJA
+        //LOKACIJA
+        public static List<Lokacija> GetAllLocations(string args)
+        {
+            return GetListFromSQL<Lokacija>(args);
+        }
+        public static List<Lokacija> GetAllLocationsInCountry(string country)
+        {
+            return GetAllLocations($"OZND='{country}'");
+        }
+        public static List<Lokacija> GetAllLocationsInCity(int posBr)
+        {
+            return GetAllLocations($"PosBr={posBr}");
+        }
+        public static Lokacija GetLokacija(string ulica, string broj, int posBr, string oznd)
+        {
+            return GetFirstFromSQL<Lokacija>($"Ulica='{ulica}' and Broj='{broj}' and PosBr={posBr} and OZND='{oznd}'");
+        }
+        //MESTO
+        public static List<Mesto> GetAllMesta()
+        {
+            return GetListFromSQL<Mesto>();
+        }
+        public static Mesto GetMesto(int posBr)
+        {
+            return GetFirstFromSQL<Mesto>($"PosBr={posBr}");
+        }
+        //DRZAVA
+        public static List<Drzava> GetAllDrzave()
+        {
+            return GetListFromSQL<Drzava>();
+        }
+        public static Drzava GetDrzava(string oznd)
+        {
+            return GetFirstFromSQL<Drzava>($"OZND='{oznd}'");
+        }
+        #endregion
+
+
+
         // KNJIGA
         public static Knjiga GetBook(int bookID)
         {
-            return ExecuteGetFirstFromCommand<Knjiga>($"IDKnjiga={bookID}");
+            return GetFirstFromSQL<Knjiga>($"IDKnjiga={bookID}");
         }
         public static Knjiga GetExactBook(string naziv, int autorID, int IDIK, string godIzd, int brIzd, string oznz, string oznj, bool ogr)
         {
@@ -286,29 +490,17 @@ namespace BP2ProjekatCornerLibrary.Helpers
             return db.IzdKuca.ToList();
         }
 
-        // RADNIK
-        public static Radnik GetRadnik(int id)
-        {
-            List<Admin> admins = new List<Admin>();
-            admins = db.Admin.FromSql($"select * from Admin where IDRadnik={id}").ToList();
-            if (admins.Count > 0)
-                return admins[0];
 
-            List<Bibliotekar> bibs = new List<Bibliotekar>();
-            bibs = db.Bibliotekar.FromSql($"select * from Bibliotekar where IDRadnik={id}").ToList();
-            if (bibs.Count > 0)
-                return bibs[0];
-
-            List<Kurir> kurirs = new List<Kurir>();
-            kurirs = db.Kurir.FromSql($"select * from Kurir where IDRadnik={id}").ToList();
-            if (kurirs.Count > 0)
-                return kurirs[0];
-
-            return null;
-        }
         #endregion
 
-        #region Adders
+        #region ADDERS
+
+        #region LOKACIJA
+        public static bool CheckIfLocationExists(string ulica, string broj, int posBr, string oznd)
+        {
+            return GetAllLocations($"Ulica='{ulica}' and Broj='{broj}' and PosBr={posBr} and OZND='{oznd}'").Count() > 0;
+        }
+        #endregion
         // KNJIGA
         public static iDbResult AddBook(string naziv, int brIzd, int godIzd, int brStrana, int velicinaFonta, int korice, string format, int ograniceno, int autorID, string jezik, int IzdKuca, string zanr)
         {
@@ -373,43 +565,6 @@ namespace BP2ProjekatCornerLibrary.Helpers
         #endregion
 
         #region Getters
-        public static int GetFirstFreeUserID()
-        {
-            //using (var db = new CornerLibraryDbContext(optionBuilder.Options))
-            //{
-            //int id = db.Clans.First().IDClan;
-
-            //foreach (Clan clan in db.Clans)
-            //{
-            //	if (clan.IDClan > id)
-            //		id = clan.IDClan;
-            //}
-            //id++;
-            //if (id < 0)
-            //{
-            //	id = db.Clans.First().IDClan;
-            //	bool set = true;
-            //	do
-            //	{
-            //		id++;
-            //		set = true;
-            //		foreach (Clan c in db.Clans)
-            //		{
-            //			if (c.IDClan == id)
-            //			{
-            //				set = false;
-            //				break;
-            //			}
-            //		}
-            //	} while (!set && id > 0);
-            //}
-            //return id;
-            return 1;
-            //}
-        }
-
-
-
         public static float GetEditionPrice(iIzdanje edition)
         {
             switch (edition)
@@ -420,6 +575,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 default: return 0;
             }
         }
+
 
         // GET BOOK
         public static KnjigaULokalu GetBookInStore(int bookID, int lokalID)

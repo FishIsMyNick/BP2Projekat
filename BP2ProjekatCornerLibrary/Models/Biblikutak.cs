@@ -1,4 +1,5 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
