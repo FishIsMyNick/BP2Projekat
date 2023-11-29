@@ -14,7 +14,7 @@ namespace BP2ProjekatCornerLibrary.Models
         [Required]
         public string NazivJezika { get; set; }
 
-        public Jezik() : base() { }
+        public Jezik() : base() { } 
         public Jezik(string oznj, string naziv)
         {
             OZNJ = oznj;
