@@ -248,9 +248,10 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		}
 
 		private void btn_EditZanr_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
+        {
+            Window editZanrWindow = new AdminEditZanrWindow();
+            editZanrWindow.ShowDialog();
+        }
 
 		private void btn_EditFormat_Click(object sender, RoutedEventArgs e)
 		{

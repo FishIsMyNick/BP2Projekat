@@ -16,10 +16,16 @@
     <Compile Update="Views\Worker\AdminEditLanguageWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Worker\AdminEditPeriodWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Update="Views\Worker\AdminEditStoreWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Worker\AdminEditWorkerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\AdminEditZanrWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
     <Compile Update="Views\Worker\AdminMainView.xaml.cs">
@@ -39,10 +45,16 @@
     <Page Update="Views\Worker\AdminEditLanguageWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
+    <Page Update="Views\Worker\AdminEditPeriodWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
     <Page Update="Views\Worker\AdminEditStoreWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Worker\AdminEditWorkerWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\AdminEditZanrWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Worker\AdminMainView.xaml">

@@ -28,10 +28,6 @@
 
 						
 						
-						
-						
-						
-						
 						<!--ZAPOSLENI RADNICI-->
 						<DockPanel Margin="5" Grid.Row="0" Grid.Column="0">
 							<Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">
@@ -50,7 +46,7 @@
 											Width="110" 
 											Click="btn_ZapRadnik_Ime_Click"/>
 										<Image x:Name="img_ZapRad_Ime_Sort" 
-											Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+											Source="..\..\Images\arrow_down.png"
 											Margin="-30 0 0 0"
 											Panel.ZIndex="2"/>
 										<!--PREZIME-->
@@ -59,7 +55,7 @@
 											Width="130" 
 											Click="btn_ZapRadnik_Prezime_Click"/>
 										<Image x:Name="img_ZapRad_Prezime_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--USERNAME-->
@@ -68,7 +64,7 @@
 											Width="120" 
 											Click="btn_ZapRadnik_Username_Click"/>
 										<Image x:Name="img_ZapRad_Username_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--TIP-->
@@ -77,7 +73,7 @@
 											Width="120" 
 											Click="btn_ZapRadnik_Tip_Click"/>
 										<Image x:Name="img_ZapRad_Tip_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--DAT ZAP-->
@@ -86,7 +82,7 @@
 											Width="100 " 
 											Click="btn_ZapRadnik_DatZap_Click"/>
 										<Image x:Name="img_ZapRad_DatZap_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 									</StackPanel>
@@ -136,7 +132,7 @@
 											Width="90" 
 											Click="btn_NezapRadnik_Ime_Click"/>
 										<Image x:Name="img_NezapRad_Ime_Sort" 
-											Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+											Source="..\..\Images\arrow_down.png"
 											Margin="-30 0 0 0"
 											Panel.ZIndex="2"/>
 										<!--PREZIME-->
@@ -145,7 +141,7 @@
 											Width="100" 
 											Click="btn_NezapRadnik_Prezime_Click"/>
 										<Image x:Name="img_NezapRad_Prezime_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--USERNAME-->
@@ -154,7 +150,7 @@
 											Width="120" 
 											Click="btn_NezapRadnik_Username_Click"/>
 										<Image x:Name="img_NezapRad_Username_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--TIP-->
@@ -163,7 +159,7 @@
 											Width="120" 
 											Click="btn_ZapRadnik_Tip_Click"/>
 										<Image x:Name="img_NezapRad_Tip_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--PERIOD ZAP-->
@@ -172,7 +168,7 @@
 											Width="150" 
 											Click="btn_ZapRadnik_DatZap_Click"/>
 										<Image x:Name="img_NezapRad_PerZap_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 									</StackPanel>
@@ -223,7 +219,7 @@
 											Width="90" 
 											Click="btn_OFil_Naziv_Click"/>
 										<Image x:Name="img_OFil_Naziv_Sort" 
-											Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+											Source="..\..\Images\arrow_down.png"
 											Margin="-30 0 0 0"
 											Panel.ZIndex="2"/>
 										<!--ADRESA-->
@@ -232,7 +228,7 @@
 											Width="150" 
 											Click="btn_OFil_Adresa_Click"/>
 										<Image x:Name="img_OFil_Ulica_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--GRAD-->
@@ -241,7 +237,7 @@
 											Width="95" 
 											Click="btn_OFil_Grad_Click"/>
 										<Image x:Name="img_OFil_Grad_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--DRZAVA-->
@@ -250,7 +246,7 @@
 											Width="95" 
 											Click="btn_OFil_Drzava_Click"/>
 										<Image x:Name="img_OFil_Drzava_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--DATUM OTV-->
@@ -259,7 +255,7 @@
 											Width="150" 
 											Click="btn_OFil_DatOtv_Click"/>
 										<Image x:Name="img_OFil_DatOtv_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 									</StackPanel>
@@ -310,7 +306,7 @@
 											Width="90" 
 											Click="btn_ZFil_Naziv_Click"/>
 										<Image x:Name="img_ZFil_Naziv_Sort" 
-											Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+											Source="..\..\Images\arrow_down.png"
 											Margin="-30 0 0 0"
 											Panel.ZIndex="2"/>
 										<!--ADRESA-->
@@ -319,7 +315,7 @@
 											Width="150" 
 											Click="btn_OFil_Adresa_Click"/>
 										<Image x:Name="img_ZFil_Ulica_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--GRAD-->
@@ -328,7 +324,7 @@
 											Width="95" 
 											Click="btn_ZFil_Grad_Click"/>
 										<Image x:Name="img_ZFil_Grad_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--DRZAVA-->
@@ -337,7 +333,7 @@
 											Width="95" 
 											Click="btn_ZFil_Drzava_Click"/>
 										<Image x:Name="img_ZFil_Drzava_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--PERIOD OTV-->
@@ -346,7 +342,7 @@
 											Width="150" 
 											Click="btn_ZFil_PerOtv_Click"/>
 										<Image x:Name="img_ZFil_PerOtv_Sort" 
-										   Source="E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Images\arrow_down.png"
+										   Source="..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 									</StackPanel>
