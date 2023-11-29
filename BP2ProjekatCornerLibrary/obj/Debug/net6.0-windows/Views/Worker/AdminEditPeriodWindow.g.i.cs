@@ -149,8 +149,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;V1.0.0.0;component/views/worker/admineditperiodwindow.x" +
-                    "aml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;component/views/worker/admineditperiodwindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\Worker\AdminEditPeriodWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
