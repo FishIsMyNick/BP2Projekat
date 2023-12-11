@@ -1,4 +1,5 @@
-﻿using BP2ProjekatCornerLibrary.Models.NonContext;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,7 +21,39 @@ namespace BP2ProjekatCornerLibrary.Models
         public DateTime DatRodj { get; set; }
         public string Biografija { get; set; }
         public string Drzava { get; set; }
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDAutor", IDAutor),
+                new ClassPropertyValue("IDBib", IDBib),
+                new ClassPropertyValue("DatVr", DatVr)
+            };
+        }
 
         public IzmenaAutora() : base() { }
+
+        public IzmenaAutora(int iDAutor, int iDBib, string ime, string prezime, DateTime datRodj, string biografija, string drzava)
+        {
+            IDAutor = iDAutor;
+            IDBib = iDBib;
+            Ime = ime;
+            Prezime = prezime;
+            DatRodj = datRodj;
+            Biografija = biografija;
+            Drzava = drzava;
+            DatVr = DateTime.Now;
+        }
+        public IzmenaAutora(Autor a, int bibID)
+        {
+            IDAutor = a.IDAutor;
+            Ime = a.Ime;
+            Prezime = a.Prezime;
+            DatRodj = a.DatRodj;
+            Biografija = a.Biografija;
+            Drzava = a.Drzava;
+            DatVr = DateTime.Now;
+            IDBib = bibID;
+        }
     }
 }

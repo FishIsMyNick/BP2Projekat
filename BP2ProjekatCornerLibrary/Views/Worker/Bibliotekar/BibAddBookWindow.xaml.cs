@@ -53,7 +53,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		{
 			List<IzdKuca> izdkucas = DBHelper.GetAllIzdKucas();
 			IzdKuca ph_addNew = new IzdKuca("Dodaj novu izdavačku kuću");
-			ph_addNew.IDBK = -1;
+			ph_addNew.IDIK = -1;
 			izdkucas.Add(ph_addNew); 
 
 			cbIK.ItemsSource = izdkucas;

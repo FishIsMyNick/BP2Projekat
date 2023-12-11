@@ -1,4 +1,5 @@
-﻿using BP2ProjekatCornerLibrary.Models.NonContext;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -18,6 +19,14 @@ namespace BP2ProjekatCornerLibrary.Models
         public DataType DatIzd { get; set; }
         [Required]
         public decimal Cena { get; set; }
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDSStivo", IDSStivo),
+                new ClassPropertyValue("BrIzd", BrIzd)
+            };
+        }
 
         public IzdanjeSStiva() : base() { }
 }

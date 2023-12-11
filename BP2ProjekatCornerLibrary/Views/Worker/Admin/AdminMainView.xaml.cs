@@ -21,8 +21,10 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     /// <summary>
     /// Interaction logic for AdminMainView.xaml
     /// </summary>
-    public partial class AdminMainView : Window
+    public partial class AdminMainView : Window, iDynamicListView
     {
+		private Admin _currentUser;
+		public static AdminMainView Instance { get; set; }
         public string Zap_Ime { get; set; }
         public string Zap_Prezime { get; set; }
         public string Zap_Username { get; set; }
@@ -37,23 +39,34 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		public int RadnikTableImeWidth = 300;
         public AdminMainView(Admin admin)
 		{
+			if (Instance == null)
+				Instance = this;
+
+			_currentUser = admin;
+
 			InitializeComponent();
 
 			FillAllLists();
         }
 
-		#region List population
-		private void FillAllLists()
+        #region List population
+        public void RefreshLists()
+        {
+			FillAllLists();
+        }
+        private void FillAllLists()
         {
 			FillZapRadniciList();
 			FillOtpRadniciList();
 			FillOtvFilList();
 			FillZatvFilList();
-			Knjiga k = DBHelper.GetBook(1);
+			//Knjiga k = DBHelper.GetBook(1);
 		}
         private void FillZapRadniciList()
 		{
-			List<Radnik> radniks = DBHelper.GetAllEmployedWorkers();
+			ZaposleniRadnici.Items.Clear();
+
+            List<Radnik> radniks = DBHelper.GetAllEmployedWorkers();
 			foreach(Radnik radnik in radniks)
 			{
 				KorisnickiNalog nalog = new KorisnickiNalog();
@@ -61,11 +74,13 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 					nalog = DBHelper.GetBibNalog(radnik.IDRadnik);
 				else if(radnik.GetType() == typeof(Kurir))
 					nalog = DBHelper.GetKurirNalog(radnik.IDRadnik);
-                ZaposleniRadnici.Items.Add(new ZapRadView(radnik.Ime, radnik.Prezime, nalog.KorisnickoIme, EnumsHelper.GetTipRadnika(nalog.TipNaloga), radnik.DatZap));
+				ZaposleniRadnici.Items.Add(new ZapRadView(radnik.IDRadnik, radnik.Ime, radnik.Prezime, radnik.DatZap, nalog.KorisnickoIme, EnumsHelper.GetTipRadnikaString(nalog.TipNaloga)));
 			}
 		}
 		private void FillOtpRadniciList()
 		{
+			NezaposleniRadnici.Items.Clear();
+
 			List<Radnik> radniks = DBHelper.GetAllUnemployedWorkers();
             foreach (Radnik radnik in radniks)
             {
@@ -74,27 +89,31 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                     nalog = DBHelper.GetBibNalog(radnik.IDRadnik);
                 else if (radnik.GetType() == typeof(Kurir))
                     nalog = DBHelper.GetKurirNalog(radnik.IDRadnik);
-                NezaposleniRadnici.Items.Add(new OtpRadView(radnik.Ime, radnik.Prezime, nalog.KorisnickoIme, EnumsHelper.GetTipRadnika(nalog.TipNaloga), radnik.DatZap, radnik.DatOtp));
+				NezaposleniRadnici.Items.Add(new OtpRadView(radnik.IDRadnik, radnik.Ime, radnik.Prezime, radnik.DatZap, radnik.DatOtp ?? radnik.DatRodj, nalog.KorisnickoIme, EnumsHelper.GetTipRadnikaString(nalog.TipNaloga)));
             }
         }
 		private void FillOtvFilList()
 		{
+			OtvoreneFilijale.Items.Clear();
+
 			List<Biblikutak> lokali = DBHelper.GetOpenLokals();
 			foreach(Biblikutak biblikutak in lokali)
 			{
 				Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
 				Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
-				OtvoreneFilijale.Items.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.Ulica, biblikutak.Broj, m.NazivMesta, d.NazivDrzave, biblikutak.DatOtv));
+				OtvoreneFilijale.Items.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, biblikutak.DatZat, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
 			}
 		}
 		private void FillZatvFilList()
         {
+			ZatvoreneFilijale.Items.Clear();
+
             List<Biblikutak> lokali = DBHelper.GetClosedLokals();
             foreach (Biblikutak biblikutak in lokali)
             {
                 Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
                 Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
-                ZatvoreneFilijale.Items.Add(new ZatFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.Ulica, biblikutak.Broj, m.NazivMesta, d.NazivDrzave, biblikutak.DatOtv, biblikutak.DatZat));
+                ZatvoreneFilijale.Items.Add(new ZatFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, biblikutak.DatZat, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
             }
 		}
 		#endregion
@@ -119,10 +138,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		private void btn_ZapRadnik_DatZap_Click(object sender, RoutedEventArgs e)
 		{
 
-		}
-		private void ZapRadnici_List_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-		{
-			Console.WriteLine("zr click");
 		}
 		#endregion
 
@@ -174,10 +189,57 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		{
 
 		}
-		private void OFil_List_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        #endregion
+
+        #region LIST INTERACTIONS
+		private void DeselectFromAllLists()
 		{
-			Console.WriteLine("zr click");
+			OtvoreneFilijale.SelectedItem = null;
+			ZatvoreneFilijale.SelectedItem = null;
+			ZaposleniRadnici.SelectedItem = null;
+			NezaposleniRadnici.SelectedItem = null;
 		}
+        private void OtvoreneFilijale_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			OtvFilView ofv = ((ListView)sender).SelectedItem as OtvFilView;
+			if (ofv == null) return;
+			Window editFilWindow = new AdminEditStoreWindow(caller:this, selectedID:ofv.IDBK);
+			editFilWindow.ShowDialog();
+		}
+        private void OtvoreneFilijale_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
+        }
+        private void OtvoreneFilijale_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+			DeselectFromAllLists();
+        }
+
+		private void ZaposleniRadnici_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+		{
+			ZapRadView zrv = ((ListView)sender).SelectedItem as ZapRadView;
+			if(zrv == null) return;
+			Window editWorkerWindow = new AdminEditWorkerWindow(caller: this, selectedID: zrv.IDRadnik, tip: EnumsHelper.GetTipRadnika(zrv.Tip));
+			editWorkerWindow.ShowDialog();
+		}
+        private void ZaposleniRadnici_LostFocus(object sender, RoutedEventArgs e)
+        {
+            ((ListView)sender).SelectedItem = null;
+        }
+
+        private void ZaposleniRadnici_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DeselectFromAllLists();
+        }
+        private void NezaposleniRadnici_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DeselectFromAllLists();
+        }
+
+        private void ZatvoreneFilijale_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            DeselectFromAllLists();
+        }
 		#endregion
 
 		private void btn_Close_Click(object sender, RoutedEventArgs e)
@@ -214,7 +276,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		#region Buttons
 		private void btn_AddWorker_Click(object sender, RoutedEventArgs e)
 		{
-			Window addWorkerWindow = new AdminAddWorkerWindow();
+			Window addWorkerWindow = new AdminAddWorkerWindow(this, _currentUser.IDRadnik);
 			addWorkerWindow.ShowDialog();
 		}
 
@@ -226,7 +288,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
 		private void btn_AddStore_Click(object sender, RoutedEventArgs e)
 		{
-			Window addStoreWindow = new AdminAddStoreWindow();
+			Window addStoreWindow = new AdminAddStoreWindow(this);
 			addStoreWindow.ShowDialog();
 		}
 
@@ -257,8 +319,10 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		{
 
 		}
-		#endregion
-	}
+
+        #endregion
+
+    }
 }
 
 

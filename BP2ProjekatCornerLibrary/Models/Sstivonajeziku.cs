@@ -1,4 +1,5 @@
-﻿using BP2ProjekatCornerLibrary.Models.NonContext;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -14,7 +15,21 @@ namespace BP2ProjekatCornerLibrary.Models
     {
         public int IDSStivo { get; set; }
         public string OZNJ { get; set; }
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDSStivo", IDSStivo),
+                new ClassPropertyValue("OZNJ", OZNJ)
+            };
+        }
 
         public SStivoNaJeziku() : base() { }
+
+        public SStivoNaJeziku(int iDSStivo, string oZNJ)
+        {
+            IDSStivo = iDSStivo;
+            OZNJ = oZNJ ?? throw new ArgumentNullException(nameof(oZNJ));
+        }
     }
 }

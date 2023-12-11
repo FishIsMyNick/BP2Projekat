@@ -1,4 +1,5 @@
-﻿using BP2ProjekatCornerLibrary.Models.NonContext;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -17,6 +18,15 @@ namespace BP2ProjekatCornerLibrary.Models
         public DateTime DatVr { get; set; }
         public DateTime DatOd { get; set; }
         public DateTime DatDo { get; set; }
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDBib", IDBib),
+                new ClassPropertyValue("IDBK", IDBK),
+                new ClassPropertyValue("DatVr", DatVr)
+            };
+        }
 
         public RasporedjenBibliotekar() : base() { }
     }

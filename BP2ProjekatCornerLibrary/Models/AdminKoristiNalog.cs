@@ -15,6 +15,14 @@ namespace BP2ProjekatCornerLibrary.Models
     {
         public int ID { get; set; }
         public string KorisnickoIme { get; set; }
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("ID", ID),
+                new ClassPropertyValue("KorisnickoIme", KorisnickoIme)
+            };
+        }
 
         public AdminKoristiNalog() : base() { }
         public AdminKoristiNalog(int ID, string KorisnickoIme)

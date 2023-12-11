@@ -51,7 +51,6 @@
                             </StackPanel>
                             <!--LIST OF LANGUAGES-->
                             <ListView Name="Zanrovi"
-										ItemsSource="{Binding ListaZanrova}"
 										Margin="0 -22 0 0"
 										Background="White"
 						ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -59,7 +58,7 @@
                                 <ListView.View>
                                     <GridView>
                                         <GridViewColumn Width="160" DisplayMemberBinding="{Binding OZNZ}"/>
-                                        <GridViewColumn Width="230" DisplayMemberBinding="{Binding Naziv}" />
+                                        <GridViewColumn Width="230" DisplayMemberBinding="{Binding NazivZanra}" />
                                     </GridView>
                                 </ListView.View>
                             </ListView>

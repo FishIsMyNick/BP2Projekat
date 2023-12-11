@@ -18,6 +18,13 @@ namespace BP2ProjekatCornerLibrary.Models
         public string OZND { get; set; }
 
         public Admin() : base() { }
-        
+
+        public Admin(int iDRadnik, string ime, string prezime, DateTime datRodj, DateTime datZap, DateTime? datOtp, string ulica, string broj , int posBr, string oznd) : base(iDRadnik, ime, prezime, datRodj, datZap, datOtp)
+        {
+            Ulica = ulica;
+            Broj = broj;
+            PosBr = posBr;
+            OZND = oznd;
+        }
     }
 }

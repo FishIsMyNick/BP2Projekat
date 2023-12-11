@@ -19,30 +19,33 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     /// <summary>
     /// Interaction logic for AdminEditZanrWindow.xaml
     /// </summary>
-    public partial class AdminEditZanrWindow : Window
+    public partial class AdminEditZanrWindow : Window, iDynamicListView
     {
-        public List<ZanrView> ListaZanrova { get; set; }
-        private ZanrView selectedZanr;
+        private Zanr selectedZanr;
         public AdminEditZanrWindow()
         {
             InitializeComponent();
 
+            RefreshLists();
+        }
+        public void RefreshLists()
+        {
             FillZanrList();
         }
-
         private void FillZanrList()
         {
             Zanrovi.Items.Clear();
 
-            ZanrView jv = new ZanrView("SRB", "Srpski");
-
-            Zanrovi.Items.Add(jv);
+            foreach(Zanr z in DBHelper.GetAllZanrs())
+            {
+                Zanrovi.Items.Add(z);
+            }
         }
 
         #region Editing
         private void Zanrovi_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            selectedZanr = (ZanrView)Zanrovi.SelectedItem;
+            selectedZanr = (Zanr)Zanrovi.SelectedItem;
 
             SetEditZanreFields();
         }
@@ -73,7 +76,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             if (selectedZanr == null) return;
 
             tb_Edit_OZNZ.Text = selectedZanr.OZNZ;
-            tb_Edit_Naziv.Text = selectedZanr.Naziv;
+            tb_Edit_Naziv.Text = selectedZanr.NazivZanra;
         }
         private void ClearEditZanrFields()
         {
@@ -84,10 +87,20 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
         private void btn_Edit_Confirm_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Update in DB
+            if (!ValidateEditInputFields()) return;
 
-            MessageBox.Show("Uspešno ste izmenili žanr!");
+            Zanr z = new Zanr(tb_Edit_OZNZ.Text.Trim(), tb_Edit_Naziv.Text.Trim());
+
+            if (DBHelper.UpdateZanr(z))
+            {
+                MessageBox.Show("Uspešno ste izmenili žanr!");
+            }
+            else
+            {
+                MessageBox.Show("Došlo je do greške pri čuvanju žanra!");
+            }
             ClearEditZanrFields();
+            RefreshLists();
         }
 
         private void btn_Edit_Cancel_Click(object sender, RoutedEventArgs e)
@@ -97,35 +110,57 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: Delete from DB
+            Zanr z = new Zanr(tb_Edit_OZNZ.Text.Trim(), tb_Edit_Naziv.Text.Trim());
 
-            MessageBox.Show("Uspešno ste obrisali žanr");
+            if (DBHelper.DeleteZanr(z))
+            {
+                MessageBox.Show("Uspešno ste obrisali žanr");
+            }
+            else
+            {
+                MessageBox.Show("Došlo je do greške pri brisanju žanra!");
+            }
             ClearEditZanrFields();
+            RefreshLists();
+        }
+        private bool ValidateEditInputFields()
+        {
+            return Validator.Oznaka(tb_Edit_OZNZ.Text.Trim()) && Validator.Naziv(tb_Edit_Naziv.Text.Trim());
         }
         #endregion
 
         #region Add
         private void btn_Add_Confirm_Click(object sender, RoutedEventArgs e)
         {
-            string oznz = tb_Add_OZNZ.Text;
-            string naziv = tb_Add_Naziv.Text;
+            if (!ValidateAddInputFields()) return;
 
-            if (oznz == "" || naziv == "")
+            Zanr zanr = new Zanr(tb_Add_OZNZ.Text.Trim(), tb_Add_Naziv.Text.Trim());
+
+            if (DBHelper.CheckEntityExists<Zanr>(zanr))
             {
-                MessageBox.Show("Sva polja moraju biti popunjena!");
+                MessageBox.Show("Žanr sa unetom oznakom već postoji!");
                 return;
             }
 
-            ZanrView toAdd = new ZanrView(oznz, naziv);
-            //TODO: Add to DB
-
-            MessageBox.Show("Uspešno ste dodali nov žanr!");
+            if (DBHelper.AddZanr(zanr))
+            {
+                MessageBox.Show("Uspešno ste dodali nov žanr!");
+            }
+            else
+            {
+                MessageBox.Show("Došlo je do greške pri dodavanju novog žanra!");
+            }
             ClearAddZanrFields();
+            RefreshLists();
         }
 
         private void btn_Add_Cancel_Click(object sender, RoutedEventArgs e)
         {
             ClearAddZanrFields();
+        }
+        private bool ValidateAddInputFields()
+        {
+            return (Validator.Oznaka(tb_Add_OZNZ.Text.Trim()) && Validator.Naziv(tb_Add_Naziv.Text.Trim()));
         }
         private void ClearAddZanrFields()
         {

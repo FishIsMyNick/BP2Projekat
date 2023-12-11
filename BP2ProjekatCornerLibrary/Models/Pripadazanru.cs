@@ -1,4 +1,5 @@
-﻿using BP2ProjekatCornerLibrary.Models.NonContext;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -20,6 +21,14 @@ namespace BP2ProjekatCornerLibrary.Models
             get; set;
         }
 
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDKnjiga", IDKnjiga),
+                new ClassPropertyValue("OZNZ", OZNZ)
+            };
+        }
         public PripadaZanru() : base() { }
         public PripadaZanru(int IDKnjiga, string OZNZ)
         {

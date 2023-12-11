@@ -15,7 +15,17 @@ namespace BP2ProjekatCornerLibrary.Helpers
 		{
 			return DateTime.ParseExact(date.Normalize(), format, provider);
 		}
-		public static string ToString(DateTime date)
+        public static DateTime ToDateTime(int day, int month, int year)
+        {
+			string dt = $"{day}.{month}.{year}.";
+            return DateTime.ParseExact(dt.Normalize(), format, provider);
+        }
+        public static DateTime ToDateTime(string day, string month, string year)
+        {
+            string dt = $"{day}.{month}.{year}.";
+            return DateTime.ParseExact(dt.Normalize(), format, provider);
+        }
+        public static string ToString(DateTime date)
 		{
 			return $"{date.Day}.{date.Month}.{date.Year}.";
 		}

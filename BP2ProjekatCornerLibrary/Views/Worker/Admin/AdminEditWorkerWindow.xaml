@@ -6,9 +6,9 @@
         xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker"
         mc:Ignorable="d"
         Title="AdminEditWorkerWindow" Height="530" Width="600">
-    <Grid>
+	<Grid>
 		<!--SELECTION VIEW-->
-		<Grid Name="SelectView" Visibility="Visible">
+		<Grid Name="SelectView" Visibility="Hidden">
 			<StackPanel Orientation="Vertical">
 				<!--SORT BUTTONS-->
 				<StackPanel Orientation="Horizontal" 
@@ -78,22 +78,20 @@
 				</ListView>
 			</StackPanel>
 		</Grid>
-        
+
 		<!--EDIT VIEW-->
-		<Grid Name="EditView" Visibility="Hidden">
+		<Grid Name="EditView" Visibility="Visible">
 
 			<StackPanel Orientation="Vertical" Margin="0,0,0,-16">
-				<Label FontSize="30">Dodaj novog radnika</Label>
+				<Label FontSize="30">Izmeni radnika</Label>
 				<!--INPUT FIELDS-->
-				<Grid Margin="10 10">
+				<Grid Margin="10 10" Height="325">
 					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="20*"/>
-						<ColumnDefinition Width="1*"/>
-						<ColumnDefinition Width="45*"/>
+						<ColumnDefinition Width="176*"/>
+						<ColumnDefinition Width="8.788"/>
+						<ColumnDefinition Width="395*"/>
 					</Grid.ColumnDefinitions>
 					<Grid.RowDefinitions>
-						<RowDefinition Height="6*"/>
-						<RowDefinition Height="1*"/>
 						<RowDefinition Height="6*"/>
 						<RowDefinition Height="1*"/>
 						<RowDefinition Height="6*"/>
@@ -142,83 +140,92 @@
 					   Grid.Column="0">
 						Šifra:
 					</Label>
+
 					<Label FontSize="20" 
 					   HorizontalAlignment="Right"
 					   Grid.Row="10"
-					   Grid.Column="0">
-						Tip radnika:
-					</Label>
-					<Label FontSize="20" 
-					   HorizontalAlignment="Right"
-					   Grid.Row="12"
 					   Grid.Column="0">
 						Ulica i broj:
 					</Label>
 					<Label FontSize="20" 
 					   HorizontalAlignment="Right"
-					   Grid.Row="14"
+					   Grid.Row="12"
 					   Grid.Column="0">
 						Mesto:
 					</Label>
 					<Label FontSize="20" 
 					   HorizontalAlignment="Right"
-					   Grid.Row="16"
+					   Grid.Row="14"
 					   Grid.Column="0">
 						Država:
 					</Label>
 
 					<!--INPUT FIELDS-->
-					<TextBox Name="Ime" 
+					<TextBox Name="tbIme" 
 						 Margin="5"
 						 Grid.Row="0"
 						 Grid.Column="2"/>
-					<TextBox Name="Prezime" 
+					<TextBox Name="tbPrezime" 
 						 Margin="5"
 						 Grid.Row="2"
 						 Grid.Column="2"/>
-					<TextBox Name="DatRodj" 
-						 Margin="5"
+					<StackPanel Orientation="Horizontal"
 						 Grid.Row="4"
-						 Grid.Column="2"/>
-					<TextBox Name="Username" 
+						 Grid.Column="2">
+						<Label FontSize="15" VerticalAlignment="Center">Dan:</Label>
+						<TextBox Name="tbDanRodj" 
+						 Margin="5"
+							 Width="50"
+								 VerticalContentAlignment="Center"/>
+						<Label FontSize="15" VerticalAlignment="Center">/ Mesec:</Label>
+						<TextBox Name="tbMesecRodj" 
+						 Margin="5"
+							 Width="50"
+								 VerticalContentAlignment="Center"/>
+						<Label FontSize="15" VerticalAlignment="Center">/ Godina:</Label>
+						<TextBox Name="tbGodinaRodj" 
+						 Margin="5"
+							 Width="80"
+								 VerticalContentAlignment="Center"/>
+					</StackPanel>
+					<TextBox Name="tbUsername" 
 						 Margin="5"
 						 Grid.Row="6"
-						 Grid.Column="2"/>
-					<PasswordBox Name="Pass" 
+						 Grid.Column="2"
+							 TextChanged="tbUsername_TextChanged"/>
+					<PasswordBox Name="pbPass" 
 						 Margin="5"
 						 Grid.Row="8"
-						 Grid.Column="2"/>
-					<ComboBox Name="TipRad" 
-						 Margin="5"
-						 Grid.Row="10"
-						 Grid.Column="2">
-						<ComboBoxItem IsSelected="True">Bibliotekar</ComboBoxItem>
-						<ComboBoxItem>Kurir</ComboBoxItem>
-					</ComboBox>
+						 Grid.Column="2"
+								 Password="00000000"
+								 GotFocus="pbPass_GotFocus"/>
 
-					<Grid Grid.Row="12" Grid.Column="2">
+
+					<Grid Grid.Row="10" Grid.Column="2">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="30*"/>
 							<ColumnDefinition Width="15*"/>
 						</Grid.ColumnDefinitions>
 
-						<TextBox Name="Ulica" 
+						<TextBox Name="tbUlica" 
 						 Margin="5"
 						 Grid.Column="0"/>
-						<TextBox Name="Broj" 
+						<TextBox Name="tbBroj" 
 						 Margin="5"
 						 Grid.Column="1"/>
 					</Grid>
 
-					<TextBox Name="Mesto" 
+					<ComboBox Name="cbMesto" 
+						 Margin="5"
+						 Grid.Row="12"
+						 Grid.Column="2"
+							  DisplayMemberPath="NazivMesta" SelectionChanged="cbMesto_SelectionChanged"/>
+
+					<ComboBox Name="cbDrzava" 
 						 Margin="5"
 						 Grid.Row="14"
-						 Grid.Column="2"/>
-
-					<TextBox Name="Drzava" 
-						 Margin="5"
-						 Grid.Row="16"
-						 Grid.Column="2"/>
+						 Grid.Column="2"
+							  DisplayMemberPath="NazivDrzave" SelectionChanged="cbDrzava_SelectionChanged"/>
 				</Grid>
 				<!--BUTTONS-->
 				<Grid Margin="30 10">
@@ -247,5 +254,5 @@
 				</Grid>
 			</StackPanel>
 		</Grid>
-    </Grid>
+	</Grid>
 </Window>

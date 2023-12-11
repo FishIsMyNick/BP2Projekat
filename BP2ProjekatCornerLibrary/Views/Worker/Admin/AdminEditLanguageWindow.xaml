@@ -51,7 +51,6 @@
 							</StackPanel>
 							<!--LIST OF LANGUAGES-->
 							<ListView Name="Jezici"
-											ItemsSource="{Binding ListaJezika}"
 											Margin="0 -22 0 0"
 											Background="White"
 							ScrollViewer.HorizontalScrollBarVisibility="Disabled"
@@ -59,7 +58,7 @@
 								<ListView.View>
 									<GridView>
 										<GridViewColumn Width="160" DisplayMemberBinding="{Binding OZNJ}"/>
-										<GridViewColumn Width="230" DisplayMemberBinding="{Binding Naziv}" />
+										<GridViewColumn Width="230" DisplayMemberBinding="{Binding NazivJezika}" />
 									</GridView>
 								</ListView.View>
 							</ListView>
@@ -101,7 +100,7 @@
 								<TextBox x:Name="tb_Edit_Naziv" Margin="10 0 10 0" VerticalContentAlignment="Center"
 										 Height="35"
 								 Grid.Column="0"
-								 Grid.Row="1"/>
+								 Grid.Row="1" TextChanged="tb_Edit_Naziv_TextChanged"/>
 							</StackPanel>
 						</Grid>
 						
@@ -148,14 +147,14 @@
 								<TextBox x:Name="tb_Add_OZNJ" Margin="10 0 10 0" VerticalContentAlignment="Center"
 										 Height="35"
 								 Grid.Column="0"
-								 Grid.Row="0"/>
+								 Grid.Row="0" TextChanged="tb_Add_OZNJ_TextChanged"/>
 							</StackPanel>
 							<StackPanel Orientation="Vertical" Grid.Row="1">
 								<Label FontSize="15" Content="Pun naziv jezika"/>
 								<TextBox x:Name="tb_Add_Naziv" Margin="10 0 10 0" VerticalContentAlignment="Center"
 										 Height="35"
 								 Grid.Column="0"
-								 Grid.Row="1"/>
+								 Grid.Row="1" TextChanged="tb_Add_Naziv_TextChanged"/>
 							</StackPanel>
 						</Grid>
 

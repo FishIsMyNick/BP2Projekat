@@ -1,4 +1,5 @@
-﻿using BP2ProjekatCornerLibrary.Models.NonContext;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,9 +17,28 @@ namespace BP2ProjekatCornerLibrary.Models
         public int BrIzd { get; set; }
         public int IDBib { get; set; }
         public DateTime DatVr { get; set; }
-        public DataType DatIzd { get; set; }
-        public decimal Cena { get; set; }
+        public DataType? DatIzd { get; set; }
+        public decimal? Cena { get; set; }
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDSStivo", IDSStivo),
+                new ClassPropertyValue("BrIzd", BrIzd),
+                new ClassPropertyValue("IDBib", IDBib),
+                new ClassPropertyValue("DatVr", DatVr)
+            };
+        }
 
         public IzmenaIzdSStiva() : base() { }
+        public IzmenaIzdSStiva(IzdanjeSStiva iss, int idBib) : base()
+        {
+            IDSStivo = iss.IDSStivo;
+            BrIzd = iss.BrIzd;
+            DatIzd = iss.DatIzd;
+            Cena = iss.Cena;
+            IDBib = idBib;
+            DatVr = DateTime.Now;
+        }
     }
 }

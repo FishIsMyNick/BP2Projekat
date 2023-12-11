@@ -1,6 +1,7 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Reflection;
 using System.Text;
@@ -8,8 +9,21 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models.NonContext
 {
-    public class _DbClass
+    public abstract class _DbClass
     {
+        public virtual ClassPropertyValue GetKeyIdentity() { return null; }
+        public abstract List<ClassPropertyValue> GetKeyProperties();
+
+        public object? GetPropertyValue(string name)
+        {
+            Type type = this.GetType();
+            PropertyInfo propInfo = type.GetProperty(name);
+            if (propInfo == null)
+                return null;
+
+            object s =  propInfo.GetValue(this);
+            return s;
+        }
         public _DbClass()
         {
 

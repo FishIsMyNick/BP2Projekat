@@ -1,4 +1,5 @@
-﻿using BP2ProjekatCornerLibrary.Models.NonContext;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,25 @@ namespace BP2ProjekatCornerLibrary.Models
         public int IDBib { get; set; }
         public DateTime DatVr { get; set; }
         public string OZNZ { get; set; }
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDKnjiga", IDKnjiga),
+                new ClassPropertyValue("IDBib", IDBib),
+                new ClassPropertyValue("DatVr", DatVr),
+                new ClassPropertyValue("OZNZ", OZNZ)
+            };
+        }
 
         public IzKnjigeZanr() : base() { }
+
+        public IzKnjigeZanr(int iDKnjiga, string oZNZ, int iDBib)
+        {
+            IDKnjiga = iDKnjiga;
+            IDBib = iDBib;
+            OZNZ = oZNZ ?? throw new ArgumentNullException(nameof(oZNZ));
+            DatVr = DateTime.Now;
+        }
     }
 }

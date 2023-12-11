@@ -5,21 +5,21 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker"
         mc:Ignorable="d"
-        Height="350" Width="610">
+        Height="350" Width="700">
 	<Grid>
 
 		<!--SELECT VIEW-->
-		<Grid Name="SelectView" Visibility="Hidden">
+		<Grid Name="SelectView" Visibility="Visible">
 			<StackPanel>
 				<!--SORT BUTTONS-->
 				<StackPanel Orientation="Horizontal" 
-												Width="600" Height="25" 
+												Width="690" Height="25" 
 												Panel.ZIndex="1" 
 												Margin="6 0  6 0">
 					<!--NAZIV-->
 					<Button x:Name="btn_Naziv_Sort"
 											Content="Naziv"
-											Width="120" Click="btn_Naziv_Sort_Click"/>
+											Width="180" Click="btn_Naziv_Sort_Click"/>
 					<Image x:Name="img_Naziv_Sort" 
 											Source="..\..\..\Images\arrow_down.png"
 											Margin="-30 0 0 0"
@@ -27,7 +27,7 @@
 					<!--ADRESA-->
 					<Button x:Name="btn_Adresa_Sort"
 											Content="Adresa"
-											Width="160" Click="btn_Adresa_Sort_Click"/>
+											Width="190" Click="btn_Adresa_Sort_Click"/>
 					<Image x:Name="img_Ulica_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
 										   Margin="-30 0 0 0"
@@ -60,7 +60,7 @@
 				<!--LIST OF OPEN STORES-->
 				<ListView Name="OtvoreneFilijale"
 											ItemsSource="{Binding ListaOtvorenihFilijala}"
-											Width="582"
+											Width="672"
 											Height="300"
 											Margin="3 -25 3 0"
 											Background="White"
@@ -68,11 +68,11 @@
 						  MouseDoubleClick="OtvoreneFilijale_MouseDoubleClick">
 					<ListView.View>
 						<GridView>
-							<GridViewColumn Width="120" DisplayMemberBinding="{Binding OF_Naziv}"/>
-							<GridViewColumn Width="160" DisplayMemberBinding="{Binding OF_Adresa}" />
-							<GridViewColumn Width="104" DisplayMemberBinding="{Binding OF_Grad}" />
-							<GridViewColumn Width="103" DisplayMemberBinding="{Binding OF_Drzava}" />
-							<GridViewColumn Width="95" DisplayMemberBinding="{Binding OF_DatOtv}" />
+							<GridViewColumn Width="180" DisplayMemberBinding="{Binding Naziv}"/>
+							<GridViewColumn Width="190" DisplayMemberBinding="{Binding Adresa}" />
+							<GridViewColumn Width="104" DisplayMemberBinding="{Binding GetMesto}" />
+							<GridViewColumn Width="103" DisplayMemberBinding="{Binding GetDrzava}" />
+							<GridViewColumn Width="95" DisplayMemberBinding="{Binding DatOtvStr}" />
 						</GridView>
 					</ListView.View>
 				</ListView>
@@ -80,7 +80,7 @@
 		</Grid>
 
 		<!--EDIT VIEW-->
-		<Grid Name="EditView" Visibility="Visible">
+		<Grid Name="EditView" Visibility="Hidden">
 			<StackPanel Orientation="Vertical">
 				<Label FontSize="30">Izmeni filijalu</Label>
 				<Grid Margin="10 10">
@@ -148,14 +148,17 @@
 					<ComboBox Name="cbMesto" 
 						 Margin="5"
 						 Grid.Row="4"
-						 Grid.Column="2">
+						 Grid.Column="2" 
+							DisplayMemberPath="NazivMesta"
+							  SelectionChanged="cbMesto_SelectionChanged">
 						
 					</ComboBox>
 
 					<ComboBox Name="cbDrzava" 
 						 Margin="5"
 						 Grid.Row="6"
-						 Grid.Column="2">
+							  DisplayMemberPath="NazivDrzave"
+						 Grid.Column="2" SelectionChanged="cbDrzava_SelectionChanged">
 						
 					</ComboBox>
 				</Grid>
@@ -178,7 +181,7 @@
 							Background="LightCoral"
 						Grid.Column="2"
 						Height="70"
-						FontSize="40" Click="btn_Delete_Click">Obriši</Button>
+						FontSize="25" Click="btn_Delete_Click">Zatvori&#x0a;Filijalu</Button>
 					<Button Name="btn_Confirm"
 							Background="LightGreen"
 						Grid.Column="4"

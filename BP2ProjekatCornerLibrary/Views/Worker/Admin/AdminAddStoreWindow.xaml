@@ -53,7 +53,7 @@
 				</Label>
 				
 				<!--INPUT FIELDS-->
-				<TextBox Name="Naziv" 
+				<TextBox Name="cbNaziv" 
 						 Margin="5"
 						 Grid.Row="0"
 						 Grid.Column="2"/>
@@ -64,23 +64,25 @@
 						<ColumnDefinition Width="15*"/>
 					</Grid.ColumnDefinitions>
 
-					<TextBox Name="Ulica" 
+					<TextBox Name="cbUlica" 
 						 Margin="5"
 						 Grid.Column="0"/>
-					<TextBox Name="Broj" 
+					<TextBox Name="cbBroj" 
 						 Margin="5"
 						 Grid.Column="1"/>
 				</Grid>
 
-				<TextBox Name="Mesto" 
+				<ComboBox Name="cbMesto" 
 						 Margin="5"
 						 Grid.Row="4"
-						 Grid.Column="2"/>
+						 Grid.Column="2"
+						  DisplayMemberPath="NazivMesta" SelectionChanged="cbMesto_SelectionChanged"/>
 
-				<TextBox Name="Drzava" 
+				<ComboBox Name="cbDrzava" 
 						 Margin="5"
 						 Grid.Row="6"
-						 Grid.Column="2"/>
+						 Grid.Column="2"
+						  DisplayMemberPath="NazivDrzave" SelectionChanged="cbDrzava_SelectionChanged"/>
 			</Grid>
 			
 			<!--BUTTONS-->

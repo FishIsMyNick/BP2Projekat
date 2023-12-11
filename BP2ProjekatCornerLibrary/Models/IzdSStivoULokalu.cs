@@ -1,4 +1,5 @@
-﻿using BP2ProjekatCornerLibrary.Models.NonContext;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,24 @@ namespace BP2ProjekatCornerLibrary.Models
         public DateTime DatVrIzmene { get; set; }
         [Required]
         public int Kolicina { get; set; }
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDSStivo", IDSStivo),
+                new ClassPropertyValue("BrIzd", BrIzd),
+                new ClassPropertyValue("IDBK", IDBK)
+            };
+        }
         public IzdSStivoULokalu() : base() { }
+
+        public IzdSStivoULokalu(int iDSStivo, int brIzd, int iDBK, int kolicina)
+        {
+            IDSStivo = iDSStivo;
+            BrIzd = brIzd;
+            IDBK = iDBK;
+            Kolicina = kolicina;
+            DatVrIzmene = DateTime.Now;
+        }
     }
 }

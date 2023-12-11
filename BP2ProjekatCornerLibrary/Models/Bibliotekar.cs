@@ -12,6 +12,7 @@ namespace BP2ProjekatCornerLibrary.Models
     public class Bibliotekar : Radnik
     {
         public Bibliotekar() : base() { }
-       
+        public Bibliotekar(int iDRadnik, string ime, string prezime, DateTime datRodj, DateTime datZap, DateTime? datOtp, int iDAdmin, DateTime datVr, string ulica, string broj, int posBr, string oznd) : base(iDRadnik, ime, prezime, datRodj, datZap, datOtp, iDAdmin, datVr, ulica, broj, posBr, oznd) { }
+
     }
 }

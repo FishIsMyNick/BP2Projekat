@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker"
         mc:Ignorable="d"
-        Height="500" Width="650">
+        Height="500" Width="800">
     <Grid>
         <StackPanel Orientation="Vertical">
             <Label FontSize="40">Periodi izdavanja</Label>
@@ -33,25 +33,33 @@
                                     <!--PERIOD-->
                                     <Button x:Name="btn_Period_Sort"
 									Content="Frekventnost izdavanja"
-									Width="245" 
+									Width="200" 
                                     Click="btn_Period_Sort_Click"/>
                                     <Image x:Name="img_Period_Sort" 
 									Source="..\..\..\Images\arrow_down.png"
 									Margin="-30 0 0 0"
 									Panel.ZIndex="2"/>
+									<!--PERIOD-->
+									<Button x:Name="btn_Ucestalost_Sort"
+Content="Učestalost"
+Width="106" Click="btn_Ucestalost_Sort_Click" />
+									<Image x:Name="img_Ucestalost_Sort" 
+Source="..\..\..\Images\arrow_down.png"
+Margin="-30 0 0 0"
+Panel.ZIndex="2"/>
 
-                                </StackPanel>
+								</StackPanel>
                                 <!--LIST OF LANGUAGES-->
-                                <ListView Name="Zanrovi"
-									ItemsSource="{Binding ListaZanrova}"
+                                <ListView Name="Periodi"
 									Margin="0 -22 0 0"
 									Background="White"
 					ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-									  SelectionChanged="Zanrovi_SelectionChanged">
+									  SelectionChanged="Periodi_SelectionChanged">
                                     <ListView.View>
                                         <GridView>
-                                            <GridViewColumn Width="270" DisplayMemberBinding="{Binding NazivPerioda}"/>
-                                        </GridView>
+											<GridViewColumn Width="200" DisplayMemberBinding="{Binding PeriodIzd}"/>
+											<GridViewColumn Width="106" DisplayMemberBinding="{Binding Ucestalost}"/>
+										</GridView>
                                     </ListView.View>
                                 </ListView>
                             </StackPanel>
@@ -82,20 +90,20 @@
                             </Grid.RowDefinitions>
 
                             <StackPanel Orientation="Vertical" Grid.Row="0">
-                                <Label FontSize="15" Content="Izmeni period:"/>
+                                <Label FontSize="15" Content="Pun naziv perioda:"/>
                                 <TextBox x:Name="tb_Edit_Period" 
                                          Margin="10 0 10 0" 
                                          VerticalContentAlignment="Center"
 									    Height="35"
 							            Grid.Column="0"
-							             Grid.Row="0"/>
+							             Grid.Row="0" TextChanged="tb_Edit_Period_TextChanged"/>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Grid.Row="1">
-                                <Label FontSize="15" Content="Pun naziv žanra"/>
-                                <TextBox x:Name="tb_Edit_Naziv" Margin="10 0 10 0" VerticalContentAlignment="Center"
+                                <Label FontSize="15" Content="Učestalost:"/>
+                                <TextBox x:Name="tb_Edit_Ucestalost" Margin="10 0 10 0" VerticalContentAlignment="Center"
 									 Height="35"
 							 Grid.Column="0"
-							 Grid.Row="1" TextChanged="tb_Edit_Naziv_TextChanged"/>
+							 Grid.Row="1" TextChanged="tb_Edit_Ucestalost_TextChanged" />
                             </StackPanel>
                         </Grid>
 
@@ -141,17 +149,17 @@
 
                             <StackPanel Orientation="Vertical" Grid.Row="0">
                                 <Label FontSize="15" Content="Oznaka žanra"/>
-                                <TextBox x:Name="tb_Add_OZNZ" Margin="10 0 10 0" VerticalContentAlignment="Center"
+                                <TextBox x:Name="tb_Add_Period" Margin="10 0 10 0" VerticalContentAlignment="Center"
 									 Height="35"
 							 Grid.Column="0"
-							 Grid.Row="0" TextChanged="tb_Add_OZNZ_TextChanged"/>
+							 Grid.Row="0" TextChanged="tb_Add_Period_TextChanged"/>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Grid.Row="1">
                                 <Label FontSize="15" Content="Pun naziv žanra"/>
-                                <TextBox x:Name="tb_Add_Naziv" Margin="10 0 10 0" VerticalContentAlignment="Center"
+                                <TextBox x:Name="tb_Add_Ucestalost" Margin="10 0 10 0" VerticalContentAlignment="Center"
 									 Height="35"
 							 Grid.Column="0"
-							 Grid.Row="1" TextChanged="tb_Add_Naziv_TextChanged"/>
+							 Grid.Row="1" TextChanged="tb_Add_Ucestalost_TextChanged" />
                             </StackPanel>
                         </Grid>
 

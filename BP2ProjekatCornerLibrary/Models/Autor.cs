@@ -1,4 +1,5 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Autor
+    public class Autor : _DbClass
     {
         [Key]
         public int IDAutor { get; set; }
@@ -18,7 +19,15 @@ namespace BP2ProjekatCornerLibrary.Models
         public DateTime DatRodj { get; set; }
         public string Biografija { get; set; }
         public string Drzava { get; set; }
+        public override ClassPropertyValue GetKeyIdentity() => new ClassPropertyValue("IDAutor", IDAutor);
 
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDAutor", IDAutor)
+            };
+        }
         public Autor() : base() { }
 
         public Autor(string ime, string prezime, DateTime datRodj, string biografija, string drzava)

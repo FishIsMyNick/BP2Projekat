@@ -13,7 +13,7 @@
 
 			<StackPanel Orientation="Horizontal">
 				<!-- Left panel -->
-				<StackPanel Orientation="Vertical" Width="1200">
+				<StackPanel Orientation="Vertical" Width="1350">
 					<Label FontSize="30" Content="Administrator" Margin="20 0 0 0 "/>
 					<!-- LISTE RADNIKA I FILIJALA -->
 					<Grid Height="1020">
@@ -37,13 +37,13 @@
 									
 									<!--SORT BUTTONS-->
 									<StackPanel Orientation="Horizontal" 
-												Width="600" Height="25" 
+												Width="655" Height="25" 
 												Panel.ZIndex="1" 
-												Margin="3 0 0 0">
+												Margin="1 0 1 0">
 										<!--IME-->
 										<Button x:Name="btnZapRadnikIme"
 											Content="Ime"
-											Width="110" 
+											Width="130" 
 											Click="btn_ZapRadnik_Ime_Click"/>
 										<Image x:Name="img_ZapRad_Ime_Sort" 
 											Source="..\..\..\Images\arrow_down.png"
@@ -61,7 +61,7 @@
 										<!--USERNAME-->
 										<Button x:Name="btnZapRadnikUsername"
 											Content="Korisničko ime"
-											Width="120" 
+											Width="130" 
 											Click="btn_ZapRadnik_Username_Click"/>
 										<Image x:Name="img_ZapRad_Username_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -70,7 +70,7 @@
 										<!--TIP-->
 										<Button x:Name="btnZapRadnikTip"
 											Content="Tip radnika"
-											Width="120" 
+											Width="125" 
 											Click="btn_ZapRadnik_Tip_Click"/>
 										<Image x:Name="img_ZapRad_Tip_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -79,7 +79,7 @@
 										<!--DAT ZAP-->
 										<Button x:Name="btnZapRadnikDatZap"
 											Content="Datum zap."
-											Width="100 " 
+											Width="140" 
 											Click="btn_ZapRadnik_DatZap_Click"/>
 										<Image x:Name="img_ZapRad_DatZap_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -90,19 +90,21 @@
 									<!--LIST OF EMPLOYED WORKERS-->
 									<ListView Name="ZaposleniRadnici"
 											ItemsSource="{Binding ListaZaposlenihRadnika}"
-											Width="580"
+											Width="655"
 											Height="447"
 											Margin="0 -25 0 0"
 											Background="White"
 							ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-											  MouseDoubleClick="ZapRadnici_List_MouseDoubleClick">
+											LostFocus="ZaposleniRadnici_LostFocus"
+											  MouseDown="ZaposleniRadnici_MouseDown"
+											  MouseDoubleClick="ZaposleniRadnici_MouseDoubleClick">
 										<ListView.View>
 											<GridView>
-												<GridViewColumn Width="110" DisplayMemberBinding="{Binding Zap_Ime}"/>
-												<GridViewColumn Width="130" DisplayMemberBinding="{Binding Zap_Prezime}" />
-												<GridViewColumn Width="120" DisplayMemberBinding="{Binding Zap_Username}" />
-												<GridViewColumn Width="120" DisplayMemberBinding="{Binding Zap_Tip}" />
-												<GridViewColumn Width="105" DisplayMemberBinding="{Binding Zap_DatZap}" />
+												<GridViewColumn Width="130" DisplayMemberBinding="{Binding Ime}"/>
+												<GridViewColumn Width="130" DisplayMemberBinding="{Binding Prezime}" />
+												<GridViewColumn Width="130" DisplayMemberBinding="{Binding KorisnickoIme}" />
+												<GridViewColumn Width="125" DisplayMemberBinding="{Binding Tip}" />
+												<GridViewColumn Width="140" DisplayMemberBinding="{Binding DatZapStr}" />
 											</GridView>
 										</ListView.View>
 									</ListView>
@@ -123,13 +125,13 @@
 
 									<!--SORT BUTTONS-->
 									<StackPanel Orientation="Horizontal" 
-												Width="600" Height="25" 
+												Width="655" Height="25" 
 												Panel.ZIndex="1" 
-												Margin="3 0 0 0">
+												Margin="1 0 1 0">
 										<!--IME-->
 										<Button x:Name="btnNezapRadnikIme"
 											Content="Ime"
-											Width="90" 
+											Width="130" 
 											Click="btn_NezapRadnik_Ime_Click"/>
 										<Image x:Name="img_NezapRad_Ime_Sort" 
 											Source="..\..\..\Images\arrow_down.png"
@@ -138,7 +140,7 @@
 										<!--PREZIME-->
 										<Button x:Name="btnNezapRadnikPrezime"
 											Content="Prezime"
-											Width="100" 
+											Width="130" 
 											Click="btn_NezapRadnik_Prezime_Click"/>
 										<Image x:Name="img_NezapRad_Prezime_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -147,7 +149,7 @@
 										<!--USERNAME-->
 										<Button x:Name="btnNezapRadnikUsername"
 											Content="Korisničko ime"
-											Width="120" 
+											Width="130" 
 											Click="btn_NezapRadnik_Username_Click"/>
 										<Image x:Name="img_NezapRad_Username_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -156,7 +158,7 @@
 										<!--TIP-->
 										<Button x:Name="btnNezapRadnikTip"
 											Content="Tip radnika"
-											Width="120" 
+											Width="125" 
 											Click="btn_ZapRadnik_Tip_Click"/>
 										<Image x:Name="img_NezapRad_Tip_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -165,7 +167,7 @@
 										<!--PERIOD ZAP-->
 										<Button x:Name="btnNezapRadnikPerZap"
 											Content="Period zap."
-											Width="150" 
+											Width="140" 
 											Click="btn_ZapRadnik_DatZap_Click"/>
 										<Image x:Name="img_NezapRad_PerZap_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -176,19 +178,20 @@
 									<!--LIST OF UNEMPLOYED WORKERS-->
 									<ListView Name="NezaposleniRadnici"
 											ItemsSource="{Binding ListaNezaposlenihRadnika}"
-											Width="580"
+											Width="655"
 											Height="447"
 											Margin="0 -25 0 0"
 											Background="White"
 							ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+											  MouseDown="NezaposleniRadnici_MouseDown"
 											  MouseDoubleClick="NezapRadnici_List_MouseDoubleClick">
 										<ListView.View>
 											<GridView>
-												<GridViewColumn Width="90" DisplayMemberBinding="{Binding Zap_Ime}"/>
-												<GridViewColumn Width="100" DisplayMemberBinding="{Binding Zap_Prezime}" />
-												<GridViewColumn Width="120" DisplayMemberBinding="{Binding Zap_Username}" />
-												<GridViewColumn Width="120" DisplayMemberBinding="{Binding Zap_Tip}" />
-												<GridViewColumn Width="155" DisplayMemberBinding="{Binding Zap_PerZap}" />
+												<GridViewColumn Width="130" DisplayMemberBinding="{Binding Ime}"/>
+												<GridViewColumn Width="130" DisplayMemberBinding="{Binding Prezime}" />
+												<GridViewColumn Width="130" DisplayMemberBinding="{Binding KorisnickoIme}" />
+												<GridViewColumn Width="125" DisplayMemberBinding="{Binding Tip}" />
+												<GridViewColumn Width="140" DisplayMemberBinding="{Binding PeriodRada}" />
 											</GridView>
 										</ListView.View>
 									</ListView>
@@ -210,13 +213,13 @@
 
 									<!--SORT BUTTONS-->
 									<StackPanel Orientation="Horizontal" 
-												Width="600" Height="25" 
+												Width="655" Height="25" 
 												Panel.ZIndex="1" 
-												Margin="3 0 0 0">
+												Margin="1 0 1 0">
 										<!--NAZIV-->
 										<Button x:Name="btnOFilNaziv"
 											Content="Naziv"
-											Width="90" 
+											Width="130" 
 											Click="btn_OFil_Naziv_Click"/>
 										<Image x:Name="img_OFil_Naziv_Sort" 
 											Source="..\..\..\Images\arrow_down.png"
@@ -225,7 +228,7 @@
 										<!--ADRESA-->
 										<Button x:Name="btnOFilUlica"
 											Content="Adresa"
-											Width="150" 
+											Width="160" 
 											Click="btn_OFil_Adresa_Click"/>
 										<Image x:Name="img_OFil_Ulica_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -234,7 +237,7 @@
 										<!--GRAD-->
 										<Button x:Name="btnOFilGrad"
 											Content="Mesto"
-											Width="95" 
+											Width="110" 
 											Click="btn_OFil_Grad_Click"/>
 										<Image x:Name="img_OFil_Grad_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -243,7 +246,7 @@
 										<!--DRZAVA-->
 										<Button x:Name="btnOFilDrzava"
 											Content="Država"
-											Width="95" 
+											Width="115" 
 											Click="btn_OFil_Drzava_Click"/>
 										<Image x:Name="img_OFil_Drzava_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -252,7 +255,7 @@
 										<!--DATUM OTV-->
 										<Button x:Name="btnOFilDatOtv"
 											Content="Datum otv."
-											Width="150" 
+											Width="140" 
 											Click="btn_OFil_DatOtv_Click"/>
 										<Image x:Name="img_OFil_DatOtv_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -263,19 +266,21 @@
 									<!--LIST OF OPEN STORES-->
 									<ListView Name="OtvoreneFilijale"
 											ItemsSource="{Binding ListaOtvorenihFilijala}"
-											Width="580"
+											Width="655"
 											Height="447"
 											Margin="0 -25 0 0"
 											Background="White"
-							ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-											  MouseDoubleClick="OFil_List_MouseDoubleClick">
+											ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+											LostFocus="OtvoreneFilijale_LostFocus"
+											MouseDown="OtvoreneFilijale_MouseDown"
+											MouseDoubleClick="OtvoreneFilijale_MouseDoubleClick">
 										<ListView.View>
 											<GridView>
-												<GridViewColumn Width="90" DisplayMemberBinding="{Binding OF_Naziv}"/>
-												<GridViewColumn Width="150" DisplayMemberBinding="{Binding OF_Adresa}" />
-												<GridViewColumn Width="95" DisplayMemberBinding="{Binding OF_Grad}" />
-												<GridViewColumn Width="95" DisplayMemberBinding="{Binding OF_Drzava}" />
-												<GridViewColumn Width="155" DisplayMemberBinding="{Binding OF_DatOtv}" />
+												<GridViewColumn Width="130" DisplayMemberBinding="{Binding Naziv}"/>
+												<GridViewColumn Width="160" DisplayMemberBinding="{Binding Adresa}" />
+												<GridViewColumn Width="110" DisplayMemberBinding="{Binding GetMesto}" />
+												<GridViewColumn Width="115" DisplayMemberBinding="{Binding GetDrzava}" />
+												<GridViewColumn Width="140" DisplayMemberBinding="{Binding DatOtvStr}" />
 											</GridView>
 										</ListView.View>
 									</ListView>
@@ -297,13 +302,13 @@
 
 									<!--SORT BUTTONS-->
 									<StackPanel Orientation="Horizontal" 
-												Width="600" Height="25" 
+												Width="655" Height="25" 
 												Panel.ZIndex="1" 
-												Margin="3 0 0 0">
+												Margin="1 0 1 0">
 										<!--NAZIV-->
 										<Button x:Name="btnZFilNaziv"
 											Content="Naziv"
-											Width="90" 
+											Width="130" 
 											Click="btn_ZFil_Naziv_Click"/>
 										<Image x:Name="img_ZFil_Naziv_Sort" 
 											Source="..\..\..\Images\arrow_down.png"
@@ -312,7 +317,7 @@
 										<!--ADRESA-->
 										<Button x:Name="btnZFilUlica"
 											Content="Adresa"
-											Width="150" 
+											Width="160" 
 											Click="btn_OFil_Adresa_Click"/>
 										<Image x:Name="img_ZFil_Ulica_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -321,7 +326,7 @@
 										<!--GRAD-->
 										<Button x:Name="btnZFilGrad"
 											Content="Mesto"
-											Width="95" 
+											Width="110" 
 											Click="btn_ZFil_Grad_Click"/>
 										<Image x:Name="img_ZFil_Grad_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -330,7 +335,7 @@
 										<!--DRZAVA-->
 										<Button x:Name="btnZFilDrzava"
 											Content="Država"
-											Width="95" 
+											Width="115" 
 											Click="btn_ZFil_Drzava_Click"/>
 										<Image x:Name="img_ZFil_Drzava_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -339,7 +344,7 @@
 										<!--PERIOD OTV-->
 										<Button x:Name="btnZFilDatOtv"
 											Content="Period otv."
-											Width="150" 
+											Width="140" 
 											Click="btn_ZFil_PerOtv_Click"/>
 										<Image x:Name="img_ZFil_PerOtv_Sort" 
 										   Source="..\..\..\Images\arrow_down.png"
@@ -350,19 +355,20 @@
 									<!--LIST OF CLOSED STORES-->
 									<ListView Name="ZatvoreneFilijale"
 											ItemsSource="{Binding ListaZatvorenihFilijala}"
-											Width="580"
+											Width="655"
 											Height="447"
 											Margin="0 -25 0 0"
 											Background="White"
 							ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+											  MouseDown="ZatvoreneFilijale_MouseDown"
 											  MouseDoubleClick="ZFil_List_MouseDoubleClick">
 										<ListView.View>
 											<GridView>
-												<GridViewColumn Width="90" DisplayMemberBinding="{Binding ZF_Naziv}"/>
-												<GridViewColumn Width="150" DisplayMemberBinding="{Binding ZF_Adresa}" />
-												<GridViewColumn Width="95" DisplayMemberBinding="{Binding ZF_Grad}" />
-												<GridViewColumn Width="95" DisplayMemberBinding="{Binding ZF_Drzava}" />
-												<GridViewColumn Width="155" DisplayMemberBinding="{Binding ZF_PerOtv}" />
+												<GridViewColumn Width="130" DisplayMemberBinding="{Binding Naziv}"/>
+												<GridViewColumn Width="160" DisplayMemberBinding="{Binding Adresa}" />
+												<GridViewColumn Width="110" DisplayMemberBinding="{Binding GetMesto}" />
+												<GridViewColumn Width="115" DisplayMemberBinding="{Binding GetDrzava}" />
+												<GridViewColumn Width="140" DisplayMemberBinding="{Binding PeriodRada}" />
 											</GridView>
 										</ListView.View>
 									</ListView>
@@ -375,11 +381,11 @@
 
 				<!-- Right panel -->
 				<StackPanel Orientation="Vertical" 
-							Width="711">
+							Width="565">
 					<Button Name="btn_Close"
 						Content="X" 
 						FontSize="30" 
-						Margin="660 5 5 5 "
+						Margin="510 5 5 5 "
 							Background="Red"
 							Foreground="LightGray"
 						Click="btn_Close_Click"/>
@@ -405,14 +411,15 @@
 								Grid.Row="0" Grid.Column="0"
 								FontSize="40"
 								Margin="15"
-								Content="Dodaj Radnika"
+								HorizontalContentAlignment="Center"
+								Content="  Dodaj&#x0a;Radnika"
 								Click="btn_AddWorker_Click"/>
 						<!--EDIT WORKER-->
 						<Button Name="btn_EditWorker" 
 								Grid.Row="0" Grid.Column="1"
 								FontSize="40"
 								Margin="15"
-								Content="Izmeni Radnika"
+								Content="  Izmeni &#x0a; Radnika"
 								Click="btn_EditWorker_Click"/>
 
 						<!--ADD STORE-->
@@ -420,14 +427,14 @@
 								Grid.Row="2" Grid.Column="0"
 								FontSize="40"
 								Margin="15"
-								Content="Dodaj Filijalu"
+								Content=" Dodaj &#x0a; Filijalu"
 								Click="btn_AddStore_Click"/>
 						<!--EDIT STORE-->
 						<Button Name="btn_EditStore" 
 								Grid.Row="2" Grid.Column="1"
 								FontSize="40"
 								Margin="15"
-								Content="Izmeni Filijalu"
+								Content="Izmeni&#x0a; Filijalu"
 								Click="btn_EditStore_Click"/>
 
 
@@ -436,21 +443,21 @@
 								Grid.Row="4" Grid.Column="0"
 								FontSize="40"
 								Margin="15"
-								Content="Izmeni Jezik"
+								Content="Izmeni&#x0a;  Jezik"
 								Click="btn_EditLanguage_Click"/>
 						<!--EDIT ZANR-->
 						<Button Name="btn_EditZanr" 
 								Grid.Row="4" Grid.Column="1"
 								FontSize="40"
 								Margin="15"
-								Content="Izmeni Žanr"
+								Content="Izmeni&#x0a;  Žanr"
 								Click="btn_EditZanr_Click"/>
 						<!--EDIT FORMAT-->
 						<Button Name="btn_EditFormat" 
 								Grid.Row="6" Grid.Column="0"
 								FontSize="40"
 								Margin="15"
-								Content="Izmeni Format"
+								Content=" Izmeni &#x0a; Format"
 								Click="btn_EditFormat_Click"/>
 						<!--EDIT PERIOD-->
 						<Button Name="btn_EditPeriod" 

@@ -17,11 +17,29 @@ namespace BP2ProjekatCornerLibrary.Models
         public string Sifra { get; set; }
         [Required]
         public DateTime DatKreiranja { get; set; }
-        public DateTime DatZatvaranja { get; set; }
+        public DateTime? DatZatvaranja { get; set; }
         [Required]
         public int TipNaloga { get; set; }
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("KorisnickoIme", KorisnickoIme)
+            };
+        }
 
         public KorisnickiNalog() : base() { }
+
+        public KorisnickiNalog(string korisnickoIme, string sifra, DateTime datKreiranja, int tipNaloga)
+        {
+            KorisnickoIme = korisnickoIme ?? throw new ArgumentNullException(nameof(korisnickoIme));
+            Sifra = sifra ?? throw new ArgumentNullException(nameof(sifra));
+            DatKreiranja = datKreiranja;
+            DatZatvaranja = null;
+            TipNaloga = tipNaloga;
+        }
+
+
         //public KorisnickiNalog(params ClassPropertyValue[] args) : base(args)
         //{
         //}

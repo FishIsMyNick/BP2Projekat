@@ -18,7 +18,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public string Naziv { get; set; }
         [Required]
         public DateTime DatOtv { get; set; }
-        public DateTime DatZat { get; set; }
+        public DateTime? DatZat { get; set; }
         [Required]
         public string Ulica { get; set; }
         [Required]
@@ -27,7 +27,27 @@ namespace BP2ProjekatCornerLibrary.Models
         public int PosBr { get; set; }
         [Required]
         public string OZND { get; set; }
+        public override ClassPropertyValue GetKeyIdentity() => new ClassPropertyValue("IDBK", IDBK);
 
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDBK", IDBK)
+            };
+        }
         public Biblikutak() : base() { }
+
+        public Biblikutak(int iDBK, string naziv, DateTime datOtv, DateTime? datZat, string ulica, string broj, int posBr, string oZND)
+        {
+            IDBK = iDBK;
+            Naziv = naziv;
+            DatOtv = datOtv;
+            DatZat = datZat;
+            Ulica = ulica;
+            Broj = broj;
+            PosBr = posBr;
+            OZND = oZND;
+        }
     }
 }

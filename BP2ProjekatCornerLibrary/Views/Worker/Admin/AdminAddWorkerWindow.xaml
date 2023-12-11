@@ -6,163 +6,186 @@
         xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker"
         mc:Ignorable="d"
         Title="AdminAddWorkerWindow" Height="530" Width="600">
-	<Grid>
-		<StackPanel Orientation="Vertical" Margin="0,0,0,-16">
-			<Label FontSize="30">Dodaj novog radnika</Label>
-			<!--INPUT FIELDS-->
-			<Grid Margin="10 10">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="20*"/>
-					<ColumnDefinition Width="1*"/>
-					<ColumnDefinition Width="45*"/>
-				</Grid.ColumnDefinitions>
-				<Grid.RowDefinitions>
-					<RowDefinition Height="6*"/>
-					<RowDefinition Height="1*"/>
-					<RowDefinition Height="6*"/>
-					<RowDefinition Height="1*"/>
-					<RowDefinition Height="6*"/>
-					<RowDefinition Height="1*"/>
-					<RowDefinition Height="6*"/>
-					<RowDefinition Height="1*"/>
-					<RowDefinition Height="6*"/>
-					<RowDefinition Height="1*"/>
-					<RowDefinition Height="6*"/>
-					<RowDefinition Height="1*"/>
-					<RowDefinition Height="6*"/>
-					<RowDefinition Height="1*"/>
-					<RowDefinition Height="6*"/>
-					<RowDefinition Height="1*"/>
-					<RowDefinition Height="6*"/>
-				</Grid.RowDefinitions>
+	
+		<Grid>
+			<Grid Name="EditView" Visibility="Visible">
 
-				<!--LABELS-->
-				<Label FontSize="20" 
+				<StackPanel Orientation="Vertical" Margin="0,0,0,-16">
+					<Label FontSize="30">Dodaj novog radnika</Label>
+					<!--INPUT FIELDS-->
+					<Grid Margin="10 10">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="20*"/>
+							<ColumnDefinition Width="1*"/>
+							<ColumnDefinition Width="45*"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="6*"/>
+							<RowDefinition Height="1*"/>
+							<RowDefinition Height="6*"/>
+							<RowDefinition Height="1*"/>
+							<RowDefinition Height="6*"/>
+							<RowDefinition Height="1*"/>
+							<RowDefinition Height="6*"/>
+							<RowDefinition Height="1*"/>
+							<RowDefinition Height="6*"/>
+							<RowDefinition Height="1*"/>
+							<RowDefinition Height="6*"/>
+							<RowDefinition Height="1*"/>
+							<RowDefinition Height="6*"/>
+							<RowDefinition Height="1*"/>
+							<RowDefinition Height="6*"/>
+							<RowDefinition Height="1*"/>
+							<RowDefinition Height="6*"/>
+						</Grid.RowDefinitions>
+
+						<!--LABELS-->
+						<Label FontSize="20" 
 					   HorizontalAlignment="Right"
 					   Grid.Row="0"
 					   Grid.Column="0">
-					Ime:
-				</Label>
-				<Label FontSize="20" 
+							Ime:
+						</Label>
+						<Label FontSize="20" 
 					   HorizontalAlignment="Right"
 					   Grid.Row="2"
 					   Grid.Column="0">
-					Prezime:
-				</Label>
-				<Label FontSize="20" 
+							Prezime:
+						</Label>
+						<Label FontSize="20" 
 					   HorizontalAlignment="Right"
 					   Grid.Row="4"
 					   Grid.Column="0">
-					Datum rođenja:
-				</Label>
-				<Label FontSize="20" 
+							Datum rođenja:
+						</Label>
+						<Label FontSize="20" 
 					   HorizontalAlignment="Right"
 					   Grid.Row="6"
 					   Grid.Column="0">
-					Korisničko ime:
-				</Label>
-				<Label FontSize="20" 
+							Korisničko ime:
+						</Label>
+						<Label FontSize="20" 
 					   HorizontalAlignment="Right"
 					   Grid.Row="8"
 					   Grid.Column="0">
-					Šifra:
-				</Label>
-				<Label FontSize="20" 
+							Šifra:
+						</Label>
+						<Label FontSize="20" 
 					   HorizontalAlignment="Right"
 					   Grid.Row="10"
 					   Grid.Column="0">
-					Tip radnika:
-				</Label>
-				<Label FontSize="20" 
+							Tip radnika:
+						</Label>
+						<Label FontSize="20" 
 					   HorizontalAlignment="Right"
 					   Grid.Row="12"
 					   Grid.Column="0">
-					Ulica i broj:
-				</Label>
-				<Label FontSize="20" 
+							Ulica i broj:
+						</Label>
+						<Label FontSize="20" 
 					   HorizontalAlignment="Right"
 					   Grid.Row="14"
 					   Grid.Column="0">
-					Mesto:
-				</Label>
-				<Label FontSize="20" 
+							Mesto:
+						</Label>
+						<Label FontSize="20" 
 					   HorizontalAlignment="Right"
 					   Grid.Row="16"
 					   Grid.Column="0">
-					Država:
-				</Label>
+							Država:
+						</Label>
 
-				<!--INPUT FIELDS-->
-				<TextBox Name="Ime" 
+						<!--INPUT FIELDS-->
+						<TextBox Name="tbIme" 
 						 Margin="5"
 						 Grid.Row="0"
-						 Grid.Column="2"/>
-				<TextBox Name="Prezime" 
+						 Grid.Column="2" Text="Toza"/>
+						<TextBox Name="tbPrezime" 
 						 Margin="5"
 						 Grid.Row="2"
-						 Grid.Column="2"/>
-				<TextBox Name="DatRodj" 
-						 Margin="5"
+						 Grid.Column="2" Text="Toza"/>
+						<StackPanel Orientation="Horizontal"
 						 Grid.Row="4"
-						 Grid.Column="2"/>
-				<TextBox Name="Username" 
+						 Grid.Column="2">
+							<Label FontSize="15" VerticalAlignment="Center">Dan:</Label>
+							<TextBox Name="tbDanRodj" 
+						 Margin="5"
+							 Width="50"
+								 VerticalContentAlignment="Center" Text="1"/>
+							<Label FontSize="15" VerticalAlignment="Center">/ Mesec:</Label>
+							<TextBox Name="tbMesecRodj" 
+						 Margin="5"
+							 Width="50"
+								 VerticalContentAlignment="Center" Text="1"/>
+							<Label FontSize="15" VerticalAlignment="Center">/ Godina:</Label>
+							<TextBox Name="tbGodinaRodj" 
+						 Margin="5"
+							 Width="80"
+								 VerticalContentAlignment="Center" Text="2000"/>
+						</StackPanel>
+						<TextBox Name="tbUsername" 
 						 Margin="5"
 						 Grid.Row="6"
-						 Grid.Column="2"/>
-				<PasswordBox Name="Pass" 
+						 Grid.Column="2" Text="asd"/>
+						<PasswordBox Name="pbPass" 
 						 Margin="5"
 						 Grid.Row="8"
-						 Grid.Column="2"/>
-				<ComboBox Name="TipRad" 
+						 Grid.Column="2" Password="asd"/>
+						<ComboBox Name="TipRad" 
 						 Margin="5"
 						 Grid.Row="10"
 						 Grid.Column="2">
-					<ComboBoxItem>Bibliotekar</ComboBoxItem>
-					<ComboBoxItem>Kurir</ComboBoxItem>
-				</ComboBox>
+							<ComboBoxItem IsSelected="True">Bibliotekar</ComboBoxItem>
+							<ComboBoxItem>Kurir</ComboBoxItem>
+						</ComboBox>
 
-				<Grid Grid.Row="12" Grid.Column="2">
-					<Grid.ColumnDefinitions>
-						<ColumnDefinition Width="30*"/>
-						<ColumnDefinition Width="15*"/>
-					</Grid.ColumnDefinitions>
+						<Grid Grid.Row="12" Grid.Column="2">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="30*"/>
+								<ColumnDefinition Width="15*"/>
+							</Grid.ColumnDefinitions>
 
-					<TextBox Name="Ulica" 
+							<TextBox Name="tbUlica" 
 						 Margin="5"
-						 Grid.Column="0"/>
-					<TextBox Name="Broj" 
+						 Grid.Column="0" Text="asd"/>
+							<TextBox Name="tbBroj" 
 						 Margin="5"
-						 Grid.Column="1"/>
-				</Grid>
+						 Grid.Column="1" Text="123"/>
+						</Grid>
 
-				<TextBox Name="Mesto" 
+						<ComboBox Name="cbMesto" 
 						 Margin="5"
 						 Grid.Row="14"
-						 Grid.Column="2"/>
+						 Grid.Column="2"
+							  DisplayMemberPath="NazivMesta" SelectionChanged="cbMesto_SelectionChanged"/>
 
-				<TextBox Name="Drzava" 
+						<ComboBox Name="cbDrzava" 
 						 Margin="5"
 						 Grid.Row="16"
-						 Grid.Column="2"/>
-			</Grid>
-			<!--BUTTONS-->
-			<Grid Margin="30 10">
-				<Grid.ColumnDefinitions>
-					<ColumnDefinition Width="1*"/>
-					<ColumnDefinition Width="2*"/>
-					<ColumnDefinition Width="1*"/>
-				</Grid.ColumnDefinitions>
+						 Grid.Column="2"
+							  DisplayMemberPath="NazivDrzave" SelectionChanged="cbDrzava_SelectionChanged"/>
+					</Grid>
+					<!--BUTTONS-->
+					<Grid Margin="30 10">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="4*"/>
+							<ColumnDefinition Width="1*"/>
+							<ColumnDefinition Width="4*"/>
+						</Grid.ColumnDefinitions>
 
-				<Button Name="btn_Cancel"
+						<Button Name="btn_Cancel"
 						Grid.Column="0"
 						Height="70"
 						FontSize="40" Click="btn_Cancel_Click">Otkaži</Button>
-				<Button Name="btn_Confirm"
+						
+						<Button Name="btn_Confirm"
 							Background="LightGreen"
 						Grid.Column="2"
 						Height="70"
 						FontSize="40" Click="btn_Confirm_Click">Potvrdi</Button>
+					</Grid>
+				</StackPanel>
 			</Grid>
-		</StackPanel>
-	</Grid>
+		</Grid>
+
 </Window>
