@@ -48,12 +48,15 @@ namespace BP2ProjekatCornerLibrary.Models
         {
             IDIK = ik.IDIK;
             IDBib = IdBib;
-            Naziv = ik.Naziv;
-            Ulica = ik.Ulica;
-            Broj = ik.Broj;
-            PosBr = ik.PosBr;
-            OZND = ik.OZND;
             DatVr = DateTime.Now;
+
+            IzdKuca postojeca = DBHelper.GetIzdKuca(IDIK);
+
+            Naziv = postojeca.Naziv != ik.Naziv ? ik.Naziv : null;
+            Ulica = postojeca.Ulica != ik.Ulica ? ik.Ulica : null;
+            Broj = postojeca.Broj != ik.Broj ? ik.Broj : null;
+            PosBr = postojeca.PosBr != ik.PosBr ? ik.PosBr : null;
+            OZND = postojeca.OZND != ik.OZND ? ik.OZND : null;
         }
     }
 }

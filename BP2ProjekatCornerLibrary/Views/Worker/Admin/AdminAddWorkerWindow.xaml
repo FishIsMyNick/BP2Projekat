@@ -99,11 +99,11 @@
 						<TextBox Name="tbIme" 
 						 Margin="5"
 						 Grid.Row="0"
-						 Grid.Column="2" Text="Toza"/>
+						 Grid.Column="2"/>
 						<TextBox Name="tbPrezime" 
 						 Margin="5"
 						 Grid.Row="2"
-						 Grid.Column="2" Text="Toza"/>
+						 Grid.Column="2"/>
 						<StackPanel Orientation="Horizontal"
 						 Grid.Row="4"
 						 Grid.Column="2">
@@ -111,26 +111,26 @@
 							<TextBox Name="tbDanRodj" 
 						 Margin="5"
 							 Width="50"
-								 VerticalContentAlignment="Center" Text="1"/>
+								 VerticalContentAlignment="Center"/>
 							<Label FontSize="15" VerticalAlignment="Center">/ Mesec:</Label>
 							<TextBox Name="tbMesecRodj" 
 						 Margin="5"
 							 Width="50"
-								 VerticalContentAlignment="Center" Text="1"/>
+								 VerticalContentAlignment="Center"/>
 							<Label FontSize="15" VerticalAlignment="Center">/ Godina:</Label>
 							<TextBox Name="tbGodinaRodj" 
 						 Margin="5"
 							 Width="80"
-								 VerticalContentAlignment="Center" Text="2000"/>
+								 VerticalContentAlignment="Center"/>
 						</StackPanel>
 						<TextBox Name="tbUsername" 
 						 Margin="5"
 						 Grid.Row="6"
-						 Grid.Column="2" Text="asd"/>
+						 Grid.Column="2"/>
 						<PasswordBox Name="pbPass" 
 						 Margin="5"
 						 Grid.Row="8"
-						 Grid.Column="2" Password="asd"/>
+						 Grid.Column="2"/>
 						<ComboBox Name="TipRad" 
 						 Margin="5"
 						 Grid.Row="10"
@@ -147,10 +147,10 @@
 
 							<TextBox Name="tbUlica" 
 						 Margin="5"
-						 Grid.Column="0" Text="asd"/>
+						 Grid.Column="0"/>
 							<TextBox Name="tbBroj" 
 						 Margin="5"
-						 Grid.Column="1" Text="123"/>
+						 Grid.Column="1"/>
 						</Grid>
 
 						<ComboBox Name="cbMesto" 

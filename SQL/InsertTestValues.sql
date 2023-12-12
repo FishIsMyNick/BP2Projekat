@@ -1,4 +1,5 @@
-﻿delete from IzmenaIzdKuce;
+﻿/*
+delete from IzmenaIzdKuce;
 delete from IzmenaIzdSStiva;
 delete from IzSStivaIzdKuca;
 delete from IzSStivaJezik;
@@ -41,7 +42,7 @@ delete from MestoUDrzavi;
 delete from Mesto;
 delete from Drzava;
 delete from Adresa;
-
+*/
 
 insert into Mesto(PosBr, NazivMesta) values
 	(21000, 'Novi Sad'),

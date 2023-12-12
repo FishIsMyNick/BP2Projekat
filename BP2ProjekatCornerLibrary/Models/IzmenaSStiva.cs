@@ -32,15 +32,18 @@ namespace BP2ProjekatCornerLibrary.Models
         }
 
         public IzmenaSStiva() : base() { }
-        public IzmenaSStiva(SerijskoStivo ss, int idBib)
+        public IzmenaSStiva(SerijskoStivo ss, int idBib) : base()
         {
             IDSStivo = ss.IDSStivo;
             IDBib = idBib;
-            Naziv = ss.Naziv;
-            TipStiva = ss.TipStiva;
-            Format = ss.Format;
-            Period = ss.Period;
             DatVr = DateTime.Now;
+
+            SerijskoStivo postojece = DBHelper.GetSerijskoStivo(IDSStivo);
+
+            Naziv = postojece.Naziv != ss.Naziv ? ss.Naziv : null;
+            TipStiva = postojece.TipStiva != ss.TipStiva ? ss.TipStiva : null;
+            Format = postojece.Format != ss.Format ? ss.Format : null;
+            Period = postojece.Period != ss.Period ? ss.Period : null;
         }
     }
 }

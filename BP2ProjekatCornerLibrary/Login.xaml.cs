@@ -46,21 +46,27 @@ namespace BP2ProjekatCornerLibrary.Views.Login
         }
         private void TryLogin()
         {
-            if(false)
-            if(tbUsername.Text == "" || pbPasswordHidden.Password == "")
-            {
-                MessageBox.Show("Sva polja moraju biti popunjena!");
-                return;
-            }
 
             string user = tbUsername.Text;
             string hashedPassword = HashHelper.ComputeSha256Hash(pbPasswordHidden.Password);
 
+            if (false)
+            {
+                if (tbUsername.Text == "" || pbPasswordHidden.Password == "")
+                {
+                    MessageBox.Show("Sva polja moraju biti popunjena!");
+                    return;
+                }
+            }
+            else
+            {
+                //test
+                user = "bib";
+                hashedPassword = HashHelper.ComputeSha256Hash("pass");
+            }
+
             string message;
 
-            //test
-            user = "admin";
-            hashedPassword = HashHelper.ComputeSha256Hash("pass");
 
             Zaposleni r = DBHelper.TryLoginUser(user, hashedPassword);
 

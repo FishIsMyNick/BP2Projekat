@@ -98,7 +98,14 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!DBHelper.DeletePeriod(_selectedPeriod))
+            {
+                MessageBox.Show("Došlo je do greške pri brisanju perioda!");
+                return;
+            }
+            MessageBox.Show("Uspešno ste obrisali period!");
+            RefreshLists();
+            ClearEditFields() ;
         }
         #endregion
 
@@ -135,12 +142,21 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         #region BUTTONS
         private void btn_Add_Confirm_Click(object sender, RoutedEventArgs e)
         {
+            if(!ValidateAddFields()) return;
 
+            if (!DBHelper.AddPeriod(new Periodicnost(tb_Add_Period.Text, int.Parse(tb_Add_Ucestalost.Text))))
+            {
+                MessageBox.Show("Došlo je do greške pri dodavanju perioda!");
+                return;
+            }
+            MessageBox.Show("Uspešno ste dodali nov period!");
+            RefreshLists();
+            ClearAddFields();
         }
 
         private void btn_Add_Cancel_Click(object sender, RoutedEventArgs e)
         {
-
+            ClearAddFields();
         }
 
         #endregion
@@ -148,16 +164,31 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         #region TEXT CHANGED
         private void tb_Add_Period_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            SetAddButtons(CheckAddFields());
         }
 
         private void tb_Add_Ucestalost_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            SetAddButtons(CheckAddFields());
         }
-
+        private bool CheckAddFields()
+        {
+            return tb_Add_Period.Text != "" && tb_Add_Ucestalost.Text != null;
+        }
+        private void SetAddButtons(bool on)
+        {
+            btn_Add_Confirm.IsEnabled = on;
+        }
+        private void ClearAddFields()
+        {
+            tb_Add_Period.Text = "";
+            tb_Add_Ucestalost.Text = "";
+        }
         #endregion
-
+        private bool ValidateAddFields()
+        {
+            return Validator.Naziv(tb_Add_Period.Text) && Validator.Ucestalost(tb_Add_Ucestalost.Text);
+        }
         #endregion
 
 

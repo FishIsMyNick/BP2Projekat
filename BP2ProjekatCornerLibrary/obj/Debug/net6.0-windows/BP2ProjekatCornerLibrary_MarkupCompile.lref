@@ -2,8 +2,11 @@
 
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Login.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\MainWindow.xaml;;
+FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Shared\AddDrzavaWindow.xaml;;
+FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Shared\AddMestoWindow.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\Admin\AdminAddStoreWindow.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\Admin\AdminAddWorkerWindow.xaml;;
+FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\Admin\AdminEditFormatWindow.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\Admin\AdminEditLanguageWindow.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\Admin\AdminEditPeriodWindow.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\Admin\AdminEditStoreWindow.xaml;;
@@ -18,6 +21,4 @@ FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\Bibli
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\Bibliotekar\BibDodajKredit.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\Bibliotekar\BibliotekarMainView.xaml;;
 FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Worker\Bibliotekar\BibUserReservations.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Shared\AddMestoWindow.xaml;;
-FE:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\Views\Shared\AddDrzavaWindow.xaml;;
 

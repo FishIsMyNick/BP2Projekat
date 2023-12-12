@@ -57,26 +57,22 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             tb_Edit_OZNJ.Text = selectedLang.OZNJ;
             tb_Edit_Naziv.Text = selectedLang.NazivJezika;
         }
-        private void EnableEditBtns()
+        private bool CheckEditFields()
         {
-            btn_Edit_Confirm.IsEnabled = true;
-            btn_Edit_Delete.IsEnabled = true;
+            return tb_Edit_Naziv.Text != "" && tb_Edit_OZNJ.Text != "";
         }
-        private void DisableEditBtns()
+        private void SetEditBtns(bool on)
         {
-            btn_Edit_Confirm.IsEnabled = false;
-            btn_Edit_Delete.IsEnabled = false;
+            btn_Edit_Confirm.IsEnabled = on;
+            btn_Edit_Delete.IsEnabled = on;
         }
         private void tb_Edit_Naziv_TextChanged(object sender, TextChangedEventArgs e)
         {
-            if (tb_Edit_Naziv.Text.Length > 0)
-            {
-                EnableEditBtns();
-            }
-            else
-            {
-                DisableEditBtns();
-            }
+            SetEditBtns(CheckEditFields());
+        }
+        private void tb_Edit_OZNJ_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            SetEditBtns(CheckEditFields());
         }
 
         #region BUTTONS
@@ -101,6 +97,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private void btn_Edit_Cancel_Click(object sender, RoutedEventArgs e)
         {
             ClearEditLanguageFields();
+            Jezici.SelectedItem = null;
         }
 
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
@@ -137,13 +134,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         {
             if (!ValidateAddInputFields()) return;
 
-            Jezik j = new Jezik(tb_Add_OZNJ.Text.Trim() , tb_Add_Naziv.Text.Trim());
+            Jezik j = new Jezik(tb_Add_OZNJ.Text.Trim(), tb_Add_Naziv.Text.Trim());
 
-            if(DBHelper.CheckEntityExists<Jezik>(j))
-            {
-                MessageBox.Show("Jezik sa unetom oznakom već postoji!");
-                return;
-            }
 
             if (DBHelper.AddJezik(j))
             {
@@ -156,6 +148,19 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             ClearAddLangFields();
             RefreshLists();
         }
+
+        private void btn_Add_Cancel_Click(object sender, RoutedEventArgs e)
+        {
+            ClearAddLangFields();
+        }
+        private void SetAddBtns(bool on)
+        {
+            btn_Add_Confirm.IsEnabled = on;
+        }
+        private bool CheckAddFields()
+        {
+            return tb_Add_Naziv.Text != "" && tb_Add_OZNJ.Text != "";
+        }
         private bool ValidateAddInputFields()
         {
             return (Validator.Oznaka(tb_Add_OZNJ.Text.Trim()) && Validator.Naziv(tb_Add_Naziv.Text.Trim()));
@@ -165,42 +170,16 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             tb_Add_OZNJ.Text = "";
             tb_Add_Naziv.Text = "";
         }
-        private void SetAddBtns()
-        {
-            if (CheckAddFields())
-            {
-                EnableAddBtns();
-            }
-            else
-            {
-                DisableAddBtns();
-            }
-        }
+
         private void tb_Add_OZNJ_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SetAddBtns();
+            SetAddBtns(CheckAddFields());
         }
-        private void EnableAddBtns()
-        {
-            btn_Add_Confirm.IsEnabled = true;
-        }
-        private void DisableAddBtns()
-        {
-            btn_Add_Confirm.IsEnabled = false;
-        }
-
         private void tb_Add_Naziv_TextChanged(object sender, TextChangedEventArgs e)
         {
-            SetAddBtns();
+            SetAddBtns(CheckAddFields());
         }
-        private bool CheckAddFields()
-        {
-            if (tb_Add_Naziv.Text.Length > 0 && tb_Add_OZNJ.Text.Length > 0)
-            {
-                return true;
-            }
-            return false;
-        }
+
         #endregion
         #region Sorting
         private void btn_OZN_Sort_Click(object sender, RoutedEventArgs e)

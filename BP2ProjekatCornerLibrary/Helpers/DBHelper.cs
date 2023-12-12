@@ -1022,6 +1022,14 @@ namespace BP2ProjekatCornerLibrary.Helpers
         {
             return GetListFromSQL<IzdanjeSStiva>(args);
         }
+        public static SerijskoStivo GetSerijskoStivo(int IDSStivo)
+        {
+            return GetFirstFromSQL<SerijskoStivo>($"IDSStivo={MakeSqlValue(IDSStivo)}");
+        }
+        public static IzdanjeSStiva GetIzdanjeSStiva(int IDSStivo, int BrIzd)
+        {
+            return GetFirstFromSQL<IzdanjeSStiva>($"IDSStivo={MakeSqlValue(IDSStivo)} and BrIzd={MakeSqlValue(BrIzd)}");
+        }
         //RELACIJE
         public static List<IzdSStivoULokalu> GetAllIzdSStivoULokalu(string args = null)
         {
@@ -1549,7 +1557,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
         // Izmena SStivo
         public static bool AddIzmenaSStiva(IzmenaSStiva iss)
         {
-            return AddItemWithSQL(iss);
+            return AddItemWithSQL<IzmenaSStiva>(iss);
         }
         // Izmena Izd SStiva
         public static bool AddIzmenaIzdSStiva(IzmenaIzdSStiva iiss)
@@ -1685,6 +1693,11 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 ss.Format = format.NazivFormata;
                 if (!UpdateSStivo(ss)) return false;
             }
+            foreach (Knjiga k in GetAllKnjigas($"Format={MakeSqlValue(oldFormatKey)}"))
+            {
+                k.Format = format.NazivFormata;
+                if (!UpdateKnjiga(k)) return false;
+            }
             return DeleteItemWithSQL<Format>(new Format(oldFormatKey));
         }
 
@@ -1701,6 +1714,11 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 {
                     ss.Period = periodicnost.PeriodIzd;
                     if (!UpdateSStivo(ss)) return false;
+                }
+                foreach (IzmenaSStiva iss in GetAllIzmenaSStiva($"Period={MakeSqlValue(oldPeriodNaziv)}"))
+                {
+                    iss.Period = periodicnost.PeriodIzd;
+                    if (!UpdateIzmenaSStiva(iss)) return false;
                 }
 
                 return DeleteItemWithSQL<Periodicnost>(new Periodicnost(oldPeriodNaziv, 0));

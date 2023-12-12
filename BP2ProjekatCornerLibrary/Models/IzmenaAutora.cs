@@ -16,11 +16,11 @@ namespace BP2ProjekatCornerLibrary.Models
         public int IDAutor { get; set; }
         public int IDBib { get; set; }
         public DateTime DatVr { get; set; }
-        public string Ime { get; set; }
-        public string Prezime { get; set; }
-        public DateTime DatRodj { get; set; }
-        public string Biografija { get; set; }
-        public string Drzava { get; set; }
+        public string? Ime { get; set; }
+        public string? Prezime { get; set; }
+        public DateTime? DatRodj { get; set; }
+        public string? Biografija { get; set; }
+        public string? Drzava { get; set; }
         public override List<ClassPropertyValue> GetKeyProperties()
         {
             return new List<ClassPropertyValue>
@@ -33,7 +33,7 @@ namespace BP2ProjekatCornerLibrary.Models
 
         public IzmenaAutora() : base() { }
 
-        public IzmenaAutora(int iDAutor, int iDBib, string ime, string prezime, DateTime datRodj, string biografija, string drzava)
+        public IzmenaAutora(int iDAutor, int iDBib, string? ime, string? prezime, DateTime? datRodj, string? biografija, string? drzava)
         {
             IDAutor = iDAutor;
             IDBib = iDBib;
@@ -47,13 +47,16 @@ namespace BP2ProjekatCornerLibrary.Models
         public IzmenaAutora(Autor a, int bibID)
         {
             IDAutor = a.IDAutor;
-            Ime = a.Ime;
-            Prezime = a.Prezime;
-            DatRodj = a.DatRodj;
-            Biografija = a.Biografija;
-            Drzava = a.Drzava;
             DatVr = DateTime.Now;
             IDBib = bibID;
+
+            Autor postojeci = DBHelper.GetAutor(a.IDAutor);
+
+            Ime = postojeci.Ime != a.Ime? a.Ime : null;
+            Prezime = postojeci.Prezime != a.Prezime ? a.Prezime : null;
+            DatRodj = postojeci.DatRodj != a.DatRodj ? a.DatRodj : null;
+            Biografija = postojeci.Biografija != a.Biografija ? a.Biografija : null;
+            Drzava = postojeci.Drzava != a.Drzava ? a.Drzava : null;
         }
     }
 }

@@ -6,6 +6,7 @@
         xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker"
         mc:Ignorable="d"
         Title="Corner Library Bibliotekar" 
+		Width="1920" Height="1080"
 		WindowState="Maximized" WindowStyle="None">
     <Grid>
 	<Grid>

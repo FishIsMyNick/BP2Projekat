@@ -32,7 +32,7 @@ namespace BP2ProjekatCornerLibrary.Models
 
         public IzmenaLokala() : base() { }
 
-        public IzmenaLokala(int iDLokal, int iDAdmin, string? naziv = null, DateTime? datOtv = null, DateTime? datZat = null)
+        public IzmenaLokala(int iDLokal, int iDAdmin, string? naziv = null, DateTime? datOtv = null, DateTime? datZat = null) : base()
         {
             IDLokal = iDLokal;
             IDAdmin = iDAdmin;
@@ -41,14 +41,17 @@ namespace BP2ProjekatCornerLibrary.Models
             DatZat = datZat;
             DatVrIL = DateTime.Now;
         }
-        public IzmenaLokala(Biblikutak b, int idAdmin)
+        public IzmenaLokala(Biblikutak b, int idAdmin) : base() 
         {
             IDLokal = b.IDBK;
             IDAdmin = idAdmin;
-            Naziv = b.Naziv;
-            DatOtv = b.DatOtv;
-            DatZat = b.DatZat;
             DatVrIL = DateTime.Now;
+
+            Biblikutak postojeci = DBHelper.GetLokal(IDLokal);
+
+            Naziv = postojeci.Naziv != b.Naziv ? b.Naziv : null;
+            DatOtv = postojeci.DatOtv != b.DatOtv ? b.DatOtv : null;
+            DatZat = postojeci.DatZat != b.DatZat ? b.DatZat : null;
         }
     }
 }

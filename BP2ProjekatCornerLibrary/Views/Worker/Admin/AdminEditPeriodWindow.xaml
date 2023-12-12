@@ -148,14 +148,14 @@ Panel.ZIndex="2"/>
                             </Grid.RowDefinitions>
 
                             <StackPanel Orientation="Vertical" Grid.Row="0">
-                                <Label FontSize="15" Content="Oznaka žanra"/>
+                                <Label FontSize="15" Content="Pun naziv perioda:"/>
                                 <TextBox x:Name="tb_Add_Period" Margin="10 0 10 0" VerticalContentAlignment="Center"
 									 Height="35"
 							 Grid.Column="0"
 							 Grid.Row="0" TextChanged="tb_Add_Period_TextChanged"/>
                             </StackPanel>
                             <StackPanel Orientation="Vertical" Grid.Row="1">
-                                <Label FontSize="15" Content="Pun naziv žanra"/>
+                                <Label FontSize="15" Content="Učestalost:"/>
                                 <TextBox x:Name="tb_Add_Ucestalost" Margin="10 0 10 0" VerticalContentAlignment="Center"
 									 Height="35"
 							 Grid.Column="0"
@@ -170,7 +170,7 @@ Panel.ZIndex="2"/>
                                 <RowDefinition Height="1*"/>
                             </Grid.RowDefinitions>
 
-                            <Button x:Name="btn_Add_Confirm" Margin="10" Background="LightGreen" Content="Dodaj&#x0a; Žanr" 
+                            <Button x:Name="btn_Add_Confirm" Margin="10" Background="LightGreen" Content="Dodaj&#xA;Period" 
 							Grid.Row="0"
 							FontSize="25"
                                     IsEnabled="False"
@@ -178,7 +178,7 @@ Panel.ZIndex="2"/>
                             <Button x:Name="btn_Add_Cancel" Margin="10" Content="Poništi" 
 							Grid.Row="1"
 							FontSize="25"
-                                    Click="btn_Add_Cancel_Click_1"/>
+									Click="btn_Add_Cancel_Click"/>
                         </Grid>
                     </Grid>
                 </Grid>

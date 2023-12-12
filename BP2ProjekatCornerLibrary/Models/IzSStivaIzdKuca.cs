@@ -31,14 +31,14 @@ namespace BP2ProjekatCornerLibrary.Models
 
         public IzSStivaIzdKuca() : base() { }
 
-        public IzSStivaIzdKuca(int iDSStivo, int iDIK, int iDBib)
+        public IzSStivaIzdKuca(int iDSStivo, int iDIK, int iDBib) :base()
         {
             IDSStivo = iDSStivo;
             IDBib = iDBib;
             IDIK = iDIK;
             DatVr = DateTime.Now;
         }
-        public IzSStivaIzdKuca(IzdajeSStivo i, int idBib)
+        public IzSStivaIzdKuca(IzdajeSStivo i, int idBib):base()
         {
             IDSStivo = i.IDSStivo;
             IDBib = idBib;

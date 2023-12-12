@@ -40,16 +40,19 @@ namespace BP2ProjekatCornerLibrary.Models
         {
             IDKnjiga = k.IDKnjiga;
             IDBib = IdBib;
-            Naziv = k.Naziv;
-            BrIzd = k.BrIzd;
-            GodIzd = k.GodIzd;
-            VrIzd = k.VrIzd;
-            BrStrana = k.BrStrana;
-            VelicinaFonta = k.VelicinaFonta;
-            Korice = k.Korice;
-            Ograniceno = k.Ograniceno;
-            Format = k.Format;
             DatVr = DateTime.Now;
+
+            Knjiga postojeca = DBHelper.GetBook(IDKnjiga);
+
+            Naziv = postojeca.Naziv != k.Naziv ? k.Naziv : null;
+            BrIzd = postojeca.BrIzd != k.BrIzd ? k.BrIzd : null;
+            GodIzd = postojeca.GodIzd != k.GodIzd ? k.GodIzd : null;
+            VrIzd = postojeca.VrIzd != k.VrIzd ? k.VrIzd : null;
+            BrStrana = postojeca.BrStrana != k.BrStrana ? k.BrStrana : null;
+            VelicinaFonta = postojeca.VelicinaFonta != k.VelicinaFonta ? k.VelicinaFonta : null;
+            Korice = postojeca.Korice != k.Korice ? k.Korice : null;
+            Ograniceno = postojeca.Ograniceno != k.Ograniceno ? k.Ograniceno : null;
+            Format = postojeca.Format != k.Format ? k.Format : null;
         }
     }
 }

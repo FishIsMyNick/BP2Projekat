@@ -35,10 +35,13 @@ namespace BP2ProjekatCornerLibrary.Models
         {
             IDSStivo = iss.IDSStivo;
             BrIzd = iss.BrIzd;
-            DatIzd = iss.DatIzd;
-            Cena = iss.Cena;
             IDBib = idBib;
             DatVr = DateTime.Now;
+
+            IzdanjeSStiva postojece = DBHelper.GetIzdanjeSStiva(IDSStivo, BrIzd);
+
+            DatIzd = postojece.DatIzd != iss.DatIzd ? iss.DatIzd : null;
+            Cena = postojece.Cena != iss.Cena ? iss.Cena : null;
         }
     }
 }

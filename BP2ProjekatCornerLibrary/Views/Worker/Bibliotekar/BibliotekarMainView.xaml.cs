@@ -1,4 +1,5 @@
-﻿using BP2ProjekatCornerLibrary.Models;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +22,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 	public partial class BibliotekarMainView : Window
 	{
 		//private MockDB mockDB;
-		private int currentUser;
+		private int _currentUser;
 		public BibliotekarMainView(Bibliotekar bibliotekar)
 		{
 
@@ -29,56 +30,13 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
 			InitializeComponent();
 
-			//lbUsername.Content = bibliotekar.Username;
+			_currentUser = bibliotekar.IDRadnik;
+			lbUsername.Content = DBHelper.GetBibNalog(_currentUser).KorisnickoIme;
 
 			//lbUsername.Content = bibliotekar.KorisnickoIme;
-            lbUsername.Content = "placeholder";
-			currentUser = bibliotekar.IDRadnik;
+            //lbUsername.Content = "placeholder";
 		}
-		//public BibliotekarMainView(Bibliotekar bibliotekar)
-		//{
-
-		//	mockDB = new MockDB();
-
-		//	InitializeComponent();
-
-		//	//lbUsername.Content = bibliotekar.Username;
-		//	lbUsername.Content = "Username";
-		//}
-
-		private bool CheckCardID()
-		{
-			//string cardIDstring = tbBrKartice.Text;
-			//clan = null;
-			//if (cardIDstring == "")
-			//{
-			//	MessageBox.Show("Morate uneti broj kartice!");
-			//	return false;
-			//}
-			//int cardID;
-			//if (!int.TryParse(cardIDstring, out cardID))
-			//{
-			//	MessageBox.Show("Unet broj kartice nije u pravilnom formatu!");
-			//	return false;
-			//}
-
-			//clan = DBHelper.GetUserByCard(cardID);
-
-			//if (clan == null)
-			//{
-			//	MessageBox.Show("Korisnik sa ovom karticom ne postoji!");
-			//	return false;
-			//}
-			//else
-			//{
-			//	if (DBHelper.GetCard(cardID).DatVal < DateTime.Now)
-			//	{
-			//		MessageBox.Show("Članu je istekla članarina!");
-			//	}
-			//	return true;
-			//}
-			return false;
-		}
+				
 
 		private void btnGetReservations_Click(object sender, RoutedEventArgs e)
 		{
@@ -135,7 +93,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
 		private void btnAddBook_Click(object sender, RoutedEventArgs e)
 		{
-			BibAddBookWindow bibAddBookWindow = new BibAddBookWindow(currentUser);
+			BibAddBookWindow bibAddBookWindow = new BibAddBookWindow(_currentUser);
 			bibAddBookWindow.ShowDialog();
 		}
 
