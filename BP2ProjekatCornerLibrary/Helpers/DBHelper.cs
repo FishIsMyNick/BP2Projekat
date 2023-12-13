@@ -19,6 +19,9 @@ using System.Windows;
 using static Microsoft.EntityFrameworkCore.DbLoggerCategory;
 using System.Windows.Input;
 using System.Windows.Documents;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using System.Windows.Controls.Primitives;
+using Microsoft.EntityFrameworkCore.Metadata;
 
 
 namespace BP2ProjekatCornerLibrary.Models { }
@@ -141,7 +144,39 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 return TryEncapsulateInSingleQuote(value);
         }
         #endregion
+        public static bool ExecuteQuery(string query)
+        {
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            columns.Add(reader.GetName(i));
+                        }
 
+                        ClassPropertyValue[] values = new ClassPropertyValue[reader.FieldCount];
+                        for (int i = 0; i < values.Length; i++)
+                        {
+                            values[i] = new ClassPropertyValue(columns[i], reader[columns[i]]);
+                        }
+
+                        ret.Add(CreateInstance<T>(values));
+                    }
+                }
+                finally
+                {
+                    // Always call Close when done reading.
+                    reader.Close();
+                    connection.Close();
+                }
+            }
+        }
         #region GET
         //GET
         public static int GetListFromSQL<T>(out List<T> list, string sqlParameters = null) where T : new()
@@ -690,6 +725,12 @@ namespace BP2ProjekatCornerLibrary.Helpers
         {
             return GetListFromSQL<RasporedjenBibliotekar>(args);
         }
+        public static RasporedjenBibliotekar GetLatestRasporedjenBibliotekar(int idRadnik)
+        {
+            SELECT* FROM table
+WHERE Dates IN(SELECT max(Dates) FROM table);
+            
+        }
         //KURIR
         public static List<Kurir> GetAllKurirs(string args = null)
         {
@@ -987,7 +1028,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
         }
         public static List<Pise> GetAllPiseWithBook(Knjiga k)
         {
-            return GetAllPise($"IDKnjiga={MakeSqlValue(k)}");
+            return GetAllPise($"IDKnjiga={MakeSqlValue(k.IDKnjiga)}");
         }
         public static List<KnjigaNaJeziku> GetAllKnjigaNaJezikuWithBook(Knjiga k)
         {

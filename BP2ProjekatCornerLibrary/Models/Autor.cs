@@ -15,11 +15,12 @@ namespace BP2ProjekatCornerLibrary.Models
         public int IDAutor { get; set; }
         [Required]
         public string Ime { get; set; }
-        public string Prezime { get; set; }
-        public DateTime DatRodj { get; set; }
-        public string Biografija { get; set; }
-        public string Drzava { get; set; }
+        public string? Prezime { get; set; }
+        public DateTime? DatRodj { get; set; }
+        public string? Biografija { get; set; }
+        public string? Drzava { get; set; }
         public override ClassPropertyValue GetKeyIdentity() => new ClassPropertyValue("IDAutor", IDAutor);
+        public string GetFullName { get => Ime + " " + ((Prezime != null) ? Prezime : string.Empty); }
 
         public override List<ClassPropertyValue> GetKeyProperties()
         {
@@ -30,13 +31,18 @@ namespace BP2ProjekatCornerLibrary.Models
         }
         public Autor() : base() { }
 
-        public Autor(string ime, string prezime, DateTime datRodj, string biografija, string drzava)
+        public Autor(string ime, string? prezime, DateTime? datRodj, string? biografija, string? drzava)
         {
             Ime = ime;
             Prezime = prezime;
             DatRodj = datRodj;
             Biografija = biografija;
             Drzava = drzava;
+        }
+        public Autor(int id, string ime)
+        {
+            IDAutor = id;
+            Ime = ime;
         }
     }
 }

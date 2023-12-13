@@ -45,5 +45,10 @@ namespace BP2ProjekatCornerLibrary.Models
             PosBr = posBr;
             OZND = oznd;
         }
+        public IzdKuca(int id, string naziv)
+        {
+            IDIK = id;
+            Naziv = naziv;
+        }
     }
 }

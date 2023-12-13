@@ -278,7 +278,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 Validator.Day(GetDan) &&
                 Validator.Month(GetMesec) &&
                 Validator.Year(GetGodina) &&
-                Validator.Street(GetUlica) &&
+                Validator.StringNumber(GetUlica) &&
                 Validator.StreetNumber(GetBroj) &&
                 Validator.Date(GetDan,GetMesec, GetGodina)
                 );

@@ -37,106 +37,87 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             //lbUsername.Content = "placeholder";
 		}
 				
+        private void btn_Close_Click(object sender, RoutedEventArgs e)
+        {
+			Close();
+        }
 
-		private void btnGetReservations_Click(object sender, RoutedEventArgs e)
-		{
-			//Clan clan = null;
-			//if (CheckCardID(out clan))
-			//{
-			//	BibUserReservations bibUserReservations = new BibUserReservations(clan);
+        #region BUTTONS
+        private void btn_Add_Book_Click(object sender, RoutedEventArgs e)
+        {
+            Window addBookWindow = new BibBookWindow(_currentUser);
+            addBookWindow.Show();
+        }
 
-			//	bibUserReservations.ShowDialog();
-			//}
-		}
+        private void btn_Edit_Book_Click(object sender, RoutedEventArgs e)
+        {
 
-		private void btnKredit_Click(object sender, RoutedEventArgs e)
-		{
-			//Clan clan = null;
-			//if (CheckCardID(out clan))
-			//{
-			//	BibDodajKredit bibKredit = new BibDodajKredit(clan);
+        }
 
-			//	bibKredit.ShowDialog();
-			//	Console.WriteLine();
-			//}
-		}
+        private void btn_Add_News_Click(object sender, RoutedEventArgs e)
+        {
 
-		private void btnAddUser_Click(object sender, RoutedEventArgs e)
-		{
-			BibAddUserWindow bibAddUserWindow = new BibAddUserWindow();
-			bibAddUserWindow.ShowDialog();
-		}
+        }
 
-		private void btnExtendMembership_Click(object sender, RoutedEventArgs e)
-		{
-			//Clan clan = null;
-			//if (CheckCardID(out clan))
-			//{
-			//	if (DBHelper.ExtendMembership(DBHelper.GetCard((int)clan.BrKartice)) == iDbResult.Success)
-			//	{
-			//		MessageBox.Show("Uspešno produžena članarina!");
-			//	}
-			//}
-		}
+        private void btn_Edit_News_Click(object sender, RoutedEventArgs e)
+        {
 
-		private void btnRazduzi_Click(object sender, RoutedEventArgs e)
-		{
-			//Clan clan = null;
-			//if (CheckCardID(out clan))
-			//{
-			//	if (DBHelper.DeleteReservations(DBHelper.GetReservations(clan.Id)) == iDbResult.Success)
-			//		MessageBox.Show("Uspešno razdužen član!");
-			//	else
-			//		MessageBox.Show("Došlo je do neočekivane greške!");
-			//}
-		}
+        }
 
-		private void btnAddBook_Click(object sender, RoutedEventArgs e)
-		{
-			BibAddBookWindow bibAddBookWindow = new BibAddBookWindow(_currentUser);
-			bibAddBookWindow.ShowDialog();
-		}
+        private void btn_Add_Magazin_Click(object sender, RoutedEventArgs e)
+        {
 
-		private void btnAddNews_Click(object sender, RoutedEventArgs e)
-		{
-			BibAddNewsWindow bibAddNewsWindow = new BibAddNewsWindow();
-			bibAddNewsWindow.ShowDialog();
-		}
+        }
 
-		private void btnAddMagazin_Click(object sender, RoutedEventArgs e)
-		{
-			BibAddMagazinWindow addMagazinWindow = new BibAddMagazinWindow();
-			addMagazinWindow.ShowDialog();
-		}
+        private void btn_Edit_Magazin_Click(object sender, RoutedEventArgs e)
+        {
 
-		private void btnAddBookInStore_Click(object sender, RoutedEventArgs e)
-		{
+        }
 
-		}
+        private void btn_Add_Izd_Nov_Click(object sender, RoutedEventArgs e)
+        {
 
-		private void btnAddNewsInStore_Click(object sender, RoutedEventArgs e)
-		{
+        }
 
-		}
+        private void btn_Edit_Izd_Nov_Click(object sender, RoutedEventArgs e)
+        {
 
-		private void btnAddMagazinInStore_Click(object sender, RoutedEventArgs e)
-		{
+        }
 
-		}
+        private void btn_Add_Izd_Mag_Click(object sender, RoutedEventArgs e)
+        {
 
-		private void btnRemoveBookInStore_Click(object sender, RoutedEventArgs e)
-		{
+        }
 
-		}
+        private void btn_Edit_Izd_Mag_Click(object sender, RoutedEventArgs e)
+        {
 
-		private void btnRemoveNewsInStore_Click(object sender, RoutedEventArgs e)
-		{
+        }
 
-		}
+        private void btn_Add_Autor_Click(object sender, RoutedEventArgs e)
+        {
 
-		private void btnRemoveMagazineInStore_Click(object sender, RoutedEventArgs e)
-		{
+        }
 
-		}
-	}
+        private void btn_Edit_Autor_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Add_Izd_Kuca_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Remove_SuL_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Edit_Izd_Kuca_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+        #endregion
+    }
 }

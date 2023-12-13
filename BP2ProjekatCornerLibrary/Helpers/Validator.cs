@@ -10,21 +10,40 @@ namespace BP2ProjekatCornerLibrary.Helpers
 {
     public static class Validator
     {
+        public static bool Number(string value)
+        {
+            return int.TryParse(value, out _);
+        }
+        public static bool PozNumber(string value)
+        {
+            int i = -1;
+            if (!int.TryParse(value, out i))
+            {
+                MessageBox.Show("Unet broj nije u dobrom formatu!");
+                return false;
+            }
+            else if (i > 0)
+            {
+                return true;
+            }
+            MessageBox.Show("Unet broj mora biti pozitivan i veći od 0!");
+            return false;
+        }
         public static bool Ucestalost(string value)
         {
             value = value.Trim();
-            if(value.Length == 0)
+            if (value.Length == 0)
             {
                 MessageBox.Show("Polje za učestalost mora biti popunjeno!");
                 return false;
             }
             int i = -1;
-            if(!int.TryParse(value, out i))
+            if (!int.TryParse(value, out i))
             {
                 MessageBox.Show("Polje za učestalost mora biti pozitivan ceo broj!");
                 return false;
             }
-            if(i <= 0)
+            if (i <= 0)
             {
                 MessageBox.Show("Polje za učestalost mora biti pozitivan ceo broj!");
                 return false;
@@ -43,7 +62,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 MessageBox.Show("Naziv mora sadržati samo slova i razmake!");
                 return false;
             }
-            if(input.Contains(' '))
+            if (input.Contains(' '))
             {
                 string[] strings = input.Split(' ');
                 string tocheck = "";
@@ -70,13 +89,13 @@ namespace BP2ProjekatCornerLibrary.Helpers
         }
         public static bool Oznaka(string input)
         {
-            if(input == null) return false;
+            if (input == null) return false;
             if (input.Length == 0)
             {
                 MessageBox.Show("Polje oznake mora biti popunjeno!");
                 return false;
             }
-            if(input.Length > 4)
+            if (input.Length > 4)
             {
                 MessageBox.Show("Oznaka može imati najviše 4 karaktera!");
                 return false;
@@ -201,7 +220,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
         }
         public static bool Date(string day, string month, string year)
         {
-            if(!DateTime.TryParse($"{int.Parse(year)}/{int.Parse(month)}/{int.Parse(day)}", out _))
+            if (!DateTime.TryParse($"{int.Parse(year)}/{int.Parse(month)}/{int.Parse(day)}", out _))
             {
                 MessageBox.Show("Unet datum ne postoji!");
                 return false;
@@ -217,7 +236,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
             }
             return true;
         }
-        public static bool Street(string input)
+        public static bool StringNumber(string input)
         {
             if (input.Length <= 0)
             {

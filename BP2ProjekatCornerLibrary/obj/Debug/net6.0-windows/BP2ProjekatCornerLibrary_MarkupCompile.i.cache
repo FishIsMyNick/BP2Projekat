@@ -10,11 +10,11 @@ none
 false
 TRACE;DEBUG;NET;NET6_0;NETCOREAPP
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\App.xaml
-21-666474118
+21-629653004
 
-81-94379953
+81-558513196
 2221671468347
-Login.xaml;MainWindow.xaml;Views\Shared\AddDrzavaWindow.xaml;Views\Shared\AddMestoWindow.xaml;Views\Worker\Admin\AdminAddStoreWindow.xaml;Views\Worker\Admin\AdminAddWorkerWindow.xaml;Views\Worker\Admin\AdminEditFormatWindow.xaml;Views\Worker\Admin\AdminEditLanguageWindow.xaml;Views\Worker\Admin\AdminEditPeriodWindow.xaml;Views\Worker\Admin\AdminEditStoreWindow.xaml;Views\Worker\Admin\AdminEditWorkerWindow.xaml;Views\Worker\Admin\AdminEditZanrWindow.xaml;Views\Worker\Admin\AdminMainView.xaml;Views\Worker\Bibliotekar\BibAddBookToStoreWindow.xaml;Views\Worker\Bibliotekar\BibAddBookWindow.xaml;Views\Worker\Bibliotekar\BibAddMagazinWindow.xaml;Views\Worker\Bibliotekar\BibAddNewsWindow.xaml;Views\Worker\Bibliotekar\BibAddUserWindow.xaml;Views\Worker\Bibliotekar\BibDodajKredit.xaml;Views\Worker\Bibliotekar\BibliotekarMainView.xaml;Views\Worker\Bibliotekar\BibUserReservations.xaml;
+Login.xaml;MainWindow.xaml;Views\Shared\AddDrzavaWindow.xaml;Views\Shared\AddMestoWindow.xaml;Views\Worker\Admin\AdminAddStoreWindow.xaml;Views\Worker\Admin\AdminAddWorkerWindow.xaml;Views\Worker\Admin\AdminEditFormatWindow.xaml;Views\Worker\Admin\AdminEditLanguageWindow.xaml;Views\Worker\Admin\AdminEditPeriodWindow.xaml;Views\Worker\Admin\AdminEditStoreWindow.xaml;Views\Worker\Admin\AdminEditWorkerWindow.xaml;Views\Worker\Admin\AdminEditZanrWindow.xaml;Views\Worker\Admin\AdminMainView.xaml;Views\Worker\Bibliotekar\BibAddBookToStoreWindow.xaml;Views\Worker\Bibliotekar\BibAddMagazinWindow.xaml;Views\Worker\Bibliotekar\BibAddNewsWindow.xaml;Views\Worker\Bibliotekar\BibAddUserWindow.xaml;Views\Worker\Bibliotekar\BibBookWindow.xaml;Views\Worker\Bibliotekar\BibDodajKredit.xaml;Views\Worker\Bibliotekar\BibliotekarMainView.xaml;Views\Worker\Bibliotekar\BibUserReservations.xaml;
 
-False
+True
 

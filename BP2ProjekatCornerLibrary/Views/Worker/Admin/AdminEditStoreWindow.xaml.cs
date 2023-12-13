@@ -174,7 +174,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private bool ValidateInputFields()
         {
             return (
-                Validator.Street(GetUlica) &&
+                Validator.StringNumber(GetUlica) &&
                 Validator.StreetNumber(GetBroj) &&
                 Validator.City(_selectedMesto) && 
                 Validator.Country(_selectedDrzava)
