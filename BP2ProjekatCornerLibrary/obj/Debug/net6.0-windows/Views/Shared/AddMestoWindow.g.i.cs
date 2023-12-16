@@ -85,7 +85,7 @@ namespace BP2ProjekatCornerLibrary.Views.Shared {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;component/views/shared/addmestowindow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;V1.0.0.0;component/views/shared/addmestowindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\Views\Shared\AddMestoWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

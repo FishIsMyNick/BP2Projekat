@@ -2892,23 +2892,23 @@
     ]
   },
   "packageFolders": {
-    "C:\\Users\\Fish\\.nuget\\packages\\": {},
+    "C:\\Users\\urska\\.nuget\\packages\\": {},
     "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "E:\\Fax\\BP2\\Projekat\\Git\\BP2Projekat\\BP2ProjekatCornerLibrary\\BP2ProjekatCornerLibrary.csproj",
+      "projectUniqueName": "C:\\Users\\urska\\OneDrive\\Namizje\\Luka\\BP2\\Projekat\\BP2Projekat\\BP2ProjekatCornerLibrary\\BP2ProjekatCornerLibrary.csproj",
       "projectName": "BP2ProjekatCornerLibrary",
-      "projectPath": "E:\\Fax\\BP2\\Projekat\\Git\\BP2Projekat\\BP2ProjekatCornerLibrary\\BP2ProjekatCornerLibrary.csproj",
-      "packagesPath": "C:\\Users\\Fish\\.nuget\\packages\\",
-      "outputPath": "E:\\Fax\\BP2\\Projekat\\Git\\BP2Projekat\\BP2ProjekatCornerLibrary\\obj\\",
+      "projectPath": "C:\\Users\\urska\\OneDrive\\Namizje\\Luka\\BP2\\Projekat\\BP2Projekat\\BP2ProjekatCornerLibrary\\BP2ProjekatCornerLibrary.csproj",
+      "packagesPath": "C:\\Users\\urska\\.nuget\\packages\\",
+      "outputPath": "C:\\Users\\urska\\OneDrive\\Namizje\\Luka\\BP2\\Projekat\\BP2Projekat\\BP2ProjekatCornerLibrary\\obj\\",
       "projectStyle": "PackageReference",
       "fallbackFolders": [
         "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
       ],
       "configFilePaths": [
-        "C:\\Users\\Fish\\AppData\\Roaming\\NuGet\\NuGet.Config",
+        "C:\\Users\\urska\\AppData\\Roaming\\NuGet\\NuGet.Config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.FallbackLocation.config",
         "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
       ],

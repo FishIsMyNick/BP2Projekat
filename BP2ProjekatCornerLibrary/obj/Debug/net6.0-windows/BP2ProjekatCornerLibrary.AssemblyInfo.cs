@@ -14,7 +14,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("BP2ProjekatCornerLibrary")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+38948ca36637b3ae13ce32d0aebfb1118dbfe169")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0")]
 [assembly: System.Reflection.AssemblyProductAttribute("BP2ProjekatCornerLibrary")]
 [assembly: System.Reflection.AssemblyTitleAttribute("BP2ProjekatCornerLibrary")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

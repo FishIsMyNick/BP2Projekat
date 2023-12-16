@@ -85,8 +85,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;component/views/worker/bibliotekar/bibaddbooktostorewin" +
-                    "dow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;V1.0.0.0;component/views/worker/bibliotekar/bibaddbookt" +
+                    "ostorewindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\Views\Worker\Bibliotekar\BibAddBookToStoreWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

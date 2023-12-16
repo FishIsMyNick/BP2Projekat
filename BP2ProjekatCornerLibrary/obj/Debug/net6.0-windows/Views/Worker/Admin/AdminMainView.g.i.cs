@@ -485,7 +485,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;component/views/worker/admin/adminmainview.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;V1.0.0.0;component/views/worker/admin/adminmainview.xam" +
+                    "l", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\Views\Worker\Admin\AdminMainView.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);
