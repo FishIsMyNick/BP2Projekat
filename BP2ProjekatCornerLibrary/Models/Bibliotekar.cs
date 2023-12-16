@@ -34,7 +34,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public int PosBr { get; set; }
         [Required]
         public string OZND { get; set; }
-
+        public Bibliotekar() { }
         public Bibliotekar(params object[] args)
         {
             IDRadnik = (int)args[0];

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models.NonContext
 {
-    public class Radnik
+    public class Radnik : DbClass
     {
     }
 }
