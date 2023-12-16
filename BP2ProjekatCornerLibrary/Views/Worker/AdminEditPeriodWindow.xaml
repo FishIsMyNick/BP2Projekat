@@ -170,7 +170,7 @@
                             <Button x:Name="btn_Add_Cancel" Margin="10" Content="Poništi" 
 							Grid.Row="1"
 							FontSize="25"
-                                    Click="btn_Add_Cancel_Click_1"/>
+                                    Click="btn_Add_Cancel_Click"/>
                         </Grid>
                     </Grid>
                 </Grid>
