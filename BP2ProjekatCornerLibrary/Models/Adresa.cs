@@ -1,4 +1,5 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -7,16 +8,25 @@ using System.ComponentModel.DataAnnotations;
 namespace BP2ProjekatCornerLibrary.Models;
 
 [PrimaryKey("Ulica", "Broj")]
-public class Adresa
+public class Adresa : _DbClass
 {
     public string Ulica { get; set; } = null!;
     public string Broj { get; set; } = null!;
 
-    public Adresa(params object[] args)
+    public override List<ClassPropertyValue> GetKeyProperties()
     {
-        if (DBHelper.CheckDbNull(args[0]))
-            Ulica = (string)args[0];
-        if (DBHelper.CheckDbNull(args[1]))
-            Broj = (string)args[1];
+        return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("Ulica", Ulica),
+                new ClassPropertyValue("Broj", Broj)
+            };
+    }
+
+    public Adresa() : base() { }
+
+    public Adresa(string ulica, string broj)
+    {
+        Ulica = ulica ?? throw new ArgumentNullException(nameof(ulica));
+        Broj = broj ?? throw new ArgumentNullException(nameof(broj));
     }
 }

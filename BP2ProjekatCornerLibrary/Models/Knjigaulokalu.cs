@@ -1,4 +1,6 @@
-﻿using Microsoft.EntityFrameworkCore;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,13 +11,23 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDKnjiga", "IDBK", "DatVrIzmene")]
-    public class KnjigaULokalu
+    public class KnjigaULokalu : _DbClass
     {
         public int IDKnjiga { get; set; }
         public int IDBK { get; set; }
         public DateTime DatVrIzmene { get; set; }
         public int Kolicina { get; set; }
 
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDKnjiga", IDKnjiga),
+                new ClassPropertyValue("IDBK", IDBK),
+                new ClassPropertyValue("DatVrIzmene", DatVrIzmene)
+            };
+        }
+        public KnjigaULokalu() : base() { }
         public KnjigaULokalu(int IDKnjiga, int IDBK, int Kolicina)
         {
             this.IDKnjiga = IDKnjiga;

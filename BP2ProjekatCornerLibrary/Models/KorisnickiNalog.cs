@@ -1,4 +1,6 @@
-﻿using System;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -7,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class KorisnickiNalog
+    public class KorisnickiNalog : _DbClass
     {
         [Key]
         public string KorisnickoIme { get; set; }
@@ -15,19 +17,31 @@ namespace BP2ProjekatCornerLibrary.Models
         public string Sifra { get; set; }
         [Required]
         public DateTime DatKreiranja { get; set; }
-        public DateTime DatZatvaranja { get; set; }
+        public DateTime? DatZatvaranja { get; set; }
         [Required]
         public int TipNaloga { get; set; }
-
-        public KorisnickiNalog() { }
-        public KorisnickiNalog(params object[] args)
+        public override List<ClassPropertyValue> GetKeyProperties()
         {
-            KorisnickoIme = (string)args[0];
-            Sifra = (string)args[1];
-            DatKreiranja = (DateTime)args[2];
-            if (args[3].GetType() != typeof(DBNull))
-                DatZatvaranja = (DateTime)args[3];
-            TipNaloga = (int)args[4];
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("KorisnickoIme", KorisnickoIme)
+            };
         }
+
+        public KorisnickiNalog() : base() { }
+
+        public KorisnickiNalog(string korisnickoIme, string sifra, DateTime datKreiranja, int tipNaloga)
+        {
+            KorisnickoIme = korisnickoIme ?? throw new ArgumentNullException(nameof(korisnickoIme));
+            Sifra = sifra ?? throw new ArgumentNullException(nameof(sifra));
+            DatKreiranja = datKreiranja;
+            DatZatvaranja = null;
+            TipNaloga = tipNaloga;
+        }
+
+
+        //public KorisnickiNalog(params ClassPropertyValue[] args) : base(args)
+        //{
+        //}
     }
 }

@@ -4,12 +4,27 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Format
+    public class Format : _DbClass
     {
         [Key]
         public string NazivFormata { get; set; }
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("NazivFormata", NazivFormata)
+            };
+        }
+        public Format() : base() { }
+
+        public Format(string nazivFormata)
+        {
+            NazivFormata = nazivFormata ?? throw new ArgumentNullException(nameof(nazivFormata));
+        }
     }
 }

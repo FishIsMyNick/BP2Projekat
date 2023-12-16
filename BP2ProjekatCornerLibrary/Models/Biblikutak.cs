@@ -1,4 +1,5 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -9,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Biblikutak
+    public class Biblikutak : _DbClass
     {
         [Key]
         public int IDBK { get; set; }
@@ -17,7 +18,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public string Naziv { get; set; }
         [Required]
         public DateTime DatOtv { get; set; }
-        public DateTime DatZat { get; set; }
+        public DateTime? DatZat { get; set; }
         [Required]
         public string Ulica { get; set; }
         [Required]
@@ -26,23 +27,27 @@ namespace BP2ProjekatCornerLibrary.Models
         public int PosBr { get; set; }
         [Required]
         public string OZND { get; set; }
+        public override ClassPropertyValue GetKeyIdentity() => new ClassPropertyValue("IDBK", IDBK);
 
-        public Biblikutak(params object[] args)
+        public override List<ClassPropertyValue> GetKeyProperties()
         {
-            IDBK = (int)args[0];
-            if (DBHelper.CheckDbNull(args[1]))
-                Naziv = (string)args[1];
-            if (DBHelper.CheckDbNull(args[2]))
-                DatOtv = (DateTime)args[2];
-            if (DBHelper.CheckDbNull(args[3]))
-                DatZat = (DateTime)args[3];
-            if (DBHelper.CheckDbNull(args[4]))
-                Ulica = (string)args[4];
-            if (DBHelper.CheckDbNull(args[5]))
-                Broj = (string)args[5];
-            PosBr = (int)args[6];
-            if (DBHelper.CheckDbNull(args[7]))
-                OZND = (string)args[7];
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDBK", IDBK)
+            };
+        }
+        public Biblikutak() : base() { }
+
+        public Biblikutak(int iDBK, string naziv, DateTime datOtv, DateTime? datZat, string ulica, string broj, int posBr, string oZND)
+        {
+            IDBK = iDBK;
+            Naziv = naziv;
+            DatOtv = datOtv;
+            DatZat = datZat;
+            Ulica = ulica;
+            Broj = broj;
+            PosBr = posBr;
+            OZND = oZND;
         }
     }
 }

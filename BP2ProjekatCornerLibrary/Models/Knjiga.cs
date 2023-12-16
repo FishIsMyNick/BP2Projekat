@@ -4,10 +4,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Knjiga
+    public class Knjiga : _DbClass
     {
         [Key]
         public int IDKnjiga { get; set; }
@@ -22,12 +24,34 @@ namespace BP2ProjekatCornerLibrary.Models
         public int Korice { get; set; }
         public int Ograniceno { get; set; }
         [Required]
-        public string Format { get; set; }
+        public string? Format { get; set; }
+        public override ClassPropertyValue GetKeyIdentity() => new ClassPropertyValue("IDKnjiga", IDKnjiga);
 
-        public Knjiga() { }
-
-        public Knjiga(string naziv, int brIzd, int godIzd, string vrIzd, int brStrana, int velicinaFonta, int korice, int ograniceno, string format)
+        public override List<ClassPropertyValue> GetKeyProperties()
         {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDKnjiga", IDKnjiga)
+            };
+        }
+        public Knjiga() : base() { }
+
+        public Knjiga(string naziv, int brIzd, int godIzd, string vrIzd, int brStrana, int velicinaFonta, int korice, int ograniceno, string? format)
+        {
+            IDKnjiga = -1;
+            Naziv = naziv;
+            BrIzd = brIzd;
+            GodIzd = godIzd;
+            VrIzd = vrIzd;
+            BrStrana = brStrana;
+            VelicinaFonta = velicinaFonta;
+            Korice = korice;
+            Ograniceno = ograniceno;
+            Format = format;
+        }
+        public Knjiga(int id, string naziv, int brIzd, int godIzd, string vrIzd, int brStrana, int velicinaFonta, int korice, int ograniceno, string? format)
+        {
+            IDKnjiga = id;
             Naziv = naziv;
             BrIzd = brIzd;
             GodIzd = godIzd;

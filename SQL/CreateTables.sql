@@ -1,3 +1,4 @@
+/*
 if OBJECT_ID(N'dbo.IzmenaIzdKuce', N'U') is not null drop table IzmenaIzdKuce;
 if OBJECT_ID(N'dbo.IzmenaIzdSStiva', N'U') is not null drop table IzmenaIzdSStiva;
 if OBJECT_ID(N'dbo.IzSStivaIzdKuca', N'U') is not null drop table IzSStivaIzdKuca;
@@ -41,7 +42,7 @@ if OBJECT_ID(N'dbo.MestoUDrzavi', N'U') is not null drop table MestoUDrzavi;
 if OBJECT_ID(N'dbo.Mesto', N'U') is not null drop table Mesto;
 if OBJECT_ID(N'dbo.Drzava', N'U') is not null drop table Drzava;
 if OBJECT_ID(N'dbo.Adresa', N'U') is not null drop table Adresa;
-
+*/
 
 /* LOKACIJA */
 create table Mesto(
@@ -257,7 +258,7 @@ create table Knjiga(
 	VelicinaFonta int,
 	Korice int,
 	Ograniceno int,
-	Format varchar(50) not null,
+	Format varchar(50),
 
 	constraint KNJIGA_PK primary key (IDKnjiga),
 
@@ -329,8 +330,8 @@ create table SerijskoStivo(
 	IDSStivo int IDENTITY not null,
 	Naziv varchar(MAX) not null,
 	TipStiva int not null,
-	Format varchar(50) not null,
-	Period varchar(50) not null,
+	Format varchar(50),
+	Period varchar(50),
 
 	constraint SSTIVO_PK primary key (IDSStivo),
 

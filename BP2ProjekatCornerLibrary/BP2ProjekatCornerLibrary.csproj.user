@@ -7,28 +7,37 @@
     </ApplicationDefinition>
   </ItemGroup>
   <ItemGroup>
-    <Compile Update="Views\Worker\AdminAddStoreWindow.xaml.cs">
+    <Compile Update="Views\Shared\AddDrzavaWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Worker\AdminAddWorkerWindow.xaml.cs">
+    <Compile Update="Views\Shared\AddMestoWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Worker\AdminEditLanguageWindow.xaml.cs">
+    <Compile Update="Views\Worker\Admin\AdminAddStoreWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Worker\AdminEditPeriodWindow.xaml.cs">
+    <Compile Update="Views\Worker\Admin\AdminAddWorkerWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Worker\AdminEditStoreWindow.xaml.cs">
+    <Compile Update="Views\Worker\Admin\AdminEditFormatWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Worker\AdminEditWorkerWindow.xaml.cs">
+    <Compile Update="Views\Worker\Admin\AdminEditLanguageWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Worker\AdminEditZanrWindow.xaml.cs">
+    <Compile Update="Views\Worker\Admin\AdminEditPeriodWindow.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
-    <Compile Update="Views\Worker\AdminMainView.xaml.cs">
+    <Compile Update="Views\Worker\Admin\AdminEditStoreWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\Admin\AdminEditWorkerWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\Admin\AdminEditZanrWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\Admin\AdminMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
   </ItemGroup>
@@ -36,28 +45,37 @@
     <Page Update="MainWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Worker\AdminAddStoreWindow.xaml">
+    <Page Update="Views\Shared\AddDrzavaWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Worker\AdminAddWorkerWindow.xaml">
+    <Page Update="Views\Shared\AddMestoWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Worker\AdminEditLanguageWindow.xaml">
+    <Page Update="Views\Worker\Admin\AdminAddStoreWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Worker\AdminEditPeriodWindow.xaml">
+    <Page Update="Views\Worker\Admin\AdminAddWorkerWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Worker\AdminEditStoreWindow.xaml">
+    <Page Update="Views\Worker\Admin\AdminEditFormatWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Worker\AdminEditWorkerWindow.xaml">
+    <Page Update="Views\Worker\Admin\AdminEditLanguageWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Worker\AdminEditZanrWindow.xaml">
+    <Page Update="Views\Worker\Admin\AdminEditPeriodWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
-    <Page Update="Views\Worker\AdminMainView.xaml">
+    <Page Update="Views\Worker\Admin\AdminEditStoreWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\Admin\AdminEditWorkerWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\Admin\AdminEditZanrWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\Admin\AdminMainView.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

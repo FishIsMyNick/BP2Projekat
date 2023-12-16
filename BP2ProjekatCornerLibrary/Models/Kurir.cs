@@ -10,28 +10,7 @@ namespace BP2ProjekatCornerLibrary.Models
 {
     public class Kurir : Radnik
     {
-        [Key]
-        public int IDRadnik { get; set; }
-        [Required]
-        public string Ime { get; set; }
-        [Required]
-        public string Prezime { get; set; }
-        [Required]
-        public DateTime DatRodj { get; set; }
-        [Required]
-        public DateTime DatZap { get; set; }
-        public DateTime DatOtp { get; set; }
-        [Required]
-        public int IDAdmin { get; set; }
-        [Required]
-        public DateTime DatVr { get; set; }
-        [Required]
-        public string Ulica { get; set; }
-        [Required]
-        public string Broj { get; set; }
-        [Required]
-        public int PosBr { get; set; }
-        [Required]
-        public string OZND { get; set; }
+        public Kurir() : base() { }
+        public Kurir(int iDRadnik, string ime, string prezime, DateTime datRodj, DateTime datZap, DateTime? datOtp, int iDAdmin, DateTime datVr, string ulica, string broj, int posBr, string oznd) : base(iDRadnik, ime, prezime, datRodj, datZap, datOtp, iDAdmin, datVr, ulica, broj, posBr, oznd) { }
     }
 }

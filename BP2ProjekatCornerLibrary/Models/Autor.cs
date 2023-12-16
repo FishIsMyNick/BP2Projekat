@@ -1,4 +1,5 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    public class Autor
+    public class Autor : _DbClass
     {
         [Key]
         public int IDAutor { get; set; }
@@ -18,8 +19,16 @@ namespace BP2ProjekatCornerLibrary.Models
         public DateTime DatRodj { get; set; }
         public string Biografija { get; set; }
         public string Drzava { get; set; }
+        public override ClassPropertyValue GetKeyIdentity() => new ClassPropertyValue("IDAutor", IDAutor);
 
-        public Autor() { }
+        public override List<ClassPropertyValue> GetKeyProperties()
+        {
+            return new List<ClassPropertyValue>
+            {
+                new ClassPropertyValue("IDAutor", IDAutor)
+            };
+        }
+        public Autor() : base() { }
 
         public Autor(string ime, string prezime, DateTime datRodj, string biografija, string drzava)
         {
@@ -28,21 +37,6 @@ namespace BP2ProjekatCornerLibrary.Models
             DatRodj = datRodj;
             Biografija = biografija;
             Drzava = drzava;
-        }
-        public Autor(params object[] args)
-        {
-            IDAutor = (int)args[0];
-
-            if (DBHelper.CheckDbNull(args[1]))
-                Ime = (string)args[1];
-            if (DBHelper.CheckDbNull(args[2]))
-                Prezime= (string)args[2];
-            if (DBHelper.CheckDbNull(args[3]))
-                DatRodj = (DateTime)args[3];
-            if (DBHelper.CheckDbNull(args[4]))
-                Biografija= (string)args[4];
-            if (DBHelper.CheckDbNull(args[5]))
-                Drzava= (string)args[5];
         }
     }
 }
