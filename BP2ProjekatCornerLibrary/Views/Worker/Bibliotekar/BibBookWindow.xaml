@@ -37,125 +37,148 @@
                 <StackPanel Name="sp_ListaKnjiga"
                             Height="550">
                     <!--SORT BUTTONS-->
-                    <StackPanel Orientation="Horizontal" 
-											Width="1325" Height="25" 
-											Panel.ZIndex="1" 
-											Margin="1 0 1 0">
+                    <Grid Panel.ZIndex="1" Margin="1 0 1 0" Height="25">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="15*"/>
+                            <ColumnDefinition Width="8*"/>
+                            <ColumnDefinition Width="9*"/>
+                            <ColumnDefinition Width="11*"/>
+                            <ColumnDefinition Width="7*"/>
+                            <ColumnDefinition Width="10*"/>
+                        </Grid.ColumnDefinitions>
                         <!--NAZIV-->
                         <Button x:Name="btn_sort_naziv"
 										Content="Naziv"
-										Width="130" 
+                                        Grid.Column="0"
                                     Click="btn_Sort_naziv_Click"/>
                         <Image x:Name="img_sort_naziv" 
 										Source="..\..\..\Images\arrow_down.png"
-										Margin="-30 0 0 0"
+                               Grid.Column="0"
+                               HorizontalAlignment="Right"
 										Panel.ZIndex="2"/>
                         <!--AUTORI-->
                         <Button x:Name="btn_sort_autori"
 										Content="Autori"
-										Width="130" 
+										Grid.Column="1" 
                                     Click="btn_Sort_Autori_Click"/>
                         <Image x:Name="img_sort_autori" 
 									   Source="..\..\..\Images\arrow_down.png"
-									   Margin="-30 0 0 0"
+                               Grid.Column="1"
+                               HorizontalAlignment="Right"
 									   Panel.ZIndex="2"/>
                         <!--BR IZDANJA-->
                         <Button x:Name="btn_sort_brIzd"
 										Content=" Br. izdanja"
-										Width="85" 
+										Grid.Column="2" 
                                     HorizontalContentAlignment="Left"
                                 Click="btn_sort_brIzd_Click"/>
                         <Image x:Name="img_sort_brIzd" 
 									   Source="..\..\..\Images\arrow_down.png"
-									   Margin="-30 0 0 0"
+                               Grid.Column="2"
+                               HorizontalAlignment="Right"
 									   Panel.ZIndex="2"/>
                         <!--JEZICI-->
                         <Button x:Name="btn_sort_jezici"
 										Content="Jezici"
-										Width="150" 
+										Grid.Column="3" 
                                     Click="btn_sort_jezici_Click"/>
                         <Image x:Name="img_sort_jezici" 
 									   Source="..\..\..\Images\arrow_down.png"
-									   Margin="-30 0 0 0"
+                               Grid.Column="3"
+                               HorizontalAlignment="Right"
 									   Panel.ZIndex="2"/>
                         <!--IZD KUCE-->
                         <Button x:Name="btn_sort_zanrovi"
 							Content="Žanrovi"
-							Width="140" 
+							Grid.Column="4" 
                                 Click="btn_sort_zanrovi_Click"/>
                         <Image x:Name="img_sort_zanrovi" 
 						   Source="..\..\..\Images\arrow_down.png"
-						   Margin="-30 0 0 0"
+                               HorizontalAlignment="Right"
+                               Grid.Column="4"
 						   Panel.ZIndex="2"/>
                         <!--IZD KUCE-->
                         <Button x:Name="btn_sort_izdKuce"
 										Content="Izdavačke kuće"
-										Width="140" 
+										Grid.Column="5" 
                                     Click="btn_sort_izdKuce_Click"/>
                         <Image x:Name="img_sort_izdKuce" 
 									   Source="..\..\..\Images\arrow_down.png"
-									   Margin="-30 0 0 0"
+                               Grid.Column="5"
+                               HorizontalAlignment="Right"
 									   Panel.ZIndex="2"/>
                         <!--VR IYD-->
                         <Button x:Name="btn_sort_vrIzd"
                                 Content="Vreme izdanja"
-                                Width="120" 
+                                Grid.Column="6" 
                                 Click="btn_sort_vrIzd_Click"/>
                         <Image x:Name="img_sort_vrIzd" 
 Source="..\..\..\Images\arrow_down.png"
-Margin="-30 0 0 0"
+                               Grid.Column="6"
+                               HorizontalAlignment="Right"
 Panel.ZIndex="2"/>
                         <!--KORICE-->
                         <Button x:Name="btn_sort_korice"
 								Content="    Korice"
                                 HorizontalContentAlignment="Left"
-								Width="80" 
+								Grid.Column="7" 
                                 Click="btn_sort_korice_Click"/>
                         <Image x:Name="img_sort_korice" 
 								Source="..\..\..\Images\arrow_down.png"
-								Margin="-30 0 0 0"
+                               Grid.Column="7"
+                               HorizontalAlignment="Right"
 								Panel.ZIndex="2"/>
                         <!--BR STRANA-->
                         <Button x:Name="btn_sort_brStr"
 						        Content=" Br. strana"
                                 HorizontalContentAlignment="Left"
-						        Width="80" 
+						        Grid.Column="8" 
                                 Click="btn_sort_brStr_Click"/>
                         <Image x:Name="img_sort_brStr" 
 					            Source="..\..\..\Images\arrow_down.png"
-					            Margin="-30 0 0 0"
+                               Grid.Column="8"
+                               HorizontalAlignment="Right"
 					            Panel.ZIndex="2"/>
                         <!--VEL FONTA-->
                         <Button x:Name="btn_sort_velFonta"
 Content=" Veličina fonta"
                         HorizontalContentAlignment="Left"
-Width="100" 
+                                Grid.Column="9"
                                 Click="btn_sort_velFonta_Click"/>
                         <Image x:Name="img_sort_velFonta" 
 Source="..\..\..\Images\arrow_down.png"
-Margin="-30 0 0 0"
+                               Grid.Column="9"
+                               HorizontalAlignment="Right"
 Panel.ZIndex="2"/>
                         <!--FORMAT-->
                         <Button x:Name="btn_sort_format"
         Content=" Format"
         HorizontalContentAlignment="Left"
-        Width="80" 
+                                Grid.Column="10"
                                 Click="btn_sort_format_Click"/>
                         <Image x:Name="img_sort_format" 
         Source="..\..\..\Images\arrow_down.png"
-        Margin="-30 0 0 0"
+                               Grid.Column="10"
+                               HorizontalAlignment="Right"
         Panel.ZIndex="2"/>
                         <!--OGRANICENO-->
                         <Button x:Name="btn_sort_ograniceno"
         Content=" Ograničeno"
                                 HorizontalContentAlignment="Left"
-        Width="90" 
+                                Grid.Column="11"
                                 Click="btn_sort_ograniceno_Click"/>
                         <Image x:Name="img_sort_ograniceno" 
         Source="..\..\..\Images\arrow_down.png"
-        Margin="-30 0 0 0"
+                               Grid.Column="11"
+                               HorizontalAlignment="Right"
         Panel.ZIndex="2"/>
-                    </StackPanel>
+                    </Grid>
 
                     <!--LIST OF EMPLOYED WORKERS-->
                     <ListView Name="Knjige"
@@ -167,6 +190,7 @@ ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                               MouseDoubleClick="Knjige_MouseDoubleClick">
                         <ListView.View>
                             <GridView>
+                                
                                 <GridViewColumn Width="130" DisplayMemberBinding="{Binding Naziv}"/>
                                 <GridViewColumn Width="130" DisplayMemberBinding="{Binding ListAutori}" />
                                 <GridViewColumn Width="85" DisplayMemberBinding="{Binding BrIzd}" />
@@ -179,7 +203,8 @@ ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                                 <GridViewColumn Width="100" DisplayMemberBinding="{Binding VelFonta}" />
                                 <GridViewColumn Width="80" DisplayMemberBinding="{Binding Format}" />
                                 <GridViewColumn Width="90">
-                                    <CheckBox IsChecked="{Binding OgranicenoBool}"></CheckBox></GridViewColumn>
+                                    <CheckBox IsChecked="{Binding OgranicenoBool}"></CheckBox>
+                                </GridViewColumn>
                             </GridView>
                         </ListView.View>
                     </ListView>
