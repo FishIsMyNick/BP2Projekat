@@ -25,9 +25,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 		private int _currentUser;
 		public BibliotekarMainView(Bibliotekar bibliotekar)
 		{
-
-			//mockDB = new MockDB();
-
 			InitializeComponent();
 
 			_currentUser = bibliotekar.IDRadnik;
@@ -45,13 +42,14 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         #region BUTTONS
         private void btn_Add_Book_Click(object sender, RoutedEventArgs e)
         {
-            Window addBookWindow = new BibBookWindow(_currentUser);
-            addBookWindow.Show();
+            Window BookWindow = new BibBookWindow(_currentUser);
+            BookWindow.Show();
         }
 
         private void btn_Edit_Book_Click(object sender, RoutedEventArgs e)
         {
-
+            Window BookWindow = new BibBookWindow(_currentUser);
+            BookWindow.Show();
         }
 
         private void btn_Add_News_Click(object sender, RoutedEventArgs e)

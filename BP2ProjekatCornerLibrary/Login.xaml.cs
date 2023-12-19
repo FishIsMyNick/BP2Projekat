@@ -23,6 +23,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
     /// </summary>
     public partial class Login : Window
     {
+        public static bool _testing = true;
         //private MockDB Mock;
         public Login()
         {
@@ -33,10 +34,14 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             //Mock = new MockDB();
             InitializeComponent();
 
+            if(_testing)
+            {
+                Window window = new BibBookWindow(1);
+                window.Show();
+                Close();
+                return;
+            }
             TryLogin();
-            //Window window = new AdminMainView();
-            //window.Show();
-            //Close();
         }
 
 

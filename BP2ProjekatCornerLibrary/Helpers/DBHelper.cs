@@ -46,9 +46,41 @@ namespace BP2ProjekatCornerLibrary.Helpers
             optionBuilder.UseSqlServer(connString);
             db = new CornerLibraryDbContext(optionBuilder.Options);
         }
-        public static object ExecuteQuery(string query)
+        public static object ExecuteQuery<T>(string query)
         {
-            return query;
+            List<string> columns = new List<string>();
+            List<T> ret = new List<T>();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            columns.Add(reader.GetName(i));
+                        }
+
+                        ClassPropertyValue[] values = new ClassPropertyValue[reader.FieldCount];
+                        for (int i = 0; i < values.Length; i++)
+                        {
+                            values[i] = new ClassPropertyValue(columns[i], reader[columns[i]]);
+                        }
+
+                        ret.Add(CreateInstance<T>(values));
+                    }
+                }
+                finally
+                {
+                    // Always call Close when done reading.
+                    reader.Close();
+                    connection.Close();
+                }
+                    return ret.Count > 0 ? ret : null;
+            }
         }
 
         #region NEW SHIT
@@ -144,39 +176,6 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 return TryEncapsulateInSingleQuote(value);
         }
         #endregion
-        public static bool ExecuteQuery(string query)
-        {
-            using (SqlConnection connection = new SqlConnection(connString))
-            {
-                SqlCommand command = new SqlCommand(query, connection);
-                connection.Open();
-                SqlDataReader reader = command.ExecuteReader();
-                try
-                {
-                    while (reader.Read())
-                    {
-                        for (int i = 0; i < reader.FieldCount; i++)
-                        {
-                            columns.Add(reader.GetName(i));
-                        }
-
-                        ClassPropertyValue[] values = new ClassPropertyValue[reader.FieldCount];
-                        for (int i = 0; i < values.Length; i++)
-                        {
-                            values[i] = new ClassPropertyValue(columns[i], reader[columns[i]]);
-                        }
-
-                        ret.Add(CreateInstance<T>(values));
-                    }
-                }
-                finally
-                {
-                    // Always call Close when done reading.
-                    reader.Close();
-                    connection.Close();
-                }
-            }
-        }
         #region GET
         //GET
         public static int GetListFromSQL<T>(out List<T> list, string sqlParameters = null) where T : new()
@@ -727,9 +726,8 @@ namespace BP2ProjekatCornerLibrary.Helpers
         }
         public static RasporedjenBibliotekar GetLatestRasporedjenBibliotekar(int idRadnik)
         {
-            SELECT* FROM table
-WHERE Dates IN(SELECT max(Dates) FROM table);
-            
+            RasporedjenBibliotekar rb = ExecuteQuery<RasporedjenBibliotekar>($"SELECT * FROM RasporedjenBibliotekar WHERE Dates IN(SELECT max(Dates) FROM RasporedjenBibliotekar);") as RasporedjenBibliotekar;
+            return rb;
         }
         //KURIR
         public static List<Kurir> GetAllKurirs(string args = null)
@@ -862,6 +860,15 @@ WHERE Dates IN(SELECT max(Dates) FROM table);
         {
             return GetListFromSQL<Pise>(args);
         }
+        public static List<Autor> GetAllBookAuthors(Knjiga k)
+        {
+            List<Autor> ret = new List<Autor>();
+            foreach (Pise p in GetAllPiseWithBook(k))
+            {
+                ret.Add(GetAutor(p.IDAutor));
+            }
+            return ret.Count > 0 ? ret : null;
+        }
         public static List<IzKnjigeAutor> GetAllIzmenaKnjigeAutor(string args = null)
         {
             return GetListFromSQL<IzKnjigeAutor>(args);
@@ -890,6 +897,13 @@ WHERE Dates IN(SELECT max(Dates) FROM table);
             return ret;
         }
         // RELACIJE
+        public static List<Jezik> GetAllBookJeziks(Knjiga k)
+        {
+            List<Jezik> ret = new List<Jezik>();
+            foreach (KnjigaNaJeziku knj in GetAllKnjigaNaJezikuWithBook(k))
+                ret.Add(GetJezik(knj.OZNJ));
+            return ret.Count > 0 ? ret : null;
+        }
         public static List<KnjigaNaJeziku> GetAllKnjigaNaJeziku(string args = null)
         {
             return GetListFromSQL<KnjigaNaJeziku>(args);
@@ -926,6 +940,14 @@ WHERE Dates IN(SELECT max(Dates) FROM table);
             return ret;
         }
         // RELACIJE
+
+        public static List<Zanr> GetAllBookZanrs(Knjiga k)
+        {
+            List<Zanr> ret = new List<Zanr>();
+            foreach (PripadaZanru pz in GetAllPripadaZanruWithBook(k))
+                ret.Add(GetZanr(pz.OZNZ));
+            return ret.Count > 0 ? ret : null;
+        }
         public static List<PripadaZanru> GetAllPripadaZanru(string args = null)
         {
             return GetListFromSQL<PripadaZanru>(args);
@@ -962,6 +984,13 @@ WHERE Dates IN(SELECT max(Dates) FROM table);
             return db.IzdKuca.ToList();
         }
         // RELACIJE
+        public static List<IzdKuca> GetAllBookIzdKucas(Knjiga k)
+        {
+            List<IzdKuca> ret = new List<IzdKuca>();
+            foreach (IzdajeKnjigu ik in GetAllIzdajeKnjiguWithBook(k))
+                ret.Add(GetIzdKuca(ik.IDIK));
+            return ret.Count > 0 ? ret : null;
+        }
         public static List<IzdajeKnjigu> GetAllIzdajeKnjigu(string args = null)
         {
             return GetListFromSQL<IzdajeKnjigu>(args);
@@ -978,6 +1007,10 @@ WHERE Dates IN(SELECT max(Dates) FROM table);
 
         #region KNJIGA
         // KNJIGA
+        public static Knjiga GetKnjiga(int id)
+        {
+            return GetFirstFromSQL<Knjiga>($"IDKnjiga={id}");
+        }
         public static List<Knjiga> GetAllKnjigas(string args = null)
         {
             return GetListFromSQL<Knjiga>(args);
@@ -1938,8 +1971,8 @@ WHERE Dates IN(SELECT max(Dates) FROM table);
         public static bool UpdateSStivo(SerijskoStivo sstivo, List<IzdKuca> izdKuce, List<Jezik> jezici)
         {
             if (!UpdateSStivo(sstivo)) return false;
-            if(!UpdateSStivoJezik(sstivo, jezici)) return false;
-            if(!UpdateSStivoIzdKuca(sstivo, izdKuce)) return false;
+            if (!UpdateSStivoJezik(sstivo, jezici)) return false;
+            if (!UpdateSStivoIzdKuca(sstivo, izdKuce)) return false;
             return true;
         }
         public static bool UpdateSStivo(SerijskoStivo sstivo)
@@ -2014,7 +2047,7 @@ WHERE Dates IN(SELECT max(Dates) FROM table);
         // izdanje
         public static bool UpdateIzdSStiva(IzdanjeSStiva iss)
         {
-            if(!UpdateItemWithSQL<IzdanjeSStiva>(iss)) return false;
+            if (!UpdateItemWithSQL<IzdanjeSStiva>(iss)) return false;
             return AddIzmenaIzdSStiva(new IzmenaIzdSStiva(iss, _currentUserID));
         }
         // izmene

@@ -36,7 +36,7 @@ namespace BP2ProjekatCornerLibrary.Models
         }
         public Knjiga() : base() { }
 
-        public Knjiga(string naziv, int brIzd, int godIzd, string vrIzd, int brStrana, int velicinaFonta, int korice, int ograniceno, string? format)
+        public Knjiga(string naziv, int brIzd, int? godIzd, string? vrIzd, int? brStrana, int? velicinaFonta, int? korice, int? ograniceno, string? format)
         {
             IDKnjiga = -1;
             Naziv = naziv;
@@ -49,7 +49,7 @@ namespace BP2ProjekatCornerLibrary.Models
             Ograniceno = ograniceno;
             Format = format;
         }
-        public Knjiga(int id, string naziv, int brIzd, int godIzd, string vrIzd, int brStrana, int velicinaFonta, int korice, int ograniceno, string? format)
+        public Knjiga(int id, string naziv, int brIzd, int? godIzd, string? vrIzd, int? brStrana, int? velicinaFonta, int? korice, int? ograniceno, string? format)
         {
             IDKnjiga = id;
             Naziv = naziv;
@@ -62,7 +62,7 @@ namespace BP2ProjekatCornerLibrary.Models
             Ograniceno = ograniceno;
             Format = format;
         }
-        public Knjiga(string naziv, string brIzd, string vrIzd, string brStrana, string velicinaFonta, string korice, bool? ograniceno, string format)
+        public Knjiga(string naziv, string brIzd, string? vrIzd, string? brStrana, string? velicinaFonta, string? korice, bool? ograniceno, string? format)
         {
             Naziv = naziv;
             BrIzd = int.Parse(brIzd);
