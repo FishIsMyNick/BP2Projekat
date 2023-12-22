@@ -5,8 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker"
         mc:Ignorable="d"
-        Height="700" Width="1325">
+        MinHeight="700" MinWidth="1325">
+    
     <Grid>
+        
         <Grid Name="view_select">
             <StackPanel Orientation="Vertical">
                 <Grid Name="grd_TopBar" 
@@ -39,18 +41,18 @@
                     <!--SORT BUTTONS-->
                     <Grid Panel.ZIndex="1" Margin="1 0 1 0" Height="25">
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition Width="9*"/>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition Width="15*"/>
-                            <ColumnDefinition Width="8*"/>
-                            <ColumnDefinition Width="9*"/>
-                            <ColumnDefinition Width="11*"/>
-                            <ColumnDefinition Width="7*"/>
-                            <ColumnDefinition Width="10*"/>
+                            <ColumnDefinition Width="15*" MinWidth="130"/>
+                            <ColumnDefinition Width="15*" MinWidth="130"/>
+                            <ColumnDefinition Width="9*" MaxWidth="80"/>
+                            <ColumnDefinition Width="15*" MinWidth="130"/>
+                            <ColumnDefinition Width="15*" MinWidth="130"/>
+                            <ColumnDefinition Width="15*" MinWidth="130"/>
+                            <ColumnDefinition Width="15*" MinWidth="130"/>
+                            <ColumnDefinition Width="8*" MaxWidth="70"/>
+                            <ColumnDefinition Width="9*" MaxWidth="75"/>
+                            <ColumnDefinition Width="11*" MaxWidth="97"/>
+                            <ColumnDefinition Width="7*" MaxWidth="65"/>
+                            <ColumnDefinition Width="10*" MaxWidth="88"/>
                         </Grid.ColumnDefinitions>
                         <!--NAZIV-->
                         <Button x:Name="btn_sort_naziv"
@@ -180,34 +182,59 @@ Panel.ZIndex="2"/>
         Panel.ZIndex="2"/>
                     </Grid>
 
-                    <!--LIST OF EMPLOYED WORKERS-->
+                    <!--New grid design-->
                     <ListView Name="Knjige"
-										Width="1325"
-										Height="447"
-										Margin="0 -25 0 0"
-										Background="White"
-ScrollViewer.HorizontalScrollBarVisibility="Disabled"
-                              MouseDoubleClick="Knjige_MouseDoubleClick">
+								Background="White"
+                                ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                                Margin="-3 -25 0 0 "
+                                MouseDoubleClick="Knjige_MouseDoubleClick">
+                        
                         <ListView.View>
                             <GridView>
-                                
-                                <GridViewColumn Width="130" DisplayMemberBinding="{Binding Naziv}"/>
-                                <GridViewColumn Width="130" DisplayMemberBinding="{Binding ListAutori}" />
-                                <GridViewColumn Width="85" DisplayMemberBinding="{Binding BrIzd}" />
-                                <GridViewColumn Width="150" DisplayMemberBinding="{Binding ListJezici}" />
-                                <GridViewColumn Width="140" DisplayMemberBinding="{Binding ListZanrovi}" />
-                                <GridViewColumn Width="140" DisplayMemberBinding="{Binding ListIzdKuce}" />
-                                <GridViewColumn Width="120" DisplayMemberBinding="{Binding DispVrIzd}" />
-                                <GridViewColumn Width="80" DisplayMemberBinding="{Binding DispKorice}" />
-                                <GridViewColumn Width="80" DisplayMemberBinding="{Binding BrStr}" />
-                                <GridViewColumn Width="100" DisplayMemberBinding="{Binding VelFonta}" />
-                                <GridViewColumn Width="80" DisplayMemberBinding="{Binding Format}" />
-                                <GridViewColumn Width="90">
-                                    <CheckBox IsChecked="{Binding OgranicenoBool}"></CheckBox>
+                                <GridViewColumn DisplayMemberBinding="{Binding Naziv}" Width="{Binding ElementName=btn_sort_naziv, Path=ActualWidth}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding ListAutori}" Width="{Binding ElementName=btn_sort_autori, Path=ActualWidth}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding BrIzd}" Width="{Binding ElementName=btn_sort_brIzd, Path=ActualWidth}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding ListJezici}"  Width="{Binding ElementName=btn_sort_jezici, Path=ActualWidth}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding ListZanrovi}" Width="{Binding ElementName=btn_sort_zanrovi, Path=ActualWidth}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding ListIzdKuce}" Width="{Binding ElementName=btn_sort_izdKuce, Path=ActualWidth}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding DispVrIzd}" Width="{Binding ElementName=btn_sort_vrIzd, Path=ActualWidth}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding DispKorice}" Width="{Binding ElementName=btn_sort_korice, Path=ActualWidth}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding BrStrana}" Width="{Binding ElementName=btn_sort_brStr, Path=ActualWidth}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding VelicinaFonta}" Width="{Binding ElementName=btn_sort_velFonta, Path=ActualWidth}"/>
+                                <GridViewColumn DisplayMemberBinding="{Binding Format}" Width="{Binding ElementName=btn_sort_format, Path=ActualWidth}"/>
+                                <GridViewColumn Header="OgranicenoBool" Width="{Binding ElementName=btn_sort_format, Path=ActualWidth}">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <CheckBox IsChecked="{Binding OgranicenoBool}" Margin="28 0 0 0">
+                                                <CheckBox.Content>
+                                                    <ContentControl ContentTemplate="{x:Null}" />
+                                                </CheckBox.Content>
+                                            </CheckBox>
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
                                 </GridViewColumn>
                             </GridView>
                         </ListView.View>
+                        Test Text
                     </ListView>
+
+                    <!--This is the hidden helper Grid which does the resizing -->
+                    <Grid Visibility="Hidden">
+                        <Grid.ColumnDefinitions>
+                            <!--Width is bound to width of the first GridViewColumn -->
+                            <ColumnDefinition Width="{Binding ElementName=col1, Path=ActualWidth}"/>
+                            <!--Width is set to "Fill"-->
+                            <ColumnDefinition Width="*"/>
+                            <!--Correction Width-->
+                            <ColumnDefinition Width="10"/>
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="1*"/>
+                        </Grid.RowDefinitions>
+                        <!--This is the hidden helper Field which is used to bind to, using the "Fill" column of the helper grid-->
+                        <Grid Grid.Column="0" x:Name="helperField"/>
+                    </Grid>
+
                 </StackPanel>
             </StackPanel>
         </Grid>
@@ -511,4 +538,5 @@ ScrollViewer.HorizontalScrollBarVisibility="Disabled"
             </StackPanel>
         </Grid>
     </Grid>
+    
 </Window>

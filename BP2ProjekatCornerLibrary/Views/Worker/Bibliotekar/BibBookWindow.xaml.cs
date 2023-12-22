@@ -116,6 +116,30 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 },
                 null, "XIV vek p.n.e.",
                 244, 14, 1, 1, "A4"));
+            Knjige.Items.Add(new ViewKnjiga(2,
+               "Neki dugi naziv knjige", 44,
+               new List<Autor>()
+               {
+                    new Autor(3, "Branko Radičević "),
+                    new Autor(4, "Adolf Dubistenschlos")
+               },
+               new List<Jezik>()
+               {
+                    new Jezik("SRB", "Srpski"),
+                    new Jezik("DEU", "Nemački")
+               },
+               new List<Zanr>()
+               {
+                    new Zanr("COM", "Komedija"),
+                    new Zanr("DRAM", "Drama")
+               },
+               new List<IzdKuca>()
+               {
+                    new IzdKuca(1, "Pingvin"),
+                    new IzdKuca(2, "Matica Srpska")
+               },
+               2002, null,
+               244, 14, 1, 0, "A5"));
 
             cb_Format.Items.Clear();
             cb_Format.Items.Add(new Format("A4"));
@@ -206,6 +230,10 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             InitLbxJezici(k);
             InitLbxZanrovi(k);
             InitLbxIzdKuce(k);
+        }
+        private void FillInputFields(ViewKnjiga vk)
+        {
+            FillInputFields(vk as Knjiga);
         }
         private void InitCbFormati(Knjiga k)
         {
@@ -501,16 +529,22 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         {
 
         }
-        #endregion
-
         private void btn_sort_brIzd_Click(object sender, RoutedEventArgs e)
         {
 
         }
+        #endregion
+
 
         private void Knjige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-
+            var sel = ((ListView)sender).SelectedValue;
+            if (sel != null)
+            {
+                FillInputFields(sel as ViewKnjiga);
+                SetEditView();
+            }
         }
+
     }
 }

@@ -1,17 +1,23 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Windows.Controls;
 
 namespace BP2ProjekatCornerLibrary.Models.NonContext
 {
-    public class ViewKnjiga : Knjiga
+    public class ViewKnjiga : Knjiga, INotifyPropertyChanged
     {
+        public event PropertyChangedEventHandler? PropertyChanged;
+
         private List<Autor>? Autori;
         private List<Jezik>? Jezici;
         private List<Zanr>? Zanrovi;
         private List<IzdKuca>? IzdKuce;
+
+
         public string ListAutori
         {
             get
@@ -68,7 +74,7 @@ namespace BP2ProjekatCornerLibrary.Models.NonContext
                 return ret;
             }
         }
-        public bool OgranicenoBool { get => Ograniceno != 0; }
+        public bool OgranicenoBool { get => Ograniceno != 0; set { try { _ = value; } catch (Exception e) { OgranicenoBool = OgranicenoBool; } } }
         public string DispVrIzd
         {
             get
@@ -78,7 +84,7 @@ namespace BP2ProjekatCornerLibrary.Models.NonContext
                     if (VrIzd == null) return "Nepoznato";
                     else return VrIzd;
                 }
-                else return GodIzd.ToString();
+                else return GodIzd.ToString() + ".";
             }
         }
         public string DispKorice
