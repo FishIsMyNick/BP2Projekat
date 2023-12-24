@@ -35,6 +35,19 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
         public Knjiga() : base() { }
+        public Knjiga(Knjiga k) : base()
+        {
+            IDKnjiga = k.IDKnjiga;
+            Naziv = k.Naziv;
+            BrIzd = k.BrIzd;
+            GodIzd = k.GodIzd;
+            VrIzd = k.VrIzd;
+            BrStrana = k.BrStrana;
+            VelicinaFonta = k.VelicinaFonta;
+            Korice = k.Korice;
+            Ograniceno = k.Ograniceno;
+            Format = k.Format;
+        }
 
         public Knjiga(string naziv, int brIzd, int? godIzd, string? vrIzd, int? brStrana, int? velicinaFonta, int? korice, int? ograniceno, string? format)
         {

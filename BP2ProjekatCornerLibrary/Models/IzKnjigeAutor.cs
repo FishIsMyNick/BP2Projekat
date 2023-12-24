@@ -36,12 +36,12 @@ namespace BP2ProjekatCornerLibrary.Models
             IDAutor = iDAutor;
             DatVr = DateTime.Now;
         }
-        public IzKnjigeAutor(Pise p, int idBib)
+        public IzKnjigeAutor(Pise p, int idBib, DateTime? datVr = null)
                     {
             IDKnjiga = p.IDKnjiga;
             IDAutor = p.IDAutor;
             IDBib = idBib;
-            DatVr = DateTime.Now;
+            DatVr = datVr == null ? DateTime.Now : (DateTime)datVr;
         }
     }
 }

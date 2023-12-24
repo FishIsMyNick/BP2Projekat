@@ -236,7 +236,7 @@ insert into IzdajeKnjigu(IDKnjiga, IDIK) values
 	(8, 3)
 	;
 
-insert into KnjigaULokalu(IDKnjiga, IDBK, DatVrIzmene, Koilcina) values
+insert into KnjigaULokalu(IDKnjiga, IDBK, DatVrIzmene, Kolicina) values
 	(1, 1, '2022-1-1 14:00:00', 3),	
 	(1, 1, '2022-1-1 14:01:00', 4),	
 	(2, 1, '2022-1-1 14:00:00', 6),	
@@ -310,7 +310,7 @@ insert into IzdanjeSStiva(IDSStivo, BrIzd, DatIzd, Cena) values
 	(3, 6, '2023-7-22', 250.00)
 	;
 
-insert into IzdSStivoULokalu(IDSStivo, BrIzd, IDBK, DatVrIzmene, Koilcina) values
+insert into IzdSStivoULokalu(IDSStivo, BrIzd, IDBK, DatVrIzmene, Kolicina) values
 	(1, 1, 1, '2023-2-1 15:00:00', 2),
 	(1, 2, 1, '2023-2-2 15:00:00', 2),
 	(1, 3, 1, '2023-2-3 15:00:00', 2),

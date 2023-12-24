@@ -236,7 +236,34 @@ namespace BP2ProjekatCornerLibrary.Helpers
             }
             return true;
         }
-        public static bool StringNumber(string input)
+        public static bool VrIzd(string input)
+        {
+            if (input.Length <= 0)
+            {
+                MessageBox.Show("Polje za vreme izdavanja mora biti popunjeno!");
+                return false;
+            }
+            if (input.Contains(' '))
+            {
+                string[] s = input.Split(' ');
+                if (!string.Concat(s).All(char.IsLetterOrDigit))
+                {
+                    MessageBox.Show("Vreme izdavanja ne sme sadržati specijalne karaktere!");
+                    return false;
+                }
+            }
+            else
+            {
+                if(input.EndsWith('.')) input = input.Substring(0, input.Length - 1);
+                if (!input.All(char.IsLetterOrDigit))
+                {
+                    MessageBox.Show("Vreme izdavanja ne sme sadržati specijalne karaktere!");
+                    return false;
+                }
+            }
+            return true;
+        }
+        public static bool StreetName(string input)
         {
             if (input.Length <= 0)
             {

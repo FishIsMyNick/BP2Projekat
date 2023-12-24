@@ -310,7 +310,7 @@ create table KnjigaULokalu(
 	IDKnjiga int not null,
 	IDBK int not null,
 	DatVrIzmene datetime not null,
-	Koilcina int not null,
+	Kolicina int not null,
 
 	constraint KUL_PK primary key (IDKnjiga, IDBK, DatVrIzmene),
 	
@@ -375,7 +375,7 @@ create table IzdSStivoULokalu(
 	BrIzd int not null,
 	IDBK int not null,
 	DatVrIzmene datetime not null,
-	Koilcina int not null,
+	Kolicina int not null,
 
 	constraint SSUL_PK primary key (IDSStivo, BrIzd, IDBK, DatVrIzmene),
 	

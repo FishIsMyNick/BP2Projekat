@@ -46,7 +46,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private bool _passwordChanged = false;
         private bool _usernameChanged = false;
 
-        public AdminEditWorkerWindow(iDynamicListView caller = null, int selectedID = -1, TipRadnika tip = TipRadnika.Bibliotekar)
+        public AdminEditWorkerWindow(iDynamicListView caller = null, int selectedID = -1, iTipRadnika tip = iTipRadnika.Bibliotekar)
         {
             _caller = caller;
             InitializeComponent();
@@ -55,7 +55,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
             if (selectedID > 0)
             {
-                if (tip == TipRadnika.Bibliotekar)
+                if (tip == iTipRadnika.Bibliotekar)
                 {
                     _selectedWorker = DBHelper.GetBibliotekar(selectedID);
                     SetUpInputFields(MakeRadnikView(_selectedWorker));
@@ -278,7 +278,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 Validator.Day(GetDan) &&
                 Validator.Month(GetMesec) &&
                 Validator.Year(GetGodina) &&
-                Validator.StringNumber(GetUlica) &&
+                Validator.StreetName(GetUlica) &&
                 Validator.StreetNumber(GetBroj) &&
                 Validator.Date(GetDan,GetMesec, GetGodina)
                 );

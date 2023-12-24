@@ -30,18 +30,18 @@ namespace BP2ProjekatCornerLibrary.Models
 
         public IzKnjigeIzdKuca() : base() { }
 
-        public IzKnjigeIzdKuca(int iDKnjiga, int iDBib, int iDIK)
+        public IzKnjigeIzdKuca(int iDKnjiga, int iDBib, int iDIK, DateTime? datVr)
         {
             IDKnjiga = iDKnjiga;
             IDBib = iDBib;
             IDIK = iDIK;
-            DatVr = DateTime.Now;
+            DatVr = datVr == null ? DateTime.Now : (DateTime)datVr;
         }
-        public IzKnjigeIzdKuca(IzdajeKnjigu i, int idBib) 
+        public IzKnjigeIzdKuca(IzmenaKnjige izk, int idik, int idBib) 
         {
-            IDKnjiga = i.IDKnjiga;
-            IDIK = i.IDIK;
-            DatVr = DateTime.Now;
+            IDKnjiga = izk.IDKnjiga;
+            IDIK = idik;
+            DatVr = izk.DatVr;
             IDBib = idBib;
         }
     }

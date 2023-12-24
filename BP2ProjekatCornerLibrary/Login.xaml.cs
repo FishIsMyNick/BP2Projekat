@@ -23,7 +23,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
     /// </summary>
     public partial class Login : Window
     {
-        public static bool _testing = true;
+        public static bool _testing = false;
         //private MockDB Mock;
         public Login()
         {

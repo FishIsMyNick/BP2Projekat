@@ -30,12 +30,12 @@ namespace BP2ProjekatCornerLibrary.Models
 
         public IzKnjigeJezik() : base() { }
 
-        public IzKnjigeJezik(int iDKnjiga, string oZNJ, int iDBib)
+        public IzKnjigeJezik(int iDKnjiga, string oZNJ, int iDBib, DateTime? datVr = null)
         {
             IDKnjiga = iDKnjiga;
             IDBib = iDBib;
             OZNJ = oZNJ ?? throw new ArgumentNullException(nameof(oZNJ));
-            DatVr = DateTime.Now;
+            DatVr = datVr == null ? DateTime.Now : (DateTime)datVr;
         }
     }
 }

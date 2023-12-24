@@ -10,41 +10,41 @@ namespace BP2ProjekatCornerLibrary.Helpers
 {
     public static class EnumsHelper
     {
-        public static TipRadnika GetTipRadnika(object obj)
+        public static iTipRadnika GetTipRadnika(object obj)
         {
             Type tip = obj.GetType();
-            if (tip == typeof(Admin)) return TipRadnika.Admin;
-            if (tip == typeof(Bibliotekar)) return TipRadnika.Bibliotekar;
-            if (tip == typeof(Kurir)) return TipRadnika.Kurir;
-            return TipRadnika.Kurir;
+            if (tip == typeof(Admin)) return iTipRadnika.Admin;
+            if (tip == typeof(Bibliotekar)) return iTipRadnika.Bibliotekar;
+            if (tip == typeof(Kurir)) return iTipRadnika.Kurir;
+            return iTipRadnika.Kurir;
         }
-        public static TipRadnika GetTipRadnika(string tipRadnika)
+        public static iTipRadnika GetTipRadnika(string tipRadnika)
         {
             switch (tipRadnika)
             {
-                case "Administrator": return TipRadnika.Admin;
-                case "Bibliotekar": return TipRadnika.Bibliotekar;
-                case "Kurir": return TipRadnika.Kurir;
-                default: return TipRadnika.Kurir;
+                case "Administrator": return iTipRadnika.Admin;
+                case "Bibliotekar": return iTipRadnika.Bibliotekar;
+                case "Kurir": return iTipRadnika.Kurir;
+                default: return iTipRadnika.Kurir;
             }
         }
-        public static TipRadnika GetTipRadnika(int tipRadnika)
+        public static iTipRadnika GetTipRadnika(int tipRadnika)
         {
             switch (tipRadnika)
             {
-                case 1: return TipRadnika.Admin;
-                case 2: return TipRadnika.Bibliotekar;
-                case 3: return TipRadnika.Kurir;
-                default: return TipRadnika.Kurir;
+                case 1: return iTipRadnika.Admin;
+                case 2: return iTipRadnika.Bibliotekar;
+                case 3: return iTipRadnika.Kurir;
+                default: return iTipRadnika.Kurir;
             }
         }
-        public static string GetTipRadnikaString(TipRadnika tipRadnika)
+        public static string GetTipRadnikaString(iTipRadnika tipRadnika)
         {
             switch (tipRadnika)
             {
-                case TipRadnika.Admin: return "Administrator";
-                case TipRadnika.Bibliotekar: return "Bibliotekar";
-                case TipRadnika.Kurir: return "Kurir";
+                case iTipRadnika.Admin: return "Administrator";
+                case iTipRadnika.Bibliotekar: return "Bibliotekar";
+                case iTipRadnika.Kurir: return "Kurir";
                 default: return null;
             }
         }
@@ -59,13 +59,31 @@ namespace BP2ProjekatCornerLibrary.Helpers
             }
         }
 
-
+        public static string GetKorice(int? korice)
+        {
+            switch (korice)
+            {
+                case 0: return "Meke";
+                case 1: return "Tvrde";
+            }
+            return "Meke";
+        }
+        public static string GetKorice(iKorice korice)
+        {
+            return korice.ToString();
+        }
     }
 
-    public enum TipRadnika
+    public enum iTipRadnika
     {
         Admin = 1,
         Bibliotekar,
         Kurir
+    }
+
+    public enum iKorice
+    {
+        Meke = 0,
+        Tvrde
     }
 }

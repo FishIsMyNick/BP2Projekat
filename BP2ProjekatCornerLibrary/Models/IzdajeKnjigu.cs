@@ -30,5 +30,11 @@ namespace BP2ProjekatCornerLibrary.Models
             this.IDKnjiga = IDKnjiga;
             this.IDIK = IDIK;
         }
+
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is IzdajeKnjigu)) return false;
+            return (obj as IzdajeKnjigu).IDKnjiga == this.IDKnjiga && (obj as IzdajeKnjigu).IDIK == this.IDIK;
+        }
     }
 }

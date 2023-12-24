@@ -49,144 +49,76 @@
 							<ColumnDefinition Width="1*"/>
 							<ColumnDefinition Width="1*"/>
 							<ColumnDefinition Width="1*"/>
-							<ColumnDefinition Width="1*"/>
-							<ColumnDefinition Width="1*"/>
-							<ColumnDefinition Width="1*"/>
-							<ColumnDefinition Width="1*"/>
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="10*"/>
 							<RowDefinition Height="10*"/>
 						</Grid.RowDefinitions>
 
-						<Button Name="btn_Add_Book" 
+						<Button Name="btn_Book" 
 						Grid.Column="0"
 						Grid.Row="0"
 						Margin="20 100"
 						FontSize="50" 
-						Content="Dodaj&#10;knjigu"
-								Click="btn_Add_Book_Click"/>
+						Content="Uredi&#10;Knjige"
+								Click="btn_Book_Click"/>
 
-						<Button Name="btn_Edit_Book" 
+						<Button Name="btn_News" 
 						Grid.Column="0"
 						Grid.Row="1"
 						Margin="20 100"
 						FontSize="50" 
-						Content="Izmeni&#10;knjigu"
-								Click="btn_Edit_Book_Click"/>
+						Content=" Uredi&#10;Novine"
+								Click="btn_News_Click"/>
 
-						<Button Name="btn_Add_News" 
+						<Button Name="btn_Autor" 
 						Grid.Column="1"
 						Grid.Row="0"
 						Margin="20 100"
 						FontSize="50" 
-						Content=" Dodaj&#10;novine"
-								Click="btn_Add_News_Click"/>
+						Content=" Uredi&#10;Autore"
+								Click="btn_Autor_Click"/>
 
-						<Button Name="btn_Edit_News" 
+						<Button Name="btn_Magazine" 
 						Grid.Column="1"
 						Grid.Row="1"
 						Margin="20 100"
 						FontSize="50" 
-						Content="Izmeni&#10;novine"
-								Click="btn_Edit_News_Click"/>
+						Content="   Uredi&#10;Magazine"
+								Click="btn_Magazine_Click"/>
 
-						<Button Name="btn_Add_Izd_Nov" 
+						<Button Name="btn_IzdKuca" 
 						Grid.Column="2"
 						Grid.Row="0"
 						Margin="20 100"
 						FontSize="50" 
-						Content=" Dodaj&#10;izdanje&#10;novina"
-								Click="btn_Add_Izd_Nov_Click"/>
+						Content="   Uredi&#10;Izdavačke&#10;    Kuće"
+								Click="btn_IzdKuca_Click"/>
 
-						<Button Name="btn_Edit_Izd_Nov" 
+						<Button Name="btn_Izd_Nov" 
 						Grid.Column="2"
 						Grid.Row="1"
 						Margin="20 100"
 						FontSize="50" 
-						Content="Izmeni&#10;izdanje&#10;novina"
-								Click="btn_Edit_Izd_Nov_Click"/>
+						Content=" Uredi&#10;Izdanje&#10;Novina"
+								Click="btn_Izd_Nov_Click"/>
 
-						<Button Name="btn_Add_Magazin" 
-						Grid.Column="3"
-						Grid.Row="0"
-						Margin="20 100"
-						FontSize="50" 
-						Content="  Dodaj &#10;magazin"
-								Click="btn_Add_Magazin_Click"/>
-						
-						<Button Name="btn_Edit_Magazin" 
-						Grid.Column="3"
-						Grid.Row="1"
-						Margin="20 100"
-						FontSize="50" 
-						Content=" Izmeni&#10;magazin"
-								Click="btn_Edit_Magazin_Click"/>
-
-
-						<Button Name="btn_Add_Izd_Mag" 
-						Grid.Column="4"
-						Grid.Row="0"
-						Margin="20 100"
-						FontSize="45" 
-						Content="   Dodaj&#10;  izdanje&#10;magazina"
-								Click="btn_Add_Izd_Mag_Click"/>
-
-						<Button Name="btn_Edit_Izd_Mag" 
-						Grid.Column="4"
-						Grid.Row="1"
-						Margin="20 100"
-						FontSize="45" 
-						Content="  Izmeni&#10;  izdanje&#10;magazina"
-								Click="btn_Edit_Izd_Mag_Click"/>
-
-						<Button Name="btn_Add_Autor" 
-						Grid.Column="5"
-						Grid.Row="0"
-						Margin="20 100"
-						FontSize="50" 
-						Content=" Dodaj&#10;autora"
-								Click="btn_Add_Autor_Click"/>
-
-						<Button Name="btn_Edit_Autor" 
-						Grid.Column="5"
-						Grid.Row="1"
-						Margin="20 100"
-						FontSize="50" 
-						Content="Izmeni&#10;autora"
-								Click="btn_Edit_Autor_Click"/>
-
-						<Button Name="btn_Add_Izd_Kuca" 
-						Grid.Column="6"
-						Grid.Row="0"
-						Margin="20 100"
-						FontSize="45" 
-						Content="   Dodaj&#10;izdavačku&#10;    kuću"
-								Click="btn_Add_Izd_Kuca_Click"/>
-
-						<Button Name="btn_Edit_Izd_Kuca" 
-						Grid.Column="6"
-						Grid.Row="1"
-						Margin="20 100"
-						FontSize="45" 
-						Content="  Izmeni&#10;izdavačku&#10;    kuću"
-								Click="btn_Edit_Izd_Kuca_Click"/>
-						
-						<Button Name="btn_Add_SuL" 
+									
+						<Button Name="btn_SuL" 
 						Grid.Column="7"
 						Grid.Row="0"
 						Margin="20 100"
 						FontSize="50" 
-						Content="  Dodaj&#10;   štivo&#10;u lokalu"
-								Click="btn_Add_Izd_Kuca_Click"/>
+						Content="  Uredi&#10;   štivo&#10;u lokalu"
+								Click="btn_SuL_Click"/>
 
-						<Button Name="btn_Remove_SuL" 
+						<Button Name="btn_Izd_Mag" 
 						Grid.Column="7"
 						Grid.Row="1"
 						Margin="20 100"
 						FontSize="50" 
-						Content="  Izbaci&#10;   štivo&#10;u lokalu"
-								Click="btn_Remove_SuL_Click"/>
+						Content="   Uredi&#10;  Izdanje&#10;Magazina"
+								Click="btn_Izd_Mag_Click"/>
 					</Grid>
 				</StackPanel>
 			</Border>

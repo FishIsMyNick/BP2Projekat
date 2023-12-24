@@ -26,24 +26,23 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         iDbResult result;
         private int _currentUser;
         private int _lokalID;
+        private Knjiga _knjigaToEdit;
 
-        private List<Autor> _selectedAutors = new List<Autor>();
-        private List<Jezik> _selectedJeziks = new List<Jezik>();
-        private List<Zanr> _selectedZanrs = new List<Zanr>();
-        private List<IzdKuca> _selectedIKs = new List<IzdKuca>();
+        private List<Autor> _selectedAutors { get => lbx_Autori.SelectedItems as List<Autor>; }
+        private List<Jezik> _selectedJeziks { get => lbx_Jezici.SelectedItems as List<Jezik>; }
+        private List<Zanr> _selectedZanrs { get => lbx_Zanrovi.SelectedItems as List<Zanr>; }
+        private List<IzdKuca> _selectedIKs { get => lbx_IzdKuce.SelectedItems as List<IzdKuca>; }
         public BibBookWindow(int currentUser, Knjiga toEdit = null)
         {
-
-
             InitializeComponent();
-
-            if (toEdit == null)
+            _knjigaToEdit = toEdit;
+            if (_knjigaToEdit == null)
             {
-                SetAddView();
+                SetSelectView();
             }
             else
             {
-                SetEditView();
+                SetEditView(toEdit);
             }
 
 
@@ -77,9 +76,13 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
             lb_Edit_Book.Visibility = Visibility.Collapsed;
             grd_Edit_Btns.Visibility = Visibility.Collapsed;
+
+            view_edit.Visibility = Visibility.Visible;
+            view_select.Visibility = Visibility.Collapsed;
         }
-        private void SetEditView()
+        private void SetEditView(Knjiga k)
         {
+            _knjigaToEdit = k;
             lb_Add_Book.Visibility = Visibility.Collapsed;
             grd_Add_Btns.Visibility = Visibility.Collapsed;
             lb_AddHere.Visibility = Visibility.Collapsed;
@@ -87,6 +90,17 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
             lb_Edit_Book.Visibility = Visibility.Visible;
             grd_Edit_Btns.Visibility = Visibility.Visible;
+
+            FillInputFields(k);
+
+            view_edit.Visibility = Visibility.Visible;
+            view_select.Visibility = Visibility.Collapsed;
+        }
+        private void SetSelectView()
+        {
+            Knjige.SelectedItem = null;
+            view_edit.Visibility = Visibility.Collapsed;
+            view_select.Visibility = Visibility.Visible;
         }
 
         private void MakeMockLists()
@@ -161,14 +175,16 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
         private void FillBookList()
         {
-            Knjiga k = DBHelper.GetKnjiga(1);
-            List<Autor> autori = DBHelper.GetAllBookAuthors(k);
-            List<Jezik> jezici = DBHelper.GetAllBookJeziks(k);
-            List<Zanr> zanrovi = DBHelper.GetAllBookZanrs(k);
-            List<IzdKuca> iks = DBHelper.GetAllBookIzdKucas(k);
-
             Knjige.Items.Clear();
-            Knjige.Items.Add(new ViewKnjiga(k.IDKnjiga, k.Naziv, k.BrIzd, autori, jezici, zanrovi, iks, k.GodIzd, k.VrIzd, k.BrStrana, k.VelicinaFonta, k.Korice, k.Ograniceno, k.Format));
+            foreach (Knjiga k in DBHelper.GetAllKnjigas())
+            {
+                List<Autor> autori = DBHelper.GetAllBookAuthors(k);
+                List<Jezik> jezici = DBHelper.GetAllBookJeziks(k);
+                List<Zanr> zanrovi = DBHelper.GetAllBookZanrs(k);
+                List<IzdKuca> iks = DBHelper.GetAllBookIzdKucas(k);
+
+                Knjige.Items.Add(new ViewKnjiga(k.IDKnjiga, k.Naziv, k.BrIzd, autori, jezici, zanrovi, iks, k.GodIzd, k.VrIzd, k.BrStrana, k.VelicinaFonta, k.Korice, k.Ograniceno, k.Format));
+            }
         }
         private void FillFormati()
         {
@@ -181,7 +197,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private void FillAutoriList()
         {
             lbx_Autori.Items.Clear();
-            lbx_Autori.Items.Add(new Autor(-1, "+ Dodaj novog autora"));
+           // lbx_Autori.Items.Add(new Autor(-1, "+ Dodaj novog autora"));
             foreach (Autor a in DBHelper.GetAllAutors())
             {
                 lbx_Autori.Items.Add(a);
@@ -190,7 +206,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private void FillJeziciList()
         {
             lbx_Jezici.Items.Clear();
-            lbx_Jezici.Items.Add(new Jezik("0000", "+ Dodaj nov jezik"));
+           // lbx_Jezici.Items.Add(new Jezik("0000", "+ Dodaj nov jezik"));
             foreach (Jezik j in DBHelper.GetAllJeziks())
             {
                 lbx_Jezici.Items.Add(j);
@@ -199,7 +215,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private void FillZanroviList()
         {
             lbx_Zanrovi.Items.Clear();
-            lbx_Zanrovi.Items.Add(new Zanr("0000", "+ Dodaj nov žanr"));
+            //lbx_Zanrovi.Items.Add(new Zanr("0000", "+ Dodaj nov žanr"));
             foreach (Zanr z in DBHelper.GetAllZanrs())
             {
                 lbx_Zanrovi.Items.Add(z);
@@ -208,13 +224,32 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private void FillIKList()
         {
             lbx_IzdKuce.Items.Clear();
-            lbx_IzdKuce.Items.Add(new IzdKuca(-1, "+ Dodaj novu izdavačku kuću"));
+            //lbx_IzdKuce.Items.Add(new IzdKuca(-1, "+ Dodaj novu izdavačku kuću"));
             foreach (IzdKuca ik in DBHelper.GetAllIzdKucas())
             {
                 lbx_IzdKuce.Items.Add(ik);
             }
         }
 
+        private void ClearInputFields()
+        {
+            tb_Name.Text = "";
+            tb_BrIzd.Text = "";
+            tb_VrIzd.Text = "";
+            tb_BrStr.Text = "";
+            tb_VelFont.Text = "";
+            cb_Korice.Text = "";
+            cb_Ogr.IsChecked = false;
+            cb_AddHere.IsChecked = false;
+            tb_Kolicina.Text = "";
+
+            InitCbFormati();
+            InitCbKorice();
+            InitLbxAutori();
+            InitLbxJezici();
+            InitLbxZanrovi();
+            InitLbxIzdKuce();
+        }
         private void FillInputFields(Knjiga k)
         {
             tb_Name.Text = k.Naziv;
@@ -226,6 +261,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             cb_Ogr.IsChecked = Convert.ToBoolean(k.Ograniceno);
 
             InitCbFormati(k);
+            InitCbKorice(k);
             InitLbxAutori(k);
             InitLbxJezici(k);
             InitLbxZanrovi(k);
@@ -235,8 +271,20 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         {
             FillInputFields(vk as Knjiga);
         }
-        private void InitCbFormati(Knjiga k)
+        private void InitCbKorice(Knjiga k = null)
         {
+            if (k != null)
+            {
+                cb_Korice.Text = EnumsHelper.GetKorice(k.Korice);
+            }
+            else
+            {
+                cb_Korice.SelectedIndex = 0;
+            }
+        }
+        private void InitCbFormati(Knjiga k = null)
+        {
+            if (k == null) { cb_Format.SelectedIndex = 0; return; }
             string nf = k.Format;
             foreach (Format f in cb_Format.Items)
             {
@@ -247,8 +295,9 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 }
             }
         }
-        private void InitLbxAutori(Knjiga k)
+        private void InitLbxAutori(Knjiga k = null)
         {
+            if (k == null) { lbx_Autori.SelectedItems.Clear(); return; }
             List<Autor> autors = new List<Autor>();
             List<int> ids = new List<int>();
             foreach (Pise p in DBHelper.GetAllPiseWithBook(k))
@@ -262,12 +311,13 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 if (ids.Contains((lbx_Autori.Items[i] as Autor).IDAutor))
                 {
                     (lbx_Autori as ListBox).SelectedItems.Add(lbx_Autori.Items[i]);
-                    _selectedAutors.Add(lbx_Autori.Items[i] as Autor);
+                    //_selectedAutors.Add(lbx_Autori.Items[i] as Autor);
                 }
             }
         }
-        private void InitLbxJezici(Knjiga k)
+        private void InitLbxJezici(Knjiga k = null)
         {
+            if (k == null) { lbx_Jezici.SelectedItems.Clear(); return; }
             List<Jezik> jeziks = new List<Jezik>();
             List<string> oznjs = new List<string>();
             foreach (KnjigaNaJeziku knj in DBHelper.GetAllKnjigaNaJezikuWithBook(k))
@@ -281,12 +331,13 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 if (oznjs.Contains((lbx_Jezici.Items[i] as Jezik).OZNJ))
                 {
                     (lbx_Jezici as ListBox).SelectedItems.Add(lbx_Jezici.Items[i]);
-                    _selectedJeziks.Add(lbx_Jezici.Items[i] as Jezik);
+                    //_selectedJeziks.Add(lbx_Jezici.Items[i] as Jezik);
                 }
             }
         }
-        private void InitLbxZanrovi(Knjiga k)
+        private void InitLbxZanrovi(Knjiga k = null)
         {
+            if (k == null) { lbx_Zanrovi.SelectedItems.Clear(); return; }
             List<Zanr> zanrovi = new List<Zanr>();
             List<string> oznzs = new List<string>();
             foreach (PripadaZanru pz in DBHelper.GetAllPripadaZanruWithBook(k))
@@ -300,12 +351,13 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 if (oznzs.Contains((lbx_Zanrovi.Items[i] as Zanr).OZNZ))
                 {
                     (lbx_Zanrovi as ListBox).SelectedItems.Add(lbx_Zanrovi.Items[i]);
-                    _selectedZanrs.Add(lbx_Zanrovi.Items[i] as Zanr);
+                    //_selectedZanrs.Add(lbx_Zanrovi.Items[i] as Zanr);
                 }
             }
         }
-        private void InitLbxIzdKuce(Knjiga k)
+        private void InitLbxIzdKuce(Knjiga k = null)
         {
+            if (k == null) { lbx_IzdKuce.SelectedItems.Clear(); return; }
             List<IzdKuca> izdKuce = new List<IzdKuca>();
             List<int> idiks = new List<int>();
             foreach (IzdajeKnjigu izk in DBHelper.GetAllIzdajeKnjiguWithBook(k))
@@ -319,7 +371,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 if (idiks.Contains((lbx_IzdKuce.Items[i] as IzdKuca).IDIK))
                 {
                     (lbx_IzdKuce as ListBox).SelectedItems.Add(lbx_IzdKuce.Items[i]);
-                    _selectedIKs.Add(lbx_IzdKuce.Items[i] as IzdKuca);
+                    //_selectedIKs.Add(lbx_IzdKuce.Items[i] as IzdKuca);
                 }
             }
         }
@@ -327,9 +379,9 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private bool ValidateInputFields()
         {
-            return Validator.StringNumber(tb_Name.Text.Trim())
+            return Validator.Naziv(tb_Name.Text.Trim())
                 && Validator.PozNumber(tb_BrIzd.Text.Trim())
-                && Validator.StringNumber(tb_VrIzd.Text.Trim())
+                && Validator.VrIzd(tb_VrIzd.Text.Trim())
                 && Validator.PozNumber(tb_BrIzd.Text.Trim())
                 && Validator.PozNumber(tb_BrStr.Text.Trim())
                 && Validator.PozNumber(tb_VelFont.Text.Trim())
@@ -354,21 +406,21 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             int bookId = 0;
             if ((bookId = DBHelper.AddBookOnly(toAdd)) == 0) return;
 
-            foreach (Jezik j in _selectedJeziks)
+            foreach (var j in lbx_Jezici.SelectedItems)
             {
-                if (!DBHelper.AddKnjigaNaJeziku(new KnjigaNaJeziku(bookId, j.OZNJ))) return;
+                if (!DBHelper.AddKnjigaNaJeziku(new KnjigaNaJeziku(bookId, (j as Jezik).OZNJ))) return;
             }
-            foreach (Zanr z in _selectedZanrs)
+            foreach (var z in lbx_Zanrovi.SelectedItems)
             {
-                if (!DBHelper.AddPripadaZanru(new PripadaZanru(bookId, z.OZNZ))) return;
+                if (!DBHelper.AddPripadaZanru(new PripadaZanru(bookId, (z as Zanr).OZNZ))) return;
             }
-            foreach (Autor a in _selectedAutors)
+            foreach (var a in lbx_Autori.SelectedItems)
             {
-                if (!DBHelper.AddPise(new Pise(bookId, a.IDAutor))) return;
+                if (!DBHelper.AddPise(new Pise(bookId, (a as Autor).IDAutor))) return;
             }
-            foreach (IzdKuca ik in _selectedIKs)
+            foreach (var ik in lbx_IzdKuce.SelectedItems)
             {
-                if (!DBHelper.AddIzdajeKnjigu(new IzdajeKnjigu(bookId, ik.IDIK))) return;
+                if (!DBHelper.AddIzdajeKnjigu(new IzdajeKnjigu(bookId, (ik as IzdKuca).IDIK))) return;
             }
 
             if (cb_AddHere.IsChecked == true)
@@ -376,13 +428,19 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 if (!DBHelper.AddKnjigaULokalu(bookId, _lokalID, int.Parse(tb_Kolicina.Text)))
                 {
                     MessageBox.Show("Došlo je do greške pri čuvanju knjige u lokalu!");
+                    return;
                 }
             }
+
+            MessageBox.Show("Uspešno ste dodali novu knjigu!");
+            RefreshLists();
+            SetSelectView();
         }
 
         private void btn_Add_Cancel_Click(object sender, RoutedEventArgs e)
         {
-
+            ClearInputFields();
+            SetSelectView();
         }
 
         #endregion
@@ -390,18 +448,97 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         #region EDIT
         private void btn_Edit_Confirm_Click(object sender, RoutedEventArgs e)
         {
+            if (!ValidateInputFields()) return;
 
+            Knjiga toEdit = new Knjiga(_knjigaToEdit);
+            toEdit.Naziv = tb_Name.Text;
+            toEdit.BrIzd = int.Parse(tb_BrIzd.Text);
+            toEdit.BrStrana = int.Parse(tb_BrStr.Text);
+            int godIzd = 0;
+            if (int.TryParse(tb_VrIzd.Text, out godIzd))
+            {
+                toEdit.GodIzd = godIzd;
+                toEdit.VrIzd = null;
+            }
+            else
+            {
+                toEdit.VrIzd = tb_VrIzd.Text;
+                toEdit.GodIzd = null;
+            }
+            toEdit.VelicinaFonta = int.Parse(tb_VelFont.Text);
+            toEdit.Korice = cb_Korice.SelectedIndex;
+            toEdit.Ograniceno = cb_Ogr.IsChecked == true ? 1 : 0;
+            toEdit.Format = cb_Format.Text;
+
+            List<Autor> aToEdit = new List<Autor>();
+            foreach (var a in lbx_Autori.SelectedItems)
+            {
+                aToEdit.Add(a as Autor);
+            }
+            List<Zanr> zToEdit = new List<Zanr>();
+            foreach (var a in lbx_Zanrovi.SelectedItems)
+            {
+                zToEdit.Add(a as Zanr);
+            }
+            List<IzdKuca> iToEdit = new List<IzdKuca>();
+            foreach (var a in lbx_IzdKuce.SelectedItems)
+            {
+                iToEdit.Add(a as IzdKuca);
+            }
+            List<Jezik> jToEdit = new List<Jezik>();
+            foreach (var a in lbx_Jezici.SelectedItems)
+            {
+                jToEdit.Add(a as Jezik);
+            }
+
+            if (!DBHelper.UpdateKnjiga(toEdit, aToEdit, iToEdit, zToEdit, jToEdit))
+            {
+                MessageBox.Show("Došlo je do greške pri čuvanju podataka!");
+                return;
+            }
+            MessageBox.Show("Uspešno ste izmenili podatke o knjizi!");
+            RefreshLists();
+            SetSelectView();
         }
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!DBHelper.DeleteKnjiga(_knjigaToEdit))
+            {
+                MessageBox.Show("Došlo je do greške pri brisanju podataka!");
+                return;
+            }
+            MessageBox.Show("Uspešno ste obrisali podatke o knjizi!");
+            RefreshLists();
+            SetSelectView();
         }
 
         private void btn_Edit_Cancel_Click(object sender, RoutedEventArgs e)
         {
+            SetSelectView();
+        }
+
+        #endregion
+
+        #region COMMON
+        private void btn_Add_Autor_Click(object sender, RoutedEventArgs e)
+        {
 
         }
 
+        private void btn_Add_Jezik_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Add_Zanr_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
+
+        private void btn_Add_IK_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
         #endregion
 
         #endregion
@@ -431,26 +568,14 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
         private void lbx_Autori_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            //Tuple<int,Autor> a = ((ListBox)sender).SelectedItem as Tuple<int, Autor>;
-            ////List<Autor> ass = ((ListBox)sender).SelectedItems as List<Autor>;
-
             //var sel = ((ListBox)sender).SelectedValue;
             //if (sel == null) return;
 
-            //int i = ((ListBox)sender).SelectedIndex;
-            //if (i < 0) return;
-
-            //ListBoxItem gg = FindDescendant<ListBoxItem>(lbx_Autori.ItemContainerGenerator.ContainerFromIndex(i) as ListBoxItem);
-
-            //if (gg.IsSelected)
+            //if (((ListBox)sender).SelectedIndex == 0)
             //{
-            //    _selectedAutors.Add(sel as Autor);
+            //    //TODO: AddAutor window
+            //lbx_Autori.SelectedItems.RemoveAt(0);
             //}
-            //else
-            //{
-            //    _selectedAutors.Remove(sel as Autor);
-            //}
-            //return;
         }
 
         private void lbx_Jezici_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -471,7 +596,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private void btn_Add_Book_Click(object sender, RoutedEventArgs e)
         {
-
+            ClearInputFields();
+            SetAddView();
         }
         #region SORTING
 
@@ -538,11 +664,11 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private void Knjige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var sel = ((ListView)sender).SelectedValue;
+            ViewKnjiga sel = ((ListView)sender).SelectedValue as ViewKnjiga;
             if (sel != null)
             {
-                FillInputFields(sel as ViewKnjiga);
-                SetEditView();
+                FillInputFields(sel);
+                SetEditView(DBHelper.GetKnjiga(sel.IDKnjiga));
             }
         }
 

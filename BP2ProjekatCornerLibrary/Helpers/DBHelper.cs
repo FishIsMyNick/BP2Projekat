@@ -46,7 +46,43 @@ namespace BP2ProjekatCornerLibrary.Helpers
             optionBuilder.UseSqlServer(connString);
             db = new CornerLibraryDbContext(optionBuilder.Options);
         }
-        public static object ExecuteQuery<T>(string query)
+        public static object ExecuteQueryFirst<T>(string query) where T : new()
+        {
+            List<string> columns = new List<string>();
+            T ret = new T();
+            using (SqlConnection connection = new SqlConnection(connString))
+            {
+                SqlCommand command = new SqlCommand(query, connection);
+                connection.Open();
+                SqlDataReader reader = command.ExecuteReader();
+                try
+                {
+                    while (reader.Read())
+                    {
+                        for (int i = 0; i < reader.FieldCount; i++)
+                        {
+                            columns.Add(reader.GetName(i));
+                        }
+
+                        ClassPropertyValue[] values = new ClassPropertyValue[reader.FieldCount];
+                        for (int i = 0; i < values.Length; i++)
+                        {
+                            values[i] = new ClassPropertyValue(columns[i], reader[columns[i]]);
+                        }
+
+                        ret = CreateInstance<T>(values);
+                    }
+                }
+                finally
+                {
+                    // Always call Close when done reading.
+                    reader.Close();
+                    connection.Close();
+                }
+                return ret;
+            }
+        }
+        public static object ExecuteQueryList<T>(string query)
         {
             List<string> columns = new List<string>();
             List<T> ret = new List<T>();
@@ -79,10 +115,9 @@ namespace BP2ProjekatCornerLibrary.Helpers
                     reader.Close();
                     connection.Close();
                 }
-                    return ret.Count > 0 ? ret : null;
+                return ret.Count > 0 ? ret : null;
             }
         }
-
         #region NEW SHIT
         #region PUBLIC
         public static bool CheckDbNotNull(object obj)
@@ -651,7 +686,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
         {
             return GetAllEmployees("DatOtp IS NOT NULL");
         }
-        public static Zaposleni GetEmployee(int workerId, TipRadnika tip)
+        public static Zaposleni GetEmployee(int workerId, iTipRadnika tip)
         {
             List<Zaposleni> workerList = new List<Zaposleni>();
             workerList.AddRange(GetListFromSQL<Admin>($"IDRadnik={workerId}"));
@@ -682,14 +717,14 @@ namespace BP2ProjekatCornerLibrary.Helpers
         {
             return GetAllWorkers("DatOtp IS NOT NULL");
         }
-        public static Radnik GetWorker(int workerId, TipRadnika tip)
+        public static Radnik GetWorker(int workerId, iTipRadnika tip)
         {
             List<Radnik> workerList = new List<Radnik>();
-            if (tip == TipRadnika.Bibliotekar)
+            if (tip == iTipRadnika.Bibliotekar)
             {
                 workerList.AddRange(GetListFromSQL<Bibliotekar>($"IDRadnik={workerId}"));
             }
-            else if (tip == TipRadnika.Kurir)
+            else if (tip == iTipRadnika.Kurir)
             {
                 workerList.AddRange(GetListFromSQL<Kurir>($"IDRadnik={workerId}"));
                 if (workerList.Count == 0)
@@ -726,8 +761,8 @@ namespace BP2ProjekatCornerLibrary.Helpers
         }
         public static RasporedjenBibliotekar GetLatestRasporedjenBibliotekar(int idRadnik)
         {
-            RasporedjenBibliotekar rb = ExecuteQuery<RasporedjenBibliotekar>($"SELECT * FROM RasporedjenBibliotekar WHERE Dates IN(SELECT max(Dates) FROM RasporedjenBibliotekar);") as RasporedjenBibliotekar;
-            return rb;
+            var rb = ExecuteQueryFirst<RasporedjenBibliotekar>($"SELECT * FROM RasporedjenBibliotekar WHERE DatVr IN(SELECT max(DatVr) FROM RasporedjenBibliotekar);");
+            return rb as RasporedjenBibliotekar;
         }
         //KURIR
         public static List<Kurir> GetAllKurirs(string args = null)
@@ -791,17 +826,17 @@ namespace BP2ProjekatCornerLibrary.Helpers
         {
             return GetFirstFromSQL<KorisnickiNalog>($"KorisnickoIme='{username}'");
         }
-        public static KorisnickiNalog GetKorisnickiNalog(int id, TipRadnika tip)
+        public static KorisnickiNalog GetKorisnickiNalog(int id, iTipRadnika tip)
         {
-            if (tip == TipRadnika.Bibliotekar)
+            if (tip == iTipRadnika.Bibliotekar)
             {
                 return GetBibNalog(id);
             }
-            else if (tip == TipRadnika.Kurir)
+            else if (tip == iTipRadnika.Kurir)
             {
                 return GetKurirNalog(id);
             }
-            else if (tip == TipRadnika.Admin)
+            else if (tip == iTipRadnika.Admin)
             {
                 return GetAdminNalog(id);
             }
@@ -1770,7 +1805,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
             foreach (Knjiga k in GetAllKnjigas($"Format={MakeSqlValue(oldFormatKey)}"))
             {
                 k.Format = format.NazivFormata;
-                if (!UpdateKnjiga(k)) return false;
+                if (UpdateKnjiga(k) == null) return false;
             }
             return DeleteItemWithSQL<Format>(new Format(oldFormatKey));
         }
@@ -1819,20 +1854,23 @@ namespace BP2ProjekatCornerLibrary.Helpers
         #region KNJIGA
         public static bool UpdateKnjiga(Knjiga knjiga, List<Autor> autori, List<IzdKuca> izdKuce, List<Zanr> zanrovi, List<Jezik> jezici)
         {
-            if (!UpdateKnjiga(knjiga)) return false;
-            if (!UpdateKnjigaAutor(knjiga, autori)) return false;
-            if (!UpdateKnjigaJezik(knjiga, jezici)) return false;
-            if (!UpdateKnjigaZanr(knjiga, zanrovi)) return false;
-            if (!UpdateKnjigaIzdKuca(knjiga, izdKuce)) return false;
+            IzmenaKnjige ik = new IzmenaKnjige();
+            if ((ik = UpdateKnjiga(knjiga)) == null) return false;
+            if (!UpdateKnjigaAutor(ik, autori)) return false;
+            if (!UpdateKnjigaJezik(ik, jezici)) return false;
+            if (!UpdateKnjigaZanr(ik, zanrovi)) return false;
+            if (!UpdateKnjigaIzdKuca(ik, izdKuce)) return false;
             return true;
         }
-        public static bool UpdateKnjiga(Knjiga knjiga)
+        public static IzmenaKnjige UpdateKnjiga(Knjiga knjiga)
         {
-            if (!UpdateItemWithSQL<Knjiga>(knjiga)) return false;
+            IzmenaKnjige ret = new IzmenaKnjige(knjiga, _currentUserID);
+            if (!UpdateItemWithSQL<Knjiga>(knjiga)) return null;
 
-            return AddIzmenaKnjige(new IzmenaKnjige(knjiga, _currentUserID));
+            if( AddIzmenaKnjige(ret) != null) return ret;
+            return null;
         }
-        public static bool UpdateKnjigaAutor(Knjiga k, List<Autor> newList)
+        public static bool UpdateKnjigaAutor(IzmenaKnjige k, List<Autor> newList)
         {
             List<Pise> newAutorList = new List<Pise>();
             foreach (Autor autor in newList)
@@ -1840,7 +1878,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 newAutorList.Add(new Pise(k.IDKnjiga, autor.IDAutor));
             }
 
-            List<Pise> pises = GetAllPiseWithBook(k);
+            List<Pise> pises = GetAllPiseWithBook(GetBook(k.IDKnjiga));
             List<Pise> toRemove = new List<Pise>();
             List<Pise> toAdd = new List<Pise>();
 
@@ -1860,11 +1898,11 @@ namespace BP2ProjekatCornerLibrary.Helpers
             foreach (Pise pise in toAdd)
             {
                 if (!AddPise(pise)) return false;
-                if (!AddIzmenaKnjigeAutor(new IzKnjigeAutor(pise, _currentUserID))) return false;
+                if (!AddIzmenaKnjigeAutor(new IzKnjigeAutor(pise, _currentUserID, k.DatVr))) return false;
             }
             return true;
         }
-        public static bool UpdateKnjigaJezik(Knjiga k, List<Jezik> newList)
+        public static bool UpdateKnjigaJezik(IzmenaKnjige k, List<Jezik> newList)
         {
             List<KnjigaNaJeziku> newKnJList = new List<KnjigaNaJeziku>();
             foreach (Jezik jezik in newList)
@@ -1872,17 +1910,17 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 newKnJList.Add(new KnjigaNaJeziku(k.IDKnjiga, jezik.OZNJ));
             }
 
-            List<KnjigaNaJeziku> jezici = GetAllKnjigaNaJezikuWithBook(k);
+            List<KnjigaNaJeziku> jezici = GetAllKnjigaNaJezikuWithBook(GetBook(k.IDKnjiga));
             List<KnjigaNaJeziku> toRemove = new List<KnjigaNaJeziku>();
             List<KnjigaNaJeziku> toAdd = new List<KnjigaNaJeziku>();
 
-            foreach (KnjigaNaJeziku knj in jezici)
+            foreach (KnjigaNaJeziku starKnj in jezici)
             {
-                if (!newKnJList.Contains(knj)) toRemove.Add(knj);
+                if (!newKnJList.Contains(starKnj)) toRemove.Add(starKnj);
             }
-            foreach (KnjigaNaJeziku knj in newKnJList)
+            foreach (KnjigaNaJeziku novKnj in newKnJList)
             {
-                if (!jezici.Contains(knj)) toAdd.Add(knj);
+                if (!jezici.Contains(novKnj)) toAdd.Add(novKnj);
             }
 
             foreach (KnjigaNaJeziku knj in toRemove)
@@ -1892,11 +1930,11 @@ namespace BP2ProjekatCornerLibrary.Helpers
             foreach (KnjigaNaJeziku knj in toAdd)
             {
                 if (!AddKnjigaNaJeziku(knj)) return false;
-                if (!AddIzmenaKnjigeJezik(new IzKnjigeJezik(knj.IDKnjiga, knj.OZNJ, _currentUserID))) return false;
+                if (!AddIzmenaKnjigeJezik(new IzKnjigeJezik(knj.IDKnjiga, knj.OZNJ, _currentUserID, k.DatVr))) return false;
             }
             return true;
         }
-        public static bool UpdateKnjigaZanr(Knjiga k, List<Zanr> newList)
+        public static bool UpdateKnjigaZanr(IzmenaKnjige k, List<Zanr> newList)
         {
             List<PripadaZanru> newPZList = new List<PripadaZanru>();
             foreach (Zanr z in newList)
@@ -1904,7 +1942,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 newPZList.Add(new PripadaZanru(k.IDKnjiga, z.OZNZ));
             }
 
-            List<PripadaZanru> pripadaZanru = GetAllPripadaZanruWithBook(k);
+            List<PripadaZanru> pripadaZanru = GetAllPripadaZanruWithBook(GetBook(k.IDKnjiga));
             List<PripadaZanru> toRemove = new List<PripadaZanru>();
             List<PripadaZanru> toAdd = new List<PripadaZanru>();
 
@@ -1924,11 +1962,11 @@ namespace BP2ProjekatCornerLibrary.Helpers
             foreach (PripadaZanru pz in toAdd)
             {
                 if (!AddPripadaZanru(pz)) return false;
-                if (!AddIzmenaPripadaZanru(new IzKnjigeZanr(pz.IDKnjiga, pz.OZNZ, _currentUserID))) return false;
+                if (!AddIzmenaPripadaZanru(new IzKnjigeZanr(pz.IDKnjiga, pz.OZNZ, _currentUserID, k.DatVr))) return false;
             }
             return true;
         }
-        public static bool UpdateKnjigaIzdKuca(Knjiga k, List<IzdKuca> newList)
+        public static bool UpdateKnjigaIzdKuca(IzmenaKnjige k, List<IzdKuca> newList)
         {
             List<IzdajeKnjigu> newIKList = new List<IzdajeKnjigu>();
             foreach (IzdKuca ik in newList)
@@ -1936,7 +1974,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 newIKList.Add(new IzdajeKnjigu(k.IDKnjiga, ik.IDIK));
             }
 
-            List<IzdajeKnjigu> izdaje = GetAllIzdajeKnjiguWithBook(k);
+            List<IzdajeKnjigu> izdaje = GetAllIzdajeKnjiguWithBook(GetBook(k.IDKnjiga));
             List<IzdajeKnjigu> toRemove = new List<IzdajeKnjigu>();
             List<IzdajeKnjigu> toAdd = new List<IzdajeKnjigu>();
 
@@ -1956,7 +1994,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
             foreach (IzdajeKnjigu ik in toAdd)
             {
                 if (!AddIzdajeKnjigu(ik)) return false;
-                if (!AddIzmenaIzdajeKnjigu(new IzKnjigeIzdKuca(ik.IDKnjiga, ik.IDIK, _currentUserID))) return false;
+                if (!AddIzmenaIzdajeKnjigu(new IzKnjigeIzdKuca(k, ik.IDIK, _currentUserID))) return false;
             }
             return true;
         }
@@ -2305,7 +2343,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
             foreach (Knjiga k in GetAllKnjigas($"Format={MakeSqlValue(format.NazivFormata)}"))
             {
                 k.Format = null;
-                if (!UpdateKnjiga(k)) return false;
+                if (UpdateKnjiga(k) == null) return false;
             }
             foreach (SerijskoStivo s in GetAllSStivo($"Format={MakeSqlValue(format.NazivFormata)}"))
             {
