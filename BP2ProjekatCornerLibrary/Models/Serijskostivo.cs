@@ -48,5 +48,13 @@ namespace BP2ProjekatCornerLibrary.Models
             Format = format;
             Period = period;
         }
+        public SerijskoStivo (SerijskoStivo clone) : base()
+        {
+            IDSStivo = clone.IDSStivo;
+            Naziv = clone.Naziv;
+            TipStiva = clone.TipStiva;
+            Format = clone.Format;
+            Period = clone.Period;
+        }
     }
 }

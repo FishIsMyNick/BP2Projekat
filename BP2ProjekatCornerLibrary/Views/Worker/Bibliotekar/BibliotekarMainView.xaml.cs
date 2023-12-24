@@ -1,5 +1,6 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
 using BP2ProjekatCornerLibrary.Models;
+using BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -23,7 +24,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     {
         //private MockDB mockDB;
         private int _currentUser;
-        public BibliotekarMainView(Bibliotekar bibliotekar)
+        public BibliotekarMainView(Models.Bibliotekar bibliotekar)
         {
             InitializeComponent();
 
@@ -49,7 +50,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private void btn_News_Click(object sender, RoutedEventArgs e)
         {
-
+            Window newsWindow = new BibNewsWindow(_currentUser);
+            newsWindow.Show();
         }
 
         private void btn_Autor_Click(object sender, RoutedEventArgs e)

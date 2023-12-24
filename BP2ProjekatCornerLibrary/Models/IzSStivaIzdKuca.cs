@@ -45,5 +45,12 @@ namespace BP2ProjekatCornerLibrary.Models
             IDIK = i.IDIK;
             DatVr = DateTime.Now;
         }
+        public IzSStivaIzdKuca(IzmenaSStiva i, int idik, int idBib)
+        {
+            IDSStivo = i.IDSStivo;
+            IDBib = idBib;
+            IDIK = idik;
+            DatVr = i.DatVr;
+        }
     }
 }

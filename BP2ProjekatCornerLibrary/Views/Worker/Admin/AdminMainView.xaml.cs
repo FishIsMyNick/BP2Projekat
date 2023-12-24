@@ -75,7 +75,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             foreach (Radnik radnik in radniks)
             {
                 KorisnickiNalog nalog = new KorisnickiNalog();
-                if (radnik.GetType() == typeof(Bibliotekar))
+                if (radnik.GetType() == typeof(Models.Bibliotekar))
                     nalog = DBHelper.GetBibNalog(radnik.IDRadnik);
                 else if (radnik.GetType() == typeof(Kurir))
                     nalog = DBHelper.GetKurirNalog(radnik.IDRadnik);
@@ -90,7 +90,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             foreach (Radnik radnik in radniks)
             {
                 KorisnickiNalog nalog = new KorisnickiNalog();
-                if (radnik.GetType() == typeof(Bibliotekar))
+                if (radnik.GetType() == typeof(Models.Bibliotekar))
                     nalog = DBHelper.GetBibNalog(radnik.IDRadnik);
                 else if (radnik.GetType() == typeof(Kurir))
                     nalog = DBHelper.GetKurirNalog(radnik.IDRadnik);

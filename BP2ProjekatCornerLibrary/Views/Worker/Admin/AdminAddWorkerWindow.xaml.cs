@@ -133,7 +133,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             switch (nalog.TipNaloga)
             {
                 case 2:
-                    Bibliotekar b = new Bibliotekar(-1, GetIme, GetPrezime, DateConverter.ToDateTime(GetDan, GetMesec, GetGodina), DateTime.Now, null, _adminID, DateTime.Now, GetUlica, GetBroj, GetPosBr, GetOZND);
+                    Models.Bibliotekar b = new Models.Bibliotekar(-1, GetIme, GetPrezime, DateConverter.ToDateTime(GetDan, GetMesec, GetGodina), DateTime.Now, null, _adminID, DateTime.Now, GetUlica, GetBroj, GetPosBr, GetOZND);
                     if (!DBHelper.AddWorkerWithAccount(b, nalog))
                     {
                         MessageBox.Show("Došlo je do greške pri dodavanju korisnika!");

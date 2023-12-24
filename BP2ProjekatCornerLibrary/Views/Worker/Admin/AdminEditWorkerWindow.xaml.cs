@@ -138,7 +138,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private RadnikView MakeRadnikView(Radnik r)
         {
             KorisnickiNalog nalog = null;
-            if (r.GetType() == typeof(Bibliotekar))
+            if (r.GetType() == typeof(Models.Bibliotekar))
                 nalog = DBHelper.GetBibNalog(r.IDRadnik);
             else if (r.GetType() == typeof(Kurir))
                 nalog = DBHelper.GetKurirNalog(r.IDRadnik);

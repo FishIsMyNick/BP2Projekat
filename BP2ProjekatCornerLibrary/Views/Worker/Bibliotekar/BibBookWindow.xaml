@@ -431,7 +431,7 @@ Panel.ZIndex="2"/>
 										Height="50" Width="150" 
 										HorizontalAlignment="Right"
 										FontSize="20"
-										Click="btn_Add_Jezik_Click">Dodaj jezik</Button>
+										Click="btn_Add_Jezik_Click" Visibility="Collapsed">Dodaj jezik</Button>
 							</StackPanel>
 
 							<StackPanel Orientation="Vertical" Grid.Row="2">
@@ -443,7 +443,8 @@ Panel.ZIndex="2"/>
 										Height="50" Width="150" 
 										HorizontalAlignment="Right"
 										FontSize="20"
-										Click="btn_Add_Zanr_Click">Dodaj žanr</Button>
+										Click="btn_Add_Zanr_Click"
+										Visibility="Collapsed">Dodaj žanr</Button>
 							</StackPanel>
 
 							<StackPanel Orientation="Vertical" Grid.Row="3">

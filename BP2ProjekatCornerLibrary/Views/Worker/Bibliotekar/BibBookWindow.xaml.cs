@@ -28,10 +28,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private int _lokalID;
         private Knjiga _knjigaToEdit;
 
-        private List<Autor> _selectedAutors { get => lbx_Autori.SelectedItems as List<Autor>; }
-        private List<Jezik> _selectedJeziks { get => lbx_Jezici.SelectedItems as List<Jezik>; }
-        private List<Zanr> _selectedZanrs { get => lbx_Zanrovi.SelectedItems as List<Zanr>; }
-        private List<IzdKuca> _selectedIKs { get => lbx_IzdKuce.SelectedItems as List<IzdKuca>; }
         public BibBookWindow(int currentUser, Knjiga toEdit = null)
         {
             InitializeComponent();
@@ -599,6 +595,18 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             ClearInputFields();
             SetAddView();
         }
+
+
+        private void Knjige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        {
+            ViewKnjiga sel = ((ListView)sender).SelectedValue as ViewKnjiga;
+            if (sel != null)
+            {
+                FillInputFields(sel);
+                SetEditView(DBHelper.GetKnjiga(sel.IDKnjiga));
+            }
+        }
+
         #region SORTING
 
         private void btn_Sort_naziv_Click(object sender, RoutedEventArgs e)
@@ -660,17 +668,5 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         }
         #endregion
-
-
-        private void Knjige_MouseDoubleClick(object sender, MouseButtonEventArgs e)
-        {
-            ViewKnjiga sel = ((ListView)sender).SelectedValue as ViewKnjiga;
-            if (sel != null)
-            {
-                FillInputFields(sel);
-                SetEditView(DBHelper.GetKnjiga(sel.IDKnjiga));
-            }
-        }
-
     }
 }

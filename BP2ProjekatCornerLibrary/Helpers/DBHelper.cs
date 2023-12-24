@@ -932,6 +932,13 @@ namespace BP2ProjekatCornerLibrary.Helpers
             return ret;
         }
         // RELACIJE
+        public static List<Jezik> GetAllSStivoJeziks(SerijskoStivo ss)
+        {
+            List<Jezik> ret = new List<Jezik>();
+            foreach (SStivoNaJeziku ssnj in GetAllSStivoNaJezikuWithSS(ss))
+                ret.Add(GetJezik(ssnj.OZNJ));
+            return ret.Count > 0 ? ret : null;
+        }
         public static List<Jezik> GetAllBookJeziks(Knjiga k)
         {
             List<Jezik> ret = new List<Jezik>();
@@ -1006,6 +1013,11 @@ namespace BP2ProjekatCornerLibrary.Helpers
         {
             return GetListFromSQL<Periodicnost>(args);
         }
+        public static List<Periodicnost> GetAllPeriodSorted()
+        {
+            return ExecuteQueryList<Periodicnost>($"SELECT * FROM Periodicnost ORDER BY Ucestalost ASC;") as List<Periodicnost>;
+        }
+        
         #endregion
 
         #region IZDAVACKA KUCA
@@ -1019,6 +1031,13 @@ namespace BP2ProjekatCornerLibrary.Helpers
             return db.IzdKuca.ToList();
         }
         // RELACIJE
+        public static List<IzdKuca> GetAllSStivoIzdKucas(SerijskoStivo ss)
+        {
+            List<IzdKuca> ret = new List<IzdKuca>();
+            foreach (IzdajeSStivo iss in GetAllIzdajeSStivoWithSS(ss))
+                ret.Add(GetIzdKuca(iss.IDIK));
+            return ret.Count > 0 ? ret : null;
+        }
         public static List<IzdKuca> GetAllBookIzdKucas(Knjiga k)
         {
             List<IzdKuca> ret = new List<IzdKuca>();
@@ -1126,6 +1145,14 @@ namespace BP2ProjekatCornerLibrary.Helpers
         public static List<SerijskoStivo> GetAllSStivo(string args = null)
         {
             return GetListFromSQL<SerijskoStivo>(args);
+        }
+        public static List<SerijskoStivo> GetAllNews()
+        {
+            return GetListFromSQL<SerijskoStivo>("TipStiva=1");
+        }
+        public static List<SerijskoStivo> GetAllMagazines()
+        {
+            return GetListFromSQL<SerijskoStivo>("TipStiva=2");
         }
         public static List<IzdanjeSStiva> GetAllIzdanjeSStiva(string args = null)
         {
@@ -1800,7 +1827,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
             foreach (SerijskoStivo ss in GetAllSStivo($"Format={MakeSqlValue(oldFormatKey)}"))
             {
                 ss.Format = format.NazivFormata;
-                if (!UpdateSStivo(ss)) return false;
+                if (UpdateSStivo(ss) == null) return false;
             }
             foreach (Knjiga k in GetAllKnjigas($"Format={MakeSqlValue(oldFormatKey)}"))
             {
@@ -1822,7 +1849,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 foreach (SerijskoStivo ss in GetAllSStivo($"Period={MakeSqlValue(oldPeriodNaziv)}"))
                 {
                     ss.Period = periodicnost.PeriodIzd;
-                    if (!UpdateSStivo(ss)) return false;
+                    if (UpdateSStivo(ss) == null) return false;
                 }
                 foreach (IzmenaSStiva iss in GetAllIzmenaSStiva($"Period={MakeSqlValue(oldPeriodNaziv)}"))
                 {
@@ -1867,7 +1894,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
             IzmenaKnjige ret = new IzmenaKnjige(knjiga, _currentUserID);
             if (!UpdateItemWithSQL<Knjiga>(knjiga)) return null;
 
-            if( AddIzmenaKnjige(ret) != null) return ret;
+            if (AddIzmenaKnjige(ret) != null) return ret;
             return null;
         }
         public static bool UpdateKnjigaAutor(IzmenaKnjige k, List<Autor> newList)
@@ -2008,17 +2035,20 @@ namespace BP2ProjekatCornerLibrary.Helpers
         #region SERIJSKO STIVO
         public static bool UpdateSStivo(SerijskoStivo sstivo, List<IzdKuca> izdKuce, List<Jezik> jezici)
         {
-            if (!UpdateSStivo(sstivo)) return false;
-            if (!UpdateSStivoJezik(sstivo, jezici)) return false;
-            if (!UpdateSStivoIzdKuca(sstivo, izdKuce)) return false;
+            IzmenaSStiva iss = new IzmenaSStiva();
+            if ((iss = UpdateSStivo(sstivo)) == null) return false;
+            if (!UpdateSStivoJezik(iss, jezici)) return false;
+            if (!UpdateSStivoIzdKuca(iss, izdKuce)) return false;
             return true;
         }
-        public static bool UpdateSStivo(SerijskoStivo sstivo)
+        public static IzmenaSStiva UpdateSStivo(SerijskoStivo sstivo)
         {
-            if (!UpdateItemWithSQL<SerijskoStivo>(sstivo)) return false;
-            return AddIzmenaSStiva(new IzmenaSStiva(sstivo, _currentUserID));
+            IzmenaSStiva ret = new IzmenaSStiva(sstivo, _currentUserID);
+            if (!UpdateItemWithSQL<SerijskoStivo>(sstivo)) return null;
+            if (AddIzmenaSStiva(ret)) return ret;
+            return null;
         }
-        public static bool UpdateSStivoJezik(SerijskoStivo ss, List<Jezik> newList)
+        public static bool UpdateSStivoJezik(IzmenaSStiva ss, List<Jezik> newList)
         {
             List<SStivoNaJeziku> newSSnJList = new List<SStivoNaJeziku>();
             foreach (Jezik jezik in newList)
@@ -2026,7 +2056,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 newSSnJList.Add(new SStivoNaJeziku(ss.IDSStivo, jezik.OZNJ));
             }
 
-            List<SStivoNaJeziku> jezici = GetAllSStivoNaJezikuWithSS(ss);
+            List<SStivoNaJeziku> jezici = GetAllSStivoNaJezikuWithSS(GetSerijskoStivo(ss.IDSStivo));
             List<SStivoNaJeziku> toRemove = new List<SStivoNaJeziku>();
             List<SStivoNaJeziku> toAdd = new List<SStivoNaJeziku>();
 
@@ -2050,15 +2080,15 @@ namespace BP2ProjekatCornerLibrary.Helpers
             }
             return true;
         }
-        public static bool UpdateSStivoIzdKuca(SerijskoStivo ss, List<IzdKuca> newList)
+        public static bool UpdateSStivoIzdKuca(IzmenaSStiva izss, List<IzdKuca> newList)
         {
             List<IzdajeSStivo> newISSList = new List<IzdajeSStivo>();
             foreach (IzdKuca ik in newList)
             {
-                newISSList.Add(new IzdajeSStivo(ss.IDSStivo, ik.IDIK));
+                newISSList.Add(new IzdajeSStivo(izss.IDSStivo, ik.IDIK));
             }
 
-            List<IzdajeSStivo> izdaju = GetAllIzdajeSStivoWithSS(ss);
+            List<IzdajeSStivo> izdaju = GetAllIzdajeSStivoWithSS(GetSerijskoStivo(izss.IDSStivo));
             List<IzdajeSStivo> toRemove = new List<IzdajeSStivo>();
             List<IzdajeSStivo> toAdd = new List<IzdajeSStivo>();
 
@@ -2348,7 +2378,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
             foreach (SerijskoStivo s in GetAllSStivo($"Format={MakeSqlValue(format.NazivFormata)}"))
             {
                 s.Format = null;
-                if (!UpdateSStivo(s)) return false;
+                if (UpdateSStivo(s) == null) return false;
             }
             foreach (IzmenaKnjige ik in GetAllIzmenaKnjige($"Format={MakeSqlValue(format.NazivFormata)}"))
             {
@@ -2371,7 +2401,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
             foreach (SerijskoStivo s in GetAllSStivo($"Period={MakeSqlValue(periodicnost.PeriodIzd)}"))
             {
                 s.Period = null;
-                if (!UpdateSStivo(s)) return false;
+                if (UpdateSStivo(s) == null) return false;
             }
             foreach (IzmenaSStiva iss in GetAllIzmenaSStiva($"Period={MakeSqlValue(periodicnost.PeriodIzd)}"))
             {
