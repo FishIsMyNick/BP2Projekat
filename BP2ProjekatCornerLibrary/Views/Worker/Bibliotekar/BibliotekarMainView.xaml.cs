@@ -56,12 +56,14 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private void btn_Autor_Click(object sender, RoutedEventArgs e)
         {
-
+            Window autorWindow = new BibAutorWindow(_currentUser);
+            autorWindow.Show();
         }
 
         private void btn_Magazine_Click(object sender, RoutedEventArgs e)
         {
-
+            Window magWindow = new BibMagazineWindow(_currentUser);
+            magWindow.Show();
         }
 
         private void btn_IzdKuca_Click(object sender, RoutedEventArgs e)

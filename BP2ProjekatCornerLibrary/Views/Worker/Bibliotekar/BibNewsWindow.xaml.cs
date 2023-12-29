@@ -27,6 +27,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private int _currentUser;
         private int _lokalID;
         private SerijskoStivo _stivoToEdit;
+
+        private int _tipSStiva = 1;
         public BibNewsWindow(int currentUser, SerijskoStivo toEdit = null)
         {
             InitializeComponent();
@@ -55,10 +57,9 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         #region INIT CONTROLS
         private void SetAddView()
         {
+            btn_Uredi_Izdanja.Visibility = Visibility.Collapsed;
             lb_Add_Book.Visibility = Visibility.Visible;
             grd_Add_Btns.Visibility = Visibility.Visible;
-            lb_AddHere.Visibility = Visibility.Visible;
-            sp_AddHere.Visibility = Visibility.Visible;
 
             lb_Edit_Book.Visibility = Visibility.Collapsed;
             grd_Edit_Btns.Visibility = Visibility.Collapsed;
@@ -69,10 +70,9 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private void SetEditView(SerijskoStivo ss)
         {
             _stivoToEdit = ss;
+            btn_Uredi_Izdanja.Visibility = Visibility.Visible;
             lb_Add_Book.Visibility = Visibility.Collapsed;
             grd_Add_Btns.Visibility = Visibility.Collapsed;
-            lb_AddHere.Visibility = Visibility.Collapsed;
-            sp_AddHere.Visibility = Visibility.Collapsed;
 
             lb_Edit_Book.Visibility = Visibility.Visible;
             grd_Edit_Btns.Visibility = Visibility.Visible;
@@ -106,7 +106,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
                 List<Jezik> jezici = DBHelper.GetAllSStivoJeziks(ss);
                 List<IzdKuca> iks = DBHelper.GetAllSStivoIzdKucas(ss);
 
-                Novine.Items.Add(new ViewSStivo(ss.IDSStivo, ss.Naziv, 0, ss.Format, ss.Period, jezici, iks));
+                Novine.Items.Add(new ViewSStivo(ss.IDSStivo, ss.Naziv, _tipSStiva, ss.Format, ss.Period, jezici, iks));
             }
         }
         private void FillFormati()
@@ -120,19 +120,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private void FillPeriodi()
         {
             cb_Period.Items.Clear();
-            //List<Periodicnost> allPeriod = DBHelper.GetAllPeriod();
-            //List<Periodicnost> sorted = new List<Periodicnost>();
-
-            //for(int i = 0; i < allPeriod.Count - 1; i++)
-            //{
-            //    sorted.Add(allPeriod[i]);
-            //    for(int j = i + 1; j < allPeriod.Count; j++)
-            //    {
-            //        if (sorted[i].Ucestalost > allPeriod[j].Ucestalost)
-            //            sorted[i] = allPeriod[j];
-            //    }
-            //}
-            foreach (Periodicnost p in DBHelper.GetAllPeriodSorted ())
+            foreach (Periodicnost p in DBHelper.GetAllPeriodSorted())
             {
                 cb_Period.Items.Add(p);
             }
@@ -208,16 +196,17 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
         private void InitLbxJezici(SerijskoStivo ss = null)
         {
-            if (ss == null) { lbx_Jezici.SelectedItems.Clear(); return; }
+            lbx_Jezici.SelectedItems.Clear();
+            if (ss == null) { return; }
             List<Jezik> jeziks = new List<Jezik>();
             List<string> oznjs = new List<string>();
-            foreach (SStivoNaJeziku knj in DBHelper.GetAllSStivoNaJezikuWithSS(ss))
+            foreach (SStivoNaJeziku ssnj in DBHelper.GetAllSStivoNaJezikuWithSS(ss))
             {
-                jeziks.Add(DBHelper.GetJezik(knj.OZNJ));
-                oznjs.Add(knj.OZNJ);
+                jeziks.Add(DBHelper.GetJezik(ssnj.OZNJ));
+                oznjs.Add(ssnj.OZNJ);
             }
 
-            for (int i = 1; i < lbx_Jezici.Items.Count; i++)
+            for (int i = 0; i < lbx_Jezici.Items.Count; i++)
             {
                 if (oznjs.Contains((lbx_Jezici.Items[i] as Jezik).OZNJ))
                 {
@@ -228,7 +217,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
         private void InitLbxIzdKuce(SerijskoStivo ss = null)
         {
-            if (ss == null) { lbx_IzdKuce.SelectedItems.Clear(); return; }
+            lbx_IzdKuce.SelectedItems.Clear();
+            if (ss == null) { return; }
             List<IzdKuca> izdKuce = new List<IzdKuca>();
             List<int> idiks = new List<int>();
             foreach (IzdajeSStivo izss in DBHelper.GetAllIzdajeSStivoWithSS(ss))
@@ -237,7 +227,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
                 idiks.Add(izss.IDIK);
             }
 
-            for (int i = 1; i < lbx_IzdKuce.Items.Count; i++)
+            for (int i = 0; i < lbx_IzdKuce.Items.Count; i++)
             {
                 if (idiks.Contains((lbx_IzdKuce.Items[i] as IzdKuca).IDIK))
                 {
@@ -257,24 +247,24 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         {
             if (!ValidateInputFields()) return;
 
-            SerijskoStivo toAdd = new SerijskoStivo(tb_Name.Text, 0, cb_Format.Text, cb_Period.Text);
-
-            int ssId = 0;
-            if ((ssId = DBHelper.AddSStivoOnly(toAdd)) == 0) return;
-
-
+            SerijskoStivo toAdd = new SerijskoStivo(tb_Name.Text, _tipSStiva, cb_Format.Text, cb_Period.Text);
+            List<Jezik> jToAdd = new List<Jezik>();
+            List<IzdKuca> iToAdd = new List<IzdKuca>();
             foreach (var j in lbx_Jezici.SelectedItems)
             {
-                if (!DBHelper.AddSStivoNaJeziku(new SStivoNaJeziku(ssId, (j as Jezik).OZNJ))) return;
+                jToAdd.Add(j as Jezik);
             }
-            foreach (var ik in lbx_IzdKuce.SelectedItems)
+            foreach (var i in lbx_IzdKuce.SelectedItems)
             {
-                if (!DBHelper.AddIzdajeSStivo(new IzdajeSStivo(ssId, (ik as IzdKuca).IDIK))) return;
+                iToAdd.Add(i as IzdKuca);
             }
 
-            MessageBox.Show("Uspešno ste dodali nove novine!");
-            RefreshLists();
-            SetSelectView();
+            if (DBHelper.AddSStivo(toAdd, jToAdd, iToAdd) != 0)
+            {
+                MessageBox.Show("Uspešno ste dodali nove novine!");
+                RefreshLists();
+                SetSelectView();
+            }
         }
 
         private void btn_Add_Cancel_Click(object sender, RoutedEventArgs e)
@@ -293,7 +283,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
             toEdit.Format = cb_Format.Text;
             toEdit.Period = cb_Period.Text;
 
-            
+
             List<IzdKuca> iToEdit = new List<IzdKuca>();
             foreach (var a in lbx_IzdKuce.SelectedItems)
             {
@@ -367,15 +357,10 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         {
             //TODO: open add IK window
         }
-
-        private void cb_Format_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void btn_Uredi_Izdanja_Click(object sender, RoutedEventArgs e)
         {
-            if (((ComboBox)sender).SelectedIndex == 0)
-            {
-                //TODO: open add format window
-
-                cb_Format.SelectedItem = null;
-            }
+            Window izdWindow = new BibIzdNewsWindow(_currentUser, _stivoToEdit);
+            izdWindow.ShowDialog();
         }
 
 
@@ -405,5 +390,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
         }
         #endregion
+
+
     }
 }

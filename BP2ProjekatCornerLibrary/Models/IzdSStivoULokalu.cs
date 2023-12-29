@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 
 namespace BP2ProjekatCornerLibrary.Models
 {
-    [PrimaryKey("IDSStivo", "BrIzd", "IDBK")]
+    [PrimaryKey("IDSStivo", "BrIzd", "IDBK", "DatVrIzmene")]
     public class IzdSStivoULokalu : _DbClass
     {
         public int IDSStivo { get; set; }
@@ -26,7 +26,8 @@ namespace BP2ProjekatCornerLibrary.Models
             {
                 new ClassPropertyValue("IDSStivo", IDSStivo),
                 new ClassPropertyValue("BrIzd", BrIzd),
-                new ClassPropertyValue("IDBK", IDBK)
+                new ClassPropertyValue("IDBK", IDBK),
+                new ClassPropertyValue("DatVrIzmene", DatVrIzmene)
             };
         }
         public IzdSStivoULokalu() : base() { }

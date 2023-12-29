@@ -193,7 +193,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private void FillAutoriList()
         {
             lbx_Autori.Items.Clear();
-           // lbx_Autori.Items.Add(new Autor(-1, "+ Dodaj novog autora"));
+            // lbx_Autori.Items.Add(new Autor(-1, "+ Dodaj novog autora"));
             foreach (Autor a in DBHelper.GetAllAutors())
             {
                 lbx_Autori.Items.Add(a);
@@ -202,7 +202,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private void FillJeziciList()
         {
             lbx_Jezici.Items.Clear();
-           // lbx_Jezici.Items.Add(new Jezik("0000", "+ Dodaj nov jezik"));
+            // lbx_Jezici.Items.Add(new Jezik("0000", "+ Dodaj nov jezik"));
             foreach (Jezik j in DBHelper.GetAllJeziks())
             {
                 lbx_Jezici.Items.Add(j);
@@ -293,7 +293,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
         private void InitLbxAutori(Knjiga k = null)
         {
-            if (k == null) { lbx_Autori.SelectedItems.Clear(); return; }
+            lbx_Autori.SelectedItems.Clear();
+            if (k == null) { return; }
             List<Autor> autors = new List<Autor>();
             List<int> ids = new List<int>();
             foreach (Pise p in DBHelper.GetAllPiseWithBook(k))
@@ -302,7 +303,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 ids.Add(p.IDAutor);
             }
 
-            for (int i = 1; i < lbx_Autori.Items.Count; i++)
+            for (int i = 0; i < lbx_Autori.Items.Count; i++)
             {
                 if (ids.Contains((lbx_Autori.Items[i] as Autor).IDAutor))
                 {
@@ -313,7 +314,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
         private void InitLbxJezici(Knjiga k = null)
         {
-            if (k == null) { lbx_Jezici.SelectedItems.Clear(); return; }
+            lbx_Jezici.SelectedItems.Clear();
+            if (k == null) { return; }
             List<Jezik> jeziks = new List<Jezik>();
             List<string> oznjs = new List<string>();
             foreach (KnjigaNaJeziku knj in DBHelper.GetAllKnjigaNaJezikuWithBook(k))
@@ -322,7 +324,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 oznjs.Add(knj.OZNJ);
             }
 
-            for (int i = 1; i < lbx_Jezici.Items.Count; i++)
+            for (int i = 0; i < lbx_Jezici.Items.Count; i++)
             {
                 if (oznjs.Contains((lbx_Jezici.Items[i] as Jezik).OZNJ))
                 {
@@ -333,7 +335,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
         private void InitLbxZanrovi(Knjiga k = null)
         {
-            if (k == null) { lbx_Zanrovi.SelectedItems.Clear(); return; }
+            lbx_Zanrovi.SelectedItems.Clear();
+            if (k == null) { return; }
             List<Zanr> zanrovi = new List<Zanr>();
             List<string> oznzs = new List<string>();
             foreach (PripadaZanru pz in DBHelper.GetAllPripadaZanruWithBook(k))
@@ -342,7 +345,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 oznzs.Add(pz.OZNZ);
             }
 
-            for (int i = 1; i < lbx_Zanrovi.Items.Count; i++)
+            for (int i = 0; i < lbx_Zanrovi.Items.Count; i++)
             {
                 if (oznzs.Contains((lbx_Zanrovi.Items[i] as Zanr).OZNZ))
                 {
@@ -353,7 +356,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
         private void InitLbxIzdKuce(Knjiga k = null)
         {
-            if (k == null) { lbx_IzdKuce.SelectedItems.Clear(); return; }
+            lbx_IzdKuce.SelectedItems.Clear();
+            if (k == null) { return; }
             List<IzdKuca> izdKuce = new List<IzdKuca>();
             List<int> idiks = new List<int>();
             foreach (IzdajeKnjigu izk in DBHelper.GetAllIzdajeKnjiguWithBook(k))
@@ -362,7 +366,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 idiks.Add(izk.IDIK);
             }
 
-            for (int i = 1; i < lbx_IzdKuce.Items.Count; i++)
+            for (int i = 0; i < lbx_IzdKuce.Items.Count; i++)
             {
                 if (idiks.Contains((lbx_IzdKuce.Items[i] as IzdKuca).IDIK))
                 {

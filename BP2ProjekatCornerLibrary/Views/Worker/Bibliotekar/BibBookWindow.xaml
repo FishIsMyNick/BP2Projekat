@@ -8,8 +8,7 @@
         MinHeight="700" MinWidth="1325">
 
 	<Grid>
-
-		<Grid Name="view_select" Visibility="Collapsed">
+		<Grid Name="view_select" Visibility="Visible">
 			<StackPanel Orientation="Vertical">
 				<Grid Name="grd_TopBar" 
                       Height="100">
@@ -238,7 +237,7 @@ Panel.ZIndex="2"/>
 				</StackPanel>
 			</StackPanel>
 		</Grid>
-		<Grid Name="view_edit" Visibility="Visible">
+		<Grid Name="view_edit" Visibility="Collapsed">
 			<Grid.Resources>
 				<SolidColorBrush x:Key="brush" Color="DarkGray"/>
 			</Grid.Resources>

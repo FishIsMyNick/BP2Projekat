@@ -39,6 +39,15 @@ namespace BP2ProjekatCornerLibrary.Models
             Biografija = biografija;
             Drzava = drzava;
         }
+        public Autor(int id, string ime, string? prezime, DateTime? datRodj, string? biografija, string? drzava)
+        {
+            IDAutor = id;
+            Ime = ime;
+            Prezime = prezime;
+            DatRodj = datRodj;
+            Biografija = biografija;
+            Drzava = drzava;
+        }
         public Autor(int id, string ime)
         {
             IDAutor = id;

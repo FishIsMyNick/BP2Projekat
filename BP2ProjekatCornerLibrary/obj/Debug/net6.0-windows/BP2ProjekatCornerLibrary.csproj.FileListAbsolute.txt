@@ -309,3 +309,11 @@ E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-wi
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\BP2ProjekatCornerLibrary.pdb
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\BP2ProjekatCornerLibrary.genruntimeconfig.cache
 E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\ref\BP2ProjekatCornerLibrary.dll
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\Bibliotekar\BibMagazineWindow.g.cs
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\Bibliotekar\BibMagazineWindow.baml
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\Bibliotekar\BibIzdNewsWindow.g.cs
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\Bibliotekar\BibIzdNewsWindow.baml
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\Bibliotekar\BibIzdMagazineWindow.g.cs
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\Bibliotekar\BibIzdMagazineWindow.baml
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\Bibliotekar\BibAutorWindow.g.cs
+E:\Fax\BP2\Projekat\Git\BP2Projekat\BP2ProjekatCornerLibrary\obj\Debug\net6.0-windows\Views\Worker\Bibliotekar\BibAutorWindow.baml

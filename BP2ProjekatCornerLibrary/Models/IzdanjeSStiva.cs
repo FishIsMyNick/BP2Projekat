@@ -16,7 +16,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public int IDSStivo { get; set; }
         public int BrIzd { get; set; }
         [Required]
-        public DataType DatIzd { get; set; }
+        public DateTime DatIzd { get; set; }
         [Required]
         public decimal Cena { get; set; }
         public override List<ClassPropertyValue> GetKeyProperties()
@@ -29,5 +29,12 @@ namespace BP2ProjekatCornerLibrary.Models
         }
 
         public IzdanjeSStiva() : base() { }
-}
+        public IzdanjeSStiva(int iDSStivo, int brIzd, DateTime datIzd, decimal cena) : base()
+        {
+            IDSStivo = iDSStivo;
+            BrIzd = brIzd;
+            DatIzd = datIzd;
+            Cena = cena;
+        }
+    }
 }

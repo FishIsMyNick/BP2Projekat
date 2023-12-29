@@ -1158,6 +1158,14 @@ namespace BP2ProjekatCornerLibrary.Helpers
         {
             return GetListFromSQL<IzdanjeSStiva>(args);
         }
+        public static List<IzdanjeSStiva> GetAllIzdanjeSStivaFromSS(SerijskoStivo ss)
+        {
+            return GetAllIzdanjeSStivaFromSS(ss.IDSStivo);
+        }
+        public static List<IzdanjeSStiva> GetAllIzdanjeSStivaFromSS(int idSS)
+        {
+            return GetListFromSQL<IzdanjeSStiva>($"IDSStivo={MakeSqlValue(idSS)}");
+        }
         public static SerijskoStivo GetSerijskoStivo(int IDSStivo)
         {
             return GetFirstFromSQL<SerijskoStivo>($"IDSStivo={MakeSqlValue(IDSStivo)}");
@@ -1166,10 +1174,22 @@ namespace BP2ProjekatCornerLibrary.Helpers
         {
             return GetFirstFromSQL<IzdanjeSStiva>($"IDSStivo={MakeSqlValue(IDSStivo)} and BrIzd={MakeSqlValue(BrIzd)}");
         }
+        public static IzdanjeSStiva GetLatestIzdanjeSStiva(int IDStivo)
+        {
+            return (IzdanjeSStiva)ExecuteQueryFirst<IzdanjeSStiva>($"SELECT * From IzdanjeSStiva where IDSStivo={MakeSqlValue(IDStivo)} and BrIzd IN(Select max(BrIzd) FROM IzdanjeSStiva where IDSStivo={MakeSqlValue(IDStivo)});");
+        }
+        public static bool CheckIfEditionExists(int idStivo, int brIzd)
+        {
+            return GetAllIzdanjeSStiva($"IDSStivo={MakeSqlValue(idStivo)} and BrIzd={MakeSqlValue(brIzd)}").Count > 0;
+        }
         //RELACIJE
         public static List<IzdSStivoULokalu> GetAllIzdSStivoULokalu(string args = null)
         {
             return GetListFromSQL<IzdSStivoULokalu>(args);
+        }
+        public static IzdSStivoULokalu GetLatestIzdSStivoULokalau(int idStivo, int brIzd, int idLokal)
+        {
+            return (IzdSStivoULokalu)ExecuteQueryFirst<IzdSStivoULokalu>($"Select * from IzdSStivoULokalu where IDSStivo={MakeSqlValue(idStivo)} and BrIzd={MakeSqlValue(brIzd)} and IDBK={MakeSqlValue(idLokal)} and DatVrIzmene IN(Select max(DatVrIzmene) from IzdSStivoULokalu where IDSStivo={MakeSqlValue(idStivo)} and BrIzd={MakeSqlValue(brIzd)} and IDBK={MakeSqlValue(idLokal)});");
         }
         public static List<SStivoNaJeziku> GetAllSStivoNaJezikuWithSS(SerijskoStivo ss)
         {
@@ -1663,21 +1683,30 @@ namespace BP2ProjekatCornerLibrary.Helpers
             int ssId = AddItemWithSQLWithIdentity(s);
             if (ssId == 0)
             {
+                MessageBox.Show("Došlo je do greške pri dodavanju serijskog štiva!");
                 return 0;
             }
 
             foreach (string j in js)
-                if (!AddSStivoNaJeziku(new SStivoNaJeziku(ssId, j))) return 0;
+                if (!AddSStivoNaJeziku(new SStivoNaJeziku(ssId, j)))
+                {
+                    MessageBox.Show("Došlo je do greške pri dodavanju jezika serijskog štiva!"); 
+                    return 0;
+                }
             foreach (int ik in iks)
-                if (!AddIzdajeSStivo(new IzdajeSStivo(ssId, ik))) return 0;
+                if (!AddIzdajeSStivo(new IzdajeSStivo(ssId, ik)))
+                {
+                    MessageBox.Show("Došlo je do greške pri dodavanju izdavačke kuće serijskog štiva!"); 
+                    return 0;
+                }
 
             return ssId;
         }
         // Izdanje SStivo
         public static bool AddIzdanjeSStiva(IzdanjeSStiva s)
         {
-            if (!CheckEntityExists<SerijskoStivo>(new ClassPropertyValue("IDSStivo", s.IDSStivo)))
-                return false;
+            //if (!CheckEntityExists<IzdanjeSStiva>(new ClassPropertyValue("IDSStivo", s.IDSStivo)))
+            //    return false;
 
             return AddItemWithSQL(s);
         }

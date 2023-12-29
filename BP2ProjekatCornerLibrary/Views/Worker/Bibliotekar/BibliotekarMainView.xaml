@@ -64,8 +64,8 @@
 								Click="btn_Book_Click"/>
 
 						<Button Name="btn_News" 
-						Grid.Column="0"
-						Grid.Row="1"
+						Grid.Column="1"
+						Grid.Row="0"
 						Margin="20 100"
 						FontSize="50" 
 						Content=" Uredi&#10;Novine"
@@ -73,15 +73,15 @@
 
 						<Button Name="btn_Autor" 
 						Grid.Column="1"
-						Grid.Row="0"
+						Grid.Row="1"
 						Margin="20 100"
 						FontSize="50" 
 						Content=" Uredi&#10;Autore"
 								Click="btn_Autor_Click"/>
 
 						<Button Name="btn_Magazine" 
-						Grid.Column="1"
-						Grid.Row="1"
+						Grid.Column="2"
+						Grid.Row="0"
 						Margin="20 100"
 						FontSize="50" 
 						Content="   Uredi&#10;Magazine"
@@ -89,36 +89,22 @@
 
 						<Button Name="btn_IzdKuca" 
 						Grid.Column="2"
-						Grid.Row="0"
+						Grid.Row="1"
 						Margin="20 100"
 						FontSize="50" 
 						Content="   Uredi&#10;Izdavačke&#10;    Kuće"
 								Click="btn_IzdKuca_Click"/>
 
-						<Button Name="btn_Izd_Nov" 
-						Grid.Column="2"
-						Grid.Row="1"
-						Margin="20 100"
-						FontSize="50" 
-						Content=" Uredi&#10;Izdanje&#10;Novina"
-								Click="btn_Izd_Nov_Click"/>
-
+						
 									
 						<Button Name="btn_SuL" 
-						Grid.Column="7"
-						Grid.Row="0"
+						Grid.Column="0"
+						Grid.Row="1"
 						Margin="20 100"
 						FontSize="50" 
 						Content="  Uredi&#10;   štivo&#10;u lokalu"
 								Click="btn_SuL_Click"/>
 
-						<Button Name="btn_Izd_Mag" 
-						Grid.Column="7"
-						Grid.Row="1"
-						Margin="20 100"
-						FontSize="50" 
-						Content="   Uredi&#10;  Izdanje&#10;Magazina"
-								Click="btn_Izd_Mag_Click"/>
 					</Grid>
 				</StackPanel>
 			</Border>

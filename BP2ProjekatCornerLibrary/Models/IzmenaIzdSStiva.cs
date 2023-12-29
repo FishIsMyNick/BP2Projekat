@@ -17,7 +17,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public int BrIzd { get; set; }
         public int IDBib { get; set; }
         public DateTime DatVr { get; set; }
-        public DataType? DatIzd { get; set; }
+        public DateTime? DatIzd { get; set; }
         public decimal? Cena { get; set; }
         public override List<ClassPropertyValue> GetKeyProperties()
         {

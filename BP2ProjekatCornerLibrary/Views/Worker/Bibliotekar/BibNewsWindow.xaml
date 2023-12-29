@@ -6,10 +6,9 @@
         xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar"
         xmlns:System="clr-namespace:System;assembly=System.Runtime" x:Class="BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar.BibNewsWindow"
         mc:Ignorable="d"
-                MinHeight="700" MinWidth="1325">
+                MinHeight="700" Width="1325">
 
 	<Grid>
-
 		<Grid x:Name="view_select" Visibility="Collapsed">
 			<StackPanel Orientation="Vertical">
 				<Grid x:Name="grd_TopBar" 
@@ -38,14 +37,14 @@
                           Grid.Row="1"/>
 				</Grid>
 				<StackPanel x:Name="sp_ListaKnjiga"
-                            Height="550" Width="1325">
+                            Height="550">
 					<Grid Panel.ZIndex="1" Margin="1 0 1 0" Height="25">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="15*" />
-							<ColumnDefinition Width="15*"/>
-							<ColumnDefinition Width="6*" />
-							<ColumnDefinition Width="15*" />
-							<ColumnDefinition Width="9*"/>
+							<ColumnDefinition Width="15*" MinWidth="150"/>
+							<ColumnDefinition Width="15*" MinWidth="150"/>
+							<ColumnDefinition Width="6*" MaxWidth="80"/>
+							<ColumnDefinition Width="15*" MinWidth="150"/>
+							<ColumnDefinition Width="9*" MaxWidth="128"/>
 						</Grid.ColumnDefinitions>
 						<!--NAZIV-->
 						<Button x:Name="btn_sort_naziv"
@@ -116,7 +115,6 @@
 								<GridViewColumn DisplayMemberBinding="{Binding Period}" Width="{Binding ActualWidth, ElementName=btn_sort_period}"/>
 							</GridView>
 						</ListView.View>
-						<System:String>Test Text</System:String>
 					</ListView>
 
 					<!--This is the hidden helper Grid which does the resizing -->
@@ -124,10 +122,6 @@
 						<Grid.ColumnDefinitions>
 							<!--Width is bound to width of the first GridViewColumn -->
 							<ColumnDefinition Width="{Binding ActualWidth, ElementName=col1}"/>
-							<!--Width is set to "Fill"-->
-							<ColumnDefinition Width="*"/>
-							<!--Correction Width-->
-							<ColumnDefinition Width="10"/>
 						</Grid.ColumnDefinitions>
 						<Grid.RowDefinitions>
 							<RowDefinition Height="1*"/>
@@ -207,8 +201,14 @@
 									  Margin="3"
 					 Grid.Column="1"
 					 Grid.Row="2"
-									  DisplayMemberPath="NazivFormata"
-									  SelectionChanged="cb_Format_SelectionChanged"/>
+									  DisplayMemberPath="NazivFormata"/>
+							<Button x:Name="btn_Uredi_Izdanja" 
+									FontSize="20"
+									Height="50" Width="150"
+									Content="Uredi izdanja"
+									Grid.Row="3"
+									Grid.Column="1"
+									Click="btn_Uredi_Izdanja_Click"/>
 							<StackPanel x:Name="sp_AddHere" Visibility="Collapsed"
 							Orientation="Horizontal" 
 					 Grid.Column="1"
