@@ -24,6 +24,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     {
         private iDynamicListView _caller;
         private bool _blockEvents = false;
+        private bool _quitAfterSave;
 
         private List<Mesto> _mesta;
         private List<Drzava> _drzave;
@@ -42,12 +43,14 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private string GetOZND { get => (cbDrzava.SelectedValue as Drzava).OZND; }
 
 
-        public AdminEditStoreWindow(iDynamicListView caller = null, int selectedID = -1)
+        public AdminEditStoreWindow(iDynamicListView caller = null, int selectedID = -1, bool quitAfterSave = false)
         {
             _caller = caller;
+            _quitAfterSave = quitAfterSave;
             InitializeComponent();
 
             RefreshLists();
+
 
             if (selectedID > 0)
             {
@@ -94,6 +97,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
         private void FillFilijaleList()
         {
+            OtvoreneFilijale.Items.Clear();
             List<Biblikutak> lokali = DBHelper.GetOpenLokals();
             foreach (Biblikutak biblikutak in lokali)
             {
@@ -103,29 +107,81 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             }
         }
         #region Sorting
+        private bool s_naz_asc = false;
         private void btn_Naziv_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            OtvoreneFilijale.Items.Clear();
+            s_naz_asc = !s_naz_asc;
+            List<Biblikutak> lokali = DBHelper.GetOpenLokals();
+            List<OtvFilView> toSort = new List<OtvFilView>();
+            foreach (Biblikutak biblikutak in lokali)
+            {
+                Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
+                Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
+                toSort.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
+            }
+            foreach(OtvFilView ofv in Sorter.SortText<OtvFilView>(toSort, "Naziv", s_naz_asc)) OtvoreneFilijale.Items.Add(ofv);
         }
 
+        private bool s_adr_asc = false;
         private void btn_Adresa_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            OtvoreneFilijale.Items.Clear();
+            s_adr_asc = !s_adr_asc;
+            List<Biblikutak> lokali = DBHelper.GetOpenLokals();
+            List<OtvFilView> toSort = new List<OtvFilView>();
+            foreach (Biblikutak biblikutak in lokali)
+            {
+                Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
+                Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
+                toSort.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
+            }
+            foreach (OtvFilView ofv in Sorter.SortText<OtvFilView>(toSort, "Adresa", s_adr_asc)) OtvoreneFilijale.Items.Add(ofv);
         }
-
+        private bool s_mesto_asc = false;
         private void btn_Mesto_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            OtvoreneFilijale.Items.Clear();
+            s_mesto_asc = !s_mesto_asc;
+            List<Biblikutak> lokali = DBHelper.GetOpenLokals();
+            List<OtvFilView> toSort = new List<OtvFilView>();
+            foreach (Biblikutak biblikutak in lokali)
+            {
+                Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
+                Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
+                toSort.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
+            }
+            foreach (OtvFilView ofv in Sorter.SortText<OtvFilView>(toSort, "GetMesto", s_mesto_asc)) OtvoreneFilijale.Items.Add(ofv);
         }
-
+        private bool s_drz_asc = false;
         private void btn_Drzava_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            OtvoreneFilijale.Items.Clear();
+            s_drz_asc = !s_drz_asc;
+            List<Biblikutak> lokali = DBHelper.GetOpenLokals();
+            List<OtvFilView> toSort = new List<OtvFilView>();
+            foreach (Biblikutak biblikutak in lokali)
+            {
+                Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
+                Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
+                toSort.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
+            }
+            foreach (OtvFilView ofv in Sorter.SortText<OtvFilView>(toSort, "GetDrzava", s_drz_asc)) OtvoreneFilijale.Items.Add(ofv);
         }
-
+        private bool s_dat_asc = false;
         private void btn_DatOtv_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            OtvoreneFilijale.Items.Clear();
+            s_dat_asc = !s_dat_asc;
+            List<Biblikutak> lokali = DBHelper.GetOpenLokals();
+            List<OtvFilView> toSort = new List<OtvFilView>();
+            foreach (Biblikutak biblikutak in lokali)
+            {
+                Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
+                Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
+                toSort.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
+            }
+            foreach (OtvFilView ofv in Sorter.SortText<OtvFilView>(toSort, "DatOtvStr", s_dat_asc)) OtvoreneFilijale.Items.Add(ofv);
         }
         #endregion
 
@@ -134,7 +190,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private void btn_Confirm_Click(object sender, RoutedEventArgs e)
         {
             // Validations
-            if(!ValidateInputFields()) return;
+            if (!ValidateInputFields()) return;
 
             string naziv = GetNaziv.Trim();
             string ulica = GetUlica.Trim();
@@ -154,29 +210,38 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
             MessageBox.Show("Uspešno ste izmenili podatke o filijali!");
             _caller?.RefreshLists();
-            Close();
+
+            if (_quitAfterSave) Close();
+            else ShowList();
         }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            ShowList();
+            if (_quitAfterSave) Close();
+            else ShowList();
         }
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
         {
             _selectedFilijala.DatZat = DateTime.Now;
-            DBHelper.UpdateItemWithSQL<Biblikutak>(_selectedFilijala);
+            if (!DBHelper.UpdateItemWithSQL<Biblikutak>(_selectedFilijala))
+            {
+                MessageBox.Show("Došlo je do greške pri brisanju filijale.");
+                return;
+            }
 
             MessageBox.Show("Uspešno ste obrisali filijalu.");
-            AdminMainView.Instance.RefreshLists();
-            Close();
+            _caller?.RefreshLists();
+
+            if (_quitAfterSave) Close();
+            else ShowList();
         }
         private bool ValidateInputFields()
         {
             return (
                 Validator.StreetName(GetUlica) &&
                 Validator.StreetNumber(GetBroj) &&
-                Validator.City(_selectedMesto) && 
+                Validator.City(_selectedMesto) &&
                 Validator.Country(_selectedDrzava)
                 );
         }
@@ -187,7 +252,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         {
             var selItem = OtvoreneFilijale.SelectedItem as OtvFilView;
             if (selItem == null) return;
-            
+
             SetUpEditView(selItem);
 
             ShowEdit();

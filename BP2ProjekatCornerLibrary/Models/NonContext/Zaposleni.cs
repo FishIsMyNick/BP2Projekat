@@ -29,6 +29,12 @@ namespace BP2ProjekatCornerLibrary.Models.NonContext
                 new ClassPropertyValue("IDRadnik", IDRadnik)
             };
         }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDRadnik", "Ime", "Prezime", "DatRodj", "DatZap", "DatOtp" };
+        }
+
         public Zaposleni()
         {
             

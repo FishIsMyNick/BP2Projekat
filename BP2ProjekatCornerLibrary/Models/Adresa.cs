@@ -22,6 +22,11 @@ public class Adresa : _DbClass
             };
     }
 
+    public override List<string> GetDbPropertyNames()
+    {
+        return new List<string> { "Ulica", "Broj" };
+    }
+
     public Adresa() : base() { }
 
     public Adresa(string ulica, string broj)

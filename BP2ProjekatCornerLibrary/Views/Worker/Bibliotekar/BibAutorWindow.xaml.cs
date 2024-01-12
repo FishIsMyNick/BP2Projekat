@@ -26,15 +26,21 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private int _lokalID;
         private int _currentUser;
         private bool _quitAfterSave = false;
-        public BibAutorWindow(int currentUser, Autor toEdit = null)
+        private iDynamicListView _caller;
+        public BibAutorWindow(int currentUser, Autor toEdit = null, bool toAdd = false, iDynamicListView caller = null)
         {
             InitializeComponent();
             _lokalID = DBHelper.GetLatestRasporedjenBibliotekar(currentUser).IDBK;
             _currentUser = currentUser;
+            _quitAfterSave = toAdd;
 
             RefreshLists();
-            
-            if (toEdit != null)
+            if (toAdd)
+            {
+                _caller = caller;
+                SetAddView();
+            }
+            else if (toEdit != null)
             {
                 _quitAfterSave = true;
                 _selectedAutor = toEdit;
@@ -63,14 +69,17 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private void InitCbDrzave()
         {
             cb_Drzava.Items.Clear();
-            cb_Drzava.Items.Add(new Drzava("0000", "Nepoznato"));
+            cb_Drzava.Items.Add(new Drzava("XXX", "Nepoznato"));
             foreach (Drzava d in DBHelper.GetAllDrzave())
-                cb_Drzava.Items.Add(d);
+            {
+                if (d.OZND != "XXX")
+                    cb_Drzava.Items.Add(d);
+            }
         }
         private void Autori_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ViewAutor sel = ((ListView)sender).SelectedItem as ViewAutor;
-            if(sel != null)
+            if (sel != null)
             {
                 _selectedAutor = sel;
                 SetEditView(_selectedAutor);
@@ -104,7 +113,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
                 tb_Godina.Text = string.Empty;
             }
             cb_Drzava.Text = a.DispDrzava;
-            tb_Biografija .Text = a.Biografija != null ? a.Biografija : "";
+            tb_Biografija.Text = a.Biografija != null ? a.Biografija : "";
         }
         #endregion
 
@@ -116,14 +125,26 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private void SetAddView()
         {
             ClearInputFields();
+
+            lb_Add_Autor.Visibility = Visibility.Visible;
+            lb_Edit_Autor.Visibility = Visibility.Collapsed;
+
             view_edit.Visibility = Visibility.Visible;
             view_select.Visibility = Visibility.Collapsed;
+
+            grd_Add_Btns.Visibility = Visibility.Visible;
+            grd_Edit_Btns.Visibility = Visibility.Collapsed;
         }
         private void SetEditView(Autor a)
         {
             FillInputFields(new ViewAutor(a));
+
+            lb_Add_Autor.Visibility = Visibility.Collapsed;
+            lb_Edit_Autor.Visibility = Visibility.Visible;
             view_edit.Visibility = Visibility.Visible;
             view_select.Visibility = Visibility.Collapsed;
+            grd_Add_Btns.Visibility = Visibility.Collapsed;
+            grd_Edit_Btns.Visibility = Visibility.Visible;
         }
         private void SetSelectView()
         {
@@ -134,25 +155,56 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         #endregion
 
         #region SORTING
-
+        private List<ViewAutor> GetAllAutorsFromList()
+        {
+            List<ViewAutor> ret = new List<ViewAutor>();
+            foreach (var autor in Autori.Items)
+            {
+                ret.Add(autor as ViewAutor);
+            }
+            return ret;
+        }
+        private void SortAutorsText(string propName, bool ascending)
+        {
+            List<ViewAutor> sorted = Sorter.SortText<ViewAutor>(GetAllAutorsFromList(), propName, ascending);
+            Autori.Items.Clear();
+            foreach (ViewAutor autor in sorted)
+            {
+                Autori.Items.Add(autor);
+            }
+        }
+        private void SortAutorsDate(string propName, bool ascending)
+        {
+            List<ViewAutor> sorted = Sorter.SortDateString<ViewAutor>(GetAllAutorsFromList(), propName, ascending);
+            Autori.Items.Clear();
+            foreach (ViewAutor autor in sorted)
+            {
+                Autori.Items.Add(autor);
+            }
+        }
+        private bool s_ime = false;
         private void btn_sort_ime_Click(object sender, RoutedEventArgs e)
         {
-
+            s_ime = !s_ime;
+            SortAutorsText("Ime", s_ime);
         }
-
+        private bool s_prezime = false;
         private void btn_sort_prezime_Click(object sender, RoutedEventArgs e)
         {
-
+            s_prezime = !s_prezime;
+            SortAutorsText("GetPrezime", s_prezime);
         }
-
+        private bool s_dat = false;
         private void btn_sort_datRodj_Click(object sender, RoutedEventArgs e)
         {
-
+            s_dat = !s_dat;
+            SortAutorsDate("DispDatRodj", s_dat);
         }
-
+        private bool s_drz = false;
         private void btn_sort_drzava_Click(object sender, RoutedEventArgs e)
         {
-
+            s_drz = !s_drz;
+            SortAutorsText("DispDrzava", s_drz);
         }
 
         #endregion
@@ -161,13 +213,13 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private bool ValidateInputFields()
         {
             return Validator.Name(tb_Ime.Text)
-                && tb_Prezime.Text != "" ? Validator.LastName(tb_Prezime.Text) : true
-                && (tb_Dan.Text != "" || tb_Mesec.Text != "" || tb_Godina.Text != "") ? Validator.Date(tb_Dan.Text, tb_Mesec.Text, tb_Godina.Text) : true;
+                && (tb_Prezime.Text != "" ? Validator.LastName(tb_Prezime.Text) : true)
+                && ((tb_Dan.Text != "" || tb_Mesec.Text != "" || tb_Godina.Text != "") ? Validator.Date(tb_Dan.Text, tb_Mesec.Text, tb_Godina.Text) : true);
         }
         #region ADD
         private void btn_Add_Confirm_Click(object sender, RoutedEventArgs e)
         {
-            if(!ValidateInputFields()) return;
+            if (!ValidateInputFields()) return;
 
             Autor toAdd = new Autor();
             toAdd.Ime = tb_Ime.Text;
@@ -177,18 +229,29 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
             toAdd.Drzava = cb_Drzava.SelectedIndex != 0 ? ((Drzava)cb_Drzava.SelectedItem).OZND : null;
 
             int idAutor = 0;
-            if((idAutor = DBHelper.AddItemWithSQLWithIdentity<Autor>(toAdd)) == 0)
+            if ((idAutor = DBHelper.AddItemWithSQLWithIdentity<Autor>(toAdd)) == 0)
             {
                 MessageBox.Show("Došlo je do greške pri dodavanju autora!");
                 return;
             }
 
             MessageBox.Show("Uspešno ste dodali novog autora!");
+            if (_quitAfterSave)
+            {
+                _caller?.RefreshLists();
+                Close();
+            }
+            else
+            {
+                RefreshLists();
+                SetSelectView();
+            }
         }
 
         private void btn_Add_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            SetSelectView();
+            if (_quitAfterSave) Close();
+            else SetSelectView();
         }
         #endregion
         #region EDIT
@@ -206,13 +269,25 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
             if (!DBHelper.UpdateAutor(toEdit))
             {
-
+                MessageBox.Show("Došlo je do greške pri izmeni podataka!");
+                return;
             }
+
+            MessageBox.Show("Uspešno ste izmenili podatke!");
+            RefreshLists();
+            SetSelectView();
         }
 
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
         {
-
+            if (!DBHelper.DeleteAutor(_selectedAutor))
+            {
+                MessageBox.Show("Došlo je do greške pri brisanju podataka!");
+                return;
+            }
+            MessageBox.Show("Uspešno ste obrisali podatke!");
+            RefreshLists();
+            SetSelectView();
         }
 
         private void btn_Edit_Cancel_Click(object sender, RoutedEventArgs e)

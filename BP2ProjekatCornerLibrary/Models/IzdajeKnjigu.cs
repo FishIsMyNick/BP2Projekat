@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDKnjiga", "IDIK")]
-    public  class IzdajeKnjigu : _DbClass
+    public class IzdajeKnjigu : _DbClass
     {
         public int IDKnjiga { get; set; }
         public int IDIK { get; set; }
@@ -35,6 +35,11 @@ namespace BP2ProjekatCornerLibrary.Models
         {
             if (!(obj is IzdajeKnjigu)) return false;
             return (obj as IzdajeKnjigu).IDKnjiga == this.IDKnjiga && (obj as IzdajeKnjigu).IDIK == this.IDIK;
+        }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDKnjiga", "IDIK" };
         }
     }
 }

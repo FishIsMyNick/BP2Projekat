@@ -25,6 +25,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     public partial class AdminEditWorkerWindow : Window, iDynamicListView
     {
         private iDynamicListView _caller;
+        private bool _quitAfterSave;
         private bool _blockEvents = false;
         private Radnik _selectedWorker;
         private Mesto _selectedMesto;
@@ -46,9 +47,10 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private bool _passwordChanged = false;
         private bool _usernameChanged = false;
 
-        public AdminEditWorkerWindow(iDynamicListView caller = null, int selectedID = -1, iTipRadnika tip = iTipRadnika.Bibliotekar)
+        public AdminEditWorkerWindow(iDynamicListView caller = null, int selectedID = -1, iTipRadnika tip = iTipRadnika.Bibliotekar, bool quitAfterSave = false)
         {
             _caller = caller;
+            _quitAfterSave = quitAfterSave;
             InitializeComponent();
 
             RefreshLists();
@@ -71,6 +73,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             {
                 SetSelect();
             }
+            _quitAfterSave = quitAfterSave;
         }
         #region Common
         public void RefreshLists()
@@ -130,7 +133,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         {
             ZaposleniRadnici.Items.Clear();
 
-            foreach (Radnik r in DBHelper.GetAllWorkers())
+            foreach (Radnik r in DBHelper.GetAllEmployedWorkers())
             {
                 ZaposleniRadnici.Items.Add(MakeRadnikView(r));
             }
@@ -219,39 +222,38 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             if (!DBHelper.AddLokacija(new Adresa(GetUlica, GetBroj), new Mesto(GetPosBr, GetMesto), new Drzava(GetOZND, GetDrzava)))
             {
                 MessageBox.Show("Došlo je do greške pri ažuriranju lokacije!");
-                Close();
                 return;
             }
             if (_usernameChanged && nalog.KorisnickoIme != GetUsername)
             {
-                if(!DBHelper.UpdateUsername(nalog.KorisnickoIme, GetUsername))
+                if (!DBHelper.UpdateUsername(nalog.KorisnickoIme, GetUsername))
                 {
                     MessageBox.Show("Došlo je do greške pri ažuriranju korisničkog imena!");
-                    Close();
                     return;
                 }
             }
             if (!DBHelper.UpdateAccount(nalog))
             {
                 MessageBox.Show("Došlo je do greške pri ažuriranju naloga!");
-                Close();
                 return;
             }
             if (!DBHelper.UpdateWorker(_selectedWorker))
             {
                 MessageBox.Show("Došlo je do greške pri ažuriranju korisnika!");
-                Close();
                 return;
             }
 
             MessageBox.Show("Uspešno ste izmenili radnika!");
             _caller.RefreshLists();
-            Close();
+
+            if (_quitAfterSave) Close();
+            else SetSelect();
         }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            SetSelect();
+            if (_quitAfterSave) Close();
+            else SetSelect();
         }
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
@@ -262,13 +264,16 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             {
                 MessageBox.Show("Uspešno ste obrisali radnika!");
                 _caller.RefreshLists();
-                Close();
+
+                if (_quitAfterSave) Close();
+                else SetSelect();
             }
             else
             {
                 MessageBox.Show("Došlo je do greške pri čuvanju podataka!");
-                Close();
+                
             }
+
         }
         private bool ValidateInputFields()
         {
@@ -280,7 +285,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 Validator.Year(GetGodina) &&
                 Validator.StreetName(GetUlica) &&
                 Validator.StreetNumber(GetBroj) &&
-                Validator.Date(GetDan,GetMesec, GetGodina)
+                Validator.Date(GetDan, GetMesec, GetGodina)
                 );
         }
         #endregion
@@ -300,29 +305,63 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
 
         #region Sorting
+        private bool s_ime = false;
         private void btn_Ime_Sort_Click(object sender, RoutedEventArgs e)
         {
+            s_ime = !s_ime;
+            ZaposleniRadnici.Items.Clear();
 
+            foreach (Radnik r in Sorter.SortText<Radnik>(DBHelper.GetAllEmployedWorkers(), "Ime", s_ime))
+            {
+                ZaposleniRadnici.Items.Add(MakeRadnikView(r));
+            }
         }
-
+        private bool s_prez = false;
         private void btn_Prezime_Sort_Click(object sender, RoutedEventArgs e)
         {
+            s_prez = !s_prez;
+            ZaposleniRadnici.Items.Clear();
 
+            foreach (Radnik r in Sorter.SortText<Radnik>(DBHelper.GetAllEmployedWorkers(), "Prezime", s_prez))
+            {
+                ZaposleniRadnici.Items.Add(MakeRadnikView(r));
+            }
         }
-
+        private bool s_user = false;
         private void btn_Username_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            s_user = !s_user;
+            ZaposleniRadnici.Items.Clear();
+            List<RadnikView> toSort = new List<RadnikView>();
+            foreach (Radnik r in DBHelper.GetAllEmployedWorkers())
+            {
+                toSort.Add(MakeRadnikView(r));
+            }
+            foreach (RadnikView rv in Sorter.SortText<RadnikView>(toSort, "Username", s_user)) ZaposleniRadnici.Items.Add(rv);
         }
-
+        private bool s_tip = false;
         private void btn_Tip_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            s_tip = !s_tip;
+            ZaposleniRadnici.Items.Clear();
+            List<RadnikView> toSort = new List<RadnikView>();
+            foreach (Radnik r in DBHelper.GetAllEmployedWorkers())
+            {
+                toSort.Add(MakeRadnikView(r));
+            }
+            foreach (RadnikView rv in Sorter.SortText<RadnikView>(toSort, "TipStr", s_tip)) ZaposleniRadnici.Items.Add(rv);
         }
-
+        private bool s_dat = false;
         private void btn_DatZap_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            s_dat = !s_dat;
+            ZaposleniRadnici.Items.Clear();
+            List<RadnikView> toSort = new List<RadnikView>();
+            foreach (Radnik r in DBHelper.GetAllEmployedWorkers())
+            {
+                toSort.Add(MakeRadnikView(r));
+            }
+            foreach (RadnikView rv in Sorter.SortDate<RadnikView>(toSort, "DatZap", s_dat)) ZaposleniRadnici.Items.Add(rv);
         }
 
         #endregion

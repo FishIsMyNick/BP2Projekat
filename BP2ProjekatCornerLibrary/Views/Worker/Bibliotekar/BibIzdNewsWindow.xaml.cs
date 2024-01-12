@@ -158,7 +158,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
             return Validator.PozNumber(tb_BrIzd.Text)
                 && Validator.Date(tb_Dan.Text, tb_Mesec.Text, tb_Godina.Text)
                 && Validator.PozDecimal(tb_Cena.Text)
-                && cb_AddHere.IsChecked == true ? Validator.PozNumber(tb_Kolicina.Text) : true;
+                && cb_AddHere.IsChecked == true ? Validator.PozNumber0(tb_Kolicina.Text) : true;
         }
         #region ADD
         private void btn_Add_Confirm_Click(object sender, RoutedEventArgs e)
@@ -242,7 +242,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (!DBHelper.DeleteIzdSStivo(_izdStivaToEdit))
+            if (!DBHelper.DeleteIzdSStivo(_izdStivaToEdit, _currentUser))
             {
                 MessageBox.Show("Došlo je do greške pri brisanju podataka!");
                 return;

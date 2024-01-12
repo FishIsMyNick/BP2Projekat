@@ -19,6 +19,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public DateTime? DatRodj { get; set; }
         public string? Biografija { get; set; }
         public string? Drzava { get; set; }
+        public DateTime? DatBrisanja { get; set; }
         public override ClassPropertyValue GetKeyIdentity() => new ClassPropertyValue("IDAutor", IDAutor);
         public string GetFullName { get => Ime + " " + ((Prezime != null) ? Prezime : string.Empty); }
 
@@ -29,6 +30,12 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("IDAutor", IDAutor)
             };
         }
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDAutor", "Ime", "Prezime", "DatRodj", "Biografija", "Drzava", "DatBrisanja" };
+        }
+
+
         public Autor() : base() { }
 
         public Autor(string ime, string? prezime, DateTime? datRodj, string? biografija, string? drzava)

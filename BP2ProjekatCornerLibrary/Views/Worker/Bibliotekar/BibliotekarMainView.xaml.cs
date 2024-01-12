@@ -45,30 +45,31 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private void btn_Book_Click(object sender, RoutedEventArgs e)
         {
             Window BookWindow = new BibBookWindow(_currentUser);
-            BookWindow.Show();
+            BookWindow.ShowDialog();
         }
 
         private void btn_News_Click(object sender, RoutedEventArgs e)
         {
             Window newsWindow = new BibNewsWindow(_currentUser);
-            newsWindow.Show();
+            newsWindow.ShowDialog();
         }
 
         private void btn_Autor_Click(object sender, RoutedEventArgs e)
         {
             Window autorWindow = new BibAutorWindow(_currentUser);
-            autorWindow.Show();
+            autorWindow.ShowDialog();
         }
 
         private void btn_Magazine_Click(object sender, RoutedEventArgs e)
         {
             Window magWindow = new BibMagazineWindow(_currentUser);
-            magWindow.Show();
+            magWindow.ShowDialog();
         }
 
         private void btn_IzdKuca_Click(object sender, RoutedEventArgs e)
         {
-
+            Window ikWindow = new BibIzdKucaWindow(_currentUser); 
+            ikWindow.ShowDialog();
         }
 
         private void btn_Izd_Nov_Click(object sender, RoutedEventArgs e)
@@ -78,7 +79,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private void btn_SuL_Click(object sender, RoutedEventArgs e)
         {
-
+            Window sulWindow = new BibSuLWindow(_currentUser);
+            sulWindow.ShowDialog();
         }
 
         private void btn_Izd_Mag_Click(object sender, RoutedEventArgs e)

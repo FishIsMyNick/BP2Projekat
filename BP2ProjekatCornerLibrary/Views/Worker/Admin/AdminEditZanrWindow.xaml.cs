@@ -208,14 +208,27 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
 
         #region Sorting
+        private bool s_ozn_asc = false;
         private void btn_OZN_Sort_Click(object sender, RoutedEventArgs e)
         {
+            s_ozn_asc = !s_ozn_asc;
+            Zanrovi.Items.Clear();
 
+            foreach (Zanr z in Sorter.SortText<Zanr>( DBHelper.GetAllZanrs(), "OZNZ", s_ozn_asc))
+            {
+                Zanrovi.Items.Add(z);
+            }
         }
-
+        private bool s_naz_asc = false;
         private void btn_Naziv_Sort_Click(object sender, RoutedEventArgs e)
         {
+            s_naz_asc = !s_naz_asc;
+            Zanrovi.Items.Clear();
 
+            foreach (Zanr z in Sorter.SortText<Zanr>(DBHelper.GetAllZanrs(), "NazivZanra", s_naz_asc))
+            {
+                Zanrovi.Items.Add(z);
+            }
         }
         #endregion
 

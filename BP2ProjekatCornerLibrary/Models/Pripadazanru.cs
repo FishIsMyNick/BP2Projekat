@@ -41,5 +41,10 @@ namespace BP2ProjekatCornerLibrary.Models
             if(!(obj is PripadaZanru)) return false;
             return (obj as PripadaZanru).IDKnjiga == this.IDKnjiga && (obj as PripadaZanru).OZNZ == this.OZNZ;
         }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDKnjiga", "OZNZ" };
+        }
     }
 }

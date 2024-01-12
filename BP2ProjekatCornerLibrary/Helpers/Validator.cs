@@ -29,6 +29,21 @@ namespace BP2ProjekatCornerLibrary.Helpers
             MessageBox.Show("Unet broj mora biti pozitivan i veći od 0!");
             return false;
         }
+        public static bool PozNumber0(string value)
+        {
+            int i = -1;
+            if (!int.TryParse(value, out i))
+            {
+                MessageBox.Show("Unet broj nije u dobrom formatu!");
+                return false;
+            }
+            else if (i >= 0)
+            {
+                return true;
+            }
+            MessageBox.Show("Unet broj mora biti pozitivan i veći od 0!");
+            return false;
+        }
         public static bool PozNumberNoCom(string value)
         {
             int i = -1;
@@ -45,7 +60,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
         public static bool PozDecimal(string value)
         {
             decimal i = -1;
-            if(!decimal.TryParse(value, out i))
+            if (!decimal.TryParse(value, out i))
             {
                 MessageBox.Show("Unet broj nije u dobrom formatu!");
                 return false;
@@ -149,7 +164,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
             }
             if (input.Contains(' '))
             {
-                string[] s = input.Split(' ');
+                string[] s = input.Trim('.').Split(' ');
                 if (!string.Concat(s).All(char.IsLetter))
                 {
                     MessageBox.Show("Ime ne sme sadržati specijalne karaktere ni cifre!");
@@ -248,7 +263,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
         }
         public static bool Date(string day, string month, string year)
         {
-            if(day == "" || month == "" || year == "")
+            if (day == "" || month == "" || year == "")
             {
                 MessageBox.Show("Polja za datum moraju biti popunjena!");
                 return false;
@@ -287,12 +302,21 @@ namespace BP2ProjekatCornerLibrary.Helpers
             }
             else
             {
-                if(input.EndsWith('.')) input = input.Substring(0, input.Length - 1);
+                if (input.EndsWith('.')) input = input.Substring(0, input.Length - 1);
                 if (!input.All(char.IsLetterOrDigit))
                 {
                     MessageBox.Show("Vreme izdavanja ne sme sadržati specijalne karaktere!");
                     return false;
                 }
+            }
+            return true;
+        }
+        public static bool CompanyName(string input)
+        {
+            if (input.Length <= 0)
+            {
+                MessageBox.Show("Polje za naziv mora biti popunjeno!");
+                return false;
             }
             return true;
         }

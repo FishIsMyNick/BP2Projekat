@@ -21,6 +21,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public string? Format { get; set; }
         [Required]
         public string? Period { get; set; }
+        public DateTime? DatBrisanja { get; set; }
         public override ClassPropertyValue GetKeyIdentity() => new ClassPropertyValue("IDSStivo", IDSStivo);
         public override List<ClassPropertyValue> GetKeyProperties()
         {
@@ -28,6 +29,11 @@ namespace BP2ProjekatCornerLibrary.Models
             {
                 new ClassPropertyValue("IDSStivo", IDSStivo)
             };
+        }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDSStivo", "Naziv", "TipStiva", "Format", "Period", "DatBrisanja" };
         }
 
         public SerijskoStivo() : base() { }

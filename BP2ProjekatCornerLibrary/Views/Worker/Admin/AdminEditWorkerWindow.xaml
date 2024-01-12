@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker"
         mc:Ignorable="d"
-        Title="AdminEditWorkerWindow" Height="530" Width="600">
+		Height="530" Width="600">
 	<Grid>
 		<!--SELECTION VIEW-->
 		<Grid Name="SelectView" Visibility="Hidden">
@@ -71,8 +71,8 @@
 							<GridViewColumn Width="110" DisplayMemberBinding="{Binding Ime}"/>
 							<GridViewColumn Width="130" DisplayMemberBinding="{Binding Prezime}" />
 							<GridViewColumn Width="120" DisplayMemberBinding="{Binding Username}" />
-							<GridViewColumn Width="120" DisplayMemberBinding="{Binding Tip}" />
-							<GridViewColumn Width="105" DisplayMemberBinding="{Binding DatZap}" />
+							<GridViewColumn Width="120" DisplayMemberBinding="{Binding GetTip}" />
+							<GridViewColumn Width="105" DisplayMemberBinding="{Binding DatZapStr}" />
 						</GridView>
 					</ListView.View>
 				</ListView>

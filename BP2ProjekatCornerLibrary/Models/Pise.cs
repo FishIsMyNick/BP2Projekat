@@ -37,5 +37,10 @@ namespace BP2ProjekatCornerLibrary.Models
             if(!(obj is Pise)) return false;
             return (obj as Pise).IDKnjiga == IDKnjiga && (obj as Pise).IDAutor == IDAutor;
         }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDKnjiga", "IDAutor" };
+        }
     }
 }

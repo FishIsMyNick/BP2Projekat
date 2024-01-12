@@ -145,9 +145,15 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
         #endregion
 
         #region SORTING
+        private bool s_format_asc = false;
         private void btn_Format_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            Formati.Items.Clear();
+            s_format_asc = !s_format_asc;
+            foreach (Format f in Sorter.SortText<Format>(DBHelper.GetAllFormats(), "NazivFormata", s_format_asc))
+            {
+                Formati.Items.Add(f);
+            }
         }
         #endregion
 

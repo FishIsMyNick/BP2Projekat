@@ -1,4 +1,5 @@
-﻿using System;
+﻿using BP2ProjekatCornerLibrary.Helpers;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -41,6 +42,7 @@ namespace BP2ProjekatCornerLibrary.Models.NonContext
                 return ret;
             }
         }
+        public int SortPeriod => DBHelper.GetPeriod(Period).Ucestalost;
 
         public ViewSStivo(int id, string naziv, int tip, string? format, string? period, List<Jezik>? jezici, List<IzdKuca>? izdKuce) : base(id, naziv, tip, format, period)
         {
@@ -56,10 +58,11 @@ namespace BP2ProjekatCornerLibrary.Models.NonContext
         public SerijskoStivo SStivo;
         public IzdanjeSStiva IzdSStiva;
         public string DispBrIzd => IzdSStiva.BrIzd.ToString();
-        public string DispDatIzd => IzdSStiva.DatIzd.Day + "/" + IzdSStiva.DatIzd.Month + "/" + IzdSStiva.DatIzd.Year;
+        public string DispDatIzd => IzdSStiva.DatIzd.Day + "." + IzdSStiva.DatIzd.Month + "." + IzdSStiva.DatIzd.Year + ".";
         public int Tip => SStivo.TipStiva;
         public string? DispFormat => SStivo.Format;
         public string? DispPeriod => SStivo.Period;
+        public int SortPeriod => DBHelper.GetPeriod(SStivo.Period).Ucestalost;
         public string DispCena => IzdSStiva.Cena.ToString();
         private List<Jezik>? Jezici;
         private List<IzdKuca>? IzdKuce;

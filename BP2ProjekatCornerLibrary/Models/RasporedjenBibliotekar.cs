@@ -28,6 +28,11 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDBib", "IDBK", "DatVr", "DatOd", "DatDo" };
+        }
+
         public RasporedjenBibliotekar() : base() { }
     }
 }

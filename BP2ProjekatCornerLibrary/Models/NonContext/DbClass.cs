@@ -13,6 +13,7 @@ namespace BP2ProjekatCornerLibrary.Models.NonContext
     {
         public virtual ClassPropertyValue GetKeyIdentity() { return null; }
         public abstract List<ClassPropertyValue> GetKeyProperties();
+        public abstract List<string> GetDbPropertyNames();
 
         public object? GetPropertyValue(string name)
         {

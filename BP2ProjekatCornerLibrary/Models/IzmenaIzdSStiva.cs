@@ -19,6 +19,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public DateTime DatVr { get; set; }
         public DateTime? DatIzd { get; set; }
         public decimal? Cena { get; set; }
+        public DateTime? DatBrisanja { get; set; }
         public override List<ClassPropertyValue> GetKeyProperties()
         {
             return new List<ClassPropertyValue>
@@ -30,18 +31,24 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
-        public IzmenaIzdSStiva() : base() { }
-        public IzmenaIzdSStiva(IzdanjeSStiva iss, int idBib) : base()
+        public override List<string> GetDbPropertyNames()
         {
-            IDSStivo = iss.IDSStivo;
-            BrIzd = iss.BrIzd;
+            return new List<string> { "IDSStivo", "BrIzd", "IDBib", "DatVr", "DatIzd", "Cena", "DatBrisanja" };
+        }
+
+        public IzmenaIzdSStiva() : base() { }
+        public IzmenaIzdSStiva(IzdanjeSStiva newIzdSS, int idBib) : base()
+        {
+            IDSStivo = newIzdSS.IDSStivo;
+            BrIzd = newIzdSS.BrIzd;
             IDBib = idBib;
             DatVr = DateTime.Now;
 
             IzdanjeSStiva postojece = DBHelper.GetIzdanjeSStiva(IDSStivo, BrIzd);
 
-            DatIzd = postojece.DatIzd != iss.DatIzd ? iss.DatIzd : null;
-            Cena = postojece.Cena != iss.Cena ? iss.Cena : null;
+            DatIzd = newIzdSS.DatIzd;
+            Cena = newIzdSS.Cena;
+            DatBrisanja = newIzdSS.DatBrisanja;
         }
     }
 }

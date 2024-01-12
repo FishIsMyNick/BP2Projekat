@@ -25,6 +25,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public int? Ograniceno { get; set; }
         [Required]
         public string? Format { get; set; }
+        public DateTime? DatBrisanja { get; set; }
         public override ClassPropertyValue GetKeyIdentity() => new ClassPropertyValue("IDKnjiga", IDKnjiga);
 
         public override List<ClassPropertyValue> GetKeyProperties()
@@ -34,6 +35,13 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("IDKnjiga", IDKnjiga)
             };
         }
+
+        public override List<string> GetDbPropertyNames()
+        {
+
+            return new List<string> { "IDKnjiga", "Naziv", "BrIzd", "GodIzd", "VrIzd", "BrStrana", "VelicinaFonta", "Korice", "Ograniceno", "Format", "DatBrisanja" };
+        }
+
         public Knjiga() : base() { }
         public Knjiga(Knjiga k) : base()
         {

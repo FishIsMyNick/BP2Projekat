@@ -30,6 +30,11 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDLokal", "IDAdmin", "DatVrIL", "Naziv", "DatOtv", "DatZat" };
+        }
+
         public IzmenaLokala() : base() { }
 
         public IzmenaLokala(int iDLokal, int iDAdmin, string? naziv = null, DateTime? datOtv = null, DateTime? datZat = null) : base()
@@ -41,17 +46,15 @@ namespace BP2ProjekatCornerLibrary.Models
             DatZat = datZat;
             DatVrIL = DateTime.Now;
         }
-        public IzmenaLokala(Biblikutak b, int idAdmin) : base() 
+        public IzmenaLokala(Biblikutak newBK, int idAdmin) : base() 
         {
-            IDLokal = b.IDBK;
+            IDLokal = newBK.IDBK;
             IDAdmin = idAdmin;
             DatVrIL = DateTime.Now;
 
-            Biblikutak postojeci = DBHelper.GetLokal(IDLokal);
-
-            Naziv = postojeci.Naziv != b.Naziv ? b.Naziv : null;
-            DatOtv = postojeci.DatOtv != b.DatOtv ? b.DatOtv : null;
-            DatZat = postojeci.DatZat != b.DatZat ? b.DatZat : null;
+            Naziv = newBK.Naziv;
+            DatOtv = newBK.DatOtv;
+            DatZat = newBK.DatZat;
         }
     }
 }

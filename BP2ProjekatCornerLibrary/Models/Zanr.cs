@@ -23,6 +23,12 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("OZNZ", OZNZ)
             };
         }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "OZNZ", "NazivZanra" };
+        }
+
         public Zanr() : base() { }
         public Zanr(string oznz, string naziv)
         {

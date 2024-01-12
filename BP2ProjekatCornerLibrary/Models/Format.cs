@@ -20,6 +20,12 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("NazivFormata", NazivFormata)
             };
         }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "NazivFormata" };
+        }
+
         public Format() : base() { }
 
         public Format(string nazivFormata)

@@ -24,6 +24,11 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDSStivo", "OZNJ" };
+        }
+
         public SStivoNaJeziku() : base() { }
 
         public SStivoNaJeziku(int iDSStivo, string oZNJ)

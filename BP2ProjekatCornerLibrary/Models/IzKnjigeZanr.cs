@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace BP2ProjekatCornerLibrary.Models
 {
     [PrimaryKey("IDKnjiga", "IDBib", "DatVr", "OZNZ")]
-    public class IzKnjigeZanr:_DbClass
+    public class IzKnjigeZanr : _DbClass
     {
         public int IDKnjiga { get; set; }
         public int IDBib { get; set; }
@@ -28,14 +28,19 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDKnjiga", "IDBib", "DatVr", "OZNZ" };
+        }
+
         public IzKnjigeZanr() : base() { }
 
-        public IzKnjigeZanr(int iDKnjiga, string oZNZ, int iDBib, DateTime? datVr = null)
+        public IzKnjigeZanr(IzmenaKnjige izK, string oZNZ) :base()
         {
-            IDKnjiga = iDKnjiga;
-            IDBib = iDBib;
+            IDKnjiga = izK.IDKnjiga;
+            IDBib = izK.IDBib;
             OZNZ = oZNZ ?? throw new ArgumentNullException(nameof(oZNZ));
-            DatVr = datVr == null ? DateTime.Now : (DateTime)datVr;
+            DatVr = izK.DatVr;
         }
     }
 }

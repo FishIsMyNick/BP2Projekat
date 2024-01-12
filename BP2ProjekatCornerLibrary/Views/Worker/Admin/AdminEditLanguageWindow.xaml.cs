@@ -182,14 +182,25 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         #endregion
         #region Sorting
+        private bool s_ozn_asc = false;
         private void btn_OZN_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            Jezici.Items.Clear();
+            s_ozn_asc = !s_ozn_asc;
+            foreach (Jezik j in Sorter.SortText<Jezik>( DBHelper.GetAllJeziks(), "OZNJ", s_ozn_asc))
+            {
+                Jezici.Items.Add(j);
+            }
         }
-
+        private bool s_naz_asc = false;
         private void btn_Naziv_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            Jezici.Items.Clear();
+            s_naz_asc = !s_naz_asc;
+            foreach (Jezik j in Sorter.SortText<Jezik>( DBHelper.GetAllJeziks(), "NazivJezika", s_naz_asc))
+            {
+                Jezici.Items.Add(j);
+            }
         }
 
 

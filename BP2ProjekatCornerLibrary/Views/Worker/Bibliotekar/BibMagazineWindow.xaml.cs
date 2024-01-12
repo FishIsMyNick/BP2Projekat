@@ -25,14 +25,22 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private bool _testing = Login.Login._testing;
         private int _currentUser;
         private int _lokalID;
+        private bool _quitAfterSave;
+        private iDynamicListView _caller;
         private SerijskoStivo _stivoToEdit;
 
         private int _tipSStiva = 2;
-        public BibMagazineWindow(int currentUser, SerijskoStivo toEdit = null)
+        public BibMagazineWindow(int currentUser, SerijskoStivo toEdit = null, bool quitAfterSave = false, iDynamicListView caller = null)
         {
             InitializeComponent();
             _stivoToEdit = toEdit;
-            if (_stivoToEdit == null)
+            _quitAfterSave = quitAfterSave;
+            _caller = caller;
+            if (quitAfterSave)
+            {
+                SetAddView();
+            }
+            else if (_stivoToEdit == null)
             {
                 SetSelectView();
             }
@@ -51,6 +59,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
             {
                 FillInputFields(toEdit);
             }
+            _quitAfterSave = quitAfterSave;
+            _caller = caller;
         }
 
         #region INIT CONTROLS
@@ -64,6 +74,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
             view_edit.Visibility = Visibility.Visible;
             view_select.Visibility = Visibility.Collapsed;
+
+            btn_Uredi_Izdanja.Visibility = Visibility.Collapsed;
         }
         private void SetEditView(SerijskoStivo ss)
         {
@@ -78,6 +90,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
             view_edit.Visibility = Visibility.Visible;
             view_select.Visibility = Visibility.Collapsed;
+
+            btn_Uredi_Izdanja.Visibility = Visibility.Visible;
         }
         private void SetSelectView()
         {
@@ -104,7 +118,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
                 List<IzdKuca> iks = DBHelper.GetAllSStivoIzdKucas(ss);
 
                 Magazini.Items.Add(new ViewSStivo(ss.IDSStivo, ss.Naziv, _tipSStiva, ss.Format, ss.Period, jezici, iks));
-            } 
+            }
         }
         private void FillFormati()
         {
@@ -259,8 +273,20 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
             if (DBHelper.AddSStivo(toAdd, jToAdd, iToAdd) != 0)
             {
                 MessageBox.Show("Uspešno ste dodali nov magazin!");
-                RefreshLists();
-                SetSelectView();
+                if (_quitAfterSave)
+                {
+                    _caller?.RefreshLists();
+                    Close();
+                }
+                else
+                {
+                    RefreshLists();
+                    SetSelectView();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Došlo je do greške pri dodavanju magazina!");
             }
         }
 
@@ -304,7 +330,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (!DBHelper.DeleteSStivo(_stivoToEdit))
+            if (!DBHelper.DeleteSStivo(_stivoToEdit, _currentUser))
             {
                 MessageBox.Show("Došlo je do greške pri brisanju podataka!");
                 return;
@@ -353,7 +379,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
         private void btn_Add_IK_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: open add IK window
+            Window addIKWin = new BibIzdKucaWindow(_currentUser, toAdd: true, caller: this); addIKWin.ShowDialog();
         }
         private void btn_Uredi_Izdanja_Click(object sender, RoutedEventArgs e)
         {
@@ -364,29 +390,62 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
 
         #region SORTING
+        private List<ViewSStivo> GetAllMagFromList()
+        {
+            List<ViewSStivo> ret = new List<ViewSStivo>();
+            foreach (var izm in Magazini.Items)
+            {
+                ret.Add(izm as ViewSStivo);
+            }
+            return ret;
+        }
+        private void SortMagText(string propName, bool ascending)
+        {
+            List<ViewSStivo> sorted = Sorter.SortText<ViewSStivo>(GetAllMagFromList(), propName, ascending);
+            Magazini.Items.Clear();
+            foreach (ViewSStivo izd in sorted)
+            {
+                Magazini.Items.Add(izd);
+            }
+        }
+        private void SortMagInt(string propName, bool ascending)
+        {
+            List<ViewSStivo> sorted = Sorter.SortInt<ViewSStivo>(GetAllMagFromList(), propName, ascending);
+            Magazini.Items.Clear();
+            foreach (ViewSStivo izd in sorted)
+            {
+                Magazini.Items.Add(izd);
+            }
+        }
+        private bool s_naz = false;
         private void btn_sort_naziv_Click(object sender, RoutedEventArgs e)
         {
-
+            s_naz = !s_naz;
+            SortMagText("Naziv", s_naz);
         }
-
+        private bool s_jez = false;
         private void btn_sort_jezici_Click(object sender, RoutedEventArgs e)
         {
-
+            s_jez = !s_jez;
+            SortMagText("ListJezici", s_jez);
         }
-
+        private bool s_for = false;
         private void btn_sort_format_Click(object sender, RoutedEventArgs e)
         {
-
+            s_for = !s_for;
+            SortMagText("Format", s_for);
         }
-
+        private bool s_ik = false;
         private void btn_sort_izdKuce_Click(object sender, RoutedEventArgs e)
         {
-
+            s_ik = !s_ik; ;
+            SortMagText("ListIzdKuce", s_ik);
         }
-
+        private bool s_per = false;
         private void btn_sort_period_Click(object sender, RoutedEventArgs e)
         {
-
+            s_per = !s_per;
+            SortMagInt("SortPeriod", s_per);
         }
         #endregion
 

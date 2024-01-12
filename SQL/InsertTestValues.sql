@@ -52,6 +52,7 @@ insert into Mesto(PosBr, NazivMesta) values
 	;
 
 
+
 insert into Drzava(OZND, NazivDrzave) values
 	('XXX', 'Nepoznato'),
 	('SRB', 'Srbija'),
@@ -60,6 +61,7 @@ insert into Drzava(OZND, NazivDrzave) values
 	('USA', 'Sjedinjene Američke Države'),
 	('ENG', 'Engleska')
 	;
+
 
 insert into Adresa(Ulica, Broj) values
 	('Blagoja Parovića', '9a'),
@@ -93,12 +95,12 @@ insert into Lokacija(Ulica, Broj, PosBr, OZND) values
 	('Slovenska cesta', '33', 1000, 'SLO')
 	;
 
-insert into IzdKuca(Naziv, Ulica, Broj, PosBr, OZND) values
-	('Pingvin', 'Vuka Karadžića', '2', 11000, 'SRB'),
-	('Arhipelag', 'Vuka Karadžića', '2', 11000, 'SRB'),
-	('Abalon', 'Jurija Gararina', '177', 11000, 'SRB'),
-	('Jesenski i Turk', 'Zagrebačka avenija', '44', 10000, 'HRV'),
-	('Beletrina', 'Slovenska cesta', '33', 1000, 'SLO')
+insert into IzdKuca(Naziv, Ulica, Broj, PosBr, OZND, DatZat) values
+	('Pingvin', 'Vuka Karadžića', '2', 11000, 'SRB', NULL),
+	('Arhipelag', 'Vuka Karadžića', '2', 11000, 'SRB', NULL),
+	('Abalon', 'Jurija Gararina', '177', 11000, 'SRB', NULL),
+	('Jesenski i Turk', 'Zagrebačka avenija', '44', 10000, 'HRV', NULL),
+	('Beletrina', 'Slovenska cesta', '33', 1000, 'SLO', NULL)
 	;
 
 insert into Biblikutak(Naziv, DatOtv, DatZat, Ulica, Broj, PosBr, OZND) values

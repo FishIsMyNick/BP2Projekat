@@ -1,9 +1,11 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
 using BP2ProjekatCornerLibrary.Models;
 using BP2ProjekatCornerLibrary.Models.NonContext;
+using BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -67,8 +69,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         {
             lb_Add_Book.Visibility = Visibility.Visible;
             grd_Add_Btns.Visibility = Visibility.Visible;
-            lb_AddHere.Visibility = Visibility.Visible;
-            sp_AddHere.Visibility = Visibility.Visible;
+            //lb_AddHere.Visibility = Visibility.Visible;
+            //sp_AddHere.Visibility = Visibility.Visible;
 
             lb_Edit_Book.Visibility = Visibility.Collapsed;
             grd_Edit_Btns.Visibility = Visibility.Collapsed;
@@ -196,7 +198,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             // lbx_Autori.Items.Add(new Autor(-1, "+ Dodaj novog autora"));
             foreach (Autor a in DBHelper.GetAllAutors())
             {
-                lbx_Autori.Items.Add(a);
+                lbx_Autori.Items.Add(new ViewAutor(a));
             }
         }
         private void FillJeziciList()
@@ -382,10 +384,9 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             return Validator.Naziv(tb_Name.Text.Trim())
                 && Validator.PozNumber(tb_BrIzd.Text.Trim())
                 && Validator.VrIzd(tb_VrIzd.Text.Trim())
-                && Validator.PozNumber(tb_BrIzd.Text.Trim())
                 && Validator.PozNumber(tb_BrStr.Text.Trim())
                 && Validator.PozNumber(tb_VelFont.Text.Trim())
-                && (cb_AddHere.IsChecked == true ? Validator.PozNumber(tb_Kolicina.Text) : true);
+                && (cb_AddHere.IsChecked == true ? Validator.PozNumber0(tb_Kolicina.Text) : true);
         }
         private void cb_AddHere_Click(object sender, RoutedEventArgs e)
         {
@@ -502,7 +503,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (!DBHelper.DeleteKnjiga(_knjigaToEdit))
+            if (!DBHelper.DeleteKnjiga(_knjigaToEdit, _currentUser))
             {
                 MessageBox.Show("Došlo je do greške pri brisanju podataka!");
                 return;
@@ -522,12 +523,13 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         #region COMMON
         private void btn_Add_Autor_Click(object sender, RoutedEventArgs e)
         {
-
+            Window addAutorWin = new BibAutorWindow(_currentUser, toAdd: true, caller: this);
+            addAutorWin.ShowDialog();
         }
 
         private void btn_Add_Jezik_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         private void btn_Add_Zanr_Click(object sender, RoutedEventArgs e)
@@ -537,7 +539,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private void btn_Add_IK_Click(object sender, RoutedEventArgs e)
         {
-
+            Window addIKWin = new BibIzdKucaWindow(_currentUser, toAdd: true, caller: this); addIKWin.ShowDialog();
         }
         #endregion
 
@@ -612,64 +614,105 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
 
         #region SORTING
-
+        private void SortBooksString(string propName, bool ascending)
+        {
+            List<ViewKnjiga> toSort = new List<ViewKnjiga>();
+            foreach (var k in Knjige.Items) toSort.Add(k as ViewKnjiga);
+            Knjige.Items.Clear();
+            foreach (ViewKnjiga vk in Sorter.SortText<ViewKnjiga>(toSort, propName, ascending)) Knjige.Items.Add(vk);
+        }
+        private void SortBooksNumber(string propName, bool ascending)
+        {
+            List<ViewKnjiga> toSort = new List<ViewKnjiga>();
+            foreach (var k in Knjige.Items) toSort.Add(k as ViewKnjiga);
+            Knjige.Items.Clear();
+            foreach (ViewKnjiga vk in Sorter.SortInt<ViewKnjiga>(toSort, propName, ascending)) Knjige.Items.Add(vk);
+        }
+        private void SortBooksDate(string propName, bool ascending)
+        {
+            List<ViewKnjiga> toSort = new List<ViewKnjiga>();
+            foreach (var k in Knjige.Items) toSort.Add(k as ViewKnjiga);
+            Knjige.Items.Clear();
+            foreach (ViewKnjiga vk in Sorter.SortGodina<ViewKnjiga>(toSort, propName, ascending)) Knjige.Items.Add(vk);
+        }
+        private void SortBooksBool(string propName, bool ascending)
+        {
+            List<ViewKnjiga> toSort = new List<ViewKnjiga>();
+            foreach (var k in Knjige.Items) toSort.Add(k as ViewKnjiga);
+            Knjige.Items.Clear();
+            foreach (ViewKnjiga vk in Sorter.SortBoolInt<ViewKnjiga>(toSort, propName, ascending)) Knjige.Items.Add(vk);
+        }
+        private bool s_naz = false;
         private void btn_Sort_naziv_Click(object sender, RoutedEventArgs e)
         {
-
+            s_naz = !s_naz;
+            SortBooksString("Naziv", s_naz);
         }
-
+        private bool s_aut = false;
         private void btn_Sort_Autori_Click(object sender, RoutedEventArgs e)
         {
-
+            s_aut = !s_aut;
+            SortBooksString("ListAutori", s_aut);
         }
-
+        private bool s_jez = false;
         private void btn_sort_jezici_Click(object sender, RoutedEventArgs e)
         {
-
+            s_jez = !s_jez;
+            SortBooksString("ListJezici", s_jez);
         }
-
+        private bool s_ik = false;
         private void btn_sort_izdKuce_Click(object sender, RoutedEventArgs e)
         {
-
+            s_ik = !s_ik;
+            SortBooksString("ListIzdKuce", s_ik);
         }
-
+        private bool s_kor = false;
         private void btn_sort_korice_Click(object sender, RoutedEventArgs e)
         {
-
+            s_kor = !s_kor;
+            SortBooksString("DispKorice", s_kor);
         }
-
+        private bool s_brS = false;
         private void btn_sort_brStr_Click(object sender, RoutedEventArgs e)
         {
-
+            s_brS = !s_brS;
+            SortBooksNumber("BrStrana", s_brS);
         }
-
+        private bool s_zan = false;
         private void btn_sort_zanrovi_Click(object sender, RoutedEventArgs e)
         {
-
+            s_zan = !s_zan;
+            SortBooksString("ListZanrovi", s_zan);
         }
-
+        private bool s_for = false;
         private void btn_sort_format_Click(object sender, RoutedEventArgs e)
         {
-
+            s_for = !s_for;
+            SortBooksString("Format", s_for);
         }
-
+        private bool s_ogr = false;
         private void btn_sort_ograniceno_Click(object sender, RoutedEventArgs e)
         {
-
+            s_ogr = !s_ogr;
+            SortBooksBool("Ograniceno", s_ogr);
         }
-
+        private bool s_vrI = false;
         private void btn_sort_vrIzd_Click(object sender, RoutedEventArgs e)
         {
-
+            s_vrI = !s_vrI;
+            SortBooksDate("DispVrIzd", s_vrI);
         }
-
+        private bool s_velF = false;
         private void btn_sort_velFonta_Click(object sender, RoutedEventArgs e)
         {
-
+            s_velF = !s_velF;
+            SortBooksNumber("VelicinaFonta", s_velF);
         }
+        private bool s_brI = false;
         private void btn_sort_brIzd_Click(object sender, RoutedEventArgs e)
         {
-
+            s_brI = !s_brI;
+            SortBooksNumber("BrIzd", s_brI);
         }
         #endregion
     }

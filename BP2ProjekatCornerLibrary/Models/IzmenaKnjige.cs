@@ -25,6 +25,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public int? Korice { get; set; }
         public int? Ograniceno { get; set; }
         public string? Format { get; set; }
+        public DateTime? DatBrisanja { get; set; }
         public override List<ClassPropertyValue> GetKeyProperties()
         {
             return new List<ClassPropertyValue>
@@ -34,25 +35,30 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("DatVr", DatVr)
             };
         }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDKnjiga", "IDBib", "DatVr", "Naziv", "BrIzd", "GodIzd", "VrIzd", "BrStrana", "VelicinaFonta", "Korice", "Ograniceno", "Format", "DatBrisanja" };
+        }
+
         public IzmenaKnjige() : base() { }
 
-        public IzmenaKnjige(Knjiga k, int IdBib) : base()
+        public IzmenaKnjige(Knjiga newKnjiga, int IdBib) : base()
         {
-            IDKnjiga = k.IDKnjiga;
+            IDKnjiga = newKnjiga.IDKnjiga;
             IDBib = IdBib;
             DatVr = DateTime.Now;
 
-            Knjiga postojeca = DBHelper.GetBook(IDKnjiga);
-
-            Naziv = postojeca.Naziv != k.Naziv ? k.Naziv : null;
-            BrIzd = postojeca.BrIzd != k.BrIzd ? k.BrIzd : null;
-            GodIzd = postojeca.GodIzd != k.GodIzd ? k.GodIzd : null;
-            VrIzd = postojeca.VrIzd != k.VrIzd ? k.VrIzd : null;
-            BrStrana = postojeca.BrStrana != k.BrStrana ? k.BrStrana : null;
-            VelicinaFonta = postojeca.VelicinaFonta != k.VelicinaFonta ? k.VelicinaFonta : null;
-            Korice = postojeca.Korice != k.Korice ? k.Korice : null;
-            Ograniceno = postojeca.Ograniceno != k.Ograniceno ? k.Ograniceno : null;
-            Format = postojeca.Format != k.Format ? k.Format : null;
+            Naziv = newKnjiga.Naziv;
+            BrIzd = newKnjiga.BrIzd;
+            GodIzd = newKnjiga.GodIzd;
+            VrIzd = newKnjiga.VrIzd;
+            BrStrana = newKnjiga.BrStrana;
+            VelicinaFonta = newKnjiga.VelicinaFonta;
+            Korice = newKnjiga.Korice;
+            Ograniceno = newKnjiga.Ograniceno;
+            Format = newKnjiga.Format;
+            DatBrisanja = newKnjiga.DatBrisanja;
         }
     }
 }

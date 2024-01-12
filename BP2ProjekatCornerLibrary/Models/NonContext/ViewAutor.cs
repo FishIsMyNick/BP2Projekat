@@ -13,7 +13,8 @@ namespace BP2ProjekatCornerLibrary.Models.NonContext
         public event PropertyChangedEventHandler? PropertyChanged;
 
         public string DispDrzava => Drzava != null ? DBHelper.GetDrzava(Drzava).NazivDrzave : "Nepoznato";
-        public string DispDatRodj => DatRodj != null ? ((DateTime)DatRodj).Day + "/" + ((DateTime)DatRodj).Month + "/" + ((DateTime)DatRodj).Year : "";
+        public string DispDatRodj => DatRodj != null ? ((DateTime)DatRodj).Day + "." + ((DateTime)DatRodj).Month + "." + ((DateTime)DatRodj).Year + "." : "Nepoznato";
+        public string GetPrezime => Prezime != null ? Prezime : "";
 
         public ViewAutor() : base() { }
 

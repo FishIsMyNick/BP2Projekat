@@ -24,6 +24,11 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "ID", "KorisnickoIme" };
+        }
+
         public BibliotekarKoristiNalog() : base() { }
 
         public BibliotekarKoristiNalog(int iD, string korisnickoIme)

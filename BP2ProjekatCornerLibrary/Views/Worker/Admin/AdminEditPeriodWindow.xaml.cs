@@ -193,13 +193,25 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
 
         #region SORTING
+        private bool s_uce_asc = false;
         private void btn_Ucestalost_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            s_uce_asc = !s_uce_asc;
+            Periodi.Items.Clear();
+            foreach (Periodicnost p in Sorter.SortInt<Periodicnost>(DBHelper.GetAllPeriod(), "Ucestalost", s_uce_asc))
+            {
+                Periodi.Items.Add(p);
+            }
         }
+        private bool s_per_asc = false;
         private void btn_Period_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            s_per_asc = !s_per_asc;
+            Periodi.Items.Clear();
+            foreach (Periodicnost p in Sorter.SortText<Periodicnost>(DBHelper.GetAllPeriod(), "PeriodIzd", s_per_asc))
+            {
+                Periodi.Items.Add(p);
+            }
         }
 
         #endregion

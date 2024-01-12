@@ -21,6 +21,8 @@ namespace BP2ProjekatCornerLibrary.Models
         public string? Broj { get; set; }
         public int? PosBr { get; set; }
         public string? OZND { get; set; }
+
+        public DateTime? DatZat { get; set; }
         public override List<ClassPropertyValue> GetKeyProperties()
         {
             return new List<ClassPropertyValue>
@@ -29,6 +31,11 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("IDBib", IDBib),
                 new ClassPropertyValue("DatVr", DatVr)
             };
+        }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDIK", "IDBib", "DatVr", "Naziv", "Ulica", "Broj", "PosBr", "OZND", "DatZat" };
         }
 
         public IzmenaIzdKuce() : base() { }
@@ -44,19 +51,18 @@ namespace BP2ProjekatCornerLibrary.Models
             OZND = oZND;
             DatVr = DateTime.Now;
         }
-        public IzmenaIzdKuce(IzdKuca ik, int IdBib)
+        public IzmenaIzdKuce(IzdKuca newIK, int IdBib)
         {
-            IDIK = ik.IDIK;
+            IDIK = newIK.IDIK;
             IDBib = IdBib;
             DatVr = DateTime.Now;
 
-            IzdKuca postojeca = DBHelper.GetIzdKuca(IDIK);
-
-            Naziv = postojeca.Naziv != ik.Naziv ? ik.Naziv : null;
-            Ulica = postojeca.Ulica != ik.Ulica ? ik.Ulica : null;
-            Broj = postojeca.Broj != ik.Broj ? ik.Broj : null;
-            PosBr = postojeca.PosBr != ik.PosBr ? ik.PosBr : null;
-            OZND = postojeca.OZND != ik.OZND ? ik.OZND : null;
+            Naziv = newIK.Naziv;
+            Ulica = newIK.Ulica;
+            Broj = newIK.Broj;
+            PosBr = newIK.PosBr;
+            OZND = newIK.OZND;
+            DatZat = newIK.DatZat;
         }
     }
 }

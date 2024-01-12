@@ -26,14 +26,22 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private bool _testing = Login.Login._testing;
         private int _currentUser;
         private int _lokalID;
+        private bool _quitAfterSave = false;
+        private iDynamicListView _caller;
         private SerijskoStivo _stivoToEdit;
 
         private int _tipSStiva = 1;
-        public BibNewsWindow(int currentUser, SerijskoStivo toEdit = null)
+        public BibNewsWindow(int currentUser, SerijskoStivo toEdit = null, bool quitAfterSave = false, iDynamicListView caller = null)
         {
             InitializeComponent();
             _stivoToEdit = toEdit;
-            if (_stivoToEdit == null)
+            _caller = caller;
+            _quitAfterSave = quitAfterSave;
+            if (quitAfterSave)
+            {
+                SetAddView();
+            }
+            else if (_stivoToEdit == null)
             {
                 SetSelectView();
             }
@@ -52,6 +60,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
             {
                 FillInputFields(toEdit);
             }
+            _quitAfterSave = quitAfterSave;
+            _caller = caller;
         }
 
         #region INIT CONTROLS
@@ -66,6 +76,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
             view_edit.Visibility = Visibility.Visible;
             view_select.Visibility = Visibility.Collapsed;
+
+            btn_Uredi_Izdanja.Visibility = Visibility.Collapsed;
         }
         private void SetEditView(SerijskoStivo ss)
         {
@@ -81,6 +93,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
             view_edit.Visibility = Visibility.Visible;
             view_select.Visibility = Visibility.Collapsed;
+
+            btn_Uredi_Izdanja.Visibility = Visibility.Visible;
         }
         private void SetSelectView()
         {
@@ -262,15 +276,34 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
             if (DBHelper.AddSStivo(toAdd, jToAdd, iToAdd) != 0)
             {
                 MessageBox.Show("Uspešno ste dodali nove novine!");
-                RefreshLists();
-                SetSelectView();
+                if (_quitAfterSave)
+                {
+                    _caller?.RefreshLists();
+                    Close();
+                }
+                else
+                {
+                    RefreshLists();
+                    SetSelectView();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Došlo je do greške pri dodavanju novina!");
             }
         }
 
         private void btn_Add_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            ClearInputFields();
-            SetSelectView();
+            if (_quitAfterSave)
+            {
+                Close();
+            }
+            else
+            {
+                ClearInputFields();
+                SetSelectView();
+            }
         }
         #endregion
         #region EDIT
@@ -307,7 +340,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (!DBHelper.DeleteSStivo(_stivoToEdit))
+            if (!DBHelper.DeleteSStivo(_stivoToEdit, _currentUser))
             {
                 MessageBox.Show("Došlo je do greške pri brisanju podataka!");
                 return;
@@ -355,7 +388,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
         private void btn_Add_IK_Click(object sender, RoutedEventArgs e)
         {
-            //TODO: open add IK window
+            Window addIKWin = new BibIzdKucaWindow(_currentUser, toAdd: true, caller: this); addIKWin.ShowDialog();
         }
         private void btn_Uredi_Izdanja_Click(object sender, RoutedEventArgs e)
         {

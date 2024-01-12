@@ -28,6 +28,11 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "KorisnickoIme", "Sifra", "DatKreiranja", "DatZatvaranja", "TipNaloga" };
+        }
+
         public KorisnickiNalog() : base() { }
 
         public KorisnickiNalog(string korisnickoIme, string sifra, DateTime datKreiranja, int tipNaloga)

@@ -96,6 +96,7 @@ create table IzdKuca(
 	Broj varchar(50) not null,
 	PosBr int not null,
 	OZND varchar(4) not null,
+	DatZat date,
 
 	constraint IK_PK primary key (IDIK),
 
@@ -242,6 +243,7 @@ create table Autor(
 	DatRodj date,
 	Biografija varchar(MAX),
 	Drzava varchar(4),
+	DatBrisanja date,
 
 	constraint AUTOR_PK primary key (IDAutor),
 
@@ -259,6 +261,7 @@ create table Knjiga(
 	Korice int,
 	Ograniceno int,
 	Format varchar(50),
+	DatBrisanja date,
 
 	constraint KNJIGA_PK primary key (IDKnjiga),
 
@@ -311,6 +314,7 @@ create table KnjigaULokalu(
 	IDBK int not null,
 	DatVrIzmene datetime not null,
 	Kolicina int not null,
+	DatBrisanja date,
 
 	constraint KUL_PK primary key (IDKnjiga, IDBK, DatVrIzmene),
 	
@@ -332,6 +336,7 @@ create table SerijskoStivo(
 	TipStiva int not null,
 	Format varchar(50),
 	Period varchar(50),
+	DatBrisanja date,
 
 	constraint SSTIVO_PK primary key (IDSStivo),
 
@@ -364,6 +369,7 @@ create table IzdanjeSStiva(
 	BrIzd int not null,
 	DatIzd date not null,
 	Cena decimal(10,2) not null,
+	DatBrisanja date,
 
 	constraint ISS_PK primary key (IDSStivo, BrIzd),
 
@@ -376,6 +382,7 @@ create table IzdSStivoULokalu(
 	IDBK int not null,
 	DatVrIzmene datetime not null,
 	Kolicina int not null,
+	DatBrisanja date,
 
 	constraint SSUL_PK primary key (IDSStivo, BrIzd, IDBK, DatVrIzmene),
 	
@@ -424,6 +431,7 @@ create table IzmenaKnjige(
 	Korice int,
 	Ograniceno int,
 	Format varchar(50),
+	DatBrisanja date,
 
 	constraint IZKNJIGA_PK primary key (IDKnjiga, IDBib, DatVr),
 	
@@ -489,6 +497,7 @@ create table IzmenaAutora(
 	DatRodj date,
 	Biografija varchar(MAX),
 	Drzava varchar(4),
+	DatBrisanja date,
 
 	constraint IZA_PK primary key (IDAutor, IDBib, DatVr),
 
@@ -505,6 +514,7 @@ create table IzmenaSStiva(
 	TipStiva int,
 	Format varchar(50),
 	Period varchar(50),
+	DatBrisanja date,
 
 	constraint IZSS_PK primary key (IDSStivo, IDBib, DatVr),
 
@@ -545,6 +555,7 @@ create table IzmenaIzdSStiva(
 	DatVr datetime not null,
 	DatIzd date,
 	Cena decimal(10,2),
+	DatBrisanja date,
 
 	constraint IZISS_PK primary key (IDSStivo, BrIzd, IDBib, DatVr),
 
@@ -561,7 +572,7 @@ create table IzmenaIzdKuce(
 	Broj varchar(50),
 	PosBr int,
 	OZND varchar(4),
-	
+	DatZat date,
 
 	constraint IZIK_PK primary key (IDIK, IDBib, DatVr),
 

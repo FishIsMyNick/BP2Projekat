@@ -50,5 +50,10 @@ namespace BP2ProjekatCornerLibrary.Models
             if (!(obj is KnjigaNaJeziku)) return false;
             return (obj as KnjigaNaJeziku).IDKnjiga == this.IDKnjiga && (obj as KnjigaNaJeziku).OZNJ == this.OZNJ;
         }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDKnjiga", "OZNJ" };
+        }
     }
 }

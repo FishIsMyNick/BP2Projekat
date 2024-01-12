@@ -24,6 +24,11 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDSStivo", "IDIK" };
+        }
+
         public IzdajeSStivo() : base() { }
 
         public IzdajeSStivo(int idSStivo, int idik)

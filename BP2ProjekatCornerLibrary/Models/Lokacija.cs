@@ -28,6 +28,12 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("OZND", OZND)
             };
         }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "Ulica", "Broj", "PosBr", "OZND" };
+        }
+
         public Lokacija() : base() { }
 
         public Lokacija(string ulica, string broj, int posBr, string oZND)

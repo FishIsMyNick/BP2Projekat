@@ -178,6 +178,19 @@ namespace BP2ProjekatCornerLibrary.Helpers
         public string GetBroj => Lok.Broj;
         public string GetMesto => DBHelper.GetMesto(Lok.PosBr).NazivMesta;
         public string GetDrzava => DBHelper.GetDrzava(Lok.OZND).NazivDrzave;
+        public string GetTip
+        {
+            get
+            {
+                switch (Tip)
+                {
+                    case 1: return "Administrator";
+                    case 2: return "Bibliotekar";
+                    case 3: return "Kurir";
+                    default: return "";
+                }
+            }
+        }
 
         public RadnikView(int id, string ime, string prezime, string username, DateTime datRodj, DateTime datZap, int tip, string ulica, string broj, int posBr, string oznd)
         {

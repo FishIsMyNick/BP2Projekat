@@ -8,7 +8,7 @@
                         MinHeight="700" Width="1325">
 
 	<Grid>
-		<Grid x:Name="view_select" Visibility="Collapsed">
+		<Grid x:Name="view_select" Visibility="Visible">
 			<StackPanel Orientation="Vertical">
 				<Grid x:Name="grd_TopBar" 
               Height="100">
@@ -66,7 +66,7 @@
 						<Button x:Name="btn_sort_cena"
 								Content="Cena"
                                 Grid.Column="1"
-							Click="btn_sort_cena_Click"/>
+							Click="btn_sort_cena_Click" Height="25" VerticalAlignment="Top"/>
 						<Image x:Name="img_sort_cena" 
 								Source="..\..\..\Images\arrow_down.png"
                        Grid.Column="1"
@@ -128,11 +128,11 @@
 					</Grid>
 
 					<!--New grid design-->
-					<ListView x:Name="IzdNovina"
+					<ListView x:Name="IzdMagazina"
 						Background="White"
                         ScrollViewer.HorizontalScrollBarVisibility="Disabled"
                         Margin="-3 -25 0 0 "
-						  MouseDoubleClick="IzdNovina_MouseDoubleClick">
+						  MouseDoubleClick="IzdMagazina_MouseDoubleClick">
 
 						<ListView.View>
 							<GridView>
@@ -163,7 +163,7 @@
 				</StackPanel>
 			</StackPanel>
 		</Grid>
-		<Grid x:Name="view_edit" Visibility="Visible">
+		<Grid x:Name="view_edit" Visibility="Collapsed">
 			<Grid.Resources>
 				<SolidColorBrush x:Key="brush" Color="DarkGray"/>
 			</Grid.Resources>

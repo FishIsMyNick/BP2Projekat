@@ -102,7 +102,7 @@
 						<ListView.View>
 							<GridView>
 								<GridViewColumn DisplayMemberBinding="{Binding Ime}" Width="{Binding ActualWidth, ElementName=btn_sort_ime}"/>
-								<GridViewColumn DisplayMemberBinding="{Binding Prezime}" Width="{Binding ActualWidth, ElementName=btn_sort_prezime}"/>
+								<GridViewColumn DisplayMemberBinding="{Binding GetPrezime}" Width="{Binding ActualWidth, ElementName=btn_sort_prezime}"/>
 								<GridViewColumn DisplayMemberBinding="{Binding DispDatRodj}" Width="{Binding ActualWidth, ElementName=btn_sort_datRodj}"/>
 								<GridViewColumn DisplayMemberBinding="{Binding Biografija}"  Width="{Binding ActualWidth, ElementName=btn_sort_biografija}"/>
 								<GridViewColumn DisplayMemberBinding="{Binding DispDrzava}" Width="{Binding ActualWidth, ElementName=btn_sort_drzava}"/>

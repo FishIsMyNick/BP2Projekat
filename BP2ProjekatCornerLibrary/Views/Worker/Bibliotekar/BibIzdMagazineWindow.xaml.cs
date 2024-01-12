@@ -92,7 +92,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         }
         private void SetSelectView()
         {
-            IzdNovina.SelectedItem = null;
+            IzdMagazina.SelectedItem = null;
             this.Width = 1325;
             view_edit.Visibility = Visibility.Collapsed;
             view_select.Visibility = Visibility.Visible;
@@ -105,13 +105,13 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
         private void FillNewsList()
         {
-            IzdNovina.Items.Clear();
+            IzdMagazina.Items.Clear();
             foreach (IzdanjeSStiva iss in DBHelper.GetAllIzdanjeSStivaFromSS(_selectedSStivo))
             {
                 List<Jezik> jezici = DBHelper.GetAllSStivoJeziks(_selectedSStivo);
                 List<IzdKuca> iks = DBHelper.GetAllSStivoIzdKucas(_selectedSStivo);
 
-                IzdNovina.Items.Add(new ViewIzdSStivo(iss.IDSStivo, iss.BrIzd, iss.DatIzd, iss.Cena, _selectedSStivo.Naziv, _tipSStiva, _selectedSStivo.Format, _selectedSStivo.Period, jezici, iks));
+                IzdMagazina.Items.Add(new ViewIzdSStivo(iss.IDSStivo, iss.BrIzd, iss.DatIzd, iss.Cena, _selectedSStivo.Naziv, _tipSStiva, _selectedSStivo.Format, _selectedSStivo.Period, jezici, iks));
             }
         }
         private void ClearInputFields()
@@ -158,7 +158,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
             return Validator.PozNumber(tb_BrIzd.Text)
                 && Validator.Date(tb_Dan.Text, tb_Mesec.Text, tb_Godina.Text)
                 && Validator.PozDecimal(tb_Cena.Text)
-                && cb_AddHere.IsChecked == true ? Validator.PozNumber(tb_Kolicina.Text) : true;
+                && cb_AddHere.IsChecked == true ? Validator.PozNumber0(tb_Kolicina.Text) : true;
         }
         #region ADD
         private void btn_Add_Confirm_Click(object sender, RoutedEventArgs e)
@@ -242,7 +242,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
         {
-            if (!DBHelper.DeleteIzdSStivo(_izdStivaToEdit))
+            if (!DBHelper.DeleteIzdSStivo(_izdStivaToEdit, _currentUser))
             {
                 MessageBox.Show("Došlo je do greške pri brisanju podataka!");
                 return;
@@ -286,7 +286,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         {
             return DBHelper.GetAllIzdSStivoULokalu($"IDSStivo={_izdStivaToEdit.IDSStivo} and BrIzd={_izdStivaToEdit.BrIzd} and IDBK={_lokalID}").Count > 0;
         }
-        private void IzdNovina_MouseDoubleClick(object sender, MouseButtonEventArgs e)
+        private void IzdMagazina_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             ViewIzdSStivo sel = ((ListView)sender).SelectedValue as ViewIzdSStivo;
             if (sel != null)
@@ -299,45 +299,91 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
 
         #region SORTING
-
+        private List<ViewIzdSStivo> GetAllIzdMagFromList()
+        {
+            List<ViewIzdSStivo> ret = new List<ViewIzdSStivo>();
+            foreach (var izm in IzdMagazina.Items)
+            {
+                ret.Add(izm as ViewIzdSStivo);
+            }
+            return ret;
+        }
+        private void SortIzdText(string propName, bool ascending)
+        {
+            List<ViewIzdSStivo> sorted = Sorter.SortText<ViewIzdSStivo>(GetAllIzdMagFromList(), propName, ascending);
+            IzdMagazina.Items.Clear();
+            foreach (ViewIzdSStivo izd in sorted)
+            {
+                IzdMagazina.Items.Add(izd);
+            }
+        }
+        private void SortIzdDate(string propName, bool ascending)
+        {
+            List<ViewIzdSStivo> sorted = Sorter.SortDate<ViewIzdSStivo>(GetAllIzdMagFromList(), propName, ascending);
+            IzdMagazina.Items.Clear();
+            foreach (ViewIzdSStivo izd in sorted)
+            {
+                IzdMagazina.Items.Add(izd);
+            }
+        }
+        private void SortIzdInt(string propName, bool ascending)
+        {
+            List<ViewIzdSStivo> sorted = Sorter.SortInt<ViewIzdSStivo>(GetAllIzdMagFromList(), propName, ascending);
+            IzdMagazina.Items.Clear();
+            foreach (ViewIzdSStivo izd in sorted)
+            {
+                IzdMagazina.Items.Add(izd);
+            }
+        }
+        private void SortIzdDecimal(string propName, bool ascending)
+        {
+            List<ViewIzdSStivo> sorted = Sorter.SortDecimal<ViewIzdSStivo>(GetAllIzdMagFromList(), propName, ascending);
+            IzdMagazina.Items.Clear();
+            foreach (ViewIzdSStivo izd in sorted)
+            {
+                IzdMagazina.Items.Add(izd);
+            }
+        }
+        private bool s_brI = false;
         private void btn_sort_brIzd_Click(object sender, RoutedEventArgs e)
         {
-
+            s_brI = !s_brI;
+            SortIzdInt("BrIzd", s_brI);
         }
-
+        private bool s_dat = false;
         private void btn_sort_datIzd_Click(object sender, RoutedEventArgs e)
         {
-
+            s_dat = !s_dat;
+            SortIzdDate("DatIzd", s_dat);
         }
-
+        private bool s_cen = false;
         private void btn_sort_cena_Click(object sender, RoutedEventArgs e)
         {
-
+            s_cen = !s_cen;
+            SortIzdDecimal("Cena", s_cen);
         }
-
-        private void btn_sort_naziv_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        private bool s_jez = false;
         private void btn_sort_jezici_Click(object sender, RoutedEventArgs e)
         {
-
+            s_jez = !s_jez;
+            SortIzdText("ListJezici", s_jez);
         }
-
+        private bool s_for = false;
         private void btn_sort_format_Click(object sender, RoutedEventArgs e)
         {
-
+            s_for = !s_for;
+            SortIzdText("DispFormat", s_for);
         }
-
+        private bool s_ik = false;
         private void btn_sort_izdKuce_Click(object sender, RoutedEventArgs e)
         {
-
+            s_ik = !s_ik;
+            SortIzdText("ListIzdKuce", s_ik);
         }
-
+        private bool s_per = false;
         private void btn_sort_period_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         #endregion

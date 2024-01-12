@@ -29,6 +29,11 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDSStivo", "IDBib", "DatVr", "IDIK" };
+        }
+
         public IzSStivaIzdKuca() : base() { }
 
         public IzSStivaIzdKuca(int iDSStivo, int iDIK, int iDBib) :base()
@@ -38,17 +43,10 @@ namespace BP2ProjekatCornerLibrary.Models
             IDIK = iDIK;
             DatVr = DateTime.Now;
         }
-        public IzSStivaIzdKuca(IzdajeSStivo i, int idBib):base()
+        public IzSStivaIzdKuca(IzmenaSStiva i, int idik) : base()
         {
             IDSStivo = i.IDSStivo;
-            IDBib = idBib;
-            IDIK = i.IDIK;
-            DatVr = DateTime.Now;
-        }
-        public IzSStivaIzdKuca(IzmenaSStiva i, int idik, int idBib)
-        {
-            IDSStivo = i.IDSStivo;
-            IDBib = idBib;
+            IDBib = i.IDBib;
             IDIK = idik;
             DatVr = i.DatVr;
         }
