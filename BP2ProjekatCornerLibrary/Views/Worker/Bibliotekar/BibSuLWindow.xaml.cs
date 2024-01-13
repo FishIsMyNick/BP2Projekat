@@ -12,6 +12,7 @@ using System.Windows.Data;
 using System.Windows.Documents;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Media.Animation;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 
@@ -27,6 +28,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private iStivoView _stivoView;
         private SuLView _selectedSuL;
         private bool _blockEvents;
+        private List<Image> arrows;
 
         private bool _prikaziSvoStivo => cb_Prikaz.SelectedIndex == 0;
         public BibSuLWindow(int currentUser)
@@ -37,14 +39,36 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
             _stivoView = iStivoView.Knjiga;
 
             InitializeComponent();
+
+            arrows = new List<Image> 
+            {
+                img_sort_autori,
+                img_sort_cenaSS,
+                img_sort_brIzd,
+                img_sort_brIzdSS,
+                img_sort_id,
+                img_sort_idSS,
+                img_sort_izdKuce,
+                img_sort_izdKuceSS,
+                img_sort_kolicina,
+                img_sort_kolicinaSS,
+                img_sort_naziv,
+                img_sort_nazivSS,
+                img_sort_vrIzd,
+                img_sort_vrIzdSS 
+            };
+            DisableAllArrows();
+
             RefreshLists();
             cb_TipStiva.SelectedIndex = 0;
             cb_Prikaz.SelectedIndex = 0;
             _blockEvents = false;
         }
+        private void DisableAllArrows() { ArrowHelper.DisableAllArrows(arrows);}
 
         private void ReloadStivoList()
         {
+            DisableAllArrows();
             switch (cb_TipStiva.SelectedIndex)
             {
                 case 0: SetSelectView(iStivoView.Knjiga); break;
@@ -356,117 +380,205 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         #endregion
 
         #region SORTING
+
         #region KNJIGE
+        private List<SuLView> GetAllKnjigeFromList()
+        {
+            List<SuLView> ret = new List<SuLView>();
+            foreach (var izm in Knjige.Items)
+            {
+                ret.Add(izm as SuLView);
+            }
+            return ret;
+        }
+        private void SortKnjigeText(string propName, bool ascending)
+        {
+            List<SuLView> sorted = Sorter.SortText<SuLView>(GetAllKnjigeFromList(), propName, ascending);
+            Knjige.Items.Clear();
+            foreach (SuLView izd in sorted)
+            {
+                Knjige.Items.Add(izd);
+            }
+        }
+        private void SortKnjigeDate(string propName, bool ascending)
+        {
+            List<SuLView> sorted = Sorter.SortGodina<SuLView>(GetAllKnjigeFromList(), propName, ascending);
+            Knjige.Items.Clear();
+            foreach (SuLView izd in sorted)
+            {
+                Knjige.Items.Add(izd);
+            }
+        }
+        private void SortKnjigeKolicina(string propName, bool ascending)
+        {
+            List<SuLView> sorted = Sorter.SortKolicina<SuLView>(GetAllKnjigeFromList(), propName, ascending);
+            Knjige.Items.Clear();
+            foreach (SuLView izd in sorted)
+            {
+                Knjige.Items.Add(izd);
+            }
+        }
+
         private bool s_id_k = false;
         private void btn_sort_id_Click(object sender, RoutedEventArgs e)
         {
-            s_id_k = ! s_id_k;
-            List<SuLView> toSort = new List<SuLView>();
-            foreach(var k in Knjige.Items)
-            {
-                toSort.Add(k as  SuLView);
-            }
-            Knjige.Items.Clear();
-            foreach(SuLView v in Sorter.SortText<SuLView>(toSort, "GetID", s_id_k))
-            {
-                Knjige.Items.Add(v);
-            }
+            s_id_k = !s_id_k;
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_id, s_id_k);
+            SortKnjigeText("GetID", s_id_k);
         }
         private bool s_naz_k = false;
         private void btn_sort_naziv_Click(object sender, RoutedEventArgs e)
         {
             s_naz_k = !s_naz_k;
-            List<SuLView> toSort = new List<SuLView>();
-            foreach (var k in Knjige.Items)
-            {
-                toSort.Add(k as SuLView);
-            }
-            Knjige.Items.Clear();
-            foreach (SuLView v in Sorter.SortText<SuLView>(toSort, "GetNaziv", s_naz_k))
-            {
-                Knjige.Items.Add(v);
-            }
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_naziv, s_naz_k);
+            SortKnjigeText("GetNaziv", s_naz_k);
         }
-
+        private bool s_aut_k = false;
         private void btn_sort_autori_Click(object sender, RoutedEventArgs e)
         {
-
+            s_aut_k = !s_aut_k;
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_autori, s_aut_k);
+            SortKnjigeText("GetAutori", s_aut_k);
         }
-
+        private bool s_bri_k = false;
         private void btn_sort_brIzd_Click(object sender, RoutedEventArgs e)
         {
-
+            s_bri_k = !s_bri_k;
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_brIzd, s_bri_k);
+            SortKnjigeText("GetBrIzdanja", s_bri_k);
         }
-
+        private bool s_ik_k = false;
         private void btn_sort_izdKuce_Click(object sender, RoutedEventArgs e)
         {
-
+            s_ik_k = !s_ik_k;
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_izdKuce, s_ik_k);
+            SortKnjigeText("GetIzdKuce", s_ik_k);
         }
         private bool s_vrI_k = false;
         private void btn_sort_vrIzd_Click(object sender, RoutedEventArgs e)
         {
             s_vrI_k = !s_vrI_k;
-            List<SuLView> toSort = new List<SuLView>();
-            foreach (var k in Knjige.Items)
-            {
-                toSort.Add(k as SuLView);
-            }
-            Knjige.Items.Clear();
-            foreach (SuLView v in Sorter.SortGodina<SuLView>(toSort, "GetVrIzd", s_vrI_k))
-            {
-                Knjige.Items.Add(v);
-            }
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_vrIzd, s_vrI_k);
+            SortKnjigeDate("GetVrIzd", s_vrI_k);
         }
         private bool s_kol_k = false;
         private void btn_sort_kolicina_Click(object sender, RoutedEventArgs e)
         {
             s_kol_k = !s_kol_k;
-            List<SuLView> toSort = new List<SuLView>();
-            foreach (var k in Knjige.Items)
-            {
-                toSort.Add(k as SuLView);
-            }
-            Knjige.Items.Clear();
-            foreach (SuLView v in Sorter.SortKolicina<SuLView>(toSort, "GetKolicina", s_kol_k))
-            {
-                Knjige.Items.Add(v);
-            }
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_kolicina, s_kol_k);
+            SortKnjigeKolicina("GetKolicina", s_kol_k);
         }
         #endregion
         #region SSTIVO
+        private List<SuLView> GetAllSStivoFromList()
+        {
+            List<SuLView> ret = new List<SuLView>();
+            foreach (var izm in SStivo.Items)
+            {
+                ret.Add(izm as SuLView);
+            }
+            return ret;
+        }
+        private void SortSStivoText(string propName, bool ascending)
+        {
+            List<SuLView> sorted = Sorter.SortText<SuLView>(GetAllSStivoFromList(), propName, ascending);
+            SStivo.Items.Clear();
+            foreach (SuLView izd in sorted)
+            {
+                SStivo.Items.Add(izd);
+            }
+        }
+        private void SortSStivoDate(string propName, bool ascending)
+        {
+            List<SuLView> sorted = Sorter.SortDateString<SuLView>(GetAllSStivoFromList(), propName, ascending);
+            SStivo.Items.Clear();
+            foreach (SuLView izd in sorted)
+            {
+                SStivo.Items.Add(izd);
+            }
+        }
+        private void SortSStivoKolicina(string propName, bool ascending)
+        {
+            List<SuLView> sorted = Sorter.SortKolicina<SuLView>(GetAllSStivoFromList(), propName, ascending);
+            SStivo.Items.Clear();
+            foreach (SuLView izd in sorted)
+            {
+                SStivo.Items.Add(izd);
+            }
+        }
+        private void SortSStivoDecimal(string propName, bool ascending)
+        {
+            List<SuLView> sorted = Sorter.SortDecimal<SuLView>(GetAllSStivoFromList(), propName, ascending);
+            SStivo.Items.Clear();
+            foreach (SuLView izd in sorted)
+            {
+                SStivo.Items.Add(izd);
+            }
+        }
+
+
+        private bool s_id_s = false;
         private void btn_sort_idSS_Click(object sender, RoutedEventArgs e)
         {
-
+            s_id_s = !s_id_s;
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_idSS, s_id_s);
+            SortSStivoText("GetID", s_id_s);
         }
-
+        private bool s_naz_s = false;
         private void btn_sort_nazivSS_Click(object sender, RoutedEventArgs e)
         {
-
+            s_naz_s = !s_naz_s;
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_nazivSS, s_naz_s);
+            SortSStivoText("GetNaziv", s_naz_s);
         }
-
+        private bool s_brI_s = false;
         private void btn_sort_brIzdSS_Click(object sender, RoutedEventArgs e)
         {
-
+            s_brI_s = !s_brI_s;
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_brIzdSS, s_brI_s);
+            SortSStivoText("GetBrIzdanja", s_brI_s);
         }
-
+        private bool s_vrI_s = false;
         private void btn_sort_vrIzdSS_Click(object sender, RoutedEventArgs e)
         {
-
+            s_vrI_s = !s_vrI_s;
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_vrIzdSS, s_vrI_s);
+            SortSStivoDate("GetVrIzd", s_vrI_s);
         }
-
+        private bool s_ik_s = false;
         private void btn_sort_izdKuceSS_Click(object sender, RoutedEventArgs e)
         {
-
+            s_ik_s = !s_ik_s;
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_izdKuceSS, s_ik_s);
+            SortSStivoText("GetIzdKuce", s_ik_s);
         }
-
+        private bool s_cen_s = false;
         private void btn_sort_cenaSS_Click(object sender, RoutedEventArgs e)
         {
-
+            s_cen_s = !s_cen_s;
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_cenaSS, s_cen_s);
+            SortSStivoDecimal("GetCenaDec", s_cen_s);
         }
-
+        private bool s_kol_s = false;
         private void btn_sort_kolicinaSS_Click(object sender, RoutedEventArgs e)
         {
-
+            s_kol_s = !s_kol_s;
+            ArrowHelper.DisableAllArrows(arrows);
+            ArrowHelper.SetArrow(img_sort_kolicinaSS, s_kol_s);
+            SortSStivoKolicina("GetKolicina", s_kol_s);
         }
 
 
@@ -662,6 +774,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         }
         public string GetPeriod => _SStivo.Period;
         public string GetCena => _IzdSStiva.Cena.ToString();
+        public decimal GetCenaDec => _IzdSStiva.Cena;
         public int GetTip => _Tip;
         public iStivoView GetTipEnum
         {

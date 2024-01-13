@@ -89,7 +89,7 @@
                                         Grid.Column="0"
 										Click="btn_sort_id_Click"/>
 								<Image x:Name="img_sort_id" 
-										Source="..\..\..\Images\arrow_down.png"
+										Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                                Grid.Column="0"
                                HorizontalAlignment="Right"
 										Panel.ZIndex="2"/>
@@ -99,7 +99,7 @@
                                         Grid.Column="1"
 										Click="btn_sort_naziv_Click"/>
 								<Image x:Name="img_sort_naziv" 
-										Source="..\..\..\Images\arrow_down.png"
+										Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                                Grid.Column="1"
                                HorizontalAlignment="Right"
 										Panel.ZIndex="2"/>
@@ -109,7 +109,7 @@
 										Grid.Column="2" 
 										Click="btn_sort_autori_Click"/>
 								<Image x:Name="img_sort_autori" 
-									   Source="..\..\..\Images\arrow_down.png"
+									   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                                Grid.Column="2"
                                HorizontalAlignment="Right"
 									   Panel.ZIndex="2"/>
@@ -120,7 +120,7 @@
                                     HorizontalContentAlignment="Left"
 										Click="btn_sort_brIzd_Click"/>
 								<Image x:Name="img_sort_brIzd" 
-									   Source="..\..\..\Images\arrow_down.png"
+									   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                                Grid.Column="3"
                                HorizontalAlignment="Right"
 									   Panel.ZIndex="2"/>
@@ -131,7 +131,7 @@
 										Grid.Column="4" 
 										Click="btn_sort_izdKuce_Click"/>
 								<Image x:Name="img_sort_izdKuce" 
-									   Source="..\..\..\Images\arrow_down.png"
+									   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                                Grid.Column="4"
                                HorizontalAlignment="Right"
 									   Panel.ZIndex="2"/>
@@ -141,7 +141,7 @@
                                 Grid.Column="5" 
 										Click="btn_sort_vrIzd_Click"/>
 								<Image x:Name="img_sort_vrIzd" 
-Source="..\..\..\Images\arrow_down.png"
+Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False" 
                                Grid.Column="5"
                                HorizontalAlignment="Right"
 Panel.ZIndex="2"/>
@@ -151,7 +151,7 @@ Panel.ZIndex="2"/>
                                 Grid.Column="6" 
 										Click="btn_sort_kolicina_Click"/>
 								<Image x:Name="img_sort_kolicina" 
-Source="..\..\..\Images\arrow_down.png"
+Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False" 
                                Grid.Column="6"
                                HorizontalAlignment="Right"
 Panel.ZIndex="2"/>
@@ -216,7 +216,7 @@ Panel.ZIndex="2"/>
                                         Grid.Column="0"
 										Click="btn_sort_idSS_Click"/>
 								<Image x:Name="img_sort_idSS" 
-										Source="..\..\..\Images\arrow_down.png"
+										Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False" 
                                Grid.Column="0"
                                HorizontalAlignment="Right"
 										Panel.ZIndex="2"/>
@@ -226,7 +226,7 @@ Panel.ZIndex="2"/>
                                         Grid.Column="1"
 										Click="btn_sort_nazivSS_Click"/>
 								<Image x:Name="img_sort_nazivSS" 
-										Source="..\..\..\Images\arrow_down.png"
+										Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False" 
                                Grid.Column="1"
                                HorizontalAlignment="Right"
 										Panel.ZIndex="2"/>
@@ -237,7 +237,7 @@ Panel.ZIndex="2"/>
                                     HorizontalContentAlignment="Left"
 										Click="btn_sort_brIzdSS_Click"/>
 								<Image x:Name="img_sort_brIzdSS" 
-									   Source="..\..\..\Images\arrow_down.png"
+									   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False" 
                                Grid.Column="2"
                                HorizontalAlignment="Right"
 									   Panel.ZIndex="2"/>
@@ -247,7 +247,7 @@ Panel.ZIndex="2"/>
                                 Grid.Column="3" 
 										Click="btn_sort_vrIzdSS_Click"/>
 								<Image x:Name="img_sort_vrIzdSS" 
-Source="..\..\..\Images\arrow_down.png"
+Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                                Grid.Column="3"
                                HorizontalAlignment="Right"
 Panel.ZIndex="2"/>
@@ -257,7 +257,7 @@ Panel.ZIndex="2"/>
 										Grid.Column="4" 
 										Click="btn_sort_izdKuceSS_Click"/>
 								<Image x:Name="img_sort_izdKuceSS" 
-									   Source="..\..\..\Images\arrow_down.png"
+									   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                                Grid.Column="4"
                                HorizontalAlignment="Right"
 									   Panel.ZIndex="2"/>
@@ -266,8 +266,8 @@ Panel.ZIndex="2"/>
 										Content="Cena"
 										Grid.Column="5"
 										Click="btn_sort_cenaSS_Click"/>
-								<Image x:Name="img_sort_autoriSS" 
-									   Source="..\..\..\Images\arrow_down.png"
+								<Image x:Name="img_sort_cenaSS" 
+									   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False" 
                                Grid.Column="5"
                                HorizontalAlignment="Right"
 									   Panel.ZIndex="4"/>
@@ -278,7 +278,7 @@ Panel.ZIndex="2"/>
 										Grid.Column="6"
 										Click="btn_sort_kolicinaSS_Click"/>
 								<Image x:Name="img_sort_kolicinaSS" 
-									   Source="..\..\..\Images\arrow_down.png"
+									   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                                Grid.Column="6"
                                HorizontalAlignment="Right"
 									   Panel.ZIndex="4"/>

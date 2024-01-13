@@ -209,7 +209,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 {
                     for (int j = i + 1; j < arr.Length; j++)
                     {
-                        if ((GetPropValue(arr[i], property) as DateTime?) > (GetPropValue(arr[j], property) as DateTime?))
+                        if (DateConverter.ToDateTime(GetPropValue(arr[i], property) as string) > DateConverter.ToDateTime(GetPropValue(arr[j], property) as string))
                         {
                             temp = arr[i];
                             arr[i] = arr[j];
@@ -217,7 +217,9 @@ namespace BP2ProjekatCornerLibrary.Helpers
                         }
                     }
                 }
-                return SortText<T>(na, property, ascending).Concat<T>(arr).ToList<T>();
+                List<T> naSorted = SortText<T>(na, property, ascending);
+                if(naSorted == null) naSorted = new List<T>();
+                return naSorted.Concat<T>(arr).ToList<T>();
             }
             else
             {
@@ -225,7 +227,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 {
                     for (int j = i + 1; j < arr.Length; j++)
                     {
-                        if ((GetPropValue(arr[i], property) as DateTime?) < (GetPropValue(arr[j], property) as DateTime?))
+                        if (DateConverter.ToDateTime(GetPropValue(arr[i], property) as string) < DateConverter.ToDateTime(GetPropValue(arr[j], property) as string))
                         {
                             temp = arr[i];
                             arr[i] = arr[j];
@@ -233,7 +235,9 @@ namespace BP2ProjekatCornerLibrary.Helpers
                         }
                     }
                 }
-                return arr.ToList<T>().Concat<T>(SortText<T>(na, property, ascending)).ToList<T>();
+                List<T> naSorted = SortText<T>(na, property, ascending);
+                if (naSorted == null) naSorted = new List<T>();
+                return arr.ToList<T>().Concat<T>(naSorted).ToList<T>();
             }
         }
         public static List<T> SortGodina<T>(List<T> toSort, string property, bool ascending)
@@ -267,7 +271,9 @@ namespace BP2ProjekatCornerLibrary.Helpers
                         }
                     }
                 }
-                return SortText<T>(na, property, ascending).Concat<T>(arr).ToList<T>();
+                List<T> naSorted = SortText<T>(na, property, ascending);
+                if (naSorted == null) naSorted = new List<T>();
+                return naSorted.Concat<T>(arr).ToList<T>();
             }
             else
             {
@@ -275,8 +281,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 {
                     for (int j = i + 1; j < arr.Length; j++)
                     {
-                        if (int.Parse((GetPropValue(arr[i], property) as string).Trim('.')) <
-                            int.Parse((GetPropValue(arr[j], property) as string).Trim('.')))
+                        if (int.Parse((GetPropValue(arr[i], property) as string).Trim('.')) < int.Parse((GetPropValue(arr[j], property) as string).Trim('.')))
                         {
                             temp = arr[i];
                             arr[i] = arr[j];
@@ -284,7 +289,9 @@ namespace BP2ProjekatCornerLibrary.Helpers
                         }
                     }
                 }
-                return arr.ToList<T>().Concat<T>(SortText<T>(na, property, ascending)).ToList<T>();
+                List<T> naSorted = SortText<T>(na, property, ascending);
+                if (naSorted == null) naSorted = new List<T>();
+                return arr.ToList<T>().Concat<T>(naSorted).ToList<T>();
             }
         }
         public static List<T> SortKolicina<T>(List<T> toSort, string property, bool ascending)
@@ -318,8 +325,9 @@ namespace BP2ProjekatCornerLibrary.Helpers
                         }
                     }
                 }
-
-                return na.Concat<T>(arrSort.ToList<T>()).ToList<T>();
+                List<T> naSorted = SortText<T>(na, property, ascending);
+                if (naSorted == null) naSorted = new List<T>();
+                return naSorted.Concat<T>(arrSort.ToList<T>()).ToList<T>();
 
             }
             else
@@ -336,8 +344,9 @@ namespace BP2ProjekatCornerLibrary.Helpers
                         }
                     }
                 }
-
-                return arrSort.ToList<T>().Concat<T>(na).ToList<T>();
+                List<T> naSorted = SortText<T>(na, property, ascending);
+                if (naSorted == null) naSorted = new List<T>();
+                return arrSort.ToList<T>().Concat<T>(naSorted).ToList<T>();
             }
         }
         public static List<T> SortBool<T>(List<T> toSort, string property, bool ascending)

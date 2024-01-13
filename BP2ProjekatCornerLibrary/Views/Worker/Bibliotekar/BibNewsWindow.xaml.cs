@@ -398,29 +398,63 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
 
         #region SORTING
+
+        private List<ViewSStivo> GetAllNovFromList()
+        {
+            List<ViewSStivo> ret = new List<ViewSStivo>();
+            foreach (var izm in Novine.Items)
+            {
+                ret.Add(izm as ViewSStivo);
+            }
+            return ret;
+        }
+        private void SortNovText(string propName, bool ascending)
+        {
+            List<ViewSStivo> sorted = Sorter.SortText<ViewSStivo>(GetAllNovFromList(), propName, ascending);
+            Novine.Items.Clear();
+            foreach (ViewSStivo izd in sorted)
+            {
+                Novine.Items.Add(izd);
+            }
+        }
+        private void SortNovInt(string propName, bool ascending)
+        {
+            List<ViewSStivo> sorted = Sorter.SortInt<ViewSStivo>(GetAllNovFromList(), propName, ascending);
+            Novine.Items.Clear();
+            foreach (ViewSStivo izd in sorted)
+            {
+                Novine.Items.Add(izd);
+            }
+        }
+        private bool s_naz = false;
         private void btn_sort_naziv_Click(object sender, RoutedEventArgs e)
         {
-
+            s_naz = !s_naz;
+            SortNovText("Naziv", s_naz);
         }
-
+        private bool s_jez = false;
         private void btn_sort_jezici_Click(object sender, RoutedEventArgs e)
         {
-
+            s_jez = !s_jez;
+            SortNovText("ListJezici", s_jez);
         }
-
+        private bool s_for = false;
         private void btn_sort_format_Click(object sender, RoutedEventArgs e)
         {
-
+            s_for = !s_for;
+            SortNovText("Format", s_for);
         }
-
+        private bool s_ik = false;
         private void btn_sort_izdKuce_Click(object sender, RoutedEventArgs e)
         {
-
+            s_ik = !s_ik;
+            SortNovText("ListIzdKuce", s_ik);
         }
-
+        private bool s_per = false;
         private void btn_sort_period_Click(object sender, RoutedEventArgs e)
         {
-
+            s_per = !s_per;
+            SortNovInt("SortPeriod", s_per);
         }
         #endregion
 

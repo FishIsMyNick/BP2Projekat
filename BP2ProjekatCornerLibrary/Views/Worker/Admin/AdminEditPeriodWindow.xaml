@@ -36,7 +36,7 @@
 									Width="200" 
                                     Click="btn_Period_Sort_Click"/>
                                     <Image x:Name="img_Period_Sort" 
-									Source="..\..\..\Images\arrow_down.png"
+									Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 									Margin="-30 0 0 0"
 									Panel.ZIndex="2"/>
 									<!--PERIOD-->
@@ -44,7 +44,7 @@
 Content="Učestalost"
 Width="106" Click="btn_Ucestalost_Sort_Click" />
 									<Image x:Name="img_Ucestalost_Sort" 
-Source="..\..\..\Images\arrow_down.png"
+Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 Margin="-30 0 0 0"
 Panel.ZIndex="2"/>
 

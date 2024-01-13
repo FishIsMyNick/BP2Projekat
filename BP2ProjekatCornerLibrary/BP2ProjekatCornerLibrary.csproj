@@ -8,6 +8,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <None Remove="Images\1200px-OOjs_UI_icon_bell.svg.png" />
+    <None Remove="Images\arrow_down.png" />
+    <None Remove="Images\arrow_up.png" />
+    <None Remove="Images\zvonce.png" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="7.0.12">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -21,8 +28,14 @@
 
   <ItemGroup>
     <Folder Include="Controllers\" />
-    <Folder Include="Images\" />
     <Folder Include="Views\Login\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Resource Include="Images\1200px-OOjs_UI_icon_bell.svg.png" />
+    <Resource Include="Images\arrow_down.png" />
+    <Resource Include="Images\arrow_up.png" />
+    <Resource Include="Images\zvonce.png" />
   </ItemGroup>
 
 </Project>

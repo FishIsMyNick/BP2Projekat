@@ -1067,7 +1067,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
         }
         public static Periodicnost GetPeriod(string args)
         {
-            return GetFirstFromSQL<Periodicnost>($"PeriodIzd={args}");
+            return GetFirstFromSQL<Periodicnost>($"PeriodIzd={MakeSqlValue(args)}");
         }
         public static List<Periodicnost> GetAllPeriodSorted()
         {

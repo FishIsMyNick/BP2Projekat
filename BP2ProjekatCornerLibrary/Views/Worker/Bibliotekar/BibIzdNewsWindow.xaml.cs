@@ -208,7 +208,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
             IzdanjeSStiva toEdit = new IzdanjeSStiva(_selectedSStivo.IDSStivo, int.Parse(tb_BrIzd.Text), new DateTime(int.Parse(tb_Godina.Text), int.Parse(tb_Mesec.Text), int.Parse(tb_Dan.Text)), decimal.Parse(tb_Cena.Text));
 
-            
+
             if (!DBHelper.UpdateIzdSStiva(toEdit))
             {
                 MessageBox.Show("Došlo je do greške pri ažuriranju izdanja serijskog štiva!");
@@ -300,44 +300,93 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
         #region SORTING
 
+        private List<ViewIzdSStivo> GetAllIzdNovFromList()
+        {
+            List<ViewIzdSStivo> ret = new List<ViewIzdSStivo>();
+            foreach (var izm in IzdNovina.Items)
+            {
+                ret.Add(izm as ViewIzdSStivo);
+            }
+            return ret;
+        }
+        private void SortIzdText(string propName, bool ascending)
+        {
+            List<ViewIzdSStivo> sorted = Sorter.SortText<ViewIzdSStivo>(GetAllIzdNovFromList(), propName, ascending);
+            IzdNovina.Items.Clear();
+            foreach (ViewIzdSStivo izd in sorted)
+            {
+                IzdNovina.Items.Add(izd);
+            }
+        }
+        private void SortIzdDate(string propName, bool ascending)
+        {
+            List<ViewIzdSStivo> sorted = Sorter.SortDate<ViewIzdSStivo>(GetAllIzdNovFromList(), propName, ascending);
+            IzdNovina.Items.Clear();
+            foreach (ViewIzdSStivo izd in sorted)
+            {
+                IzdNovina.Items.Add(izd);
+            }
+        }
+        private void SortIzdInt(string propName, bool ascending)
+        {
+            List<ViewIzdSStivo> sorted = Sorter.SortInt<ViewIzdSStivo>(GetAllIzdNovFromList(), propName, ascending);
+            IzdNovina.Items.Clear();
+            foreach (ViewIzdSStivo izd in sorted)
+            {
+                IzdNovina.Items.Add(izd);
+            }
+        }
+        private void SortIzdDecimal(string propName, bool ascending)
+        {
+            List<ViewIzdSStivo> sorted = Sorter.SortDecimal<ViewIzdSStivo>(GetAllIzdNovFromList(), propName, ascending);
+            IzdNovina.Items.Clear();
+            foreach (ViewIzdSStivo izd in sorted)
+            {
+                IzdNovina.Items.Add(izd);
+            }
+        }
+
+
+        private bool s_brI = false;
         private void btn_sort_brIzd_Click(object sender, RoutedEventArgs e)
         {
-
+            s_brI = !s_brI;
+            SortIzdInt("BrIzd", s_brI);
         }
-
+        private bool s_dat = false;
         private void btn_sort_datIzd_Click(object sender, RoutedEventArgs e)
         {
-
+            s_dat = !s_dat;
+            SortIzdDate("DatIzd", s_dat);
         }
-
+        private bool s_cen = false;
         private void btn_sort_cena_Click(object sender, RoutedEventArgs e)
         {
-
+            s_cen = !s_cen;
+            SortIzdDecimal("Cena", s_cen);
         }
-
-        private void btn_sort_naziv_Click_1(object sender, RoutedEventArgs e)
-        {
-
-        }
-
+        private bool s_jez = false;
         private void btn_sort_jezici_Click(object sender, RoutedEventArgs e)
         {
-
+            s_jez = !s_jez;
+            SortIzdText("ListJezici", s_jez);
         }
-
+        private bool s_for = false;
         private void btn_sort_format_Click(object sender, RoutedEventArgs e)
         {
-
+            s_for = !s_for;
+            SortIzdText("DispFormat", s_for);
         }
-
+        private bool s_ik = false;
         private void btn_sort_izdKuce_Click(object sender, RoutedEventArgs e)
         {
-
+            s_ik = !s_ik;
+            SortIzdText("ListIzdKuce", s_ik);
         }
-
+        private bool s_per = false;
         private void btn_sort_period_Click(object sender, RoutedEventArgs e)
         {
-
+            
         }
 
         #endregion

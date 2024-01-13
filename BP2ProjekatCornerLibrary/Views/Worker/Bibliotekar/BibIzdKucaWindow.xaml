@@ -51,7 +51,7 @@
                                     Grid.Column="0"
 								Click="btn_sort_naziv_Click"/>
 						<Image x:Name="img_sort_naziv" 
-									Source="..\..\..\Images\arrow_down.png"
+									Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                            Grid.Column="0"
                            HorizontalAlignment="Right"
 									Panel.ZIndex="2"/>
@@ -61,7 +61,7 @@
 									Grid.Column="1" 
 								Click="btn_sort_adresa_Click"/>
 						<Image x:Name="img_sort_adresa" 
-								   Source="..\..\..\Images\arrow_down.png"
+								   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                            Grid.Column="1"
                            HorizontalAlignment="Right"
 								   Panel.ZIndex="2"/>
@@ -71,7 +71,7 @@
 									Grid.Column="2" 
 								Click="btn_sort_mesto_Click"/>
 						<Image x:Name="img_sort_mesto" 
-								   Source="..\..\..\Images\arrow_down.png"
+								   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                            Grid.Column="2"
                            HorizontalAlignment="Right"
 								   Panel.ZIndex="2"/>

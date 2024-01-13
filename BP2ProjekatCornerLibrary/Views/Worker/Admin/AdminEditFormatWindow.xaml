@@ -36,7 +36,7 @@
 									Width="306" 
 											Click="btn_Format_Sort_Click"/>
 									<Image x:Name="img_Period_Sort" 
-									Source="..\..\..\Images\arrow_down.png"
+									Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 									Margin="-30 0 0 0"
 									Panel.ZIndex="2"/>
 									

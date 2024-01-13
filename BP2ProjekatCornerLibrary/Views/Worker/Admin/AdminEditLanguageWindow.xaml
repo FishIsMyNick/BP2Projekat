@@ -35,7 +35,7 @@
 											Width="150" 
 											Click="btn_OZN_Sort_Click"/>
 								<Image x:Name="img_OZN_Sort" 
-											Source="..\..\..\Images\arrow_down.png"
+											Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 											Margin="-30 0 0 0"
 											Panel.ZIndex="2"/>
 								<!--PREZIME-->
@@ -44,7 +44,7 @@
 											Width="230"
 											Click="btn_Naziv_Sort_Click"/>
 								<Image x:Name="img_Naziv_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 

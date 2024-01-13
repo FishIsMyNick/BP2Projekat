@@ -344,6 +344,9 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
                 IzdMagazina.Items.Add(izd);
             }
         }
+
+
+
         private bool s_brI = false;
         private void btn_sort_brIzd_Click(object sender, RoutedEventArgs e)
         {

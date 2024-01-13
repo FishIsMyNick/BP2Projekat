@@ -21,7 +21,7 @@
 											Content="Naziv"
 											Width="180" Click="btn_Naziv_Sort_Click"/>
 					<Image x:Name="img_Naziv_Sort" 
-											Source="..\..\..\Images\arrow_down.png"
+											Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 											Margin="-30 0 0 0"
 											Panel.ZIndex="2"/>
 					<!--ADRESA-->
@@ -29,7 +29,7 @@
 											Content="Adresa"
 											Width="190" Click="btn_Adresa_Sort_Click"/>
 					<Image x:Name="img_Ulica_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 					<!--GRAD-->
@@ -37,7 +37,7 @@
 											Content="Mesto"
 											Width="104" Click="btn_Mesto_Sort_Click"/>
 					<Image x:Name="img_Grad_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 					<!--DRZAVA-->
@@ -45,7 +45,7 @@
 											Content="Država"
 											Width="103" Click="btn_Drzava_Sort_Click" />
 					<Image x:Name="img_Drzava_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 					<!--DATUM OTV-->
@@ -53,7 +53,7 @@
 											Content="Datum otv."
 											Width="95" Click="btn_DatOtv_Sort_Click"/>
 					<Image x:Name="img_DatOtv_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 				</StackPanel>

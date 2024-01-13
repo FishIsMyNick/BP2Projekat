@@ -51,7 +51,7 @@
                                     Grid.Column="0"
 								Click="btn_sort_ime_Click"/>
 						<Image x:Name="img_sort_ime" 
-									Source="..\..\..\Images\arrow_down.png"
+									Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                            Grid.Column="0"
                            HorizontalAlignment="Right"
 									Panel.ZIndex="2"/>
@@ -61,7 +61,7 @@
 									Grid.Column="1" 
 								Click="btn_sort_prezime_Click"/>
 						<Image x:Name="img_sort_prezime" 
-								   Source="..\..\..\Images\arrow_down.png"
+								   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                            Grid.Column="1"
                            HorizontalAlignment="Right"
 								   Panel.ZIndex="2"/>
@@ -71,7 +71,7 @@
 									Grid.Column="2" 
 								Click="btn_sort_datRodj_Click"/>
 						<Image x:Name="img_sort_datRodj" 
-								   Source="..\..\..\Images\arrow_down.png"
+								   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                            Grid.Column="2"
                            HorizontalAlignment="Right"
 								   Panel.ZIndex="2"/>
@@ -85,7 +85,7 @@
 						Grid.Column="4" 
 								Click="btn_sort_drzava_Click"/>
 						<Image x:Name="img_sort_period" 
-					   Source="..\..\..\Images\arrow_down.png"
+					   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                            HorizontalAlignment="Right"
                            Grid.Column="4"
 					   Panel.ZIndex="2"/>
