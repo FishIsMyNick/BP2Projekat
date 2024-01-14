@@ -78,13 +78,13 @@
 						<!--IZD KUCE-->
 						<Button x:Name="btn_sort_biografija"
 									Content="Biografija"
-									Grid.Column="3" />
+									Grid.Column="3"/>
 						<!--PERIOD-->
 						<Button x:Name="btn_sort_drzava"
 						Content="Država porekla"
 						Grid.Column="4" 
 								Click="btn_sort_drzava_Click"/>
-						<Image x:Name="img_sort_period" 
+						<Image x:Name="img_sort_drzava" 
 					   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                            HorizontalAlignment="Right"
                            Grid.Column="4"

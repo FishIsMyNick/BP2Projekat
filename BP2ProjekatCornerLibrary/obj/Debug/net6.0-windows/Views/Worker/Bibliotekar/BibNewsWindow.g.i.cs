@@ -373,8 +373,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;V1.0.0.0;component/views/worker/bibliotekar/bibnewswind" +
-                    "ow.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/BP2ProjekatCornerLibrary;component/views/worker/bibliotekar/bibnewswindow.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\..\..\..\Views\Worker\Bibliotekar\BibNewsWindow.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

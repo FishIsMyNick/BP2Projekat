@@ -354,23 +354,6 @@ namespace BP2ProjekatCornerLibrary.Helpers
         {
             if (toAdd == null || !typeof(T).IsSubclassOf(typeof(_DbClass))) return 0;
 
-            //_DbClass asDbClass = toAdd as _DbClass;
-
-            //if (CheckEntityExists<T>(asDbClass.GetKeyProperties()))
-            //    return 0;
-
-            //Type type = typeof(T);
-            //ClassPropertyValue idKey = asDbClass.GetKeyIdentity();
-
-            //PropertyInfo[] properties = type.GetProperties();
-            //List<ClassPropertyValue> propertyValues = new List<ClassPropertyValue>();
-
-            //foreach (PropertyInfo pi in properties)
-            //{
-            //    if (!(idKey != null && pi.Name == idKey.Name))
-            //        propertyValues.Add(new ClassPropertyValue(pi.Name, pi.GetValue(toAdd)));
-            //}
-
             List<ClassPropertyValue> propertyValues = GetDBProperties(toAdd);
 
 
@@ -2267,12 +2250,12 @@ namespace BP2ProjekatCornerLibrary.Helpers
             selectedWorker.DatOtp = DateTime.Now;
             if (selectedWorker.GetType() == typeof(Bibliotekar))
             {
-                if (!DeleteBibUsingAccount(selectedWorker as Bibliotekar)) return false;
+                //if (!DeleteBibUsingAccount(selectedWorker as Bibliotekar)) return false;
                 return UpdateItemWithSQL<Bibliotekar>(selectedWorker as Bibliotekar);
             }
             else if (selectedWorker.GetType() == typeof(Kurir))
             {
-                if (!DeleteKurirUsingAccount(selectedWorker as Kurir)) return false;
+                //if (!DeleteKurirUsingAccount(selectedWorker as Kurir)) return false;
                 return UpdateItemWithSQL<Kurir>(selectedWorker as Kurir);
             }
             return false;
@@ -2291,7 +2274,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
         public static bool DeleteAccount(KorisnickiNalog nalog)
         {
             nalog.DatZatvaranja = DateTime.Now;
-            if (!DeleteAccountUsedByWorker(nalog)) return false;
+            return DeleteAccountUsedByWorker(nalog);
 
             return UpdateItemWithSQL<KorisnickiNalog>(nalog);
         }
@@ -2299,11 +2282,11 @@ namespace BP2ProjekatCornerLibrary.Helpers
         {
             if (nalog.TipNaloga == 2)
             {
-                return DeleteItemWithSQL<BibliotekarKoristiNalog>(GetFirstFromSQL<BibliotekarKoristiNalog>($"KorisnickoIme={MakeSqlValue(nalog.KorisnickoIme)}"));
+                return UpdateItemWithSQL<BibliotekarKoristiNalog>(GetFirstFromSQL<BibliotekarKoristiNalog>($"KorisnickoIme={MakeSqlValue(nalog.KorisnickoIme)}"));
             }
             else if (nalog.TipNaloga == 3)
             {
-                return DeleteItemWithSQL<KurirKoristiNalog>(GetFirstFromSQL<KurirKoristiNalog>($"KorisnickoIme={MakeSqlValue(nalog.KorisnickoIme)}"));
+                return UpdateItemWithSQL<KurirKoristiNalog>(GetFirstFromSQL<KurirKoristiNalog>($"KorisnickoIme={MakeSqlValue(nalog.KorisnickoIme)}"));
             }
             return false;
         }

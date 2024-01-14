@@ -16,7 +16,7 @@ namespace BP2ProjekatCornerLibrary.Models
 
         public override List<string> GetDbPropertyNames()
         {
-            return new List<string> { "IDRadnik", "Ime", "Prezime", "DatRodj", "DatZap", "DatOtp", "Ulica", "Broj", "PosBr", "OZND" };
+            return new List<string> { "IDRadnik", "Ime", "Prezime", "DatRodj", "DatZap", "DatOtp", "IDAdmin", "DatVr", "Ulica", "Broj", "PosBr", "OZND" };
         }
     }
 }

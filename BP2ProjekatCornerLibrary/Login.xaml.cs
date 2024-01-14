@@ -41,7 +41,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
                 Close();
                 return;
             }
-            TryLogin();
+            //TryLogin();
         }
 
 
@@ -55,7 +55,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             string user = tbUsername.Text;
             string hashedPassword = HashHelper.ComputeSha256Hash(pbPasswordHidden.Password);
 
-            if (false)
+            if (true)
             {
                 if (tbUsername.Text == "" || pbPasswordHidden.Password == "")
                 {
@@ -66,7 +66,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             else
             {
                 //test
-                user = "bib";
+                user = "admin";
                 hashedPassword = HashHelper.ComputeSha256Hash("pass");
             }
 
@@ -78,6 +78,11 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             if (r == null)
             {
                 MessageBox.Show("Pogrešna kombinacija korisničkog imena i šifre!");
+                return;
+            }
+            else if(r.DatOtp != null)
+            {
+                MessageBox.Show("Korisnički nalog je zatvoren! Pristup Vam nije dozvoljen sa ovim korisničkim nalogom!");
                 return;
             }
 

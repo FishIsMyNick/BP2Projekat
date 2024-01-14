@@ -20,7 +20,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     /// <summary>
     /// Interaction logic for AdminEditStoreWindow.xaml
     /// </summary>
-    public partial class AdminEditStoreWindow : Window, iDynamicListView
+    public partial class AdminEditStoreWindow : Window, iDynamicListView, iSortedListView
     {
         private iDynamicListView _caller;
         private bool _blockEvents = false;
@@ -41,14 +41,21 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private string GetDrzava { get => cbDrzava.Text; }
         private int GetPosBr { get => (cbMesto.SelectedValue as Mesto).PosBr; }
         private string GetOZND { get => (cbDrzava.SelectedValue as Drzava).OZND; }
-
+        public List<Image> Arrows { get; set; }
 
         public AdminEditStoreWindow(iDynamicListView caller = null, int selectedID = -1, bool quitAfterSave = false)
         {
             _caller = caller;
             _quitAfterSave = quitAfterSave;
             InitializeComponent();
-
+            Arrows = new List<Image>
+            {
+                img_Naziv_Sort,
+                img_Ulica_Sort,
+                img_Grad_Sort,
+                img_Drzava_Sort,
+                img_DatOtv_Sort
+            };
             RefreshLists();
 
 
@@ -76,6 +83,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             InitDrzavaCB();
             InitMestoCB();
             FillFilijaleList();
+            DisableAllArrows();
             _blockEvents = false;
         }
         private void InitDrzavaCB()
@@ -107,81 +115,69 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             }
         }
         #region Sorting
+        private List<OtvFilView> GetAllFilijaleFromList()
+        {
+            List<OtvFilView> ret = new List<OtvFilView>();
+            foreach (var j in OtvoreneFilijale.Items) ret.Add(j as OtvFilView);
+            return ret;
+        }
+        private void SortFilijalaString(string param, bool ascending)
+        {
+            List<OtvFilView> toSort = GetAllFilijaleFromList();
+            OtvoreneFilijale.Items.Clear();
+            foreach (OtvFilView j in Sorter.SortText<OtvFilView>(toSort, param, ascending)) OtvoreneFilijale.Items.Add(j);
+        }
+        private void SortFilijalaDate(string param, bool ascending)
+        {
+            List<OtvFilView> toSort = GetAllFilijaleFromList();
+            OtvoreneFilijale.Items.Clear();
+            foreach (OtvFilView j in Sorter.SortDateString<OtvFilView>(toSort, param, ascending)) OtvoreneFilijale.Items.Add(j);
+        }
         private bool s_naz_asc = false;
         private void btn_Naziv_Sort_Click(object sender, RoutedEventArgs e)
         {
-            OtvoreneFilijale.Items.Clear();
             s_naz_asc = !s_naz_asc;
-            List<Biblikutak> lokali = DBHelper.GetOpenLokals();
-            List<OtvFilView> toSort = new List<OtvFilView>();
-            foreach (Biblikutak biblikutak in lokali)
-            {
-                Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
-                Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
-                toSort.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
-            }
-            foreach(OtvFilView ofv in Sorter.SortText<OtvFilView>(toSort, "Naziv", s_naz_asc)) OtvoreneFilijale.Items.Add(ofv);
+            SetArrow(img_Naziv_Sort, s_naz_asc);
+            SortFilijalaString("Naziv", s_naz_asc);
         }
 
         private bool s_adr_asc = false;
         private void btn_Adresa_Sort_Click(object sender, RoutedEventArgs e)
         {
-            OtvoreneFilijale.Items.Clear();
             s_adr_asc = !s_adr_asc;
-            List<Biblikutak> lokali = DBHelper.GetOpenLokals();
-            List<OtvFilView> toSort = new List<OtvFilView>();
-            foreach (Biblikutak biblikutak in lokali)
-            {
-                Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
-                Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
-                toSort.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
-            }
-            foreach (OtvFilView ofv in Sorter.SortText<OtvFilView>(toSort, "Adresa", s_adr_asc)) OtvoreneFilijale.Items.Add(ofv);
+            SetArrow(img_Ulica_Sort, s_adr_asc);
+            SortFilijalaString("Adresa", s_adr_asc);
         }
         private bool s_mesto_asc = false;
         private void btn_Mesto_Sort_Click(object sender, RoutedEventArgs e)
         {
-            OtvoreneFilijale.Items.Clear();
             s_mesto_asc = !s_mesto_asc;
-            List<Biblikutak> lokali = DBHelper.GetOpenLokals();
-            List<OtvFilView> toSort = new List<OtvFilView>();
-            foreach (Biblikutak biblikutak in lokali)
-            {
-                Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
-                Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
-                toSort.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
-            }
-            foreach (OtvFilView ofv in Sorter.SortText<OtvFilView>(toSort, "GetMesto", s_mesto_asc)) OtvoreneFilijale.Items.Add(ofv);
+            SetArrow(img_Grad_Sort, s_mesto_asc);
+            SortFilijalaString("GetMesto", s_mesto_asc);
         }
         private bool s_drz_asc = false;
         private void btn_Drzava_Sort_Click(object sender, RoutedEventArgs e)
         {
-            OtvoreneFilijale.Items.Clear();
             s_drz_asc = !s_drz_asc;
-            List<Biblikutak> lokali = DBHelper.GetOpenLokals();
-            List<OtvFilView> toSort = new List<OtvFilView>();
-            foreach (Biblikutak biblikutak in lokali)
-            {
-                Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
-                Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
-                toSort.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
-            }
-            foreach (OtvFilView ofv in Sorter.SortText<OtvFilView>(toSort, "GetDrzava", s_drz_asc)) OtvoreneFilijale.Items.Add(ofv);
+            SetArrow(img_Drzava_Sort, s_drz_asc);
+            SortFilijalaString("GetDrzava", s_drz_asc);
         }
         private bool s_dat_asc = false;
         private void btn_DatOtv_Sort_Click(object sender, RoutedEventArgs e)
         {
-            OtvoreneFilijale.Items.Clear();
             s_dat_asc = !s_dat_asc;
-            List<Biblikutak> lokali = DBHelper.GetOpenLokals();
-            List<OtvFilView> toSort = new List<OtvFilView>();
-            foreach (Biblikutak biblikutak in lokali)
-            {
-                Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
-                Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
-                toSort.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
-            }
-            foreach (OtvFilView ofv in Sorter.SortText<OtvFilView>(toSort, "DatOtvStr", s_dat_asc)) OtvoreneFilijale.Items.Add(ofv);
+            SetArrow(img_DatOtv_Sort, s_dat_asc);
+            SortFilijalaDate("DatOtvStr", s_dat_asc);
+        }
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
+
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
         }
         #endregion
 
@@ -307,6 +303,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 _selectedDrzava = sel;
             }
         }
+
         #endregion
     }
 }

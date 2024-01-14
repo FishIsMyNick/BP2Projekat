@@ -20,19 +20,32 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
     /// <summary>
     /// Interaction logic for BibIzdNewsWindow.xaml
     /// </summary>
-    public partial class BibIzdNewsWindow : Window, iDynamicListView
+    public partial class BibIzdNewsWindow : Window, iDynamicListView, iSortedListView
     {
         private bool _testing = Login.Login._testing;
         private int _currentUser;
         private int _lokalID;
         private IzdanjeSStiva _izdStivaToEdit;
         private SerijskoStivo _selectedSStivo;
+        public List<Image> Arrows { get; set; }
 
         private int _tipSStiva = 1;
         public BibIzdNewsWindow(int currentUser, SerijskoStivo ssToEdit, int? izdToEdit = null)
         {
             _selectedSStivo = ssToEdit;
             InitializeComponent();
+
+            Arrows = new List<Image>
+            {
+                img_sort_brIzd,
+                img_sort_cena,
+                img_sort_dat,
+                img_sort_format,
+                img_sort_izdKuce,
+                img_sort_jezici,
+                img_sort_period
+            };
+            DisableAllArrows();
 
             lb_izd_name.Content = ssToEdit.Naziv;
 
@@ -351,42 +364,61 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private void btn_sort_brIzd_Click(object sender, RoutedEventArgs e)
         {
             s_brI = !s_brI;
+            SetArrow(img_sort_brIzd, s_brI);
             SortIzdInt("BrIzd", s_brI);
         }
         private bool s_dat = false;
         private void btn_sort_datIzd_Click(object sender, RoutedEventArgs e)
         {
             s_dat = !s_dat;
+            SetArrow(img_sort_dat, s_dat);
             SortIzdDate("DatIzd", s_dat);
         }
         private bool s_cen = false;
         private void btn_sort_cena_Click(object sender, RoutedEventArgs e)
         {
             s_cen = !s_cen;
+            SetArrow(img_sort_cena, s_cen);
             SortIzdDecimal("Cena", s_cen);
         }
         private bool s_jez = false;
         private void btn_sort_jezici_Click(object sender, RoutedEventArgs e)
         {
             s_jez = !s_jez;
+            SetArrow(img_sort_jezici, s_jez);
             SortIzdText("ListJezici", s_jez);
         }
         private bool s_for = false;
         private void btn_sort_format_Click(object sender, RoutedEventArgs e)
         {
             s_for = !s_for;
+            SetArrow(img_sort_format, s_for);
             SortIzdText("DispFormat", s_for);
         }
         private bool s_ik = false;
         private void btn_sort_izdKuce_Click(object sender, RoutedEventArgs e)
         {
             s_ik = !s_ik;
+            SetArrow(img_sort_izdKuce, s_ik);
             SortIzdText("ListIzdKuce", s_ik);
         }
         private bool s_per = false;
+
+
         private void btn_sort_period_Click(object sender, RoutedEventArgs e)
         {
             
+        }
+
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
+
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
         }
 
         #endregion

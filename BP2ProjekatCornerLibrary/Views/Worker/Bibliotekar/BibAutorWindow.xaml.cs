@@ -20,7 +20,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
     /// <summary>
     /// Interaction logic for BibAutorWindow.xaml
     /// </summary>
-    public partial class BibAutorWindow : Window, iDynamicListView
+    public partial class BibAutorWindow : Window, iDynamicListView, iSortedListView
     {
         private Autor _selectedAutor;
         private int _lokalID;
@@ -30,6 +30,16 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         public BibAutorWindow(int currentUser, Autor toEdit = null, bool toAdd = false, iDynamicListView caller = null)
         {
             InitializeComponent();
+
+            Arrows = new List<Image>
+            {
+                img_sort_datRodj,
+                img_sort_ime,
+                img_sort_drzava,
+                img_sort_prezime
+            };
+            DisableAllArrows();
+
             _lokalID = DBHelper.GetLatestRasporedjenBibliotekar(currentUser).IDBK;
             _currentUser = currentUser;
             _quitAfterSave = toAdd;
@@ -186,27 +196,44 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private void btn_sort_ime_Click(object sender, RoutedEventArgs e)
         {
             s_ime = !s_ime;
+            SetArrow(img_sort_ime, s_ime);
             SortAutorsText("Ime", s_ime);
         }
         private bool s_prezime = false;
         private void btn_sort_prezime_Click(object sender, RoutedEventArgs e)
         {
             s_prezime = !s_prezime;
+            SetArrow(img_sort_prezime, s_prezime);
             SortAutorsText("GetPrezime", s_prezime);
         }
         private bool s_dat = false;
         private void btn_sort_datRodj_Click(object sender, RoutedEventArgs e)
         {
             s_dat = !s_dat;
+            SetArrow(img_sort_datRodj, s_dat);
             SortAutorsDate("DispDatRodj", s_dat);
         }
         private bool s_drz = false;
         private void btn_sort_drzava_Click(object sender, RoutedEventArgs e)
         {
             s_drz = !s_drz;
+            SetArrow(img_sort_drzava, s_drz);
             SortAutorsText("DispDrzava", s_drz);
         }
 
+
+        public List<Image> Arrows { get; set; }
+
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
+
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
+        }
         #endregion
 
         #region BUTTONS
@@ -302,5 +329,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         {
 
         }
+
     }
 }

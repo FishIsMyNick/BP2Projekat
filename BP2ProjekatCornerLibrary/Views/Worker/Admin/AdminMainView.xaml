@@ -159,7 +159,7 @@
 										<Button x:Name="btnNezapRadnikTip"
 											Content="Tip radnika"
 											Width="125" 
-											Click="btn_ZapRadnik_Tip_Click"/>
+											Click="btn_NezapRadnik_Tip_Click"/>
 										<Image x:Name="img_NezapRad_Tip_Sort" 
 										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
@@ -168,7 +168,7 @@
 										<Button x:Name="btnNezapRadnikPerZap"
 											Content="Period zap."
 											Width="140" 
-											Click="btn_ZapRadnik_DatZap_Click"/>
+											Click="btn_NezapRadnik_DatZap_Click"/>
 										<Image x:Name="img_NezapRad_PerZap_Sort" 
 										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
@@ -318,7 +318,7 @@
 										<Button x:Name="btnZFilUlica"
 											Content="Adresa"
 											Width="160" 
-											Click="btn_OFil_Adresa_Click"/>
+											Click="btn_ZFil_Adresa_Click"/>
 										<Image x:Name="img_ZFil_Ulica_Sort" 
 										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"

@@ -8,7 +8,7 @@
 		Height="530" Width="600">
 	<Grid>
 		<!--SELECTION VIEW-->
-		<Grid Name="SelectView" Visibility="Hidden">
+		<Grid Name="SelectView" Visibility="Visible">
 			<StackPanel Orientation="Vertical">
 				<!--SORT BUTTONS-->
 				<StackPanel Orientation="Horizontal" 
@@ -80,7 +80,7 @@
 		</Grid>
 
 		<!--EDIT VIEW-->
-		<Grid Name="EditView" Visibility="Visible">
+		<Grid Name="EditView" Visibility="Collapsed">
 
 			<StackPanel Orientation="Vertical" Margin="0,0,0,-16">
 				<Label FontSize="30">Izmeni radnika</Label>

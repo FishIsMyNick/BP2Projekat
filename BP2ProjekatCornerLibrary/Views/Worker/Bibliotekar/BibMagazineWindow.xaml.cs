@@ -20,7 +20,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
     /// <summary>
     /// Interaction logic for BibMagazineWindow.xaml
     /// </summary>
-    public partial class BibMagazineWindow : Window, iDynamicListView
+    public partial class BibMagazineWindow : Window, iDynamicListView, iSortedListView
     {
         private bool _testing = Login.Login._testing;
         private int _currentUser;
@@ -33,6 +33,17 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         public BibMagazineWindow(int currentUser, SerijskoStivo toEdit = null, bool quitAfterSave = false, iDynamicListView caller = null)
         {
             InitializeComponent();
+
+            Arrows = new List<Image>
+            {
+                img_sort_format,
+                img_sort_izdKuce,
+                img_sort_jezici,
+                img_sort_naziv,
+                img_sort_period
+            };
+            DisableAllArrows();
+
             _stivoToEdit = toEdit;
             _quitAfterSave = quitAfterSave;
             _caller = caller;
@@ -421,31 +432,50 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private void btn_sort_naziv_Click(object sender, RoutedEventArgs e)
         {
             s_naz = !s_naz;
+            SetArrow(img_sort_naziv, s_naz);
             SortMagText("Naziv", s_naz);
         }
         private bool s_jez = false;
         private void btn_sort_jezici_Click(object sender, RoutedEventArgs e)
         {
             s_jez = !s_jez;
+            SetArrow(img_sort_jezici, s_jez);
             SortMagText("ListJezici", s_jez);
         }
         private bool s_for = false;
         private void btn_sort_format_Click(object sender, RoutedEventArgs e)
         {
             s_for = !s_for;
+            SetArrow(img_sort_format, s_for);
             SortMagText("Format", s_for);
         }
         private bool s_ik = false;
         private void btn_sort_izdKuce_Click(object sender, RoutedEventArgs e)
         {
             s_ik = !s_ik; ;
+            SetArrow(img_sort_izdKuce, s_ik);   
             SortMagText("ListIzdKuce", s_ik);
         }
         private bool s_per = false;
+
+
         private void btn_sort_period_Click(object sender, RoutedEventArgs e)
         {
             s_per = !s_per;
+            SetArrow(img_sort_period, s_per);
             SortMagInt("SortPeriod", s_per);
+        }
+
+        public List<Image> Arrows { get; set; }
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
+
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
         }
         #endregion
 

@@ -22,7 +22,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     /// <summary>
     /// Interaction logic for AdminEditWorkerWindow.xaml
     /// </summary>
-    public partial class AdminEditWorkerWindow : Window, iDynamicListView
+    public partial class AdminEditWorkerWindow : Window, iDynamicListView, iSortedListView
     {
         private iDynamicListView _caller;
         private bool _quitAfterSave;
@@ -44,6 +44,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private string GetMesto { get => cbMesto.Text; }
         private string GetOZND { get => (cbDrzava.SelectedItem as Drzava).OZND; }
         private string GetDrzava { get => cbDrzava.Text; }
+        public List<Image> Arrows { get; set; }
+
         private bool _passwordChanged = false;
         private bool _usernameChanged = false;
 
@@ -52,7 +54,14 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             _caller = caller;
             _quitAfterSave = quitAfterSave;
             InitializeComponent();
-
+            Arrows = new List<Image>
+            {
+                img_Ime_Sort,
+                img_Prezime_Sort,
+                img_Username_Sort,
+                img_DatZap_Sort,
+                img_Tip_Sort
+            };
             RefreshLists();
 
             if (selectedID > 0)
@@ -79,6 +88,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         public void RefreshLists()
         {
             _blockEvents = true;
+            DisableAllArrows();
             FillWorkerList();
             InitDrzavaCB();
             InitMestoCB();
@@ -305,63 +315,69 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
 
         #region Sorting
+        private List<RadnikView> GetAllRadniksFromList()
+        {
+            List<RadnikView> ret = new List<RadnikView>();
+            foreach (var j in ZaposleniRadnici.Items) ret.Add(j as RadnikView);
+            return ret;
+        }
+        private void SortRadnikString(string param, bool ascending)
+        {
+            List<RadnikView> toSort = GetAllRadniksFromList();
+            ZaposleniRadnici.Items.Clear();
+            foreach (RadnikView j in Sorter.SortText<RadnikView>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
+        }
+        private void SortRadnikDate(string param, bool ascending)
+        {
+            List<RadnikView> toSort = GetAllRadniksFromList();
+            ZaposleniRadnici.Items.Clear();
+            foreach (RadnikView j in Sorter.SortDateString<RadnikView>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
+        }
         private bool s_ime = false;
         private void btn_Ime_Sort_Click(object sender, RoutedEventArgs e)
         {
             s_ime = !s_ime;
-            ZaposleniRadnici.Items.Clear();
-
-            foreach (Radnik r in Sorter.SortText<Radnik>(DBHelper.GetAllEmployedWorkers(), "Ime", s_ime))
-            {
-                ZaposleniRadnici.Items.Add(MakeRadnikView(r));
-            }
+            SetArrow(img_Ime_Sort, s_ime);
+            SortRadnikString("Ime", s_ime);
         }
         private bool s_prez = false;
         private void btn_Prezime_Sort_Click(object sender, RoutedEventArgs e)
         {
             s_prez = !s_prez;
-            ZaposleniRadnici.Items.Clear();
-
-            foreach (Radnik r in Sorter.SortText<Radnik>(DBHelper.GetAllEmployedWorkers(), "Prezime", s_prez))
-            {
-                ZaposleniRadnici.Items.Add(MakeRadnikView(r));
-            }
+            SetArrow(img_Prezime_Sort, s_prez);
+            SortRadnikString("Prezime", s_prez);
         }
         private bool s_user = false;
         private void btn_Username_Sort_Click(object sender, RoutedEventArgs e)
         {
             s_user = !s_user;
-            ZaposleniRadnici.Items.Clear();
-            List<RadnikView> toSort = new List<RadnikView>();
-            foreach (Radnik r in DBHelper.GetAllEmployedWorkers())
-            {
-                toSort.Add(MakeRadnikView(r));
-            }
-            foreach (RadnikView rv in Sorter.SortText<RadnikView>(toSort, "Username", s_user)) ZaposleniRadnici.Items.Add(rv);
+            SetArrow(img_Username_Sort, s_user);
+            SortRadnikString("Username", s_user);
         }
         private bool s_tip = false;
         private void btn_Tip_Sort_Click(object sender, RoutedEventArgs e)
         {
             s_tip = !s_tip;
-            ZaposleniRadnici.Items.Clear();
-            List<RadnikView> toSort = new List<RadnikView>();
-            foreach (Radnik r in DBHelper.GetAllEmployedWorkers())
-            {
-                toSort.Add(MakeRadnikView(r));
-            }
-            foreach (RadnikView rv in Sorter.SortText<RadnikView>(toSort, "TipStr", s_tip)) ZaposleniRadnici.Items.Add(rv);
+            SetArrow(img_Tip_Sort, s_tip);
+            SortRadnikString("TipStr", s_tip);
         }
         private bool s_dat = false;
         private void btn_DatZap_Sort_Click(object sender, RoutedEventArgs e)
         {
             s_dat = !s_dat;
-            ZaposleniRadnici.Items.Clear();
-            List<RadnikView> toSort = new List<RadnikView>();
-            foreach (Radnik r in DBHelper.GetAllEmployedWorkers())
-            {
-                toSort.Add(MakeRadnikView(r));
-            }
-            foreach (RadnikView rv in Sorter.SortDate<RadnikView>(toSort, "DatZap", s_dat)) ZaposleniRadnici.Items.Add(rv);
+            SetArrow(img_DatZap_Sort, s_dat);
+            SortRadnikDate("DatZapStr", s_dat);
+        }
+
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
+
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
         }
 
         #endregion

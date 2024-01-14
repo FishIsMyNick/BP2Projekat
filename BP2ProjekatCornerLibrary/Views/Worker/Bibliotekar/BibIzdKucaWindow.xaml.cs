@@ -21,7 +21,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
     /// <summary>
     /// Interaction logic for BibIzdKucaWindow.xaml
     /// </summary>
-    public partial class BibIzdKucaWindow : Window, iDynamicListView
+    public partial class BibIzdKucaWindow : Window, iDynamicListView, iSortedListView
     {
         private int _currentUser;
         private bool _blockEvents = false;
@@ -40,13 +40,22 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private string GetDrzava { get => cb_Drzava.Text.Trim(); }
         private int GetPosBr { get => (cb_Mesto.SelectedValue as Mesto).PosBr; }
         private string GetOZND { get => (cb_Drzava.SelectedValue as Drzava).OZND; }
-
+        public List<Image> Arrows { get; set; }
 
         public BibIzdKucaWindow(int currentUser, int selectedID = -1, bool toAdd = false, iDynamicListView caller = null)
         {
             _currentUser = currentUser;
             _quitAfterSave = toAdd;
             InitializeComponent();
+
+            Arrows = new List<Image>
+            {
+                img_sort_adresa,
+                img_sort_mesto,
+                img_sort_naziv,
+                img_sort_drzava
+             };
+            DisableAllArrows();
 
             RefreshLists();
 
@@ -151,26 +160,42 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private void btn_sort_naziv_Click(object sender, RoutedEventArgs e)
         {
             s_naz = !s_naz;
+            SetArrow(img_sort_naziv, s_naz);
             SortIK("Naziv", s_naz);
         }
         private bool s_adr = false;
         private void btn_sort_adresa_Click(object sender, RoutedEventArgs e)
         {
             s_adr = !s_adr;
+            SetArrow(img_sort_adresa, s_adr);
             SortIK("Adresa", s_adr);
         }
         private bool s_mes = false;
         private void btn_sort_mesto_Click(object sender, RoutedEventArgs e)
         {
             s_mes = !s_mes;
+            SetArrow(img_sort_mesto, s_mes);
             SortIK("DispMesto", s_mes);
         }
         private bool s_drz = false;
         private void btn_sort_drzava_Click(object sender, RoutedEventArgs e)
         {
             s_drz = !s_drz;
+            SetArrow(img_sort_drzava, s_drz);
             SortIK("DispDrzava", s_drz);
         }
+
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
+
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
+        }
+
         #endregion
 
 

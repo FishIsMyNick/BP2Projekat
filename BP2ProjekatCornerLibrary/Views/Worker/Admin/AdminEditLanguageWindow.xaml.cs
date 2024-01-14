@@ -19,13 +19,13 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     /// <summary>
     /// Interaction logic for AdminEditLanguageWindow.xaml
     /// </summary>
-    public partial class AdminEditLanguageWindow : Window, iDynamicListView
+    public partial class AdminEditLanguageWindow : Window, iDynamicListView, iSortedListView
     {
         private Jezik selectedLang;
         public AdminEditLanguageWindow()
         {
             InitializeComponent();
-
+            Arrows = new List<Image> { img_Naziv_Sort, img_OZN_Sort };
             RefreshLists();
         }
         public void RefreshLists()
@@ -35,6 +35,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private void FillLanguageList()
         {
+            DisableAllArrows();
             Jezici.Items.Clear();
 
             foreach (Jezik j in DBHelper.GetAllJeziks())
@@ -182,25 +183,45 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         #endregion
         #region Sorting
+        private List<Jezik> GetAllJeziksFromList()
+        {
+            List<Jezik> ret = new List<Jezik>();
+            foreach (var j in Jezici.Items) ret.Add(j as Jezik);
+            return ret;
+        }
+        private void SortJeziks(string param, bool ascending)
+        {
+            List<Jezik> toSort = GetAllJeziksFromList();
+            Jezici.Items.Clear();
+            foreach (Jezik j in Sorter.SortText<Jezik>(toSort, param, ascending)) Jezici.Items.Add(j);
+        }
         private bool s_ozn_asc = false;
         private void btn_OZN_Sort_Click(object sender, RoutedEventArgs e)
         {
-            Jezici.Items.Clear();
             s_ozn_asc = !s_ozn_asc;
-            foreach (Jezik j in Sorter.SortText<Jezik>( DBHelper.GetAllJeziks(), "OZNJ", s_ozn_asc))
-            {
-                Jezici.Items.Add(j);
-            }
+            SetArrow(img_OZN_Sort, s_ozn_asc);
+            SortJeziks("OZNJ", s_ozn_asc);
         }
         private bool s_naz_asc = false;
+
+
         private void btn_Naziv_Sort_Click(object sender, RoutedEventArgs e)
         {
-            Jezici.Items.Clear();
             s_naz_asc = !s_naz_asc;
-            foreach (Jezik j in Sorter.SortText<Jezik>( DBHelper.GetAllJeziks(), "NazivJezika", s_naz_asc))
-            {
-                Jezici.Items.Add(j);
-            }
+            SetArrow(img_Naziv_Sort, s_naz_asc);
+            SortJeziks("NazivJezika", s_naz_asc);
+        }
+        public List<Image> Arrows { get; set; }
+
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
+
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
         }
 
 

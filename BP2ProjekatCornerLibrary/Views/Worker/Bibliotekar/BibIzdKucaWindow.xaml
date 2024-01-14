@@ -80,6 +80,11 @@
 									Content="Država"
 									Grid.Column="3" 
 								Click="btn_sort_drzava_Click"/>
+						<Image x:Name="img_sort_drzava" 
+					   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
+   Grid.Column="3"
+   HorizontalAlignment="Right"
+					   Panel.ZIndex="2"/>
 					</Grid>
 
 					<!--New grid design-->

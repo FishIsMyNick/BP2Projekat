@@ -21,16 +21,18 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
     /// <summary>
     /// Interaction logic for BibSuLWindow.xaml
     /// </summary>
-    public partial class BibSuLWindow : Window, iDynamicListView
+    public partial class BibSuLWindow : Window, iDynamicListView, iSortedListView
     {
         private int _currentUser;
         private int _lokalId;
         private iStivoView _stivoView;
         private SuLView _selectedSuL;
         private bool _blockEvents;
-        private List<Image> arrows;
 
         private bool _prikaziSvoStivo => cb_Prikaz.SelectedIndex == 0;
+
+        public List<Image> Arrows { get; set; }
+
         public BibSuLWindow(int currentUser)
         {
             _blockEvents = true;
@@ -40,7 +42,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
             InitializeComponent();
 
-            arrows = new List<Image> 
+            Arrows = new List<Image> 
             {
                 img_sort_autori,
                 img_sort_cenaSS,
@@ -64,7 +66,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
             cb_Prikaz.SelectedIndex = 0;
             _blockEvents = false;
         }
-        private void DisableAllArrows() { ArrowHelper.DisableAllArrows(arrows);}
 
         private void ReloadStivoList()
         {
@@ -423,56 +424,49 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private void btn_sort_id_Click(object sender, RoutedEventArgs e)
         {
             s_id_k = !s_id_k;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_id, s_id_k);
+            SetArrow(img_sort_id, s_id_k);
             SortKnjigeText("GetID", s_id_k);
         }
         private bool s_naz_k = false;
         private void btn_sort_naziv_Click(object sender, RoutedEventArgs e)
         {
             s_naz_k = !s_naz_k;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_naziv, s_naz_k);
+            SetArrow(img_sort_naziv, s_naz_k);
             SortKnjigeText("GetNaziv", s_naz_k);
         }
         private bool s_aut_k = false;
         private void btn_sort_autori_Click(object sender, RoutedEventArgs e)
         {
             s_aut_k = !s_aut_k;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_autori, s_aut_k);
+            SetArrow(img_sort_autori, s_aut_k);
             SortKnjigeText("GetAutori", s_aut_k);
         }
         private bool s_bri_k = false;
         private void btn_sort_brIzd_Click(object sender, RoutedEventArgs e)
         {
             s_bri_k = !s_bri_k;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_brIzd, s_bri_k);
+            SetArrow(img_sort_brIzd, s_bri_k);
             SortKnjigeText("GetBrIzdanja", s_bri_k);
         }
         private bool s_ik_k = false;
         private void btn_sort_izdKuce_Click(object sender, RoutedEventArgs e)
         {
             s_ik_k = !s_ik_k;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_izdKuce, s_ik_k);
+            SetArrow(img_sort_izdKuce, s_ik_k);
             SortKnjigeText("GetIzdKuce", s_ik_k);
         }
         private bool s_vrI_k = false;
         private void btn_sort_vrIzd_Click(object sender, RoutedEventArgs e)
         {
             s_vrI_k = !s_vrI_k;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_vrIzd, s_vrI_k);
+            SetArrow(img_sort_vrIzd, s_vrI_k);
             SortKnjigeDate("GetVrIzd", s_vrI_k);
         }
         private bool s_kol_k = false;
         private void btn_sort_kolicina_Click(object sender, RoutedEventArgs e)
         {
             s_kol_k = !s_kol_k;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_kolicina, s_kol_k);
+            SetArrow(img_sort_kolicina, s_kol_k);
             SortKnjigeKolicina("GetKolicina", s_kol_k);
         }
         #endregion
@@ -528,57 +522,61 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         private void btn_sort_idSS_Click(object sender, RoutedEventArgs e)
         {
             s_id_s = !s_id_s;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_idSS, s_id_s);
+            SetArrow(img_sort_idSS, s_id_s);
             SortSStivoText("GetID", s_id_s);
         }
         private bool s_naz_s = false;
         private void btn_sort_nazivSS_Click(object sender, RoutedEventArgs e)
         {
             s_naz_s = !s_naz_s;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_nazivSS, s_naz_s);
+            SetArrow(img_sort_nazivSS, s_naz_s);
             SortSStivoText("GetNaziv", s_naz_s);
         }
         private bool s_brI_s = false;
         private void btn_sort_brIzdSS_Click(object sender, RoutedEventArgs e)
         {
             s_brI_s = !s_brI_s;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_brIzdSS, s_brI_s);
+            SetArrow(img_sort_brIzdSS, s_brI_s);
             SortSStivoText("GetBrIzdanja", s_brI_s);
         }
         private bool s_vrI_s = false;
         private void btn_sort_vrIzdSS_Click(object sender, RoutedEventArgs e)
         {
             s_vrI_s = !s_vrI_s;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_vrIzdSS, s_vrI_s);
+            SetArrow(img_sort_vrIzdSS, s_vrI_s);
             SortSStivoDate("GetVrIzd", s_vrI_s);
         }
         private bool s_ik_s = false;
         private void btn_sort_izdKuceSS_Click(object sender, RoutedEventArgs e)
         {
             s_ik_s = !s_ik_s;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_izdKuceSS, s_ik_s);
+            SetArrow(img_sort_izdKuceSS, s_ik_s);
             SortSStivoText("GetIzdKuce", s_ik_s);
         }
         private bool s_cen_s = false;
         private void btn_sort_cenaSS_Click(object sender, RoutedEventArgs e)
         {
             s_cen_s = !s_cen_s;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_cenaSS, s_cen_s);
+            SetArrow(img_sort_cenaSS, s_cen_s);
             SortSStivoDecimal("GetCenaDec", s_cen_s);
         }
         private bool s_kol_s = false;
         private void btn_sort_kolicinaSS_Click(object sender, RoutedEventArgs e)
         {
             s_kol_s = !s_kol_s;
-            ArrowHelper.DisableAllArrows(arrows);
-            ArrowHelper.SetArrow(img_sort_kolicinaSS, s_kol_s);
+            SetArrow(img_sort_kolicinaSS, s_kol_s);
             SortSStivoKolicina("GetKolicina", s_kol_s);
+        }
+
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
+
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
         }
 
 

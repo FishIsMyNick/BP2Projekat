@@ -268,7 +268,7 @@ namespace BP2ProjekatCornerLibrary.Helpers
                 MessageBox.Show("Polja za datum moraju biti popunjena!");
                 return false;
             }
-            if (!DateTime.TryParse($"{int.Parse(year)}/{int.Parse(month)}/{int.Parse(day)}", out _))
+            if(DateConverter.TryToDateTime($"{day}.{month}.{year}.") == null)
             {
                 MessageBox.Show("Unet datum ne postoji!");
                 return false;

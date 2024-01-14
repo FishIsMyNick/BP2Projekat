@@ -22,17 +22,36 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     /// <summary>
     /// Interaction logic for BibAddBookWindow.xaml
     /// </summary>
-    public partial class BibBookWindow : Window, iDynamicListView
+    public partial class BibBookWindow : Window, iDynamicListView, iSortedListView
     {
         private bool _testing = Login.Login._testing;
         iDbResult result;
         private int _currentUser;
         private int _lokalID;
         private Knjiga _knjigaToEdit;
+        public List<Image> Arrows { get; set; }
 
         public BibBookWindow(int currentUser, Knjiga toEdit = null)
         {
             InitializeComponent();
+
+            Arrows = new List<Image>
+            {
+                img_sort_autori,
+                img_sort_brIzd,
+                img_sort_brStr,
+                img_sort_format,
+                img_sort_izdKuce,
+                img_sort_jezici,
+                img_sort_korice,
+                img_sort_naziv,
+                img_sort_ograniceno,
+                img_sort_velFonta,
+                img_sort_vrIzd,
+                img_sort_zanrovi
+            };
+            DisableAllArrows();
+
             _knjigaToEdit = toEdit;
             if (_knjigaToEdit == null)
             {
@@ -62,7 +81,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 FillInputFields(toEdit);
             }
         }
-
 
         #region INIT CONTROLS
         private void SetAddView()
@@ -614,6 +632,15 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
 
         #region SORTING
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
+        }
         private void SortBooksString(string propName, bool ascending)
         {
             List<ViewKnjiga> toSort = new List<ViewKnjiga>();
@@ -642,78 +669,91 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             Knjige.Items.Clear();
             foreach (ViewKnjiga vk in Sorter.SortBoolInt<ViewKnjiga>(toSort, propName, ascending)) Knjige.Items.Add(vk);
         }
+
+
         private bool s_naz = false;
         private void btn_Sort_naziv_Click(object sender, RoutedEventArgs e)
         {
             s_naz = !s_naz;
+            SetArrow(img_sort_naziv, s_naz);
             SortBooksString("Naziv", s_naz);
         }
         private bool s_aut = false;
         private void btn_Sort_Autori_Click(object sender, RoutedEventArgs e)
         {
             s_aut = !s_aut;
+            SetArrow(img_sort_autori, s_aut);
             SortBooksString("ListAutori", s_aut);
         }
         private bool s_jez = false;
         private void btn_sort_jezici_Click(object sender, RoutedEventArgs e)
-        {
-            s_jez = !s_jez;
+        {s_jez = !s_jez;
+            SetArrow(img_sort_jezici, s_jez);
             SortBooksString("ListJezici", s_jez);
         }
         private bool s_ik = false;
         private void btn_sort_izdKuce_Click(object sender, RoutedEventArgs e)
-        {
-            s_ik = !s_ik;
+        {s_ik = !s_ik;
+            SetArrow(img_sort_izdKuce, s_ik);
             SortBooksString("ListIzdKuce", s_ik);
         }
         private bool s_kor = false;
         private void btn_sort_korice_Click(object sender, RoutedEventArgs e)
         {
             s_kor = !s_kor;
+            SetArrow(img_sort_korice, s_kor);
             SortBooksString("DispKorice", s_kor);
         }
         private bool s_brS = false;
         private void btn_sort_brStr_Click(object sender, RoutedEventArgs e)
         {
             s_brS = !s_brS;
+            SetArrow(img_sort_brStr, s_brS);
             SortBooksNumber("BrStrana", s_brS);
         }
         private bool s_zan = false;
         private void btn_sort_zanrovi_Click(object sender, RoutedEventArgs e)
         {
             s_zan = !s_zan;
+            SetArrow(img_sort_zanrovi, s_zan);
             SortBooksString("ListZanrovi", s_zan);
         }
         private bool s_for = false;
         private void btn_sort_format_Click(object sender, RoutedEventArgs e)
         {
             s_for = !s_for;
+            SetArrow(img_sort_format, s_for);
             SortBooksString("Format", s_for);
         }
         private bool s_ogr = false;
         private void btn_sort_ograniceno_Click(object sender, RoutedEventArgs e)
         {
             s_ogr = !s_ogr;
+            SetArrow(img_sort_ograniceno, s_ogr);
             SortBooksBool("Ograniceno", s_ogr);
         }
         private bool s_vrI = false;
         private void btn_sort_vrIzd_Click(object sender, RoutedEventArgs e)
         {
             s_vrI = !s_vrI;
+            SetArrow(img_sort_vrIzd, s_vrI);
             SortBooksDate("DispVrIzd", s_vrI);
         }
         private bool s_velF = false;
         private void btn_sort_velFonta_Click(object sender, RoutedEventArgs e)
         {
             s_velF = !s_velF;
+            SetArrow(img_sort_velFonta, s_velF);
             SortBooksNumber("VelicinaFonta", s_velF);
         }
         private bool s_brI = false;
         private void btn_sort_brIzd_Click(object sender, RoutedEventArgs e)
         {
             s_brI = !s_brI;
+            SetArrow(img_sort_brIzd, s_brI);
             SortBooksNumber("BrIzd", s_brI);
         }
+
         #endregion
     }
 }

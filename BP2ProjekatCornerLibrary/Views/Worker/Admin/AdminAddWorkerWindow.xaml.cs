@@ -46,6 +46,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         public AdminAddWorkerWindow(iDynamicListView caller, int AdminID)
         {
+            DBHelper._currentUserID = AdminID;
             _adminID = AdminID;
             _caller = caller;
             InitializeComponent();
@@ -165,6 +166,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 Validator.Day(GetDan) &&
                 Validator.Month(GetMesec) &&
                 Validator.Year(GetGodina) &&
+                Validator.Date(GetDan, GetMesec, GetGodina) &&
                 Validator.StreetName(GetUlica) &&
                 Validator.StreetNumber(GetBroj) &&
                 Validator.Date(GetDan, GetMesec, GetGodina)

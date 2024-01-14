@@ -78,7 +78,7 @@
 									Content="Dat. izdanja"
                                     Grid.Column="2"
 								Click="btn_sort_datIzd_Click"/>
-						<Image x:Name="img_sort_naziv" 
+						<Image x:Name="img_sort_dat" 
 									Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
                            Grid.Column="2"
                            HorizontalAlignment="Right"
