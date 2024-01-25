@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;

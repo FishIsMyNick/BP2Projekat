@@ -22,7 +22,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     /// </summary>
     public partial class BibliotekarMainView : Window
     {
-        //private MockDB mockDB;
         private int _currentUser;
         public BibliotekarMainView(Models.Bibliotekar bibliotekar)
         {
@@ -31,9 +30,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             _currentUser = bibliotekar.IDRadnik;
             DBHelper._currentUserID = _currentUser;
             lbUsername.Content = DBHelper.GetBibNalog(_currentUser).KorisnickoIme;
-
-            //lbUsername.Content = bibliotekar.KorisnickoIme;
-            //lbUsername.Content = "placeholder";
         }
 
         private void btn_Close_Click(object sender, RoutedEventArgs e)
@@ -72,20 +68,11 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             ikWindow.ShowDialog();
         }
 
-        private void btn_Izd_Nov_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
 
         private void btn_SuL_Click(object sender, RoutedEventArgs e)
         {
             Window sulWindow = new BibSuLWindow(_currentUser);
             sulWindow.ShowDialog();
-        }
-
-        private void btn_Izd_Mag_Click(object sender, RoutedEventArgs e)
-        {
-
         }
 
         #endregion

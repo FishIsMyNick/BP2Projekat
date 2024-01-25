@@ -1,6 +1,8 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models;
 using BP2ProjekatCornerLibrary.Models.NonContext;
+using BP2ProjekatCornerLibrary.ViewModel;
 using BP2ProjekatCornerLibrary.Views.Worker.Admin;
 using System;
 using System.Collections.Generic;
@@ -35,10 +37,10 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         public string Zap_Tip { get; set; }
 
         //TODO: treba da bude lista radnika
-        public List<ZapRadView> ListaZaposlenihRadnika { get; set; }
-        public List<OtpRadView> ListaOtpustenihRadnika { get; set; }
-        public List<OtvFilView> ListaOtvorenihFilijala { get; set; }
-        public List<ZatFilView> ListaZatvorenihFilijala { get; set; }
+        public List<ViewZapRad> ListaZaposlenihRadnika { get; set; }
+        public List<ViewOtpRad> ListaOtpustenihRadnika { get; set; }
+        public List<ViewOtvFil> ListaOtvorenihFilijala { get; set; }
+        public List<ViewZatFil> ListaZatvorenihFilijala { get; set; }
 
         public int RadnikTableImeWidth = 300;
         public AdminMainView(Models.Admin admin)
@@ -104,7 +106,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                     nalog = DBHelper.GetBibNalog(radnik.IDRadnik);
                 else if (radnik.GetType() == typeof(Kurir))
                     nalog = DBHelper.GetKurirNalog(radnik.IDRadnik);
-                ZaposleniRadnici.Items.Add(new ZapRadView(radnik.IDRadnik, radnik.Ime, radnik.Prezime, radnik.DatZap, nalog.KorisnickoIme, EnumsHelper.GetTipRadnikaString(nalog.TipNaloga)));
+                ZaposleniRadnici.Items.Add(new ViewZapRad(radnik.IDRadnik, radnik.Ime, radnik.Prezime, radnik.DatZap, nalog.KorisnickoIme, EnumsHelper.GetTipRadnikaString(nalog.TipNaloga)));
             }
         }
         private void FillOtpRadniciList()
@@ -119,7 +121,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                     nalog = DBHelper.GetBibNalog(radnik.IDRadnik);
                 else if (radnik.GetType() == typeof(Kurir))
                     nalog = DBHelper.GetKurirNalog(radnik.IDRadnik);
-                NezaposleniRadnici.Items.Add(new OtpRadView(radnik.IDRadnik, radnik.Ime, radnik.Prezime, radnik.DatZap, radnik.DatOtp ?? radnik.DatRodj, nalog.KorisnickoIme, EnumsHelper.GetTipRadnikaString(nalog.TipNaloga)));
+                NezaposleniRadnici.Items.Add(new ViewOtpRad(radnik.IDRadnik, radnik.Ime, radnik.Prezime, radnik.DatZap, radnik.DatOtp ?? radnik.DatRodj, nalog.KorisnickoIme, EnumsHelper.GetTipRadnikaString(nalog.TipNaloga)));
             }
         }
         private void FillOtvFilList()
@@ -131,7 +133,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             {
                 Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
                 Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
-                OtvoreneFilijale.Items.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, biblikutak.DatZat, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
+                OtvoreneFilijale.Items.Add(new ViewOtvFil(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, biblikutak.DatZat, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
             }
         }
         private void FillZatvFilList()
@@ -143,7 +145,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             {
                 Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
                 Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
-                ZatvoreneFilijale.Items.Add(new ZatFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, biblikutak.DatZat, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
+                ZatvoreneFilijale.Items.Add(new ViewZatFil(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, biblikutak.DatZat, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
             }
         }
         #endregion
@@ -163,23 +165,23 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
 
         #region Zaposleni radnici
-        private List<ZapRadView> GetAllZapRadFromList()
+        private List<ViewZapRad> GetAllZapRadFromList()
         {
-            List<ZapRadView> ret = new List<ZapRadView>();
-            foreach (var j in ZaposleniRadnici.Items) ret.Add(j as ZapRadView);
+            List<ViewZapRad> ret = new List<ViewZapRad>();
+            foreach (var j in ZaposleniRadnici.Items) ret.Add(j as ViewZapRad);
             return ret;
         }
         private void SortZapRadString(string param, bool ascending)
         {
-            List<ZapRadView> toSort = GetAllZapRadFromList();
+            List<ViewZapRad> toSort = GetAllZapRadFromList();
             ZaposleniRadnici.Items.Clear();
-            foreach (ZapRadView j in Sorter.SortText<ZapRadView>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
+            foreach (ViewZapRad j in Sorter.SortText<ViewZapRad>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
         }
         private void SortZapRadDate(string param, bool ascending)
         {
-            List<ZapRadView> toSort = GetAllZapRadFromList();
+            List<ViewZapRad> toSort = GetAllZapRadFromList();
             ZaposleniRadnici.Items.Clear();
-            foreach (ZapRadView j in Sorter.SortDateString<ZapRadView>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
+            foreach (ViewZapRad j in Sorter.SortDateString<ViewZapRad>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
         }
         private bool s_zr_ime = false;
         private void btn_ZapRadnik_Ime_Click(object sender, RoutedEventArgs e)
@@ -219,23 +221,23 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         #endregion
 
         #region Nezaposleni radnici
-        private List<OtpRadView> GetAllOtpRadFromList()
+        private List<ViewOtpRad> GetAllOtpRadFromList()
         {
-            List<OtpRadView> ret = new List<OtpRadView>();
-            foreach (var j in NezaposleniRadnici.Items) ret.Add(j as OtpRadView);
+            List<ViewOtpRad> ret = new List<ViewOtpRad>();
+            foreach (var j in NezaposleniRadnici.Items) ret.Add(j as ViewOtpRad);
             return ret;
         }
         private void SortOtpRadString(string param, bool ascending)
         {
-            List<OtpRadView> toSort = GetAllOtpRadFromList();
+            List<ViewOtpRad> toSort = GetAllOtpRadFromList();
             NezaposleniRadnici.Items.Clear();
-            foreach (OtpRadView j in Sorter.SortText<OtpRadView>(toSort, param, ascending)) NezaposleniRadnici.Items.Add(j);
+            foreach (ViewOtpRad j in Sorter.SortText<ViewOtpRad>(toSort, param, ascending)) NezaposleniRadnici.Items.Add(j);
         }
         private void SortOtpRadDate(string param, bool ascending)
         {
-            List<OtpRadView> toSort = GetAllOtpRadFromList();
+            List<ViewOtpRad> toSort = GetAllOtpRadFromList();
             NezaposleniRadnici.Items.Clear();
-            foreach (OtpRadView j in Sorter.SortDateString<OtpRadView>(toSort, param, ascending)) NezaposleniRadnici.Items.Add(j);
+            foreach (ViewOtpRad j in Sorter.SortDateString<ViewOtpRad>(toSort, param, ascending)) NezaposleniRadnici.Items.Add(j);
         }
         private bool s_nzr_ime = false;
         private void btn_NezapRadnik_Ime_Click(object sender, RoutedEventArgs e)
@@ -279,23 +281,23 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         #endregion
 
         #region Otvorene filijale
-        private List<OtvFilView> GetAllOtvFilFromList()
+        private List<ViewOtvFil> GetAllOtvFilFromList()
         {
-            List<OtvFilView> ret = new List<OtvFilView>();
-            foreach (var j in OtvoreneFilijale.Items) ret.Add(j as OtvFilView);
+            List<ViewOtvFil> ret = new List<ViewOtvFil>();
+            foreach (var j in OtvoreneFilijale.Items) ret.Add(j as ViewOtvFil);
             return ret;
         }
         private void SortOtvFilString(string param, bool ascending)
         {
-            List<OtvFilView> toSort = GetAllOtvFilFromList();
+            List<ViewOtvFil> toSort = GetAllOtvFilFromList();
             OtvoreneFilijale.Items.Clear();
-            foreach (OtvFilView j in Sorter.SortText<OtvFilView>(toSort, param, ascending)) OtvoreneFilijale.Items.Add(j);
+            foreach (ViewOtvFil j in Sorter.SortText<ViewOtvFil>(toSort, param, ascending)) OtvoreneFilijale.Items.Add(j);
         }
         private void SortOtvFilDate(string param, bool ascending)
         {
-            List<OtvFilView> toSort = GetAllOtvFilFromList();
+            List<ViewOtvFil> toSort = GetAllOtvFilFromList();
             OtvoreneFilijale.Items.Clear();
-            foreach (OtvFilView j in Sorter.SortDateString<OtvFilView>(toSort, param, ascending)) OtvoreneFilijale.Items.Add(j);
+            foreach (ViewOtvFil j in Sorter.SortDateString<ViewOtvFil>(toSort, param, ascending)) OtvoreneFilijale.Items.Add(j);
         }
         private bool s_otf_naz = false;
         private void btn_OFil_Naziv_Click(object sender, RoutedEventArgs e)
@@ -335,23 +337,23 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         #endregion
 
         #region Zatvorene filijale
-        private List<ZatFilView> GetAllZatFilFromList()
+        private List<ViewZatFil> GetAllZatFilFromList()
         {
-            List<ZatFilView> ret = new List<ZatFilView>();
-            foreach (var j in ZatvoreneFilijale.Items) ret.Add(j as ZatFilView);
+            List<ViewZatFil> ret = new List<ViewZatFil>();
+            foreach (var j in ZatvoreneFilijale.Items) ret.Add(j as ViewZatFil);
             return ret;
         }
         private void SortZatFilString(string param, bool ascending)
         {
-            List<ZatFilView> toSort = GetAllZatFilFromList();
+            List<ViewZatFil> toSort = GetAllZatFilFromList();
             ZatvoreneFilijale.Items.Clear();
-            foreach (ZatFilView j in Sorter.SortText<ZatFilView>(toSort, param, ascending)) ZatvoreneFilijale.Items.Add(j);
+            foreach (ViewZatFil j in Sorter.SortText<ViewZatFil>(toSort, param, ascending)) ZatvoreneFilijale.Items.Add(j);
         }
         private void SortZatFilDate(string param, bool ascending)
         {
-            List<ZatFilView> toSort = GetAllZatFilFromList();
+            List<ViewZatFil> toSort = GetAllZatFilFromList();
             ZatvoreneFilijale.Items.Clear();
-            foreach (ZatFilView j in Sorter.SortDateString<ZatFilView>(toSort, param, ascending)) ZatvoreneFilijale.Items.Add(j);
+            foreach (ViewZatFil j in Sorter.SortDateString<ViewZatFil>(toSort, param, ascending)) ZatvoreneFilijale.Items.Add(j);
         }
         private bool s_ztf_naz = false;
         private void btn_ZFil_Naziv_Click(object sender, RoutedEventArgs e)
@@ -405,7 +407,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
         private void OtvoreneFilijale_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            OtvFilView ofv = ((ListView)sender).SelectedItem as OtvFilView;
+            ViewOtvFil ofv = ((ListView)sender).SelectedItem as ViewOtvFil;
             if (ofv == null) return;
             Window editFilWindow = new AdminEditStoreWindow(caller: this, selectedID: ofv.IDBK, quitAfterSave:true);
             editFilWindow.ShowDialog();
@@ -421,7 +423,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private void ZaposleniRadnici_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            ZapRadView zrv = ((ListView)sender).SelectedItem as ZapRadView;
+            ViewZapRad zrv = ((ListView)sender).SelectedItem as ViewZapRad;
             if (zrv == null) return;
             Window editWorkerWindow = new AdminEditWorkerWindow(caller: this, selectedID: zrv.IDRadnik, tip: EnumsHelper.GetTipRadnika(zrv.Tip), quitAfterSave:true);
             editWorkerWindow.ShowDialog();

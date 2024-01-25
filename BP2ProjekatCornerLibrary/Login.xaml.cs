@@ -23,27 +23,15 @@ namespace BP2ProjekatCornerLibrary.Views.Login
     /// </summary>
     public partial class Login : Window
     {
-        public static bool _testing = false;
-        //private MockDB Mock;
+
         public Login()
         {
 
             DBHelper.InitializeConnection();
 
-
-            //Mock = new MockDB();
             InitializeComponent();
 
-            if(_testing)
-            {
-                Window window = new BibBookWindow(1);
-                window.Show();
-                Close();
-                return;
-            }
-            //TryLogin();
         }
-
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -80,7 +68,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
                 MessageBox.Show("Pogrešna kombinacija korisničkog imena i šifre!");
                 return;
             }
-            else if(r.DatOtp != null)
+            else if (r.DatOtp != null)
             {
                 MessageBox.Show("Korisnički nalog je zatvoren! Pristup Vam nije dozvoljen sa ovim korisničkim nalogom!");
                 return;
@@ -133,8 +121,6 @@ namespace BP2ProjekatCornerLibrary.Views.Login
         }
         #endregion
 
-
-
         #region Password
         private void tbPasswordUnmasked_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -153,24 +139,5 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             }
         }
         #endregion
-
-        //#region Show password
-        //private void revealModeCheckBox_Checked(object sender, RoutedEventArgs e)
-        //{
-        //	tbPasswordUnmasked.Text = pbPasswordHidden.Password;
-        //	tbPasswordUnmasked.Foreground = Brushes.Black;
-        //	tbPasswordUnmasked.Visibility = Visibility.Visible;
-        //	pbPasswordHidden.Visibility = Visibility.Hidden;
-        //	tbPasswordUnmasked.Focus();
-        //}
-
-        //private void revealModeCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        //{
-        //	tbPasswordUnmasked.Visibility = Visibility.Hidden;
-        //	pbPasswordHidden.Visibility = Visibility.Visible;
-        //	pbPasswordHidden.Focus();
-        //}
-        //#endregion
-
     }
 }

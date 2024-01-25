@@ -26,15 +26,17 @@
 							<RowDefinition Height="1*"/>
 						</Grid.RowDefinitions>
 
-						
-						
+
+
 						<!--ZAPOSLENI RADNICI-->
 						<DockPanel Margin="5" Grid.Row="0" Grid.Column="0">
 							<Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">
 								<StackPanel>
 									<!--LABEL-->
-									<Label FontSize="20" FontWeight="Bold" Margin="15 10 0 0">Zaposleni radnici:</Label>
-									
+									<Grid >
+										<Label FontSize="20" FontWeight="Bold" Margin="15 10 0 0">Zaposleni radnici:</Label>
+
+									</Grid>
 									<!--SORT BUTTONS-->
 									<StackPanel Orientation="Horizontal" 
 												Width="655" Height="25" 
@@ -86,7 +88,7 @@
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 									</StackPanel>
-									
+
 									<!--LIST OF EMPLOYED WORKERS-->
 									<ListView Name="ZaposleniRadnici"
 											ItemsSource="{Binding ListaZaposlenihRadnika}"
@@ -112,10 +114,10 @@
 							</Border>
 						</DockPanel>
 
-						
-						
-						
-						
+
+
+
+
 						<!--NEZAPOSLENI RADNICI-->
 						<DockPanel Margin="5" Grid.Row="1" Grid.Column="0">
 							<Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">
@@ -199,17 +201,19 @@
 							</Border>
 						</DockPanel>
 
-						
-						
-						
-						
+
+
+
+
 
 						<!--OTVORENE FILIJALE-->
 						<DockPanel Margin="5" Grid.Row="0" Grid.Column="1">
 							<Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">
 								<StackPanel>
 									<!--LABEL-->
-									<Label FontSize="20" FontWeight="Bold" Margin="15 10 0 0">Otvorene filijale:</Label>
+									<Grid>
+										<Label FontSize="20" FontWeight="Bold" Margin="15 10 0 0">Otvorene filijale:</Label>
+									</Grid>
 
 									<!--SORT BUTTONS-->
 									<StackPanel Orientation="Horizontal" 
@@ -288,11 +292,11 @@
 							</Border>
 						</DockPanel>
 
-						
-						
-						
-						
-						
+
+
+
+
+
 						<!--ZATVORENE FILIJALE-->
 						<DockPanel Margin="5" Grid.Row="1" Grid.Column="1">
 							<Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">

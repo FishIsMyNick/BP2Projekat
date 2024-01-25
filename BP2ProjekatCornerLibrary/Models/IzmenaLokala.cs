@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Conventions;

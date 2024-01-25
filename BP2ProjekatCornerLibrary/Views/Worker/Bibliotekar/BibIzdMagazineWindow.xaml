@@ -8,7 +8,7 @@
                         MinHeight="700" Width="1325">
 
 	<Grid>
-		<Grid x:Name="view_select" Visibility="Visible">
+		<Grid x:Name="view_select" Visibility="Collapsed">
 			<StackPanel Orientation="Vertical">
 				<Grid x:Name="grd_TopBar" 
               Height="100">
@@ -40,6 +40,7 @@
 				</Grid>
 				<StackPanel x:Name="sp_ListaKnjiga"
                     Height="550">
+					
 					<Grid Panel.ZIndex="1" Margin="1 0 1 0" Height="25">
 						<Grid.ColumnDefinitions>
 							<ColumnDefinition Width="4*" MaxWidth="80"/>
@@ -163,7 +164,7 @@
 				</StackPanel>
 			</StackPanel>
 		</Grid>
-		<Grid x:Name="view_edit" Visibility="Collapsed">
+		<Grid x:Name="view_edit" Visibility="Visible">
 			<Grid.Resources>
 				<SolidColorBrush x:Key="brush" Color="DarkGray"/>
 			</Grid.Resources>
@@ -357,29 +358,30 @@
 						<ColumnDefinition Width="6*"/>
 					</Grid.ColumnDefinitions>
 
-					<Button x:Name="btn_Edit_Confirm"
-					Margin="5 0"
-					Height="45"
-					FontSize="30"
-					Background="LightGreen"
-					Grid.Column="1"
-					Content="Sačuvaj" Click="btn_Edit_Confirm_Click"/>
-					<Button x:Name="btn_Edit_Delete"
-					Margin="5 0"
-					Height="45"
-					FontSize="30"
-					Background="LightCoral"
-					Grid.Column="3"
-					Content="Obriši"
-						Click="btn_Edit_Delete_Click"/>
 					<Button x:Name="btn_Edit_Cancel"
-					Margin="5 0"
-					Height="45"
-					FontSize="30"
-					Background="LightGray"
-					Grid.Column="5"
-					Content="Poništi"
-						Click="btn_Edit_Cancel_Click"/>
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightGray"
+						Grid.Column="1"
+						Content="Poništi"
+							Click="btn_Edit_Cancel_Click"/>
+					<Button x:Name="btn_Edit_Delete"
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightCoral"
+						Grid.Column="3"
+						Content="Obriši"
+							Click="btn_Edit_Delete_Click"/>
+					<Button x:Name="btn_Edit_Confirm"
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightGreen"
+						Grid.Column="5"
+						Content="Sačuvaj"
+							Click="btn_Edit_Confirm_Click"/>
 				</Grid>
 			</StackPanel>
 		</Grid>

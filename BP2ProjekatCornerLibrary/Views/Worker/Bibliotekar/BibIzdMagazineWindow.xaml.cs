@@ -22,7 +22,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
     /// </summary>
     public partial class BibIzdMagazineWindow : Window, iDynamicListView, iSortedListView
     {
-        private bool _testing = Login.Login._testing;
         private int _currentUser;
         private int _lokalID;
         private IzdanjeSStiva _izdStivaToEdit;

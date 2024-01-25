@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 
 namespace BP2ProjekatCornerLibrary.Models

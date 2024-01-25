@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using System;
 using System.Collections.Generic;
@@ -44,9 +44,5 @@ namespace BP2ProjekatCornerLibrary.Models
             TipNaloga = tipNaloga;
         }
 
-
-        //public KorisnickiNalog(params ClassPropertyValue[] args) : base(args)
-        //{
-        //}
     }
 }

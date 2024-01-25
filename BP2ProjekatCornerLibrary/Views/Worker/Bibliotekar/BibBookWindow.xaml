@@ -8,7 +8,7 @@
         MinHeight="700" MinWidth="1325">
 
 	<Grid>
-		<Grid Name="view_select" Visibility="Visible">
+		<Grid Name="view_select" Visibility="Collapsed">
 			<StackPanel Orientation="Vertical">
 				<Grid Name="grd_TopBar" 
                       Height="100">
@@ -18,12 +18,18 @@
 					</Grid.RowDefinitions>
 					<Grid Name="grd_TopBar_Content">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="50*"/>
-							<ColumnDefinition Width="50*"/>
+							<ColumnDefinition Width="60*"/>
+							<ColumnDefinition Width="40*"/>
 						</Grid.ColumnDefinitions>
 						<Label FontSize="40" FontWeight="Bold">Odabir knjige:</Label>
+						<Grid Grid.Column="1">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="33*"/>
+								<ColumnDefinition Width="33*"/>
+								<ColumnDefinition Width="33*"/>
+							</Grid.ColumnDefinitions>
 						<Button Name="btn_Add_Book"
-                            Grid.Column="1"
+                            Grid.Column="0"
                             HorizontalAlignment="Right"
                             Margin="10"
                             Width="150"
@@ -31,12 +37,92 @@
                             FontSize="22"
                             Content="Dodaj knjigu"
                             Click="btn_Add_Book_Click"/>
+							<Button x:Name="btn_filter" 
+									Width="150"
+                            Height="60"
+									Grid.Column="1"
+									FontSize="22"
+									Click="btn_filter_Click">
+								Primeni filtere
+							</Button>
+							<Button x:Name="btn_clr_filter" 
+									Width="150"
+                            Height="60"
+									Grid.Column="2"
+									FontSize="22"
+									Click="btn_clr_filter_Click">
+								Obriši filtere
+							</Button>
+						</Grid>
 					</Grid>
 					<Grid Background="DarkGray"
                           Grid.Row="1"></Grid>
 				</Grid>
 				<StackPanel Name="sp_ListaKnjiga"
                             Height="550">
+					<!-- FILTER FIELDS-->
+					<Grid Panel.ZIndex="1" Margin="1 0 1 0" Height="25">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="15*" MinWidth="130"/>
+							<ColumnDefinition Width="15*" MinWidth="130"/>
+							<ColumnDefinition Width="9*" MaxWidth="80"/>
+							<ColumnDefinition Width="15*" MinWidth="130"/>
+							<ColumnDefinition Width="15*" MinWidth="130"/>
+							<ColumnDefinition Width="15*" MinWidth="130"/>
+							<ColumnDefinition Width="15*" MinWidth="130"/>
+							<ColumnDefinition Width="8*" MaxWidth="70"/>
+							<ColumnDefinition Width="9*" MaxWidth="75"/>
+							<ColumnDefinition Width="11*" MaxWidth="97"/>
+							<ColumnDefinition Width="7*" MaxWidth="65"/>
+							<ColumnDefinition Width="10*" MaxWidth="88"/>
+						</Grid.ColumnDefinitions>
+						
+						<TextBox Name="tb_f_naz"
+								 Grid.Column="0"
+												 Margin="1"
+							 VerticalContentAlignment="Center"></TextBox>
+						<TextBox Name="tb_f_aut"
+								 Grid.Column="1"
+												 Margin="1"
+							 VerticalContentAlignment="Center"></TextBox>
+						<TextBox Name="tb_f_brI"
+								 Grid.Column="2"
+												 Margin="1"
+							 VerticalContentAlignment="Center"></TextBox>
+						<TextBox Name="tb_f_jez"
+								 Grid.Column="3"
+												 Margin="1"
+							 VerticalContentAlignment="Center"></TextBox>
+						<TextBox Name="tb_f_zan"
+								 Grid.Column="4"
+												 Margin="1"
+							 VerticalContentAlignment="Center"></TextBox>
+						<TextBox Name="tb_f_ik"
+								 Grid.Column="5"
+												 Margin="1"
+							 VerticalContentAlignment="Center"></TextBox>
+						<TextBox Name="tb_f_vrI"
+								 Grid.Column="6"
+												 Margin="1"
+							 VerticalContentAlignment="Center"></TextBox>
+						<TextBox Name="tb_f_kor"
+								 Grid.Column="7"
+												 Margin="1"
+							 VerticalContentAlignment="Center"></TextBox>
+						<TextBox Name="tb_f_brS"
+								 Grid.Column="8"
+												 Margin="1"
+							 VerticalContentAlignment="Center"></TextBox>
+						<TextBox Name="tb_f_vel"
+								 Grid.Column="9"
+												 Margin="1"
+							 VerticalContentAlignment="Center"></TextBox>
+						<TextBox Name="tb_f_for"
+								 Grid.Column="10"
+												 Margin="1"
+							 VerticalContentAlignment="Center"></TextBox>
+							
+					</Grid>
 					<!--SORT BUTTONS-->
 					<Grid Panel.ZIndex="1" Margin="1 0 1 0" Height="25">
 						<Grid.ColumnDefinitions>
@@ -237,7 +323,7 @@ Panel.ZIndex="2"/>
 				</StackPanel>
 			</StackPanel>
 		</Grid>
-		<Grid Name="view_edit" Visibility="Collapsed">
+		<Grid Name="view_edit" Visibility="Visible">
 			<Grid.Resources>
 				<SolidColorBrush x:Key="brush" Color="DarkGray"/>
 			</Grid.Resources>
@@ -503,23 +589,23 @@ Panel.ZIndex="2"/>
 						<ColumnDefinition Width="8*"/>
 					</Grid.ColumnDefinitions>
 
-					<Button Name="btn_Add_Confirm"
-						Margin="5 0"
-						Height="45"
-						FontSize="30"
-						Background="LightGreen"
-						Grid.Column="1"
-						Click="btn_Add_Confirm_Click">
-						Dodaj
-					</Button>
 					<Button Name="btn_Add_Cancel"
 						Margin="5 0"
 						Height="45"
 						FontSize="30"
 						Background="LightGray"
-						Grid.Column="3"
+						Grid.Column="1"
 						Click="btn_Add_Cancel_Click">
 						Poništi
+					</Button>
+					<Button Name="btn_Add_Confirm"
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightGreen"
+						Grid.Column="3"
+						Click="btn_Add_Confirm_Click">
+						Dodaj
 					</Button>
 				</Grid>
 				<Grid x:Name="grd_Edit_Btns">
@@ -533,14 +619,14 @@ Panel.ZIndex="2"/>
 						<ColumnDefinition Width="6*"/>
 					</Grid.ColumnDefinitions>
 
-					<Button Name="btn_Edit_Confirm"
+					<Button Name="btn_Edit_Cancel"
 			Margin="5 0"
 			Height="45"
 			FontSize="30"
-			Background="LightGreen"
+			Background="LightGray"
 			Grid.Column="1"
-						Click="btn_Edit_Confirm_Click">
-						Sačuvaj
+						Click="btn_Edit_Cancel_Click">
+						Poništi
 					</Button>
 					<Button Name="btn_Edit_Delete"
 			Margin="5 0"
@@ -551,14 +637,14 @@ Panel.ZIndex="2"/>
 						Click="btn_Edit_Delete_Click">
 						Obriši
 					</Button>
-					<Button Name="btn_Edit_Cancel"
+					<Button Name="btn_Edit_Confirm"
 			Margin="5 0"
 			Height="45"
 			FontSize="30"
-			Background="LightGray"
+			Background="LightGreen"
 			Grid.Column="5"
-						Click="btn_Edit_Cancel_Click">
-						Poništi
+						Click="btn_Edit_Confirm_Click">
+						Sačuvaj
 					</Button>
 				</Grid>
 			</StackPanel>

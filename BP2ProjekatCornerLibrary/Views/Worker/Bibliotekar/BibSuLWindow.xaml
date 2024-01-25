@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         MinHeight="700" MinWidth="1325">
 	<Grid>
-		<Grid Name="view_select" Visibility="Visible">
+		<Grid Name="view_select" Visibility="Collapsed">
 			<StackPanel Orientation="Vertical">
 				<Grid Name="grd_TopBar" 
                       Height="100">
@@ -17,8 +17,9 @@
 					</Grid.RowDefinitions>
 					<Grid Name="grd_TopBar_Content">
 						<Grid.ColumnDefinitions>
-							<ColumnDefinition Width="50*"/>
-							<ColumnDefinition Width="50*"/>
+							<ColumnDefinition Width="30*"/>
+							<ColumnDefinition Width="35*"/>
+							<ColumnDefinition Width="40*"/>
 						</Grid.ColumnDefinitions>
 
 						<StackPanel Orientation="Horizontal">
@@ -50,12 +51,30 @@
 								<ComboBoxItem>Štiva u filijali</ComboBoxItem>
 							</ComboBox>
 						</StackPanel>
-						<Grid>
+						<Grid Grid.Column="2">
 							<Grid.ColumnDefinitions>
-								<ColumnDefinition Width="120*"/>
-								<ColumnDefinition Width="1*"/>
-								<ColumnDefinition Width="80*"/>
+								<ColumnDefinition Width="60*"/>
+								<ColumnDefinition Width="30*"/>
 							</Grid.ColumnDefinitions>
+
+							<Button x:Name="btn_filter"
+					Grid.Column="0"
+					HorizontalAlignment="Right"
+					Margin="10"
+					Width="150"
+					Height="60"
+					FontSize="22"
+					Content="Primeni filtere"
+									Click="btn_filter_Click"/>
+							<Button x:Name="btn_cl_filter"
+					Grid.Column="1"
+					HorizontalAlignment="Right"
+					Margin="10"
+					Width="150"
+					Height="60"
+					FontSize="22"
+					Content="Obriši filtere"
+									Click="btn_cl_filter_Click"/>
 						</Grid>
 					</Grid>
 					<Grid x:Name="grd_TopBar_Separator"
@@ -72,6 +91,46 @@
 						<StackPanel Name="sp_ListaKnjiga"
 								Visibility="Visible"
                             Height="550">
+							<!-- FILTER FIELDS-->
+							<Grid Panel.ZIndex="1" Margin="1 0 1 0" Height="25">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="1*" MinWidth="60" MaxWidth="60"/>
+									<ColumnDefinition Width="5*" MinWidth="300" MaxWidth="400"/>
+									<ColumnDefinition Width="5*" MinWidth="200" MaxWidth="350"/>
+									<ColumnDefinition Width="1*"  MaxWidth="80"/>
+									<ColumnDefinition Width="5*" MinWidth="130" MaxWidth="290"/>
+									<ColumnDefinition Width="5*" MaxWidth="120"/>
+									<ColumnDefinition Width="5*" MaxWidth="130"/>
+								</Grid.ColumnDefinitions>
+
+								<TextBox Name="tb_f_k_id"
+			 Grid.Column="0"
+							 Margin="1"
+VerticalContentAlignment="Center"></TextBox>
+								<TextBox Name="tb_f_k_naz"
+						 Grid.Column="1"
+										 Margin="1"
+					 VerticalContentAlignment="Center"></TextBox>
+								<TextBox Name="tb_f_k_aut"
+						 Grid.Column="2"
+										 Margin="1"
+					 VerticalContentAlignment="Center"></TextBox>
+								<TextBox Name="tb_f_k_brI"
+						 Grid.Column="3"
+										 Margin="1"
+					 VerticalContentAlignment="Center"></TextBox>
+								
+								<TextBox Name="tb_f_k_ik"
+						 Grid.Column="4"
+										 Margin="1"
+					 VerticalContentAlignment="Center"></TextBox>
+								<TextBox Name="tb_f_k_vrI"
+						 Grid.Column="5"
+										 Margin="1"
+					 VerticalContentAlignment="Center"></TextBox>
+								
+
+							</Grid>
 							<!--SORT BUTTONS-->
 							<Grid Panel.ZIndex="1" Margin="1 0 1 0" Height="25">
 								<Grid.ColumnDefinitions>
@@ -199,6 +258,47 @@ Panel.ZIndex="2"/>
 
 						<StackPanel Name="sp_ListaSStiva"
                             Height="550" Visibility="Collapsed">
+
+							<!-- FILTER FIELDS-->
+							<Grid Panel.ZIndex="1" Margin="1 0 1 0" Height="25">
+								<Grid.ColumnDefinitions>
+									<ColumnDefinition Width="1*" MinWidth="70" MaxWidth="70"/>
+									<ColumnDefinition Width="5*" MinWidth="450" MaxWidth="500"/>
+									<ColumnDefinition Width="1*" MaxWidth="80"/>
+									<ColumnDefinition Width="3*" MaxWidth="120"/>
+									<ColumnDefinition Width="5*" MinWidth="400" MaxWidth="500"/>
+									<ColumnDefinition Width="5*" MinWidth="100" MaxWidth="100"/>
+									<ColumnDefinition Width="5*" MinWidth="100" MaxWidth="100"/>
+								</Grid.ColumnDefinitions>
+
+								<TextBox Name="tb_f_ss_id"
+			 Grid.Column="0"
+							 Margin="1"
+VerticalContentAlignment="Center"></TextBox>
+								<TextBox Name="tb_f_ss_naz"
+						 Grid.Column="1"
+										 Margin="1"
+					 VerticalContentAlignment="Center"></TextBox>
+								<TextBox Name="tb_f_ss_brI"
+						 Grid.Column="2"
+										 Margin="1"
+					 VerticalContentAlignment="Center"></TextBox>
+								<TextBox Name="tb_f_ss_dat"
+						 Grid.Column="3"
+										 Margin="1"
+					 VerticalContentAlignment="Center"></TextBox>
+
+								<TextBox Name="tb_f_ss_ik"
+						 Grid.Column="4"
+										 Margin="1"
+					 VerticalContentAlignment="Center"></TextBox>
+								<TextBox Name="tb_f_ss_cen"
+						 Grid.Column="5"
+										 Margin="1"
+					 VerticalContentAlignment="Center"></TextBox>
+
+
+							</Grid>
 							<!--SORT BUTTONS-->
 							<Grid Panel.ZIndex="1" Margin="1 0 1 0" Height="25">
 								<Grid.ColumnDefinitions>
@@ -327,7 +427,7 @@ Panel.ZIndex="2"/>
 				</Grid>
 			</StackPanel>
 		</Grid>
-		<Grid Name="view_edit" Visibility="Collapsed">
+		<Grid Name="view_edit" Visibility="Visible">
 			<Grid.Resources>
 				<SolidColorBrush x:Key="brush" Color="DarkGray"/>
 			</Grid.Resources>
@@ -347,7 +447,7 @@ Panel.ZIndex="2"/>
 						<Grid Name="grd_edit_knjiga" 
 						  Margin="20 10" 
 						  Height="540"
-						  Visibility="Collapsed">
+						  Visibility="Visible">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="1*"/>
 								<ColumnDefinition Width="1*"/>
@@ -592,7 +692,7 @@ Panel.ZIndex="2"/>
 						<Grid Name="grd_edit_sstivo" 
 				  Margin="20 10" 
 				  Height="540"
-				  Visibility="Visible">
+				  Visibility="Collapsed">
 							<Grid.ColumnDefinitions>
 								<ColumnDefinition Width="1*"/>
 								<ColumnDefinition Width="1*"/>
@@ -771,33 +871,30 @@ Grid.Row="8"
 						<ColumnDefinition Width="2*"/>
 					</Grid.ColumnDefinitions>
 
-					<Button Name="btn_Save"
-				Margin="5 0"
-				Height="45"
-				FontSize="30"
-				Background="LightGreen"
-				Grid.Column="1"
-							Click="btn_Save_Click">
-						Sačuvaj
-					</Button>
-					<Button Name="btn_Delete"
-Margin="5 0"
-Height="45"
-FontSize="30"
-Background="LightCoral"
-Grid.Column="3"
-							Click="btn_Delete_Click">
-						Ukloni iz filijale
-					</Button>
-					<Button Name="btn_Cancel"
-				Margin="5 0"
-				Height="45"
-				FontSize="30"
-				Background="LightGray"
-				Grid.Column="5"
-							Click="btn_Cancel_Click">
-						Poništi
-					</Button>
+					<Button x:Name="btn_Cancel"
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightGray"
+						Grid.Column="1"
+						Content="Poništi"
+							Click="btn_Cancel_Click"/>
+					<Button x:Name="btn_Delete"
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightCoral"
+						Grid.Column="3"
+						Content="Obriši"
+							Click="btn_Delete_Click"/>
+					<Button x:Name="btn_Confirm"
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightGreen"
+						Grid.Column="5"
+						Content="Sačuvaj"
+							Click="btn_Save_Click"/>
 				</Grid>
 
 			</StackPanel>

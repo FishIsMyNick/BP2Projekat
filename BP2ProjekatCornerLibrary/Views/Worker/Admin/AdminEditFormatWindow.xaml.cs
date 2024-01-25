@@ -29,9 +29,10 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
             InitializeComponent();
 
             Arrows = new List<Image> { img_Period_Sort };
-            DisableAllArrows();
 
             RefreshLists();
+            ClearInputFields();
+
         }
         public void RefreshLists()
         {
@@ -63,10 +64,12 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
         }
         private bool CheckEditField()
         {
-            return tb_Edit_Format.Text != _selectedFormat.NazivFormata && tb_Edit_Format.Text != "";
+            if (_selectedFormat == null) return false;
+            return tb_Edit_Format.Text != _selectedFormat.NazivFormata && tb_Edit_Format.Text == "";
         }
         private void SetEditField()
         {
+            tb_Edit_Format.IsEnabled = _selectedFormat != null;
             tb_Edit_Format.Text = _selectedFormat.NazivFormata;
         }
         private void ClearEditField()
@@ -100,6 +103,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
             ClearEditField();
             _blockEvents = true;
             Formati.SelectedItem = null;
+            _selectedFormat = null;
             _blockEvents = false;
         }
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
@@ -110,7 +114,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
                 return;
             }
             MessageBox.Show("Uspešno ste obrisali format!");
-            ClearEditField() ; RefreshLists();
+            ClearEditField(); RefreshLists();
         }
         #endregion
 

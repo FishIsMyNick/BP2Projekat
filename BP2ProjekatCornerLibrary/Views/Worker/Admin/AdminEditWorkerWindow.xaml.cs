@@ -1,6 +1,8 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models;
 using BP2ProjekatCornerLibrary.Models.NonContext;
+using BP2ProjekatCornerLibrary.ViewModel;
 using BP2ProjekatCornerLibrary.Views.Shared;
 using System;
 using System.Collections.Generic;
@@ -107,7 +109,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             SelectView.Visibility = Visibility.Visible;
         }
 
-        private void SetUpInputFields(RadnikView rv)
+        private void SetUpInputFields(ViewRadnik rv)
         {
             if (rv == null) return;
 
@@ -148,7 +150,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 ZaposleniRadnici.Items.Add(MakeRadnikView(r));
             }
         }
-        private RadnikView MakeRadnikView(Radnik r)
+        private ViewRadnik MakeRadnikView(Radnik r)
         {
             KorisnickiNalog nalog = null;
             if (r.GetType() == typeof(Models.Bibliotekar))
@@ -156,7 +158,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             else if (r.GetType() == typeof(Kurir))
                 nalog = DBHelper.GetKurirNalog(r.IDRadnik);
 
-            return new RadnikView(r.IDRadnik, r.Ime, r.Prezime, nalog.KorisnickoIme, r.DatRodj, r.DatZap, nalog.TipNaloga, r.Ulica, r.Broj, r.PosBr, r.OZND);
+            return new ViewRadnik(r.IDRadnik, r.Ime, r.Prezime, nalog.KorisnickoIme, r.DatRodj, r.DatZap, nalog.TipNaloga, r.Ulica, r.Broj, r.PosBr, r.OZND);
         }
         #endregion
 
@@ -305,7 +307,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         #region SELECT VIEW
         private void ZaposleniRadnici_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            RadnikView rv = ZaposleniRadnici.SelectedItem as RadnikView;
+            ViewRadnik rv = ZaposleniRadnici.SelectedItem as ViewRadnik;
 
             SetUpInputFields(rv);
 
@@ -315,23 +317,23 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
 
         #region Sorting
-        private List<RadnikView> GetAllRadniksFromList()
+        private List<ViewRadnik> GetAllRadniksFromList()
         {
-            List<RadnikView> ret = new List<RadnikView>();
-            foreach (var j in ZaposleniRadnici.Items) ret.Add(j as RadnikView);
+            List<ViewRadnik> ret = new List<ViewRadnik>();
+            foreach (var j in ZaposleniRadnici.Items) ret.Add(j as ViewRadnik);
             return ret;
         }
         private void SortRadnikString(string param, bool ascending)
         {
-            List<RadnikView> toSort = GetAllRadniksFromList();
+            List<ViewRadnik> toSort = GetAllRadniksFromList();
             ZaposleniRadnici.Items.Clear();
-            foreach (RadnikView j in Sorter.SortText<RadnikView>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
+            foreach (ViewRadnik j in Sorter.SortText<ViewRadnik>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
         }
         private void SortRadnikDate(string param, bool ascending)
         {
-            List<RadnikView> toSort = GetAllRadniksFromList();
+            List<ViewRadnik> toSort = GetAllRadniksFromList();
             ZaposleniRadnici.Items.Clear();
-            foreach (RadnikView j in Sorter.SortDateString<RadnikView>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
+            foreach (ViewRadnik j in Sorter.SortDateString<ViewRadnik>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
         }
         private bool s_ime = false;
         private void btn_Ime_Sort_Click(object sender, RoutedEventArgs e)

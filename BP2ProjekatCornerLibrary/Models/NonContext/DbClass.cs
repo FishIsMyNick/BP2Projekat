@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -15,38 +15,16 @@ namespace BP2ProjekatCornerLibrary.Models.NonContext
         public abstract List<ClassPropertyValue> GetKeyProperties();
         public abstract List<string> GetDbPropertyNames();
 
-        public object? GetPropertyValue(string name)
+        public object? GetPropertyValue(string propertyName)
         {
-            Type type = this.GetType();
-            PropertyInfo propInfo = type.GetProperty(name);
+            Type type = GetType();
+            PropertyInfo propInfo = type.GetProperty(propertyName);
             if (propInfo == null)
                 return null;
 
-            object s =  propInfo.GetValue(this);
-            return s;
+            object val = propInfo.GetValue(this);
+            return val;
         }
-        public _DbClass()
-        {
-
-        }
-
-        /// <summary>
-        /// Self-setting parametered constructor
-        /// </summary>
-        /// <param name="args" type="ClassPropertyValue">Name-Value pair class</param>
-        //public DbClass(params ClassPropertyValue[] args)
-        //{
-        //    var props = GetType().GetProperties();
-        //    Type type = GetType();
-
-        //    DbClass dbClass;
-
-        //    foreach (ClassPropertyValue arg in args)
-        //    {
-        //        if (DBHelper.CheckDbNotNull(arg.Value))
-        //            type.GetProperty(arg.Name).SetValue(this, arg.Value);
-
-        //    }
-        //}
+        public _DbClass() { }
     }
 }

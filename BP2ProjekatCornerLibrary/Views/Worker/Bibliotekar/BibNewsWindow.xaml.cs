@@ -23,7 +23,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
     /// </summary>
     public partial class BibNewsWindow : Window, iDynamicListView, iSortedListView
     {
-        private bool _testing = Login.Login._testing;
         private int _currentUser;
         private int _lokalID;
         private bool _quitAfterSave = false;
@@ -483,8 +482,48 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
             DisableAllArrows();
             ArrowHelper.SetArrow(arrow, ascending);
         }
+
         #endregion
+        #region FILTERING
+        private void ApplyFilters()
+        {
+            List<ViewSStivo> toShow = new List<ViewSStivo>();
+            List<ViewSStivo> inList = new List<ViewSStivo>();
 
+            foreach (SerijskoStivo ss in DBHelper.GetAllMagazines())
+            {
+                List<Jezik> jezici = DBHelper.GetAllSStivoJeziks(ss);
+                List<IzdKuca> iks = DBHelper.GetAllSStivoIzdKucas(ss);
 
+                inList.Add(new ViewSStivo(ss.IDSStivo, ss.Naziv, _tipSStiva, ss.Format, ss.Period, jezici, iks));
+            }
+
+            foreach (ViewSStivo ss in inList)
+            {
+                if (ss.Naziv.ToLower().Contains(tb_f_naz.Text.ToLower())
+                && ss.ListJezici.ToLower().Contains(tb_f_jez.Text.ToLower())
+                && ss.Format.ToLower().Contains(tb_f_for.Text.ToLower())
+                && ss.ListIzdKuce.ToLower().Contains(tb_f_ik.Text.ToLower())
+                && ss.Period.ToLower().Contains(tb_f_per.Text.ToLower()))
+                    toShow.Add(ss);
+            }
+            Novine.Items.Clear();
+            foreach (ViewSStivo ss in toShow) Novine.Items.Add(ss);
+        }
+        private void btn_filter_Click(object sender, RoutedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void btn_cl_filter_Click(object sender, RoutedEventArgs e)
+        {
+            tb_f_naz.Text = "";
+            tb_f_jez.Text = "";
+            tb_f_ik.Text = "";
+            tb_f_for.Text = "";
+            tb_f_per.Text = "";
+            ApplyFilters();
+        }
+        #endregion
     }
 }

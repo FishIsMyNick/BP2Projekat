@@ -42,7 +42,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
 
             InitializeComponent();
 
-            Arrows = new List<Image> 
+            Arrows = new List<Image>
             {
                 img_sort_autori,
                 img_sort_cenaSS,
@@ -57,11 +57,12 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
                 img_sort_naziv,
                 img_sort_nazivSS,
                 img_sort_vrIzd,
-                img_sort_vrIzdSS 
+                img_sort_vrIzdSS
             };
             DisableAllArrows();
 
             RefreshLists();
+            SetSelectView(iStivoView.Knjiga);
             cb_TipStiva.SelectedIndex = 0;
             cb_Prikaz.SelectedIndex = 0;
             _blockEvents = false;
@@ -583,7 +584,163 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar
         #endregion
 
         #endregion
+        private void ApplyFilters()
+        {
+            if (cb_TipStiva.SelectedIndex == 0)
+            {
+                List<SuLView> toShow = new List<SuLView>();
+                List<SuLView> inList = new List<SuLView>();
 
+                List<KnjigaULokalu> kkk = DBHelper.GetAllLatestKnjigeULokalu(_lokalId);
+                List<int> idsInLokal = new List<int>();
+                foreach (KnjigaULokalu kul in kkk)
+                {
+                    if (kul.DatBrisanja == null)
+                        idsInLokal.Add(kul.IDKnjiga);
+                }
+                foreach (KnjigaULokalu kul in kkk)
+                {
+                    if (idsInLokal.Contains(kul.IDKnjiga))
+                        inList.Add(new SuLView(DBHelper.GetKnjiga(kul.IDKnjiga), _lokalId, kul.Kolicina));
+                }
+                if (_prikaziSvoStivo)
+                {
+                    foreach (Knjiga k in DBHelper.GetAllKnjigas())
+                    {
+                        if (!idsInLokal.Contains(k.IDKnjiga))
+                            inList.Add(new SuLView(k, _lokalId, 0, false));
+                    }
+                }
+
+                foreach (SuLView sul in inList)
+                {
+                    if (sul.GetNaziv.ToLower().Contains(tb_f_k_naz.Text.ToLower())
+                    && sul.GetID.ToLower().Contains(tb_f_k_id.Text.ToLower())
+                    && sul.GetAutori.ToLower().Contains(tb_f_k_aut.Text.ToLower())
+                    && sul.GetBrIzdanja.ToLower().Contains(tb_f_k_brI.Text.ToLower())
+                    && sul.GetIzdKuce.ToLower().Contains(tb_f_k_ik.Text.ToLower())
+                    && sul.GetVrIzd.ToLower().Contains(tb_f_k_vrI.Text.ToLower()))
+                        toShow.Add(sul);
+                }
+                Knjige.Items.Clear();
+                foreach(SuLView sul in toShow) Knjige.Items.Add(sul);
+            }
+            else if (cb_TipStiva.SelectedIndex == 1)
+            {
+                List<SuLView> toShow = new List<SuLView>();
+                List<SuLView> inList = new List<SuLView>();
+
+                List<IzdSStivoULokalu> sss = DBHelper.GetAllLatestIzdSStivoULokalu(_lokalId);
+                List<Tuple<int, int>> idsInLokal = new List<Tuple<int, int>>();
+                foreach (IzdSStivoULokalu sul in sss)
+                {
+                    if (sul.DatBrisanja == null)
+                        idsInLokal.Add(new Tuple<int, int>(sul.IDSStivo, sul.BrIzd));
+                }
+                foreach (IzdSStivoULokalu issul in sss)
+                {
+                    if (idsInLokal.Contains(new Tuple<int, int>(issul.IDSStivo, issul.BrIzd)))
+                    {
+                        SerijskoStivo ss = DBHelper.GetSerijskoStivo(issul.IDSStivo);
+                        if (ss.TipStiva == 1)
+                            inList.Add(new SuLView(ss, DBHelper.GetIzdanjeSStiva(issul.IDSStivo, issul.BrIzd), _lokalId, issul.Kolicina));
+                    }
+                }
+                if (_prikaziSvoStivo)
+                {
+                    foreach (IzdanjeSStiva iss in DBHelper.GetAllIzdanjeSStiva())
+                    {
+                        SerijskoStivo ss = DBHelper.GetSerijskoStivo(iss.IDSStivo);
+                        if (ss.TipStiva != 1) continue;
+                        Tuple<int, int> toAdd = new Tuple<int, int>(iss.IDSStivo, iss.BrIzd);
+                        if (!idsInLokal.Contains(toAdd))
+                            inList.Add(new SuLView(DBHelper.GetSerijskoStivo(ss.IDSStivo), iss, _lokalId, 0, false));
+                    }
+                }
+
+                foreach (SuLView sul in inList)
+                {
+                    if (sul.GetNaziv.ToLower().Contains(tb_f_ss_naz.Text.ToLower())
+                    && sul.GetID.ToLower().Contains(tb_f_ss_id.Text.ToLower())
+                    && sul.GetBrIzdanja.ToLower().Contains(tb_f_ss_brI.Text.ToLower())
+                    && sul.GetVrIzd.ToLower().Contains(tb_f_ss_dat.Text.ToLower())
+                    && sul.GetIzdKuce.ToLower().Contains(tb_f_ss_ik.Text.ToLower())
+                    && sul.GetCena.ToLower().Contains(tb_f_ss_cen.Text.ToLower()))
+                        toShow.Add(sul);
+                }
+                SStivo.Items.Clear();
+                foreach (SuLView sul in toShow) SStivo.Items.Add(sul);
+            }
+            else if (cb_TipStiva.SelectedIndex == 2)
+            {
+                List<SuLView> toShow = new List<SuLView>();
+                List<SuLView> inList = new List<SuLView>();
+
+                List<IzdSStivoULokalu> sss = DBHelper.GetAllLatestIzdSStivoULokalu(_lokalId);
+                List<Tuple<int, int>> idsInLokal = new List<Tuple<int, int>>();
+                foreach (IzdSStivoULokalu sul in sss)
+                {
+                    if (sul.DatBrisanja == null)
+                        idsInLokal.Add(new Tuple<int, int>(sul.IDSStivo, sul.BrIzd));
+                }
+                foreach (IzdSStivoULokalu issul in sss)
+                {
+                    if (idsInLokal.Contains(new Tuple<int, int>(issul.IDSStivo, issul.BrIzd)))
+                    {
+                        SerijskoStivo ss = DBHelper.GetSerijskoStivo(issul.IDSStivo);
+                        if (ss.TipStiva == 2)
+                            inList.Add(new SuLView(ss, DBHelper.GetIzdanjeSStiva(issul.IDSStivo, issul.BrIzd), _lokalId, issul.Kolicina));
+                    }
+                }
+                if (_prikaziSvoStivo)
+                {
+                    foreach (IzdanjeSStiva iss in DBHelper.GetAllIzdanjeSStiva())
+                    {
+                        SerijskoStivo ss = DBHelper.GetSerijskoStivo(iss.IDSStivo);
+                        if (ss.TipStiva != 2) continue;
+                        Tuple<int, int> toAdd = new Tuple<int, int>(iss.IDSStivo, iss.BrIzd);
+                        if (!idsInLokal.Contains(toAdd))
+                            inList.Add(new SuLView(DBHelper.GetSerijskoStivo(ss.IDSStivo), iss, _lokalId, 0, false));
+                    }
+                }
+
+                foreach (SuLView sul in inList)
+                {
+                    if (sul.GetNaziv.ToLower().Contains(tb_f_ss_naz.Text.ToLower())
+                    && sul.GetID.ToLower().Contains(tb_f_ss_id.Text.ToLower())
+                    && sul.GetBrIzdanja.ToLower().Contains(tb_f_ss_brI.Text.ToLower())
+                    && sul.GetVrIzd.ToLower().Contains(tb_f_ss_dat.Text.ToLower())
+                    && sul.GetIzdKuce.ToLower().Contains(tb_f_ss_ik.Text.ToLower())
+                    && sul.GetCena.ToLower().Contains(tb_f_ss_cen.Text.ToLower()))
+                        toShow.Add(sul);
+                }
+                SStivo.Items.Clear();
+                foreach (SuLView sul in toShow) SStivo.Items.Add(sul);
+            }
+        }
+        private void btn_filter_Click(object sender, RoutedEventArgs e)
+        {
+            ApplyFilters();
+        }
+
+        private void btn_cl_filter_Click(object sender, RoutedEventArgs e)
+        {
+            tb_f_ss_naz.Text = "";
+            tb_f_ss_id.Text = "";
+            tb_f_ss_brI.Text = "";
+            tb_f_ss_dat.Text = "";
+            tb_f_ss_ik.Text = "";
+            tb_f_ss_cen.Text = "";
+
+            tb_f_k_naz.Text = "";
+            tb_f_k_id.Text = "";
+            tb_f_k_aut.Text = "";
+            tb_f_k_brI.Text = "";
+            tb_f_k_ik.Text = "";
+            tb_f_k_vrI.Text = "";
+
+            ApplyFilters();
+        }
     }
 
     public enum iStivoView

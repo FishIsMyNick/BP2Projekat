@@ -1,5 +1,6 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
 using BP2ProjekatCornerLibrary.Models;
+using BP2ProjekatCornerLibrary.ViewModel;
 using BP2ProjekatCornerLibrary.Views.Shared;
 using System;
 using System.Collections.Generic;
@@ -111,27 +112,27 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             {
                 Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
                 Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
-                OtvoreneFilijale.Items.Add(new OtvFilView(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
+                OtvoreneFilijale.Items.Add(new ViewOtvFil(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
             }
         }
         #region Sorting
-        private List<OtvFilView> GetAllFilijaleFromList()
+        private List<ViewOtvFil> GetAllFilijaleFromList()
         {
-            List<OtvFilView> ret = new List<OtvFilView>();
-            foreach (var j in OtvoreneFilijale.Items) ret.Add(j as OtvFilView);
+            List<ViewOtvFil> ret = new List<ViewOtvFil>();
+            foreach (var j in OtvoreneFilijale.Items) ret.Add(j as ViewOtvFil);
             return ret;
         }
         private void SortFilijalaString(string param, bool ascending)
         {
-            List<OtvFilView> toSort = GetAllFilijaleFromList();
+            List<ViewOtvFil> toSort = GetAllFilijaleFromList();
             OtvoreneFilijale.Items.Clear();
-            foreach (OtvFilView j in Sorter.SortText<OtvFilView>(toSort, param, ascending)) OtvoreneFilijale.Items.Add(j);
+            foreach (ViewOtvFil j in Sorter.SortText<ViewOtvFil>(toSort, param, ascending)) OtvoreneFilijale.Items.Add(j);
         }
         private void SortFilijalaDate(string param, bool ascending)
         {
-            List<OtvFilView> toSort = GetAllFilijaleFromList();
+            List<ViewOtvFil> toSort = GetAllFilijaleFromList();
             OtvoreneFilijale.Items.Clear();
-            foreach (OtvFilView j in Sorter.SortDateString<OtvFilView>(toSort, param, ascending)) OtvoreneFilijale.Items.Add(j);
+            foreach (ViewOtvFil j in Sorter.SortDateString<ViewOtvFil>(toSort, param, ascending)) OtvoreneFilijale.Items.Add(j);
         }
         private bool s_naz_asc = false;
         private void btn_Naziv_Sort_Click(object sender, RoutedEventArgs e)
@@ -214,7 +215,12 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
             if (_quitAfterSave) Close();
-            else ShowList();
+            else
+            {
+                //_selectedFilijala = null;
+                OtvoreneFilijale.SelectedItem = null;
+                ShowList();
+            }
         }
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
@@ -244,9 +250,48 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         #endregion
 
         #region LIST INTERACTIONS
+
+        private void btn_filter_Click(object sender, RoutedEventArgs e)
+        {
+            ApplyFilters();
+        }
+        private void btn_clr_filter_Click(object sender, RoutedEventArgs e)
+        {
+            tb_f_naz.Text = "";
+            tb_f_adr.Text = "";
+            tb_f_grd.Text = "";
+            tb_f_drz.Text = "";
+            ApplyFilters();
+        }
+        private void ApplyFilters()
+        {
+            DisableAllArrows();
+            List<ViewOtvFil> toShow = new List<ViewOtvFil>();
+            List<ViewOtvFil> inList = new List<ViewOtvFil>();
+
+            List<Biblikutak> lokali = DBHelper.GetOpenLokals();
+            foreach (Biblikutak biblikutak in lokali)
+            {
+                Mesto m = DBHelper.GetMesto(biblikutak.PosBr);
+                Drzava d = DBHelper.GetDrzava(biblikutak.OZND);
+                inList.Add(new ViewOtvFil(biblikutak.IDBK, biblikutak.Naziv, biblikutak.DatOtv, null, biblikutak.Ulica, biblikutak.Broj, m.PosBr, d.OZND));
+            }
+            foreach (ViewOtvFil ofv in inList)
+            {
+                if (ofv.Naziv.ToLower().Contains(tb_f_naz.Text.ToLower())
+                && ofv.Adresa.ToLower().Contains(tb_f_adr.Text.ToLower())
+                && ofv.GetMesto.ToLower().Contains(tb_f_grd.Text.ToLower())
+                && ofv.GetDrzava.ToLower().Contains(tb_f_drz.Text.ToLower()))
+                {
+                    toShow.Add(ofv);
+                }
+            }
+            OtvoreneFilijale.Items.Clear();
+            foreach (ViewOtvFil ofv in toShow) OtvoreneFilijale.Items.Add(ofv);
+        }
         private void OtvoreneFilijale_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            var selItem = OtvoreneFilijale.SelectedItem as OtvFilView;
+            var selItem = OtvoreneFilijale.SelectedItem as ViewOtvFil;
             if (selItem == null) return;
 
             SetUpEditView(selItem);
@@ -258,7 +303,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         private void SetUpEditView(Biblikutak biblikutak)
         {
-            var selItem = new OtvFilView(biblikutak);
+            var selItem = new ViewOtvFil(biblikutak);
             if (selItem == null) return;
 
             //_selectedFilijala = selItem;
@@ -305,5 +350,6 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
 
         #endregion
+
     }
 }
