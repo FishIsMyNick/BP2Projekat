@@ -35,7 +35,7 @@
 										Width="150" 
 										Click="btn_OZN_Sort_Click"/>
                                 <Image x:Name="img_OZN_Sort" 
-										Source="..\..\..\Images\arrow_down.png"
+										Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										Margin="-30 0 0 0"
 										Panel.ZIndex="2"/>
                                 <!--PREZIME-->
@@ -44,7 +44,7 @@
 										Width="230"
 										Click="btn_Naziv_Sort_Click"/>
                                 <Image x:Name="img_Naziv_Sort" 
-									   Source="..\..\..\Images\arrow_down.png"
+									   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 									   Margin="-30 0 0 0"
 									   Panel.ZIndex="2"/>
 
@@ -117,15 +117,15 @@
 							FontSize="25"
                                     IsEnabled="False"
 							Click="btn_Edit_Confirm_Click" />
-                            <Button x:Name="btn_Edit_Cancel" Margin="10" Content="Poništi" 
-							Grid.Row="1"
-							FontSize="25"
-							Click="btn_Edit_Cancel_Click"/>
                             <Button x:Name="btn_Edit_Delete" Margin="10" Background="LightCoral" Content="Obriši" 
-							Grid.Row="2"
+							Grid.Row="1"
 							FontSize="25"
                                     IsEnabled="False"
 								Click="btn_Edit_Delete_Click"/>
+                            <Button x:Name="btn_Edit_Cancel" Margin="10" Content="Poništi" 
+							Grid.Row="2"
+							FontSize="25"
+							Click="btn_Edit_Cancel_Click"/>
                         </Grid>
                     </Grid>
                     <!--SEPARATOR-->

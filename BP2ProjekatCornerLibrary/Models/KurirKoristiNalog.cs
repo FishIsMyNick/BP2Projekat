@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -22,6 +22,11 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("ID", ID),
                 new ClassPropertyValue("KorisnickoIme", KorisnickoIme)
             };
+        }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "ID", "KorisnickoIme" };
         }
 
         public KurirKoristiNalog() : base() { }

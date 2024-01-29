@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 
 namespace BP2ProjekatCornerLibrary.Models
@@ -21,6 +21,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public string? Format { get; set; }
         [Required]
         public string? Period { get; set; }
+        public DateTime? DatBrisanja { get; set; }
         public override ClassPropertyValue GetKeyIdentity() => new ClassPropertyValue("IDSStivo", IDSStivo);
         public override List<ClassPropertyValue> GetKeyProperties()
         {
@@ -28,6 +29,11 @@ namespace BP2ProjekatCornerLibrary.Models
             {
                 new ClassPropertyValue("IDSStivo", IDSStivo)
             };
+        }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDSStivo", "Naziv", "TipStiva", "Format", "Period", "DatBrisanja" };
         }
 
         public SerijskoStivo() : base() { }
@@ -47,6 +53,14 @@ namespace BP2ProjekatCornerLibrary.Models
             TipStiva = tipStiva;
             Format = format;
             Period = period;
+        }
+        public SerijskoStivo (SerijskoStivo clone) : base()
+        {
+            IDSStivo = clone.IDSStivo;
+            Naziv = clone.Naziv;
+            TipStiva = clone.TipStiva;
+            Format = clone.Format;
+            Period = clone.Period;
         }
     }
 }

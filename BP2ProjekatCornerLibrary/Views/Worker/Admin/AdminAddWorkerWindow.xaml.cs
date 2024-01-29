@@ -1,4 +1,5 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using BP2ProjekatCornerLibrary.Views.Shared;
@@ -46,6 +47,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
         public AdminAddWorkerWindow(iDynamicListView caller, int AdminID)
         {
+            DBHelper._currentUserID = AdminID;
             _adminID = AdminID;
             _caller = caller;
             InitializeComponent();
@@ -133,7 +135,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             switch (nalog.TipNaloga)
             {
                 case 2:
-                    Bibliotekar b = new Bibliotekar(-1, GetIme, GetPrezime, DateConverter.ToDateTime(GetDan, GetMesec, GetGodina), DateTime.Now, null, _adminID, DateTime.Now, GetUlica, GetBroj, GetPosBr, GetOZND);
+                    Models.Bibliotekar b = new Models.Bibliotekar(-1, GetIme, GetPrezime, DateConverter.ToDateTime(GetDan, GetMesec, GetGodina), DateTime.Now, null, _adminID, DateTime.Now, GetUlica, GetBroj, GetPosBr, GetOZND);
                     if (!DBHelper.AddWorkerWithAccount(b, nalog))
                     {
                         MessageBox.Show("Došlo je do greške pri dodavanju korisnika!");
@@ -165,7 +167,8 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 Validator.Day(GetDan) &&
                 Validator.Month(GetMesec) &&
                 Validator.Year(GetGodina) &&
-                Validator.Street(GetUlica) &&
+                Validator.Date(GetDan, GetMesec, GetGodina) &&
+                Validator.StreetName(GetUlica) &&
                 Validator.StreetNumber(GetBroj) &&
                 Validator.Date(GetDan, GetMesec, GetGodina)
                 );

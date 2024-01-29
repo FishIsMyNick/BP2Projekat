@@ -26,15 +26,17 @@
 							<RowDefinition Height="1*"/>
 						</Grid.RowDefinitions>
 
-						
-						
+
+
 						<!--ZAPOSLENI RADNICI-->
 						<DockPanel Margin="5" Grid.Row="0" Grid.Column="0">
 							<Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">
 								<StackPanel>
 									<!--LABEL-->
-									<Label FontSize="20" FontWeight="Bold" Margin="15 10 0 0">Zaposleni radnici:</Label>
-									
+									<Grid >
+										<Label FontSize="20" FontWeight="Bold" Margin="15 10 0 0">Zaposleni radnici:</Label>
+
+									</Grid>
 									<!--SORT BUTTONS-->
 									<StackPanel Orientation="Horizontal" 
 												Width="655" Height="25" 
@@ -46,7 +48,7 @@
 											Width="130" 
 											Click="btn_ZapRadnik_Ime_Click"/>
 										<Image x:Name="img_ZapRad_Ime_Sort" 
-											Source="..\..\..\Images\arrow_down.png"
+											Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 											Margin="-30 0 0 0"
 											Panel.ZIndex="2"/>
 										<!--PREZIME-->
@@ -55,7 +57,7 @@
 											Width="130" 
 											Click="btn_ZapRadnik_Prezime_Click"/>
 										<Image x:Name="img_ZapRad_Prezime_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--USERNAME-->
@@ -64,7 +66,7 @@
 											Width="130" 
 											Click="btn_ZapRadnik_Username_Click"/>
 										<Image x:Name="img_ZapRad_Username_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--TIP-->
@@ -73,7 +75,7 @@
 											Width="125" 
 											Click="btn_ZapRadnik_Tip_Click"/>
 										<Image x:Name="img_ZapRad_Tip_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--DAT ZAP-->
@@ -82,11 +84,11 @@
 											Width="140" 
 											Click="btn_ZapRadnik_DatZap_Click"/>
 										<Image x:Name="img_ZapRad_DatZap_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 									</StackPanel>
-									
+
 									<!--LIST OF EMPLOYED WORKERS-->
 									<ListView Name="ZaposleniRadnici"
 											ItemsSource="{Binding ListaZaposlenihRadnika}"
@@ -112,10 +114,10 @@
 							</Border>
 						</DockPanel>
 
-						
-						
-						
-						
+
+
+
+
 						<!--NEZAPOSLENI RADNICI-->
 						<DockPanel Margin="5" Grid.Row="1" Grid.Column="0">
 							<Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">
@@ -134,7 +136,7 @@
 											Width="130" 
 											Click="btn_NezapRadnik_Ime_Click"/>
 										<Image x:Name="img_NezapRad_Ime_Sort" 
-											Source="..\..\..\Images\arrow_down.png"
+											Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 											Margin="-30 0 0 0"
 											Panel.ZIndex="2"/>
 										<!--PREZIME-->
@@ -143,7 +145,7 @@
 											Width="130" 
 											Click="btn_NezapRadnik_Prezime_Click"/>
 										<Image x:Name="img_NezapRad_Prezime_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--USERNAME-->
@@ -152,25 +154,25 @@
 											Width="130" 
 											Click="btn_NezapRadnik_Username_Click"/>
 										<Image x:Name="img_NezapRad_Username_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--TIP-->
 										<Button x:Name="btnNezapRadnikTip"
 											Content="Tip radnika"
 											Width="125" 
-											Click="btn_ZapRadnik_Tip_Click"/>
+											Click="btn_NezapRadnik_Tip_Click"/>
 										<Image x:Name="img_NezapRad_Tip_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--PERIOD ZAP-->
 										<Button x:Name="btnNezapRadnikPerZap"
 											Content="Period zap."
 											Width="140" 
-											Click="btn_ZapRadnik_DatZap_Click"/>
+											Click="btn_NezapRadnik_DatZap_Click"/>
 										<Image x:Name="img_NezapRad_PerZap_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 									</StackPanel>
@@ -199,17 +201,19 @@
 							</Border>
 						</DockPanel>
 
-						
-						
-						
-						
+
+
+
+
 
 						<!--OTVORENE FILIJALE-->
 						<DockPanel Margin="5" Grid.Row="0" Grid.Column="1">
 							<Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">
 								<StackPanel>
 									<!--LABEL-->
-									<Label FontSize="20" FontWeight="Bold" Margin="15 10 0 0">Otvorene filijale:</Label>
+									<Grid>
+										<Label FontSize="20" FontWeight="Bold" Margin="15 10 0 0">Otvorene filijale:</Label>
+									</Grid>
 
 									<!--SORT BUTTONS-->
 									<StackPanel Orientation="Horizontal" 
@@ -222,7 +226,7 @@
 											Width="130" 
 											Click="btn_OFil_Naziv_Click"/>
 										<Image x:Name="img_OFil_Naziv_Sort" 
-											Source="..\..\..\Images\arrow_down.png"
+											Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 											Margin="-30 0 0 0"
 											Panel.ZIndex="2"/>
 										<!--ADRESA-->
@@ -231,7 +235,7 @@
 											Width="160" 
 											Click="btn_OFil_Adresa_Click"/>
 										<Image x:Name="img_OFil_Ulica_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--GRAD-->
@@ -240,7 +244,7 @@
 											Width="110" 
 											Click="btn_OFil_Grad_Click"/>
 										<Image x:Name="img_OFil_Grad_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--DRZAVA-->
@@ -249,7 +253,7 @@
 											Width="115" 
 											Click="btn_OFil_Drzava_Click"/>
 										<Image x:Name="img_OFil_Drzava_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--DATUM OTV-->
@@ -258,7 +262,7 @@
 											Width="140" 
 											Click="btn_OFil_DatOtv_Click"/>
 										<Image x:Name="img_OFil_DatOtv_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 									</StackPanel>
@@ -288,11 +292,11 @@
 							</Border>
 						</DockPanel>
 
-						
-						
-						
-						
-						
+
+
+
+
+
 						<!--ZATVORENE FILIJALE-->
 						<DockPanel Margin="5" Grid.Row="1" Grid.Column="1">
 							<Border CornerRadius="6" BorderBrush="Gray" Background="LightGray" BorderThickness="2" DockPanel.Dock="Top">
@@ -311,16 +315,16 @@
 											Width="130" 
 											Click="btn_ZFil_Naziv_Click"/>
 										<Image x:Name="img_ZFil_Naziv_Sort" 
-											Source="..\..\..\Images\arrow_down.png"
+											Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 											Margin="-30 0 0 0"
 											Panel.ZIndex="2"/>
 										<!--ADRESA-->
 										<Button x:Name="btnZFilUlica"
 											Content="Adresa"
 											Width="160" 
-											Click="btn_OFil_Adresa_Click"/>
+											Click="btn_ZFil_Adresa_Click"/>
 										<Image x:Name="img_ZFil_Ulica_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--GRAD-->
@@ -329,7 +333,7 @@
 											Width="110" 
 											Click="btn_ZFil_Grad_Click"/>
 										<Image x:Name="img_ZFil_Grad_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--DRZAVA-->
@@ -338,7 +342,7 @@
 											Width="115" 
 											Click="btn_ZFil_Drzava_Click"/>
 										<Image x:Name="img_ZFil_Drzava_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 										<!--PERIOD OTV-->
@@ -347,7 +351,7 @@
 											Width="140" 
 											Click="btn_ZFil_PerOtv_Click"/>
 										<Image x:Name="img_ZFil_PerOtv_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 									</StackPanel>

@@ -40,6 +40,27 @@
     <Compile Update="Views\Worker\Admin\AdminMainView.xaml.cs">
       <SubType>Code</SubType>
     </Compile>
+    <Compile Update="Views\Worker\Bibliotekar\BibAutorWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\Bibliotekar\BibIzdKucaWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\Bibliotekar\BibIzdMagazineWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\Bibliotekar\BibIzdNewsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\Bibliotekar\BibMagazineWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\Bibliotekar\BibNewsWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Update="Views\Worker\Bibliotekar\BibSuLWindow.xaml.cs">
+      <SubType>Code</SubType>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Page Update="MainWindow.xaml">
@@ -76,6 +97,27 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Update="Views\Worker\Admin\AdminMainView.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\Bibliotekar\BibAutorWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\Bibliotekar\BibIzdKucaWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\Bibliotekar\BibIzdMagazineWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\Bibliotekar\BibIzdNewsWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\Bibliotekar\BibMagazineWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\Bibliotekar\BibNewsWindow.xaml">
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Update="Views\Worker\Bibliotekar\BibSuLWindow.xaml">
       <SubType>Designer</SubType>
     </Page>
   </ItemGroup>

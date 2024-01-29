@@ -1,50 +1,3 @@
-/*
-if OBJECT_ID(N'dbo.IzmenaIzdKuce', N'U') is not null drop table IzmenaIzdKuce;
-if OBJECT_ID(N'dbo.IzmenaIzdSStiva', N'U') is not null drop table IzmenaIzdSStiva;
-if OBJECT_ID(N'dbo.IzSStivaIzdKuca', N'U') is not null drop table IzSStivaIzdKuca;
-if OBJECT_ID(N'dbo.IzSStivaJezik', N'U') is not null drop table IzSStivaJezik;
-if OBJECT_ID(N'dbo.IzmenaSStiva', N'U') is not null drop table IzmenaSStiva;
-if OBJECT_ID(N'dbo.IzmenaAutora', N'U') is not null drop table IzmenaAutora;
-if OBJECT_ID(N'dbo.RasporedjenBibliotekar', N'U') is not null drop table RasporedjenBibliotekar;
-if OBJECT_ID(N'dbo.IzmenaLokala', N'U') is not null drop table IzmenaLokala;
-if OBJECT_ID(N'dbo.IzKnjigeIzdKuca', N'U') is not null drop table IzKnjigeIzdKuca;
-if OBJECT_ID(N'dbo.IzKnjigeZanr', N'U') is not null drop table IzKnjigeZanr;
-if OBJECT_ID(N'dbo.IzKnjigeJezik', N'U') is not null drop table IzKnjigeJezik;
-if OBJECT_ID(N'dbo.IzKnjigeAutor', N'U') is not null drop table IzKnjigeAutor;
-if OBJECT_ID(N'dbo.IzmenaKnjige', N'U') is not null drop table IzmenaKnjige;
-if OBJECT_ID(N'dbo.IzdSStivoULokalu', N'U') is not null drop table IzdSStivoULokalu;
-if OBJECT_ID(N'dbo.IzdanjeSStiva', N'U') is not null drop table IzdanjeSStiva;
-if OBJECT_ID(N'dbo.IzdajeSStivo', N'U') is not null drop table IzdajeSStivo;
-if OBJECT_ID(N'dbo.SStivoNaJeziku', N'U') is not null drop table SStivoNaJeziku;
-if OBJECT_ID(N'dbo.SerijskoStivo', N'U') is not null drop table SerijskoStivo;
-if OBJECT_ID(N'dbo.Periodicnost', N'U') is not null drop table Periodicnost;
-if OBJECT_ID(N'dbo.KnjigaULokalu', N'U') is not null drop table KnjigaULokalu;
-if OBJECT_ID(N'dbo.IzdajeKnjigu', N'U') is not null drop table IzdajeKnjigu;
-if OBJECT_ID(N'dbo.KnjigaNaJeziku', N'U') is not null drop table KnjigaNaJeziku;
-if OBJECT_ID(N'dbo.PripadaZanru', N'U') is not null drop table PripadaZanru;
-if OBJECT_ID(N'dbo.Pise', N'U') is not null drop table Pise;
-if OBJECT_ID(N'dbo.Knjiga', N'U') is not null drop table Knjiga;
-if OBJECT_ID(N'dbo.Autor', N'U') is not null drop table Autor;
-if OBJECT_ID(N'dbo.Jezik', N'U') is not null drop table Jezik;
-if OBJECT_ID(N'dbo.Zanr', N'U') is not null drop table Zanr;
-if OBJECT_ID(N'dbo.Format', N'U') is not null drop table Format;
-if OBJECT_ID(N'dbo.KurirKoristiNalog', N'U') is not null drop table KurirKoristiNalog;
-if OBJECT_ID(N'dbo.BibliotekarKoristiNalog', N'U') is not null drop table BibliotekarKoristiNalog;
-if OBJECT_ID(N'dbo.AdminKoristiNalog', N'U') is not null drop table AdminKoristiNalog;
-if OBJECT_ID(N'dbo.Bibliotekar', N'U') is not null drop table Bibliotekar;
-if OBJECT_ID(N'dbo.Kurir', N'U') is not null drop table Kurir;
-if OBJECT_ID(N'dbo.Admin', N'U') is not null drop table Admin;
-if OBJECT_ID(N'dbo.KorisnickiNalog', N'U') is not null drop table KorisnickiNalog;
-if OBJECT_ID(N'dbo.Biblikutak', N'U') is not null drop table Biblikutak;
-if OBJECT_ID(N'dbo.IzdKuca', N'U') is not null drop table IzdKuca;
-if OBJECT_ID(N'dbo.Lokacija', N'U') is not null drop table Lokacija;
-if OBJECT_ID(N'dbo.MestoUDrzavi', N'U') is not null drop table MestoUDrzavi;
-if OBJECT_ID(N'dbo.Mesto', N'U') is not null drop table Mesto;
-if OBJECT_ID(N'dbo.Drzava', N'U') is not null drop table Drzava;
-if OBJECT_ID(N'dbo.Adresa', N'U') is not null drop table Adresa;
-*/
-
-/* LOKACIJA */
 create table Mesto(
 	PosBr int not null,
 	NazivMesta varchar(MAX) not null,
@@ -96,6 +49,7 @@ create table IzdKuca(
 	Broj varchar(50) not null,
 	PosBr int not null,
 	OZND varchar(4) not null,
+	DatZat date,
 
 	constraint IK_PK primary key (IDIK),
 
@@ -242,6 +196,7 @@ create table Autor(
 	DatRodj date,
 	Biografija varchar(MAX),
 	Drzava varchar(4),
+	DatBrisanja date,
 
 	constraint AUTOR_PK primary key (IDAutor),
 
@@ -259,6 +214,7 @@ create table Knjiga(
 	Korice int,
 	Ograniceno int,
 	Format varchar(50),
+	DatBrisanja date,
 
 	constraint KNJIGA_PK primary key (IDKnjiga),
 
@@ -310,7 +266,8 @@ create table KnjigaULokalu(
 	IDKnjiga int not null,
 	IDBK int not null,
 	DatVrIzmene datetime not null,
-	Koilcina int not null,
+	Kolicina int not null,
+	DatBrisanja date,
 
 	constraint KUL_PK primary key (IDKnjiga, IDBK, DatVrIzmene),
 	
@@ -332,6 +289,7 @@ create table SerijskoStivo(
 	TipStiva int not null,
 	Format varchar(50),
 	Period varchar(50),
+	DatBrisanja date,
 
 	constraint SSTIVO_PK primary key (IDSStivo),
 
@@ -364,6 +322,7 @@ create table IzdanjeSStiva(
 	BrIzd int not null,
 	DatIzd date not null,
 	Cena decimal(10,2) not null,
+	DatBrisanja date,
 
 	constraint ISS_PK primary key (IDSStivo, BrIzd),
 
@@ -375,7 +334,8 @@ create table IzdSStivoULokalu(
 	BrIzd int not null,
 	IDBK int not null,
 	DatVrIzmene datetime not null,
-	Koilcina int not null,
+	Kolicina int not null,
+	DatBrisanja date,
 
 	constraint SSUL_PK primary key (IDSStivo, BrIzd, IDBK, DatVrIzmene),
 	
@@ -424,6 +384,7 @@ create table IzmenaKnjige(
 	Korice int,
 	Ograniceno int,
 	Format varchar(50),
+	DatBrisanja date,
 
 	constraint IZKNJIGA_PK primary key (IDKnjiga, IDBib, DatVr),
 	
@@ -489,6 +450,7 @@ create table IzmenaAutora(
 	DatRodj date,
 	Biografija varchar(MAX),
 	Drzava varchar(4),
+	DatBrisanja date,
 
 	constraint IZA_PK primary key (IDAutor, IDBib, DatVr),
 
@@ -505,6 +467,7 @@ create table IzmenaSStiva(
 	TipStiva int,
 	Format varchar(50),
 	Period varchar(50),
+	DatBrisanja date,
 
 	constraint IZSS_PK primary key (IDSStivo, IDBib, DatVr),
 
@@ -545,6 +508,7 @@ create table IzmenaIzdSStiva(
 	DatVr datetime not null,
 	DatIzd date,
 	Cena decimal(10,2),
+	DatBrisanja date,
 
 	constraint IZISS_PK primary key (IDSStivo, BrIzd, IDBib, DatVr),
 
@@ -561,7 +525,7 @@ create table IzmenaIzdKuce(
 	Broj varchar(50),
 	PosBr int,
 	OZND varchar(4),
-	
+	DatZat date,
 
 	constraint IZIK_PK primary key (IDIK, IDBib, DatVr),
 

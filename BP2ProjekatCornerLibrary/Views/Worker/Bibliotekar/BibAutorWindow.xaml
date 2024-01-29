@@ -1,0 +1,306 @@
+﻿<Window x:Class="BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar.BibAutorWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar"
+        mc:Ignorable="d"
+                    MinHeight="700" Width="1325">
+
+	<Grid>
+		<Grid x:Name="view_select" Visibility="Collapsed">
+			<StackPanel Orientation="Vertical">
+				<Grid x:Name="grd_TopBar" 
+                  Height="100">
+					<Grid.RowDefinitions>
+						<RowDefinition Height="95"/>
+						<RowDefinition Height="5"/>
+					</Grid.RowDefinitions>
+					<Grid x:Name="grd_TopBar_Content">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="50*"/>
+							<ColumnDefinition Width="50*"/>
+						</Grid.ColumnDefinitions>
+						<Label FontSize="40" FontWeight="Bold" Content="Odabir autora:"/>
+						<Button x:Name="btn_Add_Autor"
+                        Grid.Column="1"
+                        HorizontalAlignment="Right"
+                        Margin="10"
+                        Width="150"
+                        Height="60"
+                        FontSize="22"
+                        Content="Dodaj autora"
+								Click="btn_Add_Autor_Click"/>
+					</Grid>
+					<Grid Background="DarkGray"
+                      Grid.Row="1"/>
+				</Grid>
+				<StackPanel x:Name="sp_ListaKnjiga"
+                        Height="550">
+					<Grid Panel.ZIndex="1" Margin="1 0 1 0" Height="25">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="5*" MinWidth="150"/>
+							<ColumnDefinition Width="5*" MinWidth="150"/>
+							<ColumnDefinition Width="1*" MinWidth="120"/>
+							<ColumnDefinition Width="15*" MinWidth="150"/>
+							<ColumnDefinition Width="5*" MaxWidth="180"/>
+						</Grid.ColumnDefinitions>
+						<!--NAZIV-->
+						<Button x:Name="btn_sort_ime"
+									Content="Ime"
+                                    Grid.Column="0"
+								Click="btn_sort_ime_Click"/>
+						<Image x:Name="img_sort_ime" 
+									Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
+                           Grid.Column="0"
+                           HorizontalAlignment="Right"
+									Panel.ZIndex="2"/>
+						<!--JEZICI-->
+						<Button x:Name="btn_sort_prezime"
+									Content="Prezime"
+									Grid.Column="1" 
+								Click="btn_sort_prezime_Click"/>
+						<Image x:Name="img_sort_prezime" 
+								   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
+                           Grid.Column="1"
+                           HorizontalAlignment="Right"
+								   Panel.ZIndex="2"/>
+						<!--FORMAT-->
+						<Button x:Name="btn_sort_datRodj"
+									Content="Dat. rođenja"
+									Grid.Column="2" 
+								Click="btn_sort_datRodj_Click"/>
+						<Image x:Name="img_sort_datRodj" 
+								   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
+                           Grid.Column="2"
+                           HorizontalAlignment="Right"
+								   Panel.ZIndex="2"/>
+						<!--IZD KUCE-->
+						<Button x:Name="btn_sort_biografija"
+									Content="Biografija"
+									Grid.Column="3"/>
+						<!--PERIOD-->
+						<Button x:Name="btn_sort_drzava"
+						Content="Država porekla"
+						Grid.Column="4" 
+								Click="btn_sort_drzava_Click"/>
+						<Image x:Name="img_sort_drzava" 
+					   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
+                           HorizontalAlignment="Right"
+                           Grid.Column="4"
+					   Panel.ZIndex="2"/>
+					</Grid>
+
+					<!--New grid design-->
+					<ListView x:Name="Autori"
+							Background="White"
+                            ScrollViewer.HorizontalScrollBarVisibility="Disabled"
+                            Margin="-3 -25 0 0 "
+							  Width="{Binding ActualWidth, ElementName=sp_ListaKnjiga}"
+							  MouseDoubleClick="Autori_MouseDoubleClick">
+
+						<ListView.View>
+							<GridView>
+								<GridViewColumn DisplayMemberBinding="{Binding Ime}" Width="{Binding ActualWidth, ElementName=btn_sort_ime}"/>
+								<GridViewColumn DisplayMemberBinding="{Binding GetPrezime}" Width="{Binding ActualWidth, ElementName=btn_sort_prezime}"/>
+								<GridViewColumn DisplayMemberBinding="{Binding DispDatRodj}" Width="{Binding ActualWidth, ElementName=btn_sort_datRodj}"/>
+								<GridViewColumn DisplayMemberBinding="{Binding Biografija}"  Width="{Binding ActualWidth, ElementName=btn_sort_biografija}"/>
+								<GridViewColumn DisplayMemberBinding="{Binding DispDrzava}" Width="{Binding ActualWidth, ElementName=btn_sort_drzava}"/>
+							</GridView>
+						</ListView.View>
+					</ListView>
+
+					<!--This is the hidden helper Grid which does the resizing -->
+					<Grid Visibility="Hidden">
+						<Grid.ColumnDefinitions>
+							<!--Width is bound to width of the first GridViewColumn -->
+							<ColumnDefinition Width="{Binding ActualWidth, ElementName=col1}"/>
+						</Grid.ColumnDefinitions>
+						<Grid.RowDefinitions>
+							<RowDefinition Height="1*"/>
+						</Grid.RowDefinitions>
+						<!--This is the hidden helper Field which is used to bind to, using the "Fill" column of the helper grid-->
+						<Grid Grid.Column="0" x:Name="helperField"/>
+					</Grid>
+
+				</StackPanel>
+			</StackPanel>
+		</Grid>
+		<Grid x:Name="view_edit" Visibility="Visible">
+			<Grid.Resources>
+				<SolidColorBrush x:Key="brush" Color="DarkGray"/>
+			</Grid.Resources>
+			<StackPanel >
+				<Label x:Name="lb_Add_Autor" FontSize="30" Content="Dodaj autora:"/>
+				<Label x:Name="lb_Edit_Autor" FontSize="30" Visibility="Collapsed" Content="Izmeni autora:"/>
+				<Border Grid.Column="1" Grid.Row="0" BorderBrush="{StaticResource brush}" BorderThickness="0 2 0 0">
+					<Grid Margin="20 10" Height="540">
+						<Grid.ColumnDefinitions>
+							<ColumnDefinition Width="1*"/>
+							<ColumnDefinition Width="1*"/>
+						</Grid.ColumnDefinitions>
+
+						<Grid>
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="4*"/>
+								<ColumnDefinition Width="7*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="1*"/>
+								<RowDefinition Height="1*"/>
+								<RowDefinition Height="1*"/>
+								<RowDefinition Height="1*"/>
+							</Grid.RowDefinitions>
+
+							<Label HorizontalContentAlignment="Right"
+						   VerticalContentAlignment="Center"
+						   FontSize="20"
+						   Grid.Row="0" Content="Ime:"/>
+							<Label HorizontalContentAlignment="Right"
+			   VerticalContentAlignment="Center"
+			   FontSize="20"
+			   Grid.Row="1" Content="Prezime:"/>
+							<Label HorizontalContentAlignment="Right"
+			   VerticalContentAlignment="Center"
+			   FontSize="20"
+			   Grid.Row="2"
+						   Content="Datum rođenja:"/>
+							<Label 	HorizontalContentAlignment="Right"
+			   VerticalContentAlignment="Center"
+			   FontSize="20"
+			   Grid.Row="3"
+						   Content="Država porekla:"/>
+
+							<TextBox x:Name="tb_Ime"
+								 VerticalContentAlignment="Center"
+								 FontSize="20"
+								 Margin="3"
+								 MaxHeight="50"
+								 Grid.Column="1"
+								 Grid.Row="0"/>
+							<TextBox x:Name="tb_Prezime"
+								 VerticalContentAlignment="Center"
+								 FontSize="20"
+								 Margin="3"
+								 MaxHeight="50"
+								 Grid.Column="1"
+								 Grid.Row="1"/>
+							<StackPanel Orientation="Horizontal" Grid.Row="2" Grid.Column="1" Margin="3">
+								<TextBox x:Name="tb_Dan" 
+									 FontSize="20"
+									 Width="70"
+									 Height="50"
+									 VerticalContentAlignment="Center"/>
+								<Label FontSize="20" VerticalAlignment="Center">/</Label>
+								<TextBox x:Name="tb_Mesec" 
+									 FontSize="20"
+									 Width="70"
+									 Height="50"
+									 VerticalContentAlignment="Center"/>
+								<Label FontSize="20" VerticalAlignment="Center">/</Label>
+								<TextBox x:Name="tb_Godina" 
+									 FontSize="20"
+									 Width="120"
+									 Height="50"
+									 VerticalContentAlignment="Center"/>
+							</StackPanel>
+							<ComboBox x:Name="cb_Drzava" 
+									FontSize="20"
+									Margin="3"
+									MaxHeight="50"
+									Grid.Row="3"
+									Grid.Column="1"
+									  VerticalContentAlignment="Center"
+									  DisplayMemberPath="NazivDrzave"/>
+						</Grid>
+
+						<Grid Grid.Column="1">
+							<Grid.ColumnDefinitions>
+								<ColumnDefinition Width="2*"/>
+								<ColumnDefinition Width="7*"/>
+							</Grid.ColumnDefinitions>
+							<Grid.RowDefinitions>
+								<RowDefinition Height="1*"/>
+							</Grid.RowDefinitions>
+
+								<Label FontSize="20"
+								   Margin="3"
+								   HorizontalContentAlignment="Right"
+								   VerticalContentAlignment="Center" Content="Biografija:"/>
+
+							<TextBox x:Name="tb_Biografija"
+							 Margin="3"
+							 FontSize="17"
+							 Grid.Column="1"
+							 Grid.Row="1"
+									 TextWrapping="Wrap"/>
+						</Grid>
+
+					</Grid>
+				</Border>
+				<Grid x:Name="grd_Add_Btns" Visibility="Collapsed">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="8*"/>
+						<ColumnDefinition Width="6*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="6*"/>
+						<ColumnDefinition Width="8*"/>
+					</Grid.ColumnDefinitions>
+
+					<Button x:Name="btn_Add_Cancel"
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightGray"
+						Grid.Column="1"
+						Content="Poništi"
+							Click="btn_Add_Cancel_Click"/>
+					<Button x:Name="btn_Add_Confirm"
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightGreen"
+						Grid.Column="3"
+						Content="Dodaj"
+							Click="btn_Add_Confirm_Click"/>
+				</Grid>
+				<Grid x:Name="grd_Edit_Btns">
+					<Grid.ColumnDefinitions>
+						<ColumnDefinition Width="6*"/>
+						<ColumnDefinition Width="6*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="6*"/>
+						<ColumnDefinition Width="1*"/>
+						<ColumnDefinition Width="6*"/>
+						<ColumnDefinition Width="6*"/>
+					</Grid.ColumnDefinitions>
+
+					<Button x:Name="btn_Edit_Cancel"
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightGray"
+						Grid.Column="1"
+						Content="Poništi"
+							Click="btn_Edit_Cancel_Click"/>
+					<Button x:Name="btn_Edit_Delete"
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightCoral"
+						Grid.Column="3"
+						Content="Obriši"
+							Click="btn_Edit_Delete_Click"/>
+					<Button x:Name="btn_Edit_Confirm"
+						Margin="5 0"
+						Height="45"
+						FontSize="30"
+						Background="LightGreen"
+						Grid.Column="5"
+						Content="Sačuvaj"
+							Click="btn_Edit_Confirm_Click"/>
+				</Grid>
+			</StackPanel>
+		</Grid>
+	</Grid>
+</Window>

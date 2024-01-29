@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,21 +28,19 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDKnjiga", "IDBib", "DatVr", "IDIK" };
+        }
+
         public IzKnjigeIzdKuca() : base() { }
 
-        public IzKnjigeIzdKuca(int iDKnjiga, int iDBib, int iDIK)
+        public IzKnjigeIzdKuca(IzmenaKnjige izK, int iDIK) : base() 
         {
-            IDKnjiga = iDKnjiga;
-            IDBib = iDBib;
+            IDKnjiga = izK.IDKnjiga;
+            IDBib = izK.IDBib;
             IDIK = iDIK;
-            DatVr = DateTime.Now;
-        }
-        public IzKnjigeIzdKuca(IzdajeKnjigu i, int idBib) 
-        {
-            IDKnjiga = i.IDKnjiga;
-            IDIK = i.IDIK;
-            DatVr = DateTime.Now;
-            IDBib = idBib;
+            DatVr = izK.DatVr;
         }
     }
 }

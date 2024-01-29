@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -26,6 +26,11 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("IDBK", IDBK),
                 new ClassPropertyValue("DatVr", DatVr)
             };
+        }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDBib", "IDBK", "DatVr", "DatOd", "DatDo" };
         }
 
         public RasporedjenBibliotekar() : base() { }

@@ -1,6 +1,8 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
+using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models;
 using BP2ProjekatCornerLibrary.Models.NonContext;
+using BP2ProjekatCornerLibrary.ViewModel;
 using BP2ProjekatCornerLibrary.Views.Shared;
 using System;
 using System.Collections.Generic;
@@ -22,9 +24,10 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     /// <summary>
     /// Interaction logic for AdminEditWorkerWindow.xaml
     /// </summary>
-    public partial class AdminEditWorkerWindow : Window, iDynamicListView
+    public partial class AdminEditWorkerWindow : Window, iDynamicListView, iSortedListView
     {
         private iDynamicListView _caller;
+        private bool _quitAfterSave;
         private bool _blockEvents = false;
         private Radnik _selectedWorker;
         private Mesto _selectedMesto;
@@ -43,19 +46,29 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         private string GetMesto { get => cbMesto.Text; }
         private string GetOZND { get => (cbDrzava.SelectedItem as Drzava).OZND; }
         private string GetDrzava { get => cbDrzava.Text; }
+        public List<Image> Arrows { get; set; }
+
         private bool _passwordChanged = false;
         private bool _usernameChanged = false;
 
-        public AdminEditWorkerWindow(iDynamicListView caller = null, int selectedID = -1, TipRadnika tip = TipRadnika.Bibliotekar)
+        public AdminEditWorkerWindow(iDynamicListView caller = null, int selectedID = -1, iTipRadnika tip = iTipRadnika.Bibliotekar, bool quitAfterSave = false)
         {
             _caller = caller;
+            _quitAfterSave = quitAfterSave;
             InitializeComponent();
-
+            Arrows = new List<Image>
+            {
+                img_Ime_Sort,
+                img_Prezime_Sort,
+                img_Username_Sort,
+                img_DatZap_Sort,
+                img_Tip_Sort
+            };
             RefreshLists();
 
             if (selectedID > 0)
             {
-                if (tip == TipRadnika.Bibliotekar)
+                if (tip == iTipRadnika.Bibliotekar)
                 {
                     _selectedWorker = DBHelper.GetBibliotekar(selectedID);
                     SetUpInputFields(MakeRadnikView(_selectedWorker));
@@ -71,11 +84,13 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             {
                 SetSelect();
             }
+            _quitAfterSave = quitAfterSave;
         }
         #region Common
         public void RefreshLists()
         {
             _blockEvents = true;
+            DisableAllArrows();
             FillWorkerList();
             InitDrzavaCB();
             InitMestoCB();
@@ -94,7 +109,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             SelectView.Visibility = Visibility.Visible;
         }
 
-        private void SetUpInputFields(RadnikView rv)
+        private void SetUpInputFields(ViewRadnik rv)
         {
             if (rv == null) return;
 
@@ -130,20 +145,20 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         {
             ZaposleniRadnici.Items.Clear();
 
-            foreach (Radnik r in DBHelper.GetAllWorkers())
+            foreach (Radnik r in DBHelper.GetAllEmployedWorkers())
             {
                 ZaposleniRadnici.Items.Add(MakeRadnikView(r));
             }
         }
-        private RadnikView MakeRadnikView(Radnik r)
+        private ViewRadnik MakeRadnikView(Radnik r)
         {
             KorisnickiNalog nalog = null;
-            if (r.GetType() == typeof(Bibliotekar))
+            if (r.GetType() == typeof(Models.Bibliotekar))
                 nalog = DBHelper.GetBibNalog(r.IDRadnik);
             else if (r.GetType() == typeof(Kurir))
                 nalog = DBHelper.GetKurirNalog(r.IDRadnik);
 
-            return new RadnikView(r.IDRadnik, r.Ime, r.Prezime, nalog.KorisnickoIme, r.DatRodj, r.DatZap, nalog.TipNaloga, r.Ulica, r.Broj, r.PosBr, r.OZND);
+            return new ViewRadnik(r.IDRadnik, r.Ime, r.Prezime, nalog.KorisnickoIme, r.DatRodj, r.DatZap, nalog.TipNaloga, r.Ulica, r.Broj, r.PosBr, r.OZND);
         }
         #endregion
 
@@ -219,39 +234,38 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             if (!DBHelper.AddLokacija(new Adresa(GetUlica, GetBroj), new Mesto(GetPosBr, GetMesto), new Drzava(GetOZND, GetDrzava)))
             {
                 MessageBox.Show("Došlo je do greške pri ažuriranju lokacije!");
-                Close();
                 return;
             }
             if (_usernameChanged && nalog.KorisnickoIme != GetUsername)
             {
-                if(!DBHelper.UpdateUsername(nalog.KorisnickoIme, GetUsername))
+                if (!DBHelper.UpdateUsername(nalog.KorisnickoIme, GetUsername))
                 {
                     MessageBox.Show("Došlo je do greške pri ažuriranju korisničkog imena!");
-                    Close();
                     return;
                 }
             }
             if (!DBHelper.UpdateAccount(nalog))
             {
                 MessageBox.Show("Došlo je do greške pri ažuriranju naloga!");
-                Close();
                 return;
             }
             if (!DBHelper.UpdateWorker(_selectedWorker))
             {
                 MessageBox.Show("Došlo je do greške pri ažuriranju korisnika!");
-                Close();
                 return;
             }
 
             MessageBox.Show("Uspešno ste izmenili radnika!");
             _caller.RefreshLists();
-            Close();
+
+            if (_quitAfterSave) Close();
+            else SetSelect();
         }
 
         private void btn_Cancel_Click(object sender, RoutedEventArgs e)
         {
-            SetSelect();
+            if (_quitAfterSave) Close();
+            else SetSelect();
         }
 
         private void btn_Delete_Click(object sender, RoutedEventArgs e)
@@ -262,13 +276,16 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
             {
                 MessageBox.Show("Uspešno ste obrisali radnika!");
                 _caller.RefreshLists();
-                Close();
+
+                if (_quitAfterSave) Close();
+                else SetSelect();
             }
             else
             {
                 MessageBox.Show("Došlo je do greške pri čuvanju podataka!");
-                Close();
+                
             }
+
         }
         private bool ValidateInputFields()
         {
@@ -278,9 +295,9 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
                 Validator.Day(GetDan) &&
                 Validator.Month(GetMesec) &&
                 Validator.Year(GetGodina) &&
-                Validator.Street(GetUlica) &&
+                Validator.StreetName(GetUlica) &&
                 Validator.StreetNumber(GetBroj) &&
-                Validator.Date(GetDan,GetMesec, GetGodina)
+                Validator.Date(GetDan, GetMesec, GetGodina)
                 );
         }
         #endregion
@@ -290,7 +307,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         #region SELECT VIEW
         private void ZaposleniRadnici_MouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
-            RadnikView rv = ZaposleniRadnici.SelectedItem as RadnikView;
+            ViewRadnik rv = ZaposleniRadnici.SelectedItem as ViewRadnik;
 
             SetUpInputFields(rv);
 
@@ -300,29 +317,69 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
         }
 
         #region Sorting
+        private List<ViewRadnik> GetAllRadniksFromList()
+        {
+            List<ViewRadnik> ret = new List<ViewRadnik>();
+            foreach (var j in ZaposleniRadnici.Items) ret.Add(j as ViewRadnik);
+            return ret;
+        }
+        private void SortRadnikString(string param, bool ascending)
+        {
+            List<ViewRadnik> toSort = GetAllRadniksFromList();
+            ZaposleniRadnici.Items.Clear();
+            foreach (ViewRadnik j in Sorter.SortText<ViewRadnik>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
+        }
+        private void SortRadnikDate(string param, bool ascending)
+        {
+            List<ViewRadnik> toSort = GetAllRadniksFromList();
+            ZaposleniRadnici.Items.Clear();
+            foreach (ViewRadnik j in Sorter.SortDateString<ViewRadnik>(toSort, param, ascending)) ZaposleniRadnici.Items.Add(j);
+        }
+        private bool s_ime = false;
         private void btn_Ime_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            s_ime = !s_ime;
+            SetArrow(img_Ime_Sort, s_ime);
+            SortRadnikString("Ime", s_ime);
         }
-
+        private bool s_prez = false;
         private void btn_Prezime_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            s_prez = !s_prez;
+            SetArrow(img_Prezime_Sort, s_prez);
+            SortRadnikString("Prezime", s_prez);
         }
-
+        private bool s_user = false;
         private void btn_Username_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            s_user = !s_user;
+            SetArrow(img_Username_Sort, s_user);
+            SortRadnikString("Username", s_user);
         }
-
+        private bool s_tip = false;
         private void btn_Tip_Sort_Click(object sender, RoutedEventArgs e)
         {
-
+            s_tip = !s_tip;
+            SetArrow(img_Tip_Sort, s_tip);
+            SortRadnikString("TipStr", s_tip);
         }
-
+        private bool s_dat = false;
         private void btn_DatZap_Sort_Click(object sender, RoutedEventArgs e)
         {
+            s_dat = !s_dat;
+            SetArrow(img_DatZap_Sort, s_dat);
+            SortRadnikDate("DatZapStr", s_dat);
+        }
 
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
+
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
         }
 
         #endregion

@@ -19,7 +19,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
     /// <summary>
     /// Interaction logic for AdminEditZanrWindow.xaml
     /// </summary>
-    public partial class AdminEditZanrWindow : Window, iDynamicListView
+    public partial class AdminEditZanrWindow : Window, iDynamicListView, iSortedListView
     {
         private Zanr selectedZanr;
         public AdminEditZanrWindow()
@@ -208,14 +208,44 @@ namespace BP2ProjekatCornerLibrary.Views.Worker
 
 
         #region Sorting
-        private void btn_OZN_Sort_Click(object sender, RoutedEventArgs e)
+        private List<Zanr> GetAllZanroviFromList()
         {
-
+            List<Zanr> ret = new List<Zanr>();
+            foreach (var j in Zanrovi.Items) ret.Add(j as Zanr);
+            return ret;
+        }
+        private void SortZanrString(string param, bool ascending)
+        {
+            List<Zanr> toSort = GetAllZanroviFromList();
+            Zanrovi.Items.Clear();
+            foreach (Zanr j in Sorter.SortText<Zanr>(toSort, param, ascending)) Zanrovi.Items.Add(j);
         }
 
+
+        private bool s_ozn_asc = false;
+        private void btn_OZN_Sort_Click(object sender, RoutedEventArgs e)
+        {
+            s_ozn_asc = !s_ozn_asc;
+            SetArrow(img_OZN_Sort, s_ozn_asc);
+            SortZanrString("OZNZ", s_ozn_asc);
+        }
+        private bool s_naz_asc = false;
         private void btn_Naziv_Sort_Click(object sender, RoutedEventArgs e)
         {
+            s_naz_asc = !s_naz_asc;
+            SetArrow(img_Naziv_Sort, s_naz_asc);
+            SortZanrString("NazivZanra", s_naz_asc);
+        }
+        public List<Image> Arrows { get; set; }
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
 
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
         }
         #endregion
 

@@ -5,10 +5,10 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Worker"
         mc:Ignorable="d"
-        Title="AdminEditWorkerWindow" Height="530" Width="600">
+		Height="530" Width="600">
 	<Grid>
 		<!--SELECTION VIEW-->
-		<Grid Name="SelectView" Visibility="Hidden">
+		<Grid Name="SelectView" Visibility="Visible">
 			<StackPanel Orientation="Vertical">
 				<!--SORT BUTTONS-->
 				<StackPanel Orientation="Horizontal" 
@@ -20,7 +20,7 @@
 											Content="Ime"
 											Width="110" Click="btn_Ime_Sort_Click"/>
 					<Image x:Name="img_Ime_Sort" 
-											Source="..\..\..\Images\arrow_down.png"
+											Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 											Margin="-30 0 0 0"
 											Panel.ZIndex="2"/>
 					<!--PREZIME-->
@@ -28,7 +28,7 @@
 											Content="Prezime"
 											Width="130" Click="btn_Prezime_Sort_Click"/>
 					<Image x:Name="img_Prezime_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 					<!--USERNAME-->
@@ -36,7 +36,7 @@
 											Content="Korisničko ime"
 											Width="120" Click="btn_Username_Sort_Click"/>
 					<Image x:Name="img_Username_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 					<!--TIP-->
@@ -44,7 +44,7 @@
 											Content="Tip radnika"
 											Width="120" Click="btn_Tip_Sort_Click"/>
 					<Image x:Name="img_Tip_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 					<!--DAT ZAP-->
@@ -52,7 +52,7 @@
 											Content="Datum zap."
 											Width="100 " Click="btn_DatZap_Sort_Click"/>
 					<Image x:Name="img_DatZap_Sort" 
-										   Source="..\..\..\Images\arrow_down.png"
+										   Source="..\..\..\Images\arrow_down.png" IsHitTestVisible="False"
 										   Margin="-30 0 0 0"
 										   Panel.ZIndex="2"/>
 				</StackPanel>
@@ -71,8 +71,8 @@
 							<GridViewColumn Width="110" DisplayMemberBinding="{Binding Ime}"/>
 							<GridViewColumn Width="130" DisplayMemberBinding="{Binding Prezime}" />
 							<GridViewColumn Width="120" DisplayMemberBinding="{Binding Username}" />
-							<GridViewColumn Width="120" DisplayMemberBinding="{Binding Tip}" />
-							<GridViewColumn Width="105" DisplayMemberBinding="{Binding DatZap}" />
+							<GridViewColumn Width="120" DisplayMemberBinding="{Binding GetTip}" />
+							<GridViewColumn Width="105" DisplayMemberBinding="{Binding DatZapStr}" />
 						</GridView>
 					</ListView.View>
 				</ListView>
@@ -80,7 +80,7 @@
 		</Grid>
 
 		<!--EDIT VIEW-->
-		<Grid Name="EditView" Visibility="Visible">
+		<Grid Name="EditView" Visibility="Collapsed">
 
 			<StackPanel Orientation="Vertical" Margin="0,0,0,-16">
 				<Label FontSize="30">Izmeni radnika</Label>

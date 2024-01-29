@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -16,9 +16,10 @@ namespace BP2ProjekatCornerLibrary.Models
         public int IDSStivo { get; set; }
         public int BrIzd { get; set; }
         [Required]
-        public DataType DatIzd { get; set; }
+        public DateTime DatIzd { get; set; }
         [Required]
         public decimal Cena { get; set; }
+        public DateTime? DatBrisanja { get; set; }
         public override List<ClassPropertyValue> GetKeyProperties()
         {
             return new List<ClassPropertyValue>
@@ -28,6 +29,18 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDSStivo", "BrIzd", "DatIzd", "Cena", "DatBrisanja"};
+        }
+
         public IzdanjeSStiva() : base() { }
-}
+        public IzdanjeSStiva(int iDSStivo, int brIzd, DateTime datIzd, decimal cena) : base()
+        {
+            IDSStivo = iDSStivo;
+            BrIzd = brIzd;
+            DatIzd = datIzd;
+            Cena = cena;
+        }
+    }
 }

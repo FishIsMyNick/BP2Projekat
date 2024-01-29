@@ -1,5 +1,6 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
 using BP2ProjekatCornerLibrary.Models;
+using BP2ProjekatCornerLibrary.Views.Worker.Bibliotekar;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,127 +17,65 @@ using System.Windows.Shapes;
 
 namespace BP2ProjekatCornerLibrary.Views.Worker
 {
-	/// <summary>
-	/// Interaction logic for BibliotekarMainView.xaml
-	/// </summary>
-	public partial class BibliotekarMainView : Window
-	{
-		//private MockDB mockDB;
-		private int _currentUser;
-		public BibliotekarMainView(Bibliotekar bibliotekar)
-		{
+    /// <summary>
+    /// Interaction logic for BibliotekarMainView.xaml
+    /// </summary>
+    public partial class BibliotekarMainView : Window
+    {
+        private int _currentUser;
+        public BibliotekarMainView(Models.Bibliotekar bibliotekar)
+        {
+            InitializeComponent();
 
-			//mockDB = new MockDB();
+            _currentUser = bibliotekar.IDRadnik;
+            DBHelper._currentUserID = _currentUser;
+            lbUsername.Content = DBHelper.GetBibNalog(_currentUser).KorisnickoIme;
+        }
 
-			InitializeComponent();
+        private void btn_Close_Click(object sender, RoutedEventArgs e)
+        {
+            Close();
+        }
 
-			_currentUser = bibliotekar.IDRadnik;
-			lbUsername.Content = DBHelper.GetBibNalog(_currentUser).KorisnickoIme;
+        #region BUTTONS
+        private void btn_Book_Click(object sender, RoutedEventArgs e)
+        {
+            Window BookWindow = new BibBookWindow(_currentUser);
+            BookWindow.ShowDialog();
+        }
 
-			//lbUsername.Content = bibliotekar.KorisnickoIme;
-            //lbUsername.Content = "placeholder";
-		}
-				
+        private void btn_News_Click(object sender, RoutedEventArgs e)
+        {
+            Window newsWindow = new BibNewsWindow(_currentUser);
+            newsWindow.ShowDialog();
+        }
 
-		private void btnGetReservations_Click(object sender, RoutedEventArgs e)
-		{
-			//Clan clan = null;
-			//if (CheckCardID(out clan))
-			//{
-			//	BibUserReservations bibUserReservations = new BibUserReservations(clan);
+        private void btn_Autor_Click(object sender, RoutedEventArgs e)
+        {
+            Window autorWindow = new BibAutorWindow(_currentUser);
+            autorWindow.ShowDialog();
+        }
 
-			//	bibUserReservations.ShowDialog();
-			//}
-		}
+        private void btn_Magazine_Click(object sender, RoutedEventArgs e)
+        {
+            Window magWindow = new BibMagazineWindow(_currentUser);
+            magWindow.ShowDialog();
+        }
 
-		private void btnKredit_Click(object sender, RoutedEventArgs e)
-		{
-			//Clan clan = null;
-			//if (CheckCardID(out clan))
-			//{
-			//	BibDodajKredit bibKredit = new BibDodajKredit(clan);
+        private void btn_IzdKuca_Click(object sender, RoutedEventArgs e)
+        {
+            Window ikWindow = new BibIzdKucaWindow(_currentUser); 
+            ikWindow.ShowDialog();
+        }
 
-			//	bibKredit.ShowDialog();
-			//	Console.WriteLine();
-			//}
-		}
 
-		private void btnAddUser_Click(object sender, RoutedEventArgs e)
-		{
-			BibAddUserWindow bibAddUserWindow = new BibAddUserWindow();
-			bibAddUserWindow.ShowDialog();
-		}
+        private void btn_SuL_Click(object sender, RoutedEventArgs e)
+        {
+            Window sulWindow = new BibSuLWindow(_currentUser);
+            sulWindow.ShowDialog();
+        }
 
-		private void btnExtendMembership_Click(object sender, RoutedEventArgs e)
-		{
-			//Clan clan = null;
-			//if (CheckCardID(out clan))
-			//{
-			//	if (DBHelper.ExtendMembership(DBHelper.GetCard((int)clan.BrKartice)) == iDbResult.Success)
-			//	{
-			//		MessageBox.Show("Uspešno produžena članarina!");
-			//	}
-			//}
-		}
+        #endregion
 
-		private void btnRazduzi_Click(object sender, RoutedEventArgs e)
-		{
-			//Clan clan = null;
-			//if (CheckCardID(out clan))
-			//{
-			//	if (DBHelper.DeleteReservations(DBHelper.GetReservations(clan.Id)) == iDbResult.Success)
-			//		MessageBox.Show("Uspešno razdužen član!");
-			//	else
-			//		MessageBox.Show("Došlo je do neočekivane greške!");
-			//}
-		}
-
-		private void btnAddBook_Click(object sender, RoutedEventArgs e)
-		{
-			BibAddBookWindow bibAddBookWindow = new BibAddBookWindow(_currentUser);
-			bibAddBookWindow.ShowDialog();
-		}
-
-		private void btnAddNews_Click(object sender, RoutedEventArgs e)
-		{
-			BibAddNewsWindow bibAddNewsWindow = new BibAddNewsWindow();
-			bibAddNewsWindow.ShowDialog();
-		}
-
-		private void btnAddMagazin_Click(object sender, RoutedEventArgs e)
-		{
-			BibAddMagazinWindow addMagazinWindow = new BibAddMagazinWindow();
-			addMagazinWindow.ShowDialog();
-		}
-
-		private void btnAddBookInStore_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
-		private void btnAddNewsInStore_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
-		private void btnAddMagazinInStore_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
-		private void btnRemoveBookInStore_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
-		private void btnRemoveNewsInStore_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-
-		private void btnRemoveMagazineInStore_Click(object sender, RoutedEventArgs e)
-		{
-
-		}
-	}
+    }
 }

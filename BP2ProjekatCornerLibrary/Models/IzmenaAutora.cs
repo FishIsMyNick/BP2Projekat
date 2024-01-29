@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -21,6 +21,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public DateTime? DatRodj { get; set; }
         public string? Biografija { get; set; }
         public string? Drzava { get; set; }
+        public DateTime? DatBrisanja { get; set; }
         public override List<ClassPropertyValue> GetKeyProperties()
         {
             return new List<ClassPropertyValue>
@@ -29,6 +30,11 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("IDBib", IDBib),
                 new ClassPropertyValue("DatVr", DatVr)
             };
+        }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDAutor", "IDBib", "DatVr", "Ime", "Prezime", "DatRodj", "Biografija", "Drzava", "DatBrisanja" };
         }
 
         public IzmenaAutora() : base() { }
@@ -44,19 +50,17 @@ namespace BP2ProjekatCornerLibrary.Models
             Drzava = drzava;
             DatVr = DateTime.Now;
         }
-        public IzmenaAutora(Autor a, int bibID)
+        public IzmenaAutora(Autor newAutor, int bibID)
         {
-            IDAutor = a.IDAutor;
+            IDAutor = newAutor.IDAutor;
             DatVr = DateTime.Now;
             IDBib = bibID;
 
-            Autor postojeci = DBHelper.GetAutor(a.IDAutor);
-
-            Ime = postojeci.Ime != a.Ime? a.Ime : null;
-            Prezime = postojeci.Prezime != a.Prezime ? a.Prezime : null;
-            DatRodj = postojeci.DatRodj != a.DatRodj ? a.DatRodj : null;
-            Biografija = postojeci.Biografija != a.Biografija ? a.Biografija : null;
-            Drzava = postojeci.Drzava != a.Drzava ? a.Drzava : null;
+            Ime = newAutor.Ime;
+            Prezime = newAutor.Prezime;
+            DatRodj = newAutor.DatRodj;
+            Biografija = newAutor.Biografija;
+            Drzava = newAutor.Drzava;
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,6 +28,12 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("OZND", OZND)
             };
         }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "Ulica", "Broj", "PosBr", "OZND" };
+        }
+
         public Lokacija() : base() { }
 
         public Lokacija(string ulica, string broj, int posBr, string oZND)

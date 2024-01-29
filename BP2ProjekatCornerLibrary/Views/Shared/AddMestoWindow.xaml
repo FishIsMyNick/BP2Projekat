@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:BP2ProjekatCornerLibrary.Views.Shared"
         mc:Ignorable="d"
-		Height="300" Width="500">
+		Height="300" Width="550">
 	<Grid>
 		<Grid Margin="10 20">
 			<Grid.RowDefinitions>

@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using System;
 using System.Collections.Generic;
@@ -36,6 +36,12 @@ namespace BP2ProjekatCornerLibrary.Models
                 new ClassPropertyValue("IDBK", IDBK)
             };
         }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDBK", "Naziv", "DatOtv", "DatZat", "Ulica", "Broj", "PosBr", "OZND" };
+        }
+
         public Biblikutak() : base() { }
 
         public Biblikutak(int iDBK, string naziv, DateTime datOtv, DateTime? datZat, string ulica, string broj, int posBr, string oZND)

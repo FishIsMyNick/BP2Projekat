@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using System;
 using System.Collections.Generic;
@@ -28,6 +28,11 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "KorisnickoIme", "Sifra", "DatKreiranja", "DatZatvaranja", "TipNaloga" };
+        }
+
         public KorisnickiNalog() : base() { }
 
         public KorisnickiNalog(string korisnickoIme, string sifra, DateTime datKreiranja, int tipNaloga)
@@ -39,9 +44,5 @@ namespace BP2ProjekatCornerLibrary.Models
             TipNaloga = tipNaloga;
         }
 
-
-        //public KorisnickiNalog(params ClassPropertyValue[] args) : base(args)
-        //{
-        //}
     }
 }

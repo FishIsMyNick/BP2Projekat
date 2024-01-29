@@ -23,22 +23,15 @@ namespace BP2ProjekatCornerLibrary.Views.Login
     /// </summary>
     public partial class Login : Window
     {
-        //private MockDB Mock;
+
         public Login()
         {
 
             DBHelper.InitializeConnection();
 
-
-            //Mock = new MockDB();
             InitializeComponent();
 
-            TryLogin();
-            //Window window = new AdminMainView();
-            //window.Show();
-            //Close();
         }
-
 
         private void btnLogin_Click(object sender, RoutedEventArgs e)
         {
@@ -50,7 +43,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             string user = tbUsername.Text;
             string hashedPassword = HashHelper.ComputeSha256Hash(pbPasswordHidden.Password);
 
-            if (false)
+            if (true)
             {
                 if (tbUsername.Text == "" || pbPasswordHidden.Password == "")
                 {
@@ -61,7 +54,7 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             else
             {
                 //test
-                user = "bib";
+                user = "admin";
                 hashedPassword = HashHelper.ComputeSha256Hash("pass");
             }
 
@@ -73,6 +66,11 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             if (r == null)
             {
                 MessageBox.Show("Pogrešna kombinacija korisničkog imena i šifre!");
+                return;
+            }
+            else if (r.DatOtp != null)
+            {
+                MessageBox.Show("Korisnički nalog je zatvoren! Pristup Vam nije dozvoljen sa ovim korisničkim nalogom!");
                 return;
             }
 
@@ -123,8 +121,6 @@ namespace BP2ProjekatCornerLibrary.Views.Login
         }
         #endregion
 
-
-
         #region Password
         private void tbPasswordUnmasked_GotFocus(object sender, RoutedEventArgs e)
         {
@@ -143,24 +139,5 @@ namespace BP2ProjekatCornerLibrary.Views.Login
             }
         }
         #endregion
-
-        //#region Show password
-        //private void revealModeCheckBox_Checked(object sender, RoutedEventArgs e)
-        //{
-        //	tbPasswordUnmasked.Text = pbPasswordHidden.Password;
-        //	tbPasswordUnmasked.Foreground = Brushes.Black;
-        //	tbPasswordUnmasked.Visibility = Visibility.Visible;
-        //	pbPasswordHidden.Visibility = Visibility.Hidden;
-        //	tbPasswordUnmasked.Focus();
-        //}
-
-        //private void revealModeCheckBox_Unchecked(object sender, RoutedEventArgs e)
-        //{
-        //	tbPasswordUnmasked.Visibility = Visibility.Hidden;
-        //	pbPasswordHidden.Visibility = Visibility.Visible;
-        //	pbPasswordHidden.Focus();
-        //}
-        //#endregion
-
     }
 }

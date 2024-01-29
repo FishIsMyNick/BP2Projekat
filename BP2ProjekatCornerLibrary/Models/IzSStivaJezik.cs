@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -28,14 +28,19 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDSStivo", "IDBib", "DatVr", "OZNJ" };
+        }
+
         public IzSStivaJezik() : base() { }
 
-        public IzSStivaJezik(int iDSStivo, string oZNJ, int iDBib)
+        public IzSStivaJezik(IzmenaSStiva izSS, string oZNJ) : base()
         {
-            IDSStivo = iDSStivo;
-            IDBib = iDBib;
+            IDSStivo = izSS.IDSStivo;
+            IDBib = izSS.IDBib;
             OZNJ = oZNJ ?? throw new ArgumentNullException(nameof(oZNJ));
-            DatVr = DateTime.Now;
+            DatVr = izSS.DatVr;
         }
     }
 }

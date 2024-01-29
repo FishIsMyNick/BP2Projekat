@@ -52,6 +52,7 @@ insert into Mesto(PosBr, NazivMesta) values
 	;
 
 
+
 insert into Drzava(OZND, NazivDrzave) values
 	('XXX', 'Nepoznato'),
 	('SRB', 'Srbija'),
@@ -60,6 +61,7 @@ insert into Drzava(OZND, NazivDrzave) values
 	('USA', 'Sjedinjene Američke Države'),
 	('ENG', 'Engleska')
 	;
+
 
 insert into Adresa(Ulica, Broj) values
 	('Blagoja Parovića', '9a'),
@@ -93,12 +95,12 @@ insert into Lokacija(Ulica, Broj, PosBr, OZND) values
 	('Slovenska cesta', '33', 1000, 'SLO')
 	;
 
-insert into IzdKuca(Naziv, Ulica, Broj, PosBr, OZND) values
-	('Pingvin', 'Vuka Karadžića', '2', 11000, 'SRB'),
-	('Arhipelag', 'Vuka Karadžića', '2', 11000, 'SRB'),
-	('Abalon', 'Jurija Gararina', '177', 11000, 'SRB'),
-	('Jesenski i Turk', 'Zagrebačka avenija', '44', 10000, 'HRV'),
-	('Beletrina', 'Slovenska cesta', '33', 1000, 'SLO')
+insert into IzdKuca(Naziv, Ulica, Broj, PosBr, OZND, DatZat) values
+	('Pingvin', 'Vuka Karadžića', '2', 11000, 'SRB', NULL),
+	('Arhipelag', 'Vuka Karadžića', '2', 11000, 'SRB', NULL),
+	('Abalon', 'Jurija Gararina', '177', 11000, 'SRB', NULL),
+	('Jesenski i Turk', 'Zagrebačka avenija', '44', 10000, 'HRV', NULL),
+	('Beletrina', 'Slovenska cesta', '33', 1000, 'SLO', NULL)
 	;
 
 insert into Biblikutak(Naziv, DatOtv, DatZat, Ulica, Broj, PosBr, OZND) values
@@ -236,7 +238,7 @@ insert into IzdajeKnjigu(IDKnjiga, IDIK) values
 	(8, 3)
 	;
 
-insert into KnjigaULokalu(IDKnjiga, IDBK, DatVrIzmene, Koilcina) values
+insert into KnjigaULokalu(IDKnjiga, IDBK, DatVrIzmene, Kolicina) values
 	(1, 1, '2022-1-1 14:00:00', 3),	
 	(1, 1, '2022-1-1 14:01:00', 4),	
 	(2, 1, '2022-1-1 14:00:00', 6),	
@@ -310,7 +312,7 @@ insert into IzdanjeSStiva(IDSStivo, BrIzd, DatIzd, Cena) values
 	(3, 6, '2023-7-22', 250.00)
 	;
 
-insert into IzdSStivoULokalu(IDSStivo, BrIzd, IDBK, DatVrIzmene, Koilcina) values
+insert into IzdSStivoULokalu(IDSStivo, BrIzd, IDBK, DatVrIzmene, Kolicina) values
 	(1, 1, 1, '2023-2-1 15:00:00', 2),
 	(1, 2, 1, '2023-2-2 15:00:00', 2),
 	(1, 3, 1, '2023-2-3 15:00:00', 2),

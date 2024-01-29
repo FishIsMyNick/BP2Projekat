@@ -1,5 +1,6 @@
 ﻿using BP2ProjekatCornerLibrary.Helpers;
 using BP2ProjekatCornerLibrary.Models;
+using BP2ProjekatCornerLibrary.Models.NonContext;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,7 +20,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
     /// <summary>
     /// Interaction logic for AdminEditFormatWindow.xaml
     /// </summary>
-    public partial class AdminEditFormatWindow : Window, iDynamicListView
+    public partial class AdminEditFormatWindow : Window, iDynamicListView, iSortedListView
     {
         private Format _selectedFormat;
         private bool _blockEvents;
@@ -27,7 +28,11 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
         {
             InitializeComponent();
 
+            Arrows = new List<Image> { img_Period_Sort };
+
             RefreshLists();
+            ClearInputFields();
+
         }
         public void RefreshLists()
         {
@@ -37,6 +42,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
         }
         private void FillFormatList()
         {
+            DisableAllArrows();
             Formati.Items.Clear();
             foreach (Format f in DBHelper.GetAllFormats())
             {
@@ -58,10 +64,12 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
         }
         private bool CheckEditField()
         {
-            return tb_Edit_Format.Text != _selectedFormat.NazivFormata && tb_Edit_Format.Text != "";
+            if (_selectedFormat == null) return false;
+            return tb_Edit_Format.Text != _selectedFormat.NazivFormata && tb_Edit_Format.Text == "";
         }
         private void SetEditField()
         {
+            tb_Edit_Format.IsEnabled = _selectedFormat != null;
             tb_Edit_Format.Text = _selectedFormat.NazivFormata;
         }
         private void ClearEditField()
@@ -95,6 +103,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
             ClearEditField();
             _blockEvents = true;
             Formati.SelectedItem = null;
+            _selectedFormat = null;
             _blockEvents = false;
         }
         private void btn_Edit_Delete_Click(object sender, RoutedEventArgs e)
@@ -105,7 +114,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
                 return;
             }
             MessageBox.Show("Uspešno ste obrisali format!");
-            ClearEditField() ; RefreshLists();
+            ClearEditField(); RefreshLists();
         }
         #endregion
 
@@ -145,8 +154,28 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
         #endregion
 
         #region SORTING
+        private bool s_format_asc = false;
+
+        public List<Image> Arrows { get; set; }
+
+        public void DisableAllArrows()
+        {
+            ArrowHelper.DisableAllArrows(Arrows);
+        }
+
+        public void SetArrow(Image arrow, bool ascending)
+        {
+            DisableAllArrows();
+            ArrowHelper.SetArrow(arrow, ascending);
+        }
         private void btn_Format_Sort_Click(object sender, RoutedEventArgs e)
         {
+            s_format_asc = !s_format_asc;
+            SetArrow(img_Period_Sort, s_format_asc);
+            List<Format> toSort = new List<Format>();
+            foreach (var k in Formati.Items) toSort.Add(k as Format);
+            Formati.Items.Clear();
+            foreach (Format vk in Sorter.SortText<Format>(toSort, "NazivFormata", s_format_asc)) Formati.Items.Add(vk);
 
         }
         #endregion
@@ -159,6 +188,7 @@ namespace BP2ProjekatCornerLibrary.Views.Worker.Admin
             _selectedFormat = ((ListView)sender).SelectedItem as Format;
             SetEditField();
         }
+
         #endregion
 
     }

@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +20,7 @@ namespace BP2ProjekatCornerLibrary.Models
         public int? TipStiva { get; set; }
         public string? Format { get; set; }
         public string? Period { get; set; }
+        public DateTime? DatBrisanja { get; set; }
 
         public override List<ClassPropertyValue> GetKeyProperties()
         {
@@ -31,19 +32,23 @@ namespace BP2ProjekatCornerLibrary.Models
             };
         }
 
-        public IzmenaSStiva() : base() { }
-        public IzmenaSStiva(SerijskoStivo ss, int idBib) : base()
+        public override List<string> GetDbPropertyNames()
         {
-            IDSStivo = ss.IDSStivo;
+            return new List<string> { "IDSStivo", "IDBib", "DatVr", "Naziv", "TipStiva", "Format", "Period", "DatBrisanja" };
+        }
+
+        public IzmenaSStiva() : base() { }
+        public IzmenaSStiva(SerijskoStivo newSS, int idBib) : base()
+        {
+            IDSStivo = newSS.IDSStivo;
             IDBib = idBib;
             DatVr = DateTime.Now;
 
-            SerijskoStivo postojece = DBHelper.GetSerijskoStivo(IDSStivo);
-
-            Naziv = postojece.Naziv != ss.Naziv ? ss.Naziv : null;
-            TipStiva = postojece.TipStiva != ss.TipStiva ? ss.TipStiva : null;
-            Format = postojece.Format != ss.Format ? ss.Format : null;
-            Period = postojece.Period != ss.Period ? ss.Period : null;
+            Naziv = newSS.Naziv;
+            TipStiva = newSS.TipStiva;
+            Format = newSS.Format;
+            Period = newSS.Period;
+            DatBrisanja = newSS.DatBrisanja;
         }
     }
 }

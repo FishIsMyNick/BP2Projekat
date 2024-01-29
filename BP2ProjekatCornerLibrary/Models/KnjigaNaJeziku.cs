@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -30,6 +30,30 @@ namespace BP2ProjekatCornerLibrary.Models
         {
             this.IDKnjiga = IDKnjiga;
             this.OZNJ = OZNJ;
+        }
+
+        public static bool operator ==(KnjigaNaJeziku obj1, KnjigaNaJeziku obj2)
+        {
+            return (obj1.IDKnjiga == obj2.IDKnjiga
+                        && obj1.OZNJ == obj2.OZNJ);
+        }
+
+        // this is second one '!='
+        public static bool operator !=(KnjigaNaJeziku obj1, KnjigaNaJeziku obj2)
+        {
+            return (obj1.IDKnjiga != obj2.IDKnjiga
+                        && obj1.OZNJ != obj2.OZNJ);
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if (!(obj is KnjigaNaJeziku)) return false;
+            return (obj as KnjigaNaJeziku).IDKnjiga == this.IDKnjiga && (obj as KnjigaNaJeziku).OZNJ == this.OZNJ;
+        }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDKnjiga", "OZNJ" };
         }
     }
 }

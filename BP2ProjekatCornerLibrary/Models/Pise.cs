@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -30,6 +30,17 @@ namespace BP2ProjekatCornerLibrary.Models
         {
             this.IDKnjiga = IDKnjiga;
             this.IDAutor = IDAutor;
+        }
+
+        public override bool Equals(object? obj)
+        {
+            if(!(obj is Pise)) return false;
+            return (obj as Pise).IDKnjiga == IDKnjiga && (obj as Pise).IDAutor == IDAutor;
+        }
+
+        public override List<string> GetDbPropertyNames()
+        {
+            return new List<string> { "IDKnjiga", "IDAutor" };
         }
     }
 }

@@ -1,4 +1,4 @@
-﻿using BP2ProjekatCornerLibrary.Helpers;
+﻿using BP2ProjekatCornerLibrary.Helpers.Classes;
 using BP2ProjekatCornerLibrary.Models.NonContext;
 using Microsoft.EntityFrameworkCore;
 using System;
@@ -20,6 +20,11 @@ public class Adresa : _DbClass
                 new ClassPropertyValue("Ulica", Ulica),
                 new ClassPropertyValue("Broj", Broj)
             };
+    }
+
+    public override List<string> GetDbPropertyNames()
+    {
+        return new List<string> { "Ulica", "Broj" };
     }
 
     public Adresa() : base() { }
